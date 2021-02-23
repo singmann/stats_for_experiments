@@ -1,9 +1,17 @@
-Meta
-# History files
+.Rproj.user
 .Rhistory
-.Rapp.history
-
-# Example code in package build process
-# RStudio files
-.Rproj.user/
-
+*_cache
+*_files
+_main.rds
+_book
+*.md
+!CODE_OF_CONDUCT.md
+*.html
+!ga_script.html
+search_index.json
+libs
+*.rds
+_main.*
+bookdown*
+tmp-pdfcrop-*
+figures
