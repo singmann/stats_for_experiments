@@ -1,0 +1,1 @@
+The files in this folder were originally retrieved from "Files referenced in Corrigendum" in the original author's OSF project at https://osf.io/t43ua/

@@ -1,0 +1,745 @@
+---
+title: "Appendix: Supplementary Material"
+author: "Heather Urry"
+date: "February, 9, 2019"
+output: papaja::apa6_pdf
+geometry: left=25mm, right=25mm, top=25mm, bottom=25mm, includeheadfoot
+---
+
+```{r}
+
+library(papaja)
+library(knitr)
+
+# Set default chunk options (can be overridden in later chunks)
+knitr::opts_chunk$set(echo = FALSE, 
+                      eval = TRUE,
+                      message = FALSE, 
+                      fig.width = 7, 
+                      fig.height = 7,
+                      results = "hide",
+                      error = FALSE,
+                      warning = FALSE,
+                      include = TRUE)
+
+```
+
+## Sample Size Rationale
+
+As noted in our preregistration, we planned to recruit as many participants as possible up to *N* = 250 within the time available in the Spring 2017 semester. At a minimum, we sought to recruit *N* = 67 participants, the number of participants in the original study. Ideally, we hoped to recruit at least *N* = 200 participants. This would have yielded 80% statistical power to detect a condition effect as small as Cohen's *f* = 0.20, which is equivalent to $\eta^2$ = .04 or *d* = 0.40. However, we ran out of time to reach this ideal target. Our sample of N = 142 more than doubles the original sample size and, thus, gives us greater power to detect effects of any size. That said, it is insufficient to detect effects smaller than Cohen's *d* = `r d80perf` for quiz performance variables or Cohen's *d* = `r d80notes` for notes variables. 
+
+## Lecture Videos
+
+The lecture videos we used in the replication at Tufts University in Spring 2017 were as follows:
+
+- [Mustafa Akyol - Faith versus Tradition in Islam](http://www.ted.com/talks/mustafa_akyol_faith_versus_tradition_in_islam.html)
+- [Richard Wilkinson - How Economic Inequality Harms Societies](http://www.ted.com/talks/richard_wilkinson.html)
+- [Matt Ridley - When Ideas Have Sex](http://www.ted.com/talks/matt_ridley_when_ideas_have_sex.html)
+- [Rajesh Rao - Computing a Rosetta Stone for the Indus Script](http://www.ted.com/talks/rajesh_rao_computing_a_rosetta_stone_for_the_indus_script.html)
+- [Kevin Slavin - How Algorithms Shape Our World](http://www.ted.com/talks/kevin_slavin_how_algorithms_shape_our_world.html)
+
+These are the same videos used in the original Study 1.
+
+## Quiz Scoring
+
+Each rater scored data for only one of the five lecture conditions blind to note-taking condition using one of the scoring keys available at https://osf.io/s5gfd/. Note that we reworded one quiz item after preregistration. Specifically, the original wording of one of the factual-recall items was, "What word/sound do researchers think this symbol might represent?" (from the "Computing a Rosetta Stone for the Indus" lecture). We did not see a symbol in the scoring document posted by the original authors. Based on the image shown in the TED talk, we revised the wording to say, "What word/sound do researchers think the fish-like symbol might represent?" Answers accepted as correct were star or meen.
+
+Per the 2018 corrigendum to the original study, we converted the original scores to index scores. The corrigendum says that "a perfect score would be 1 point per question; 10 points total" (p. 1) but not how instances of partial credit were handled. We assigned values of 0 (for items for which the participant earned zero credit) and 1 (for items for which the participant earned partial or full credit). We calculated a total index score across items for each participant for each rater separately for factual-recall and conceptual-application scales. We then examined interrater reliability by computing intraclass correlations (ICC) for these total scores. Because a random sample of k = 12-15 raters scored the quiz for each participant and our intention was to average across raters as our measures of factual-recall and conceptual-application performance, we calculated the average measure ICC; this is ICC(2,k) according to Shrout and Fleiss [-@shrout1979intraclass].
+
+## Details about Distractor Tasks
+
+The typing test lasted 5 minutes (https://www.typing.com/student/test/5). Experimenters recorded two scores, number of words per minute and accuracy. (Instead of the typing test and questionnaire, the original Study 1 used two 5-minute tasks that were not amenable to administration via Qualtrics; see *Deviations from the Original Method* section in the main manuscript)
+
+Participants also completed the Need for Cognition questionnaire [@petty1984efficient], indicating to what extent they agree or disagree that 18 statements are characteristic of them on a scale ranging from +4, *very strong agreement*, to 0, *neither agreement nor disagreement*, to -4, *very strong disagreement*. Items included "I would prefer complex to simple problems", "I try to anticipate and avoid situations where there is likely a chance I will have to think in depth about something," and "I find satisfaction in deliberating hard and for long hours." Scores were computed by summing after reverse-scoring 9 items, with mean substitution for two participants with one missing item. (We did not compute a score if there was more than one missing item; there were two participants missing all items and one missing eight items.) The range of possible values is -72 to 72. Internal consistency reliability was acceptable in the present sample (hierarchical omega = `r printnum(omega.nfc$est, gt1=FALSE)`, 95% CI[`r printnum(omega.nfc$ci.lower, gt1=FALSE)`, `r printnum(omega.nfc$ci.upper, gt1=FALSE)`], Cronbach's alpha = `r printnum(alpha.nfc$est, gt1=FALSE)`, 95% CI[`r printnum(alpha.nfc$ci.lower, gt1=FALSE)`, `r printnum(alpha.nfc$ci.upper, gt1=FALSE)`]). 
+
+Finally, participants completed an automated reading span task programmed in Inquisit (Millisecond.com; see an example and details at https://www.millisecond.com/download/library/rspan/). Participants saw a sequence of 3-7 letters that they were meant to hold in mind while also processing the meaning of sentences. Timing information provided by experimenters suggested that all but one participant did the reading span task for at least some period of time but only two participants completed the task in full because it would otherwise have taken longer than the time available. We have useable reading span task data from a total of `r descr(mydata$rspandurmin)$'sample size'$'valid'` participants, as explained below. On average, these participants spent `r descr(mydata$rspandurmin)$'central tendency'$'mean'` minutes doing the reading span task, 95% CI `r gsub(";", ",", descr(mydata$rspandurmin)$'central tendency'$'95% CI mean')`. 
+
+Of the 46 participants for whom we do not have useable reading span task data, 20 were present in the Inquisit participant activity log; this suggested that the reading span task was administered but got discontinued in a way that failed to save the data. The remaining 26 participants were not present in the activity log; for these participants, experimenter notes for 6 pointed to technical difficulties. In one case, experimenters noted that they did not run the reading span task due to a problem with security settings. In five other cases, experimenters noted that they had to cut the task short, that they hit ctrl-q to leave the task, that they experienced undescribed technical difficulties, that they had to open the reading span task on a different laptop when the link in the Qualtrics survey did not work, or that they had to open the Qualtrics survey again which generated a new subject identification number. We have no information about why the remaining 20 participants were not present in the Inquisit participant activity log. 
+
+## Additional Self-Report Questions
+
+We asked participants a number of self-report questions after completing the quiz. For one, they rated "How much knowledge related to the topic of the talk did you have before today?" on a scale from 0, *Not at all*, to 5, *Expert*. We also asked them what year they'll graduate and their concentration, and gave them an open-ended prompt, "Do you normally take notes in class on your laptop or in a notebook? Why?" After that, they rated, "In general, do you think it is better for learning purposes to take notes on a laptop or in a notebook?" on a scale from 1, *Laptop significantly better*, to 9, *Notebook significantly better*. They also responded to four open-ended questions, "Does your choice to take notes on a laptop or in a notebook differ depending on whether it is a humanities, science, or math course?", "How long do you normally spend reviewing notes when studying for a test?", "Do you have any other thoughts regarding notetaking on a laptop vs. in a notebook?", and "What do you think this study is about?" 
+
+## Deviations from our Preregistration
+
+Our replication of Study 1 deviated from our preregistration in the following ways:
+
+1. Our preregistration said we would use a Z test to compare the replication effect sizes to the original effect sizes; the one-sided tests are, rather, t-tests.
+
+2. Our preregistration indicated we'd set lower and upper equivalence bounds of +/- Cohen's *d* = .40, or whatever effect size is detectable with 80% power given the final sample size. We went with the latter because, although we would have preferred to set narrower equivalence bounds, doing so would have required *n* = `r round(powerTOSTtwo(alpha=.05,statistical_power=.80,low_eqbound_d = -.40,high_eqbound_d=.40))` participants per group to have 80% power.
+
+3. Our sole focus on trigrams as the indicator of verbatim overlap represents a deviation from our preregistered analysis plan. We originally planned to also examine the degree to which one- and two-word chunks of text reflected overlap but chose not to do so for the sake of simplicity. The original report found similar results for all three overlap measures, thus this deviation should not hamper the conclusions we draw.
+
+## Summary Statistics for Measured Variables
+
+Table \@ref(tab:corrstable) shows descriptive statistics for and correlations between measured variables, computed in part using the *psych* [@R-psych] and *userfriendlyscience* [@R-userfriendlyscience] packages. The four primary measured variables were factual-recall performance, conceptual-application performance, word count, and verbatim overlap. For quiz performance, we present standardized scores (referenced as factual Z and conceptual Z in the table) and proportion correct (referenced as factual proportion correct and conceptual proportion correct in the table) for both item types. Measured variables of secondary interest were need for cognition, knowledge related to the lecture, preference for taking notes with a laptop or in a notebook, typing speed and accuracy, and distraction duration.
+
+Higher word count was modestly positively correlated with two of the four quiz performance variables (factual Z and conceptual proportion correct); higher verbatim overlap was modestly negatively correlated with two of the four quiz performance variables (factual Z and factual proportion correct). Higher factual-recall performance was modestly positively correlated with higher conceptual-application performance. Higher word count was strongly positively correlated with greater verbatim overlap. Longer distraction time was associated with lower conceptual-application performance (proportion correct only), rating longhand note taking as better, and slower typing speed. The remaining measured variables of secondary interest exhibited a similar pattern of very small correlations with quiz performance. Faster typing speed was correlated with higher word count and greater verbatim overlap. Higher typing accuracy was correlated with greater verbatim overlap and faster typing speed. 
+
+```{r corrstable, results="asis"}
+
+# create data frame with the four primary dependent variables
+dvs <- subset(mydata, select = c(objectiveZ,
+                                 openZ,
+                                 obj_index_prop,
+                                 open_index_prop,
+                                 wordcount,
+                                 threegramspercent,
+                                 NFC,
+                                 relatedknowledge,
+                                 betterlorn,
+                                 typingwpm,
+                                 typingacc,
+                                 distracttime))
+
+
+# print table of correlations using function by lgluca, https://github.com/crsh/papaja/issues/210
+# run the function from source script
+source("glrstab.R")
+
+# use function on the dvs data frame
+a             <-glrstab(dvs) #the function in action!
+
+rownames(a)<- c("1. factual Z",
+                "2. conceptual Z",
+                "3. factual proportion correct", 
+                "4. conceptual proportion correct",
+                "5. word count", 
+                "6. verbatim overlap",
+                "7. need for cognition",
+                "8. related knowledge",
+                "9. better laptop or notebook",
+                "10. typing speed (WPM)",
+                "11. typing accuracy (\\%)",
+                "12. distraction duration")
+
+
+# should be numbered from 1 to max number of variables minus 1
+# here there are 12 variables so numbers go from 1 to 11
+colnames(a)   <- c("$M$", "$SD$", "$95\\% CI$", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11")
+apa_table(a
+          , escape  = FALSE
+          , caption = '(ref:corrstablecap)'
+          , note    = '* p<0.05; ** p<0.01; *** p<0.001. (ref:corrstablenote)'
+          , landscape = TRUE
+          , font_size = "footnotesize")
+
+```
+
+## Identifying Influential Observations
+
+<!-- R code for these computations is in main manuscript -->To identify influential observations for each of our four dependent variables of primary interest, we computed Cook's Distance for each participant based on a set of four linear regression models examining note-taking condition as a predictor of each. Influential observations were defined as those for which Cook's Distance was greater than or equal to 4 times the mean Cook's Distance across all participants. 
+
+A total of `r length(mydata_out_objZ[ ,1])` and `r length(mydata_out_openZ[ ,1])` observations were identified for factual-recall and conceptual-application performance, respectively. For factual-recall performance, there were `r laptop_out_objZ` in the laptop condition, and `r longhand_out_objZ` in the longhand condition. For conceptual-application performance, there were `r laptop_out_openZ` in the laptop condition, and `r longhand_out_openZ` in the longhand condition. In addition, a total of `r length(mydata_out_wordcount[ ,1])` and `r length(mydata_out_threegramspercent[ ,1])` observations were identified for word count and verbatim overlap, respectively. For word count, there were `r laptop_out_wordcount` in the laptop condition, and `r longhand_out_wordcount` in the longhand condition. For verbatim overlap, there were `r laptop_out_threegramspercent` in the laptop condition, and `r longhand_out_threegramspercent` in the longhand condition.
+
+We repeated our confirmatory analyses without these influential observations included, as specified in our pre-registration (see https://osf.io/qe3wb/wiki/home/). Their exclusion did not alter conclusions.
+
+## Literature Search Strategy for the Mini-Meta-Analyses
+
+To locate studies to include in our exploratory mini-meta-analyses, we used the Google and Google Scholar databases to search for articles that were methodologically similar to the original work by Mueller and Oppenheimer (2014). In our search, we used terms such as: notes, note taking, laptop, longhand, and academic performance. We also used Google Scholar to see if any articles that cited Mueller and Oppenheimer (2014) met our search criteria. Our search revealed a total of eight studies that experimentally manipulated laptop versus longhand note taking, assessed immediate quiz performance on the same day as exposure to the lecture, used video lecture material, measured and reported results for quiz performance, word count, and verbatim overlap, and studied undergraduates. 
+
+It is likely that our mini-meta-analyses do not include all unpublished attempts to replicate the original Study 1 by Mueller and Oppenheimer (2014). If a preponderance of unpublished attempts to replicate the original study have found that longhand note-taking prompts superior quiz performance compared to laptop note-taking, then our mini-meta-analytic estimates for quiz performance are biased toward zero. If, on the other hand, a preponderance of unpublished attempts to replicate found null results (consistent with the file drawer problem), then including them would have little effect on our mini-meta-analytic estimates for quiz performance; they are already close to zero. 
+
+## Correlations Between Effect Sizes from the Mini-Meta-Analyses
+
+```{r prepmatrix}
+
+# sort data frame
+metadatatemp <- metadatatemp[order(metadatatemp$series, metadatatemp$slab), ]
+
+# set the factual and conceptual values for Luo et al. (2018) to be NA (they only reported the total score; currently that total is recorded as both factual and conceptual)
+
+metadatatemp$es.g[ metadatatemp$slab == "Luo et al. (2018)" & (metadatatemp$measure == "factual" | metadatatemp$measure == "conceptual")] <- NA
+metadatatemp$es.g.v[ metadatatemp$slab == "Luo et al. (2018)" & (metadatatemp$measure == "factual" | metadatatemp$measure == "conceptual")] <- NA
+metadatatemp$d.se[ metadatatemp$slab == "Luo et al. (2018)" & (metadatatemp$measure == "factual" | metadatatemp$measure == "conceptual")] <- NA
+
+ess <- as.data.frame(cbind(
+              metadatatemp$es.g[metadatatemp$measure=="total"],
+              metadatatemp$es.g[metadatatemp$measure=="factual"],
+              metadatatemp$es.g[metadatatemp$measure=="conceptual"],
+              metadatatemp$es.g[metadatatemp$measure=="word count"],
+              metadatatemp$es.g[metadatatemp$measure=="verbatim overlap"],
+              metadatatemp$n1[metadatatemp$measure=="total"],
+              metadatatemp$n2[metadatatemp$measure=="total"]))
+
+
+names(ess) <- c("total", "factual","conceptual", "words", "overlap", "n1", "n2")
+
+# compute correlations between effect sizes for reporting in text 
+ess_words_overlap <- cor.test(~ words+overlap,data=ess)
+ess_factual_conceptual <- cor.test(~ factual+conceptual,data=ess)
+ess_factual_words <- cor.test(~ factual+words,data=ess)
+ess_factual_overlap <- cor.test(~ factual+overlap,data=ess)
+ess_conceptual_words <- cor.test(~ conceptual+words,data=ess)
+ess_conceptual_overlap <- cor.test(~ conceptual+overlap,data=ess)
+ess_total_words <- cor.test(~ total+words,data=ess)
+ess_total_overlap <- cor.test(~ total+overlap,data=ess)
+
+
+# compute total study N
+ess$n = ess$n1+ess$n2
+
+# create correlation matrix
+cormat.ess <- cor(ess, use="pairwise.complete.obs")
+
+```
+
+One question is whether note-taking condition effects on notes content variables are correlated with note-taking condition effects on quiz performance variables at the study level. As shown in Figure \@ref(fig:metacorrsplot), generated using the *car* package in R [@R-car; @R-carData], lower laptop superiority (i.e., less negative values) for both word count, `r apa_print(ess_factual_words)$estimate`, and verbatim overlap, `r apa_print(ess_factual_overlap)$estimate`, were associated with greater longhand superiority (i.e., more positive values) for factual quiz performance. The confidence intervals indicated that the data were compatible with a wide range of positive associations from small to very large. 
+
+Associations between note-taking condition effects on conceptual and total quiz performance and note-taking condition effects on words, `r apa_print(ess_conceptual_words)$estimate` and `r apa_print(ess_total_words)$estimate`, respectively, and verbatim overlap, `r apa_print(ess_conceptual_overlap)$estimate` and `r apa_print(ess_total_overlap)$estimate`, respectively, were much smaller. Moreover, the confidence intervals indicated that the data were compatible with a wide range of negative and positive associations, including a nil association. 
+
+We also found that studies showing laptop superiority for word count tended to show laptop superiority for verbatim overlap, `r apa_print(ess_words_overlap)$estimate`; the confidence interval indicated that the data were compatible with a wide range of positive associations from small to very large. Studies showing laptop or longhand superiority for factual quiz performance tended to show parallel laptop or longhand superiority for conceptual quiz performance, `r apa_print(ess_factual_conceptual)$estimate`; the confidence interval indicated that the data were compatible with a wide range of negative and positive associations, including a nil association.
+
+```{r metacorrsplot, fig.cap = '(ref:metacorrsplotcap)',fig.height=9}
+
+
+
+# Make the plot using the car package
+scatterplotMatrix(~total+factual+conceptual+words+overlap, 
+                  data=ess , smooth=FALSE, id=list(method="mahal", n=0, cex=1, location="lr"),
+                  col="black",
+                  cex=1.5 , pch=c(15,16,17) , 
+                  main="Scatter plot matrix of associations between effect sizes", 
+                  legend = TRUE,
+                  regLine = TRUE,
+                  use = "pairwise.complete.obs",
+                  upper.panel=NULL)
+
+# lmer to see if item type moderates the association between notes variable effects and performance effects
+
+# first restructure
+ess$id <- rownames(ess)
+ess_long <- gather(ess, key="itemtype",value="performance",factual:conceptual)
+ess_long$itemtype_int[ ess_long$itemtype == "conceptual"] <- 0.5
+ess_long$itemtype_int[ ess_long$itemtype == "factual"] <- -0.5
+ess_lmer_words <- lmer(performance ~ itemtype_int*words + (1|id),data=ess_long)
+ess_lmer_overlap <- lmer(performance ~ itemtype_int*overlap + (1|id),data=ess_long)
+
+```
+
+## Additional Exploratory Analyses
+### Bayes Factor (BF) tests
+
+We used logic and code provided by Verhagen and Wagenmakers [-@VerhagenJosine2014BTtQ] to conduct Jeffreys-Zellner-Siow (JZS) BF and replication BF tests supported by the *BayesFactor* [@R-BayesFactor], *MCMC* [@R-MCMCpack], and *polspline* [@R-polspline] packages. According to Verhagen and Wagenmakers (2014), the replication BF test addresses the question, "Is  the  effect  from  the  replication attempt comparable to what was found before, or is it absent?" By setting a prior based on the original effect, the replication BF test quantifies relative support for the replication hypothesis (i.e., that the replication study effect size is similar to the original study effect size) versus the null hypothesis (i.e., that the replication study effect size is zero). We also report a JZS BF test to evaluate evidence for the note-taking condition effect in the original and the replication studies separately. For these tests, we used a standard two-sided Cauchy(0, 1) distribution as the prior; results indicate relative support for the presence or absence of a note-taking condition effect. For the replication and JZS BF tests, numbers greater than 3 or less than 0.33 represent nonanecdotal support for the replication/alternative and null hypotheses, respectively.
+
+```{r bayes, include=FALSE}
+
+# this source code runs a series of Bayes Factor tests
+
+#use a set of Bayesian analyses to examine whether our replication study, in conjunction with the #original study, offers stronger support for the alternative or null hypothesis. 
+
+source("04_exploratory_bayes.R")
+
+```
+
+For factual-recall performance, the original study revealed nonanecdotal support favoring the null hypothesis over the alternative hypothesis, JZS BF~10~ = `r BF_objZ[1,1]`. The current replication study also revealed nonanecdotal support favoring the null hypothesis over the alternative hypothesis, JZS BF~10~ = `r BF_objZ[1,2]`. The replication hypothesis was somewhat less likely than the null hypothesis, replication BF~10~ = `r BF_objZ[4,2]`, although support for the null hypothesis was anecdotal.  
+
+For conceptual-application performance, the original study surprisingly revealed anecdotal support favoring the null hypothesis over the alternative hypothesis, JZS BF~10~ = `r BF_openZ[1,1]`. The current replication study revealed nonanecdotal support for the null hypothesis over the alternative hypothesis, JZS BF~10~ = `r BF_openZ[1,2]`. The replication hypothesis was much less likely than the null hypothesis, replication BF~10~ = `r BF_openZ[4,2]`. 
+
+By contrast, for both word count and verbatim overlap, the original study revealed nonanecdotal support favoring the alternative hypothesis over the null hypothesis, JZS BF~10~ = `r BF_wc[1,1]` and JZS BF~10~ = `r BF_vo[1,1]`, respectively. The current replication study also revealed nonanecdotal support favoring the alternative hypothesis over the null hypothesis, JZS BF~10~ = `r BF_wc[1,2]` and JZS BF~10~ = `r BF_vo[1,2]`, respectively. The replication hypothesis was much more likely than the null hypothesis, replication BF~10~ = `r BF_wc[4,2]` and replication BF~10~ = `r BF_vo[4,2]`, respectively. 
+
+### Treating Item Type as a Factor
+
+In the original article, the authors distinguished between factual and conceptual item types because, "Previous studies have shown that detriments due to verbatim note-taking are more prominent for conceptual than for factual items (e.g., Bretzing & Kulhavy, 1979)" (Mueller & Oppenheimer, 2014, p. 1160). Analyses focused separately on factual-recall and conceptual-application quiz performance, perhaps because there were more quiz items representing factual than conceptual information for some lectures. 
+
+However, we might have had greater sensitivity to detect true effects, if present, by examining performance across item type given a potential increase in measurement reliability. Moreover, strong inferences about differential effects of note-taking condition on these different item types require an interaction between condition and item type. We, thus, conducted mixed-effect analyses of variance of both the original Study 1 data and this replication using the *afex* package [@R-afex]. We examined fixed effects of note-taking condition, item type, and their interaction, and random effects of lecture and participant; the dependent variable was quiz performance (Z index scores). For those who might argue that lecture should be a fixed effect, we also conducted analyses of variance with fixed effects of note-taking condition, item type, lecture, and their interactions. 
+
+```{r fullanova}
+
+# include item type (objective, open) as factor
+
+# first for original M&O2014 Study 1
+# restructure the wide file to be long
+MO_Study1_long <- gather(MO_Study1, itemtype, quizperf, ZFindexA:ZCindexA, factor_key=TRUE)
+
+# fixed effects ANOVA
+Z_aov_4_orig_fullfixedanova <- aov_ez(id="participant",dv="quizperf",between=c("condition","whichtalk"),within="itemtype",data=MO_Study1_long)
+
+Z_aov_4_orig_fullfixedanova_print <- apa_print(Z_aov_4_orig_fullfixedanova)
+
+
+# lecture as random effect
+Z_aov_4_orig_fullrandomanova <- aov_4(quizperf ~ condition*itemtype + (condition*itemtype|whichtalk) (itemtype|participant), data=MO_Study1_long,type = "III")
+
+Z_aov_4_orig_fullrandomanova_print <- apa_print(Z_aov_4_orig_fullrandomanova)
+
+
+
+# now this replication study
+# restructure the wide file to be long
+data_long <- gather(mydata, itemtype, quizperf, objectiveZ:openZ, factor_key=TRUE)
+
+# fixed effects ANOVA
+Z_aov_4_rep_fullfixedanova <- aov_ez(id="ID",dv="quizperf",between=c("condition","whichtalk"),within="itemtype",data=data_long)
+
+Z_aov_4_rep_fullfixedanova_print <- apa_print(Z_aov_4_rep_fullfixedanova)
+
+# lecture as random effect
+Z_aov_4_rep_fullrandomanova <- aov_4(quizperf ~ condition*itemtype + (condition*itemtype|whichtalk) (itemtype|ID), data=data_long,type = "III")
+
+Z_aov_4_rep_fullrandomanova_print <- apa_print(Z_aov_4_rep_fullrandomanova)
+
+
+
+
+```
+
+In the original Study 1, based on the analysis with random effects, neither the main effect of note-taking condition, `r Z_aov_4_orig_fullrandomanova_print$full_result$condition`, nor its interaction with item type, `r Z_aov_4_orig_fullrandomanova_print$full_result$condition_itemtype`, explained significant variation in quiz performance. The same was true in the all fixed-effects analysis; neither the main effect of note-taking condition, `r Z_aov_4_orig_fullfixedanova_print$full_result$condition`, nor its interaction with item type, `r Z_aov_4_orig_fullfixedanova_print$full_result$condition_itemtype`, explained significant variation in quiz performance. There also was no three-way interaction, `r Z_aov_4_orig_fullfixedanova_print$full_result$condition_whichtalk_itemtype`. 
+
+Similarly, in our replication, neither the main effect of note-taking condition, `r Z_aov_4_rep_fullrandomanova_print$full_result$condition`, nor its interaction with item type, `r Z_aov_4_rep_fullrandomanova_print$full_result$condition_itemtype`, explained significant variation in quiz performance. The same was true in the all fixed-effects analysis; neither the main effect of note-taking condition, `r Z_aov_4_rep_fullfixedanova_print$full_result$condition`, nor its interaction with item type, `r Z_aov_4_rep_fullfixedanova_print$full_result$condition_itemtype`, explained significant variation in quiz performance. There also was no three-way interaction, `r Z_aov_4_rep_fullfixedanova_print$full_result$condition_whichtalk_itemtype`.
+
+### Continuous Predictors of Quiz Performance
+
+In the original study, higher word count and lower verbatim overlap were associated with better quiz performance, and these two variables mediated the effect of note-taking condition on quiz performance. Moreover, it was possible that accounting for variability in quiz performance due to these and other covariates of interest might have revealed hypothesized effects of note-taking condition. Thus, in a set of linear mixed-effect regressions, we examined associations between word count, verbatim overlap, and other covariates --  knowledge related to the lecture topic, beliefs about whether taking notes using a laptop or notebook is better for learning, need for cognition, typing speed and accuracy, or distraction duration -- and quiz performance in our direct replication. We examined proportion correct for these analyses to facilitate interpretation in units of everyday interest. We conducted these analyses using the *lme4* package [@R-lme4] and generated tables using the *stargazer* package [@R-stargazer].  
+
+```{r lmerdataprep}
+
+# center the covariates in the wide file
+mydata$wordcountC <- scale(mydata$wordcount, center=TRUE)
+mydata$threegramsC <- scale(mydata$threegramspercent, center=TRUE)
+mydata$relatedknowledgeC <- scale(mydata$relatedknowledge, center=TRUE)
+mydata$betterlornC <- scale(mydata$betterlorn, center=TRUE)
+mydata$NFCC <- scale(mydata$NFC, center=TRUE)
+mydata$typingwpmC <- scale(mydata$typingwpm, center=TRUE)
+mydata$typingaccC <- scale(mydata$typingacc, center=TRUE)
+mydata$distracttimeC <- scale(mydata$distracttime, center=TRUE)
+
+# create dummy-coded condition predictor in the wide file
+mydata$condition_int <- as.numeric(mydata$longlap) + 0.5
+
+# calculate the total score in the wide file
+mydata$total_prop <- (mydata$obj_index_prop + mydata$open_index_prop)/2
+
+# restructure the wide file to be long, focus on proportion correct
+data_long <- gather(mydata, itemtype, quizperf_prop, obj_index_prop:open_index_prop, factor_key=TRUE)
+
+# center the covariates in the long file
+data_long$wordcountC <- scale(data_long$wordcount, center=TRUE)
+data_long$threegramsC <- scale(data_long$threegramspercent, center=TRUE)
+data_long$relatedknowledgeC <- scale(data_long$relatedknowledge, center=TRUE)
+data_long$betterlornC <- scale(data_long$betterlorn, center=TRUE)
+data_long$NFCC <- scale(data_long$NFC, center=TRUE)
+data_long$typingwpmC <- scale(data_long$typingwpm, center=TRUE)
+data_long$typingaccC <- scale(data_long$typingacc, center=TRUE)
+data_long$distracttimeC <- scale(data_long$distracttimeC, center=TRUE)
+
+# create dummy-coded condition predictor in the long file
+data_long$condition_int <- as.numeric(data_long$longlap) + 0.5
+
+```
+
+```{r lmertabcovar, results="asis"}
+
+
+# examine impact of covariates; treat item type as a factor
+
+# make word count and verbatim overlap variables attribute-free numeric
+data_long$wordcountC <- as.numeric(data_long$wordcountC)
+data_long$threegramsC <- as.numeric(data_long$threegramsC)
+
+
+# model 1: run lmer with no covariates
+model1 <- lmer(quizperf_prop ~ 
+                              condition_int*itemtype +
+                              (itemtype|whichtalk) + (1|ID), 
+                            contrasts = list(itemtype = "contr.sum"),
+                          data=data_long, REML = FALSE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+# model 2: run lmer with all covariates
+model2 <- lmer(quizperf_prop ~ 
+                              condition_int*itemtype +
+                              wordcountC + threegramsC + 
+                                relatedknowledgeC + betterlornC + NFCC +
+                               typingaccC + typingwpmC + distracttimeC +
+                              (itemtype|whichtalk) + (1|ID), 
+                            contrasts = list(itemtype = "contr.sum"),
+                          data=data_long, REML = FALSE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+
+# model 3: lmer with all covariates minus influential
+# call library for influence analyses
+# library(influence.ME)
+
+# examine influence based on ID grouping variable
+estex.covars <- influence(model2, "ID")
+
+# extract IDs surpassing the Cook's Distance cutoff of 4/N
+estex.covars.cksd <- cooks.distance.estex(estex.covars, sort = TRUE)
+N <- length(estex.covars.cksd)
+estex.covars.cksd.filtIDs <- as.numeric(row.names(estex.covars.cksd)[ estex.covars.cksd > 4/N ])
+
+# create new filter based on Cook's Distance > cut-off
+data_long$filter_cksd[ data_long$ID %in% estex.covars.cksd.filtIDs ] <- 0
+data_long$filter_cksd[ !data_long$ID %in% estex.covars.cksd.filtIDs ] <- 1
+
+# # plot results to identify influential IDs
+# plot(estex.covars,
+# which="cook",
+# cutoff=4/N, 
+# sort=TRUE,
+# xlab="Cook´s Distance",
+# ylab="ID")
+
+# determine how elimination of each participant impacts the t value and signif
+# sigtest(estex.covars, test=1.96)$wordcountC[,]
+# sigtest(estex.covars, test=-1.96)$threegramsC[,]
+
+# now run the lmer analysis with covariates again filtering out just these participants
+model3 <- lmer(quizperf_prop ~ 
+                              condition_int*itemtype +
+                              wordcountC + threegramsC + 
+                                relatedknowledgeC + betterlornC + NFCC +
+                               typingaccC + typingwpmC + distracttimeC +
+                              (itemtype|whichtalk) + (1|ID), 
+                            contrasts = list(itemtype = "contr.sum"),
+                          data=subset(data_long, filter_cksd == 1 ), REML = FALSE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+
+# model 4: lmer with only significant covariates
+model4 <- lmer(quizperf_prop ~ condition_int*itemtype +
+                             wordcountC + threegramsC + 
+                              (itemtype|whichtalk) + (1|ID), 
+                            contrasts = list(itemtype = "contr.sum"),
+                          data=data_long, REML = FALSE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+# model 5: lmer with only significant covariates minus influential
+
+# call library for influence analyses
+# library(influence.ME)
+# 
+# examine influence based on ID grouping variable
+estex.covarsubset <- influence(model4, "ID")
+
+# extract IDs surpassing the Cook's Distance cutoff of 4/N
+estex.covarsubset.cksd <- cooks.distance.estex(estex.covarsubset, sort = TRUE)
+N <- length(estex.covarsubset.cksd)
+estex.covarsubset.cksd.filtIDs <- as.numeric(row.names(estex.covarsubset.cksd)[ estex.covarsubset.cksd > 4/N ])
+
+# create new filter based on Cook's Distance > cut-off
+data_long$filter_cksdsubset[ data_long$ID %in% estex.covarsubset.cksd.filtIDs ] <- 0
+data_long$filter_cksdsubset[ !data_long$ID %in% estex.covarsubset.cksd.filtIDs ] <- 1
+
+# # plot results to identify influential IDs
+# plot(estex.covarsubset,
+# which="cook",
+# cutoff=4/N,
+# sort=TRUE,
+# xlab="Cook´s Distance",
+# ylab="ID")
+
+# determine how elimination of each participant impacts the t value and signif
+# sigtest(estex.covarsubset, test=1.96)$wordcountC[,]
+# sigtest(estex.covarsubset, test=-1.96)$threegramsC[,]
+
+# now run the lmer analysis with covariates again filtering out just these participants
+model5 <- lmer(quizperf_prop ~ 
+                              condition_int*itemtype +
+                              wordcountC + threegramsC + 
+                              (itemtype|whichtalk) + (1|ID), 
+                            contrasts = list(itemtype = "contr.sum"),
+                          data=subset(data_long, filter_cksdsubset == 1 ), REML = FALSE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+
+# model 6: update best model (model 5) using REML = TRUE
+# not shown in manuscript because estimates are nearly identical to those in model 5
+
+model6 <- update(model5, REML = TRUE)
+
+
+# finally, run a robust version of model 4 using REML
+
+model4robust <- rlmer(quizperf_prop ~ 
+                              condition_int*itemtype +
+                              wordcountC + threegramsC + 
+                              (1|ID) + (itemtype|whichtalk), 
+                            contrasts = list(itemtype = "contr.sum"),
+                          data=data_long, REML = TRUE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+# report robust b, SE, t
+# get coefficients (three digits beyond decimal)
+model4robust_coef <- round(coef(summary(model4robust)),digits=3)
+
+model4robust_wc <- paste0("*b* = ",
+              model4robust_coef["wordcountC","Estimate"],
+              ", ",
+              "*SE* = ",
+              model4robust_coef["wordcountC","Std. Error"],
+              ", ",
+              "*t* = ",
+              model4robust_coef["wordcountC","t value"]
+)
+
+model4robust_vo <- paste0("*b* = ",
+              model4robust_coef["threegramsC","Estimate"],
+              ", ",
+              "*SE* = ",
+              model4robust_coef["threegramsC","Std. Error"],
+              ", ",
+              "*t* = ",
+              model4robust_coef["threegramsC","t value"]
+)
+
+# # tried to tune model4robust to fix ID variance = 0 but hasn't worked with k = up to 10
+# model4robusttuned <- update(model4robust,
+#                   rho.sigma.e = psi2propII(smoothPsi, k = 2.28), 
+#                   rho.sigma.b = psi2propII(smoothPsi, k = 2.28))
+
+# model 7: now run model examining 3-way interaction between condition, item type, and lecture
+# (will not be shown in table for simplicity)
+model7 <- lmer(quizperf_prop ~ 
+                            condition_int*itemtype*whichtalk +
+                            wordcountC + threegramsC + 
+                              relatedknowledgeC + betterlornC + NFCC +
+                            typingaccC + typingwpmC + distracttimeC + (1|ID), 
+                            contrasts = list(whichtalk = "contr.sum",
+                                             itemtype = "contr.sum"),
+                            data = data_long, REML = FALSE,
+                          control=lmerControl(optimizer="bobyqa", 
+                                              optCtrl=list(maxfun=2e5)))
+
+
+# set model class to be lmerMod so stargazer package can make table
+class(model1) <- "lmerMod"
+class(model2) <- "lmerMod"
+class(model3) <- "lmerMod"
+class(model4) <- "lmerMod"
+class(model5) <- "lmerMod"
+
+stargazer(model1,
+          model2,
+          model3,
+          model4,
+          model5,
+          column.labels = c("Item Type as Factor",
+                            "(1) + 8 Covariates",
+                            "(2) - Influential",
+                            "(2) - 6 Covariates",
+                            "(4) - Influential"),
+          dep.var.caption="",
+          dep.var.labels.include = FALSE,
+          float=TRUE, float.env = "sidewaystable",
+          ci = FALSE, font.size = "footnotesize", no.space=TRUE,
+          single.row = TRUE,
+          notes.align = "l",
+          star.cutoffs = c(.05,.01,.001),
+          initial.zero = FALSE,
+          intercept.bottom=FALSE,
+          intercept.top=TRUE,
+          title = '(ref:lmertabcovarcap)',
+          label='tab:lmertabcovar',
+          #notes = '(ref:lmertabcovarnote)',
+          covariate.labels=c("Intercept (laptop = 0)",
+                             "condition (longhand = 1)",
+                             "item type",
+                             "word count",
+                             "verbatim overlap",
+                             "related knowledge",
+                             "better laptop or notebook",
+                             "need for cognition",
+                             "typing accuracy",
+                             "typing speed",
+                             "distraction duration",
+                             "condition*item type"),
+          header=FALSE)
+
+```
+
+```{r plotpred, fig.cap = '(ref:plotpredcap)', fig.height=8}
+
+# use library(effects) to prepare to plot estimates
+estmodel4 <-predictorEffects(model4,
+               residuals=TRUE)
+estmodel5 <-predictorEffects(model5,
+               residuals=TRUE)
+
+p1 <- estmodel4$wordcountC
+p2 <- estmodel4$threegramsC
+p3 <- estmodel5$wordcountC
+p4 <- estmodel5$threegramsC
+plist <- list( p1, p2, p3, p4 )
+class(plist) <- "efflist"
+plot(plist, col=2, row=2,
+     lines=list(multiline=FALSE, col="black"),
+     confint=list(col="gray50",alpha=.7),
+     axes=list(y=list(lab="quiz performance (proportion correct)"),
+               x=list(threegramsC=list(lab="verbatim overlap",
+                                       lim={c(-1.5,4.1)}),
+                      wordcountC=list(lab="word count",
+                                      lim={c(-1.5,4.1)}))),
+     main="",
+     partial.residuals=list(smooth=TRUE, 
+                            col="gray85",
+                            smooth.col="black", 
+                            lty = "dashed"))
+
+```
+
+In model 1, we entered condition (treatment contrast: laptop [0], longhand [1]), item type (sum contrast: factual [1], conceptual [-1]), and their interaction as fixed effects. There were random intercepts for lectures and participants, and random slopes for item type across lectures. (Models including a random slope for condition across lectures did not converge; fits were singular.) In model 2, we added 8 centered covariates to model 1. In model 3, we repeated model 2 excluding participants identified as influential using the *influence.ME* package [@R-influenceME]. In model 4, we repeated model 2, this time including word count and verbatim overlap, the only two statistically significant covariates. Finally, in model 5, we repeated model 4 excluding participants identified as influential again using *influence.ME*.
+
+Table \@ref(tab:lmertabcovar) summarizes all five models. According to Akaike and Bayesian information criteria, model 5 provided the best fit to the data. Consistent with the original study, higher word count was associated with better quiz performance in all models. Also consistent with the original study, higher verbatim overlap was significantly associated with lower quiz performance in models 2-4. In model 5, however, the magnitude of the association between verbatim overlap and quiz performance was reduced by half and no longer statistically significant. Figure \@ref(fig:plotpred) shows the linear associations between the notes content variables and quiz performance from models 4 and 5, generated using the *effects* package [@R-effects]. 
+
+Model 5 raises doubt about the robustness of the negative association between verbatim overlap and quiz performance, especially since it was the best-fitting model. To investigate further, we conducted a robust version of model 4 using the *robustlmm* package [@R-robustlmm], which applies robustness weights based on a random effects contamination model to reduce influence. In the robust version of model 4, the word count association was again positive, `r model4robust_wc`, and the verbatim overlap association was again negative, `r model4robust_vo`; both estimates were similar in magnitude to estimates derived from models 2-4. Although *robustlmm* does not provide *p* values for significance testing, both *t* values were larger than |1.96|, which suggests statistical significance. 
+
+In sum, whereas the best-fitting linear mixed-effect regression suggested that higher word count but not lower verbatim overlap was associated with better quiz performance, a robust version of that analysis supported both associations. There is, thus, some ambiguity as to the extent of negative association between verbatim overlap and quiz performance in this study. 
+
+Of note, accounting for variability in performance attributable to the covariates did not reveal the hypothesized effect of note-taking condition on its own or in interaction with item type. Similar conclusions emerge from an analysis examining the fixed unique and interactive effects of condition, item type, and lecture with the same covariates and with random intercepts for participants (not shown). Associations between other covariates and quiz performance were generally closer to zero and not statistically significant, as reflected in models 2 and 3.
+
+```{r lmertabcovar2, eval=FALSE, results="asis"}
+
+# examine impact of covariates separately for total, factual, and conceptual quiz performance
+# (no filters)
+
+# total
+total_prop_lmer_rep_covar <- lmer(total_prop ~ condition_int + (1|whichtalk) +
+                             wordcountC + threegramsC + 
+                               relatedknowledgeC + betterlornC + NFCC +
+                               typingaccC + typingwpmC + distracttimeC,
+                             data = mydata)
+
+# factual-recall
+obj_prop_lmer_rep_covar <- lmer(obj_index_prop ~ condition_int + (1|whichtalk) +
+                             wordcountC + threegramsC + 
+                               relatedknowledgeC + betterlornC + NFCC +
+                               typingaccC + typingwpmC + distracttimeC,
+                             data = mydata)
+
+# conceptual-application 
+open_prop_lmer_rep_covar <- lmer(open_index_prop ~ condition_int + (1|whichtalk) +
+                             wordcountC + threegramsC + 
+                               relatedknowledgeC + betterlornC + NFCC +
+                               typingaccC + typingwpmC + distracttimeC,
+                             data = mydata)
+
+# code below could be used to exclude participants in above lmers.
+                          # data=subset(mydata, filter_wordcount == 1 & 
+                          #               filter_threegramspercent == 1 &
+                          #               filter_objZ == 1 & 
+                          #               filter_openZ == 1))
+
+
+# set model class to be lmerMod so stargazer package can make table
+class(obj_prop_lmer_rep_covar) <- "lmerMod"
+class(open_prop_lmer_rep_covar) <- "lmerMod"
+class(total_prop_lmer_rep_covar) <- "lmerMod"
+
+stargazer(obj_prop_lmer_rep_covar,
+         open_prop_lmer_rep_covar,
+         total_prop_lmer_rep_covar,
+          column.labels = c("Factual Performance",
+                            "Conceptual Performance",
+                            "Total Performance"),
+          dep.var.caption="",
+          dep.var.labels.include = FALSE,
+          float=TRUE, float.env = "sidewaystable",
+          ci = FALSE, font.size = "footnotesize", no.space=TRUE,
+          single.row = TRUE,
+          notes.align = "l",
+          star.cutoffs = c(.05,.01,.001),
+          initial.zero = FALSE,
+          intercept.bottom=FALSE,
+          intercept.top=TRUE,
+          title = '(ref:lmertabcovar2cap)',
+          label='tab:lmertabcovar2',
+          covariate.labels=c("Intercept (laptop = 0)",
+                             "condition (longhand = 1)",
+                             "word count",
+                             "verbatim overlap",
+                             "related knowledge",
+                             "better laptop or notebook",
+                             "need for cognition",
+                             "typing accuracy",
+                             "typing speed",
+                             "distraction duration"),
+          header=FALSE)
+
+
+```
+
+## Difference in Laptop versus Longhand Note Taking Preferences
+
+```{r laptopornotebook}
+
+# import coding of whether participants typically use laptop or notebook in the original and replication studies
+
+# original study; read in the pre-corrigendum Study 1 data (the laptopornotebook variable is not available in the abbreviated data file post post-corrigendum)
+MO1laptopornotebookdata <- read_spss("../data/M&O2014/orig/Study_1_Upload_Data.sav")
+MO1laptopornotebookdata$laptopornotebook_coded[ MO1laptopornotebookdata$laptopornotebook== 1 ] <- "laptop"
+MO1laptopornotebookdata$laptopornotebook_coded[ MO1laptopornotebookdata$laptopornotebook== 2 ] <- "notebook"
+MO1laptopornotebookdata$laptopornotebook_coded[ MO1laptopornotebookdata$laptopornotebook== 3 ] <- "depends/both"
+MO1laptopornotebookdata$laptopornotebook_coded[ MO1laptopornotebookdata$laptopornotebook== 0 ] <- "other"
+MO1laptopornotebookdata$study <- "MO_Study1"
+MO1laptopornotebookdata <- subset(MO1laptopornotebookdata, select=c("study","laptopornotebook_coded","betterlorn"))
+
+# this replication; read in the csv data file
+replicationlaptopornotebookdata <- read.csv("../data/infostudy_data_laptopornotebook_coding.csv", fileEncoding="UTF-8-BOM", header = TRUE, sep = ",", quote = "\"", dec = ".", fill = TRUE)
+replicationlaptopornotebookdata$study <- "Replication"
+replicationlaptopornotebookdata <- subset(replicationlaptopornotebookdata, select=c("ID","study","laptopornotebook_coded"))
+# merge in betterlorn variable 
+betterlorn <- subset(mydata, select = c("ID","betterlorn"))
+replicationlaptopornotebookdata <- merge(replicationlaptopornotebookdata,
+                                         betterlorn,
+                                         by="ID")
+
+# merge the two files together
+laptopornotebook <- rbind(MO1laptopornotebookdata, 
+                          replicationlaptopornotebookdata[ ,c(2:4)])
+
+# calculate percentages based on coding of laptop or notebook usage
+table_laptopornotebook <- as.data.frame(table(laptopornotebook$laptopornotebook_coded,laptopornotebook$study))
+table_laptopornotebookMO1 <- subset(table_laptopornotebook, Var2 == "MO_Study1")
+table_laptopornotebookMO1$perc <- 100*prop.table(table_laptopornotebookMO1$Freq)
+
+table_laptopornotebookRep <- subset(table_laptopornotebook, Var2 == "Replication")
+table_laptopornotebookRep$perc <- 100*prop.table(table_laptopornotebookRep$Freq)
+
+# determine if laptop or notebook preferences vary by significantly by study (chi square)
+xtab_laptopornotebook <- chisq.test(laptopornotebook$laptopornotebook_coded,laptopornotebook$study)
+xtab_laptopornotebook_print <- apa_print(xtab_laptopornotebook, n = sum(table_laptopornotebook$Freq))
+
+# determine if ratings of which is better for learning, laptop (lower numbers) or notebook (higher numbers) vary by study (t-test)
+t_betterlorn <- t.test(betterlorn ~ study, data=laptopornotebook)
+t_betterlorn_print <- apa_print(t_betterlorn)
+
+# get descriptives for betterlorn by stdy
+desc_betterlorn <- describeBy(laptopornotebook$betterlorn, 
+                        group = laptopornotebook$study) 
+
+CI_betterlorn_MO1 <- gsub(";", ",", descr(laptopornotebook$betterlorn[ laptopornotebook$study == "MO_Study1"])$`central tendency`$`95% CI mean`)
+CI_betterlorn_Rep <- gsub(";", ",", descr(laptopornotebook$betterlorn[ laptopornotebook$study == "Replication"])$`central tendency`$`95% CI mean`)
+
+
+```
+
+It's possible that note-taking medium preferences among original and replication study participants may have differed. To evaluate that possibility, we compared responses to the question, "Do you normally take notes in class on your laptop or in a notebook? Why?". We obtained the original authors' coded responses from the SPSS Study_1_Upload_Data.sav file stored at https://osf.io/4psyk. They categorized responses into four categories, "laptop", "notebook", "it depends", or 0, which we interpret as "other," meaning the response didn't fall into one of the first three categories or was missing. We coded replication responses to that question into these same categories. 
+
+The distribution of note-taking medium preferences varied by study, `r xtab_laptopornotebook_print$statistic`. In the original study, proportionally more participants said they typically use a laptop (`r table_laptopornotebookMO1$perc[ table_laptopornotebookMO1$Var1 == "laptop" ]`%) than  a notebook (`r table_laptopornotebookMO1$perc[ table_laptopornotebookMO1$Var1 == "notebook" ]`%) to take notes during class, and `r table_laptopornotebookMO1$perc[ table_laptopornotebookMO1$Var1 == "depends/both" ]`% said it depends. In our replication study, proportionally more participants said they typically use a notebook (`r table_laptopornotebookRep$perc[ table_laptopornotebookRep$Var1 == "notebook" ]`%) than a laptop (`r table_laptopornotebookRep$perc[ table_laptopornotebookRep$Var1 == "laptop" ]`%) to take notes during class, and `r table_laptopornotebookRep$perc[ table_laptopornotebookRep$Var1 == "depends/both" ]`% said it depends.  
+
+The extent to which original and replication study participants believed that taking notes with a laptop or notebook is better for learning varied by study too, `r t_betterlorn_print$full_result`. Specifically, in both studies, participants responded to the question, "In general, do you think it is better for learning purposes to take notes on a laptop or in a notebook?" on a scale from 1, *Laptop significantly better*, to 9, *Notebook significantly better*. In the original study, participants on average believed that laptop and notebook note taking were equally good for learning; the mean hovered near the scale midpoint, *M* = `r desc_betterlorn$MO_Study1$mean`, 95% CI `r CI_betterlorn_MO1`, *SD* = `r desc_betterlorn$MO_Study1$sd`. In our replication study, participants on average believed that taking notes in a notebook was slightly better for learning than taking notes with a laptop; the mean fell to the right of the scale midpoint, *M* = `r desc_betterlorn$Replication$mean`, 95% CI `r CI_betterlorn_Rep`, *SD* = `r desc_betterlorn$Replication$sd`.
+
+These results indicate that note-taking medium preferences are different in the two samples. Our replication participants were more likely to say they generally took class notes longhand whereas original study participants were more likely to say they generally took notes using a laptop. Our replication participants also believed, on average, that taking notes in a notebook was better for learning whereas original study participants believed, on average, that there wasn't much of a difference.  
+
+## Session Information
+Following is the output of R's sessionInfo() command, which reveals the information necessary to ensure analytic reproducibility of our work.
+
+```{r session, results='asis'}
+
+sessionInfo()
+
+```
+
+
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
