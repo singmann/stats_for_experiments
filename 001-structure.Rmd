@@ -1,0 +1,28 @@
+# Structure
+
+1. Why do we need statistics?
+
+- Research process in psychology: research question - operationalisation - statistical analysis
+
+- Epistemic gaps
+
+- Illustrative example (framing effects?)
+
+- How important is statistics?
+  - Statistics only one part of the puzzle
+  - Statistical tests have a certain number of assumptions and results need to be understood in the context of these assumptions. As a consequence, some statistical results are more convincing other ar eless so.
+  - Assumptions generally should not or cannot be tested with other statistical tests. For some assumptions the question of whether they hold or not can be answered by thinking about the data. For others, we need graphical representations of the data. In general, we always should have at least one graphical representation of the data.
+
+2. The standard approach: One independent variable
+
+- Statistical Model
+
+- Variety of Examples
+
+3. One factor with two levels
+
+4. One factor with three levels
+
+5. One factor with more than three levels
+
+6. One continuous independent variable
