@@ -1,0 +1,9 @@
+Meta
+# History files
+.Rhistory
+.Rapp.history
+
+# Example code in package build process
+# RStudio files
+.Rproj.user/
+
