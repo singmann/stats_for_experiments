@@ -7,21 +7,21 @@ library("tidyverse")
 summary(mydata$obj_raw)
 summary(mydata$open_raw)
 
-summary(mydata$obj_index)
-summary(mydata$open_index)
+summary(mydata$obj_index_prop)
+summary(mydata$open_index_prop)
 
-laptop <- mydata %>% 
-  select(ID, condition_label, whichtalklabel, obj_index, open_index) %>% 
-  mutate(performance = obj_index + open_index) %>% 
+laptop_urry <- mydata %>% 
+  #select(ID, condition_label, whichtalklabel, obj_index, open_index) %>% 
+  mutate(performance = (obj_index_prop + open_index_prop)/2 * 100) %>% 
   mutate(pid = factor(ID)) %>% 
   mutate(condition = factor(condition_label, 
                             levels = c("laptop", "longhand")),
          talk = factor(whichtalklabel)) %>% 
   select(pid, condition, talk, performance)
 
-ggplot(laptop, aes(x = condition, y = performance)) +
+ggplot(laptop_urry, aes(x = condition, y = performance)) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  geom_jitter()
+  geom_jitter(width = 0.1)
 
-save(laptop, file = "../../../data/urry2021_data.rda")
+save(laptop_urry, file = "../../../data/urry2021_data.rda")
 

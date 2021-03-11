@@ -1,0 +1,58 @@
+# The Standard Approach for One Independent Variable {#standard1}
+
+In this chapter we are introducing the standard statistical approach for analysing experimental data with one independent variable. The most simple example for such a data set is a study comparing two experimental conditions with one dependent variable such as discussed in the previous chapter. Our first example to introduce the important concepts will be a new and straightforward study.
+
+## Example Data: Note Taking Experiment
+
+```{r load-laptop, echo=FALSE}
+load("data/urry2021_data.rda")
+```
+
+Heather Urry and 87 of her undergraduate and graduate students [@urry2021] (yes, all 87 students are co-authors!) compared the effectiveness of taking notes on a laptop versus longhand (i.e., pen and paper) for learning from lectures. 142 participants first viewed one of several 15 minutes lectures (TED talks) during which they were allowed to take notes either on a laptop or with pen and paper. As this was a proper experiment, participants were randomly assigned to either the laptop ($N = 68$) or longhand condition ($N = 74$). After a 30 minutes delay, participants were quizzed on the content of the lecture. The answers from each participant were then independently rated from several raters (which agreed very strongly with each other) using a standardised scoring key resulting in one memory performance score ranging from 0 (= no memory) to 100 (= perfect memory). Figure \@ref(fig:laptop-dist) below shows the performance scores across both note taking conditions.
+
+```{r laptop-dist, echo=FALSE, fig.cap='Distribution of performance scores from Urry et al. (2021) across conditions.', message=FALSE}
+ggplot(laptop_urry, aes(x = condition, y = performance)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  geom_quasirandom() +
+  stat_summary(colour = "red") +
+  coord_cartesian(ylim = c(0, 100))
+
+```
+
+In Figure \@ref(fig:laptop-dist), each black point shows the score of one participant so the full distribution is visible. The shape of the distribution is also shown via a violin plot (i.e., the black outline around the points) to which we have added three lines representing three summary statistics of the data. From top to bottom these are the 75% quantile, the 50% quantile (i.e., the median), and the 25% quantile. The red points show the mean and the associated error bars show the standard error of the mean[^standard_approach-1]. We will discuss this data in more detail in the next chapter. For now it is enough to see that the two means are very similar, although the mean in the laptop condition is slightly larger (mean laptop = `r round(mean(laptop_urry[laptop_urry$condition == "laptop", "performance"]), 1)`, mean longhand = `r round(mean(laptop_urry[laptop_urry$condition == "longhand", "performance"]), 1)`).
+
+[^standard_approach-1]: We will discuss standard errors in detail in the coming chapters. Until then, it is enough to understand the standard error as a representation of the statistical precision of the mean. In other words, the larger the standard error, the less sure we are about the "true" value of the mean (again, what we mean with true will be discussed later).
+
+## The Basic Statistical Model
+
+The important statistical question for the example data is if we believe the observed difference between the two conditions is statistically meaningful. In other words, do we believe the observed difference is a difference that also holds for the underlying *population* (i.e., students taking notes in lectures with either laptop or in longhand format) or is it just a chance occurrence and there is no real difference in memory performance between both types of note taking? The standard statistical approach answers this question through a *statistical model* that attempts to explain (or predict) the observed values of the DV from the IV.[^standard_approach-2] In the experimental context this means predicting our observed outcome, the DV, from our manipulation.
+
+[^standard_approach-2]: All statistical models considered in this book are solely based on observable quantities. We predict the DV (i.e., what we measure) from the IVs we either manipulate (in experiments) or observe/measure (for non-experimental DVs). However, statistical models can also use non-observable (latent) quantities to explain the DV. Popular examples in psychology are structural equation models [e.g., @kline2015] or cognitive models [e.g., @lee2013].
+
+The basic statistical model separates the observed DV into three parts that: the overall mean, which for reasons that will become clear later is called the *intercept*, the effect of the IV, and the part of the data that cannot be explained by the model, the so-called *residuals*. When summing these three parts together, they result in the observed value. In mathematical form we can express this as
+
+```{=tex}
+\begin{equation}
+\text{DV} = \underbrace{\text{intercept}}_{\text{overall mean}} + \text{IV-effect} + \text{residual}.
+(\#eq:statmodel)
+\end{equation}
+```
+(For those not used to reading mathematical expressions, the point at the end of the equation simply ends the previous sentence and has no mathematical meaning.) As someone without a mathematics background myself, I know that equations in a text are often more intimidating than immediately useful. Consequently, before moving on it makes sense to go through this equation in more detail. Furthermore, all analyses performed in this book are applications of Equation \@ref(eq:statmodel). So understanding this one equation should make it relatively straight forward to understand the analyses reported in the following.
+
+The first thing we consider in more detail is the different possible values the variables in Equation \@ref(eq:statmodel) (i.e., $\text{DV}$, $\text{intercept}$, $\text{IV-effect}$, and $\text{residual}$) can take on.[^standard_approach-3] For a given data set, only the intercept is the same for each observation. The IV-effect differs for each condition and the residual can be different for each individual observation. In other words, this equation holds for every individual observation and the $\text{DV}$ on the left hand side are the actually observed individual values of the DV (e.g., the black points in Figure \@ref(fig:laptop-dist)).
+
+[^standard_approach-3]: Equation \@ref(eq:statmodel) is displayed in simplified and not fully correct form. Mathematically correct would be that either each variable (i.e., $\text{DV}$, $\text{intercept}$, $\text{IV-effect}$, and $\text{residual}$) has an index, such as $i$, that goes from 1 to $N$ (where $N$ is the total number of observations) or that each variables is a vector (i.e., holds multiple values) of length $N$.
+
+A simplification of Equation \@ref(eq:statmodel) is obtained if we ignore the residuals for a moment. As said above, the residuals are the part of the data that remains unexplained. In other words, these represent all the idiosyncratic parts of the data independent of our manipulation (e.g., some people have better memory than others independent of how they took notes). What remains from our statistical model if we ignore all idiosyncratic aspects are only the predictions based on our IV. In the case of experimental data, the IV is the experimental condition. Thus, what our statistical model actually predicts is the means of the experimental conditions. We can again formalise this as
+
+```{=tex}
+\begin{equation}
+\hat{\text{DV}} = \text{intercept} + \text{IV-effect}.
+(\#eq:predmodel)
+\end{equation}
+```
+Here, the hat symbol ($\hat{}$) means predicted value. Thus in contrast to the actual DV above, we only have the predicted DV in this equation. And as
+
+As mentioned above, Equation \@ref(eq:statmodel) holds for everyone of the 142 participants of [@urry2021]. Our approach for a better understanding of the equation is to see how it looks like for the first few of these participants. Before we can do so, we first need to define all parts on the right hand side of Equation \@ref(eq:statmodel) precisely. The first part on the right hand side is the intercept which we have
+
+To exemplify this, let us take a look at the first few participants of the data set and create this
