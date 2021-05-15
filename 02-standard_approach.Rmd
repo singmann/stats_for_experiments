@@ -143,7 +143,8 @@ library("afex")
 library("emmeans")
 library("tidyverse")
 theme_set(theme_bw(base_size = 15) + 
-            theme(legend.position="bottom", panel.grid.major.x = element_blank()))
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
 ```
 
 The next step would be loading in the data. This is made easy here as the data from @urry2021 is part of `afex`, under the name `laptop_urry2021`. So we can load it with the `data()` function. We then also get an overview of the variables in this data set using `str()`, which returns the structure of a `data.frame`.
@@ -216,9 +217,9 @@ Estimating a statistical model with `aov_car()` provides us with the inferential
 
 ### Data Visualisation 
 
-For data visualisation we can use the `afex` function `afex_plot()` which is built on top of the `ggplot2` package. `afex_plot()` requires an estimated model object (e.g., as returned from `aov_car()`) and specifying which factors of the model we want to plot. In the present case, we only have one factor, `condition`, so we can only choose this one. Importantly, all factors passed to `afex_plot()` need to be passed as character strings (i.e., enclosed with `"`).
+For data visualisation we can use the `afex` function `afex_plot()` which is built on top of the `ggplot2` package. `afex_plot()` requires an estimated model object (e.g., as returned from `aov_car()`) and specifying which factors of the model we want to plot. In the present case, we only have one factor, `condition`, so we can only choose this one. Importantly, all factors passed to `afex_plot()` need to be passed as character strings (i.e., enclosed with `"..."`).
 
-```{r, fig.cap='afex_plot() figure for data from Urry et al. (2021).'}
+```{r fig1, fig.cap='afex\\_plot() figure for data from Urry et al. (2021)'}
 afex_plot(res1, "condition")
 ```
 
@@ -226,7 +227,7 @@ This simple call to `afex_plot()` produces already a rather good looking results
 
 As `afex_plot()` returns a `ggplot2` plot object, we can manipulate the plot to make it nicer.
 
-```{r}
+```{r fig2}
 p1 <- afex_plot(res1, "condition")
 p1 + 
   labs(x = "note taking condition", y = "memory performance (0 - 100)") +

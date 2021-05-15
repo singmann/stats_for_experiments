@@ -1,5 +1,5 @@
 --- 
-title: "Introduction to Statistics with `R` for Experimental Psychology"
+title: "Introduction to Statistics for Experimental Psychology with `R`"
 author: "Henrik Singmann"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,7 +7,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+description: "Statistics for Experimental Psychology with R using the afex package."
 ---
 
 ```{r setup, include=FALSE}

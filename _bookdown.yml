@@ -1,3 +1,4 @@
+rmd_files: ["index.Rmd", "02-standard_approach.Rmd", "99-references.Rmd"]
 book_filename: "stats_for_experiments"
 delete_merged_file: true
 language:
@@ -5,3 +6,4 @@ language:
     chapter_name: "Chapter "
 
 before_chapter_script: "_common.R"
+output_dir: "docs"
