@@ -1,4 +1,4 @@
---- 
+---
 title: "Introduction to Statistics for Experimental Psychology with `R`"
 author: "Henrik Singmann"
 date: "`r Sys.Date()`"
@@ -21,7 +21,7 @@ theme_set(theme_bw(base_size = 15) +
 
 # Overview
 
-At this point in time, the book is being written so only few chapters are already available.
+At this point in time, the book is being written so only few chapters are already available, beginning with chapter \@ref(standard1).
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -29,6 +29,3 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
-
-
-
