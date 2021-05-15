@@ -1,0 +1,66 @@
+# Case Study: 
+
+```{r}
+library("afex")
+library("emmeans")
+library("tidyverse")
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+```
+
+```{r, message=FALSE}
+mo2014 <- read_csv("data/Study 1 abbreviated data.csv")
+glimpse(mo2014)
+```
+
+```{r}
+mo2014 <- mo2014 %>% 
+  mutate(
+    pid = factor(participant),
+    condition = factor(LapLong, 
+                      levels = c(0, 1),
+                      labels = c("laptop", "longhand")),
+    performance = (factualindex/perfectfactindexscore + 
+                     conceptualindex/perfectconceptindexscore)/2 * 100
+  ) %>% 
+  select(pid, condition, performance)
+```
+
+```{r}
+ggplot(mo2014, aes(x = condition, y = performance)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  ggbeeswarm::geom_quasirandom() +
+  stat_summary(colour = "red") +
+  coord_cartesian(ylim = c(0, 100))
+```
+
+
+```{r}
+res2 <- aov_car(performance ~ condition + Error(pid), mo2014)
+```
+
+
+### The Logic of Inferential Statistics
+
+Going beyond the the present sample is the goal of *inferential statistics*. There are different inferential statistical approaches, and we are focussing on the most popular one, *null hypothesis significance testing* (NHST). We will describe NHST more thoroughly in the next chapter, but will already introduce its main ideas here. For NHST, the question of generalising from sample to population is about two different possible true states of the world: There either is no difference in conditions means in the population (i.e., there only is a mean difference in our sample due to chance) or there is a difference in the condition means in the population. To decide between these possibilities, we set up a statistical model for the data. This statistical model allows us to construct a test for the possibility that there is no difference -- the *null hypothesis*. More specifically, the statistical model allows us to test how compatible the data is with the null hypothesis of no difference. The test of the null hypothesis proceeds as follows: (1) We assume that the state of the world in which there is no difference in the population means is true. (2) Based on this assumption we calculate how likely it is to observe a difference as large as the one we have observed in our sample. (3) If the probability of observing a difference as large as the one we have is very small, we take this as evidence that the null hypothesis of no difference is not true -- we reject the null hypothesis. (4) We act as if there were a difference in the population. In this case (i.e., we reject the null hypothesis and act as if there is a difference), we say our experimental manipulation *has an effect*.
+
+As is clear from this description, the logic underlying inferential statistics using NHST is not trivial. To make it clearer, let us apply the logic to our example data. We want to know whether the observed mean memory difference between note taking with a laptop and note taking in long hand format in our sample generalises to the population of students that take note in either of these formats. To do so, we set up a statistical model for our data. This model allows us to test how compatible our data is with the null hypothesis that there is no mean memory difference in the population. Specifically, the model allows us to calculate the probability of obtaining a memory difference as large as the one we have observed assuming the there is no mean memory difference in the population. If our data is incompatible with the null hypothesis (i.e., it is unlikely to obtain a memory difference as large as the one we have observed if the null hypothesis were true), we reject the null hypothesis of no mean memory difference in the population. Because we reject the null hypothesis we then act as if there was a mean memory difference in the population. In other words, we then act as if the type of note taking had an effect on memory performance in the population.
+
+Even though the logic of NHST is not necessarily intuitive, it is clearly helpful for researchers. After running an experiment we really would like to know if the difference observed in our experiment (i.e., in our sample) is meaningful in the sense that it generalises to the population from which we have sampled our participants. And in almost every actual experiment there is some mean difference between the condition (i.e., it is extreme unlikely that both conditions have exactly the same mean). Thus, we pretty much always face this question. NHST allows us to test whether the observed difference is compatible with a world in which there is no difference. If this is unlikely, we decide (i.e., act as if) there were a difference.
+
+NHST is the de facto standard procedure for inferential statistics in the cognitive and behavioural sciences. Understanding the logic of NHST will enable you to understand the majority of empirical papers and will also allow you to apply inferential statistics in your own research. Nevertheless, there exist a long list of popular criticisms of NHST [e.g., @meehl1978; @cohen1994; @rozeboom1960; @nickerson2000; @wagenmakers2007]. Most of these criticisms are related to one or more of the following four aspects or shortcomings of NHST:
+
+1.  NHST does not test what we actually want to know, but uses a backward logic to get there. We want to know whether the observed mean difference in our sample generalises to the population, but NHST does not test this directly. Instead, we construct a test of the opposite (or complement) of what we are actually interested in, the idea that there is no mean difference in the population. If the observed mean difference is unlikely to occur under the null hypothesis of no difference, we act as if there were a difference.
+
+2.  NHST does not provide evidence for or test the two possible states of the world -- either there is a true difference in the population or not -- directly. Instead, NHST again uses a somewhat backward logic to get there. We only test the compatibility of our data with the null hypothesis; how likely it is to obtain a mean difference as observed in our sample if there were no difference in the population. If this probability is low, we act as if there is a difference, but we do not really know that. Thus, inferential statistics can never prove which of the two states of the world is actually true. Based on the information we have, we make a decision and then act as if one or the other states is true, but we never really know which state is really true. There almost always is the chance we got it wrong along the way and we made the wrong choice. If one is interested in absolute and eternal truths, inferential statistics is sadly the wrong tool.
+
+3.  The logic underlying NHST is asymmetric. If the probability of obtaining a results as extreme as the one we have observed is low, we reject the null hypothesis and act as if there were a difference. However, if the probability is not low we do not generally accept the null hypothesis of no mean difference. Thus, the standard approach only lets us gather evidence for an effect of a condition, but not against it.
+
+4.  NHST is not concerned with the size of the mean difference in the population. It just tests if the data is compatible with a world in which there is no mean difference. However, in some situations a very small difference might have the same meaning for us as no difference. So just distinguishing no difference from any difference might not be that useful in such a situation.
+
+All of these points are valid arguments and describe shortcomings or complications with the NHST framework.
+
+### Effect Sizes
+
+The next column that is important is ges which stands for generalised eta-squared, in math notation, $\eta^2_G$. $\eta^2_G$ is a standardised effect size that tells us something about the absolute magnitude of the observed effect [@olejnikGeneralizedEtaOmega2003; @bakemanRecommendedEffectSize2005]. More specifically, $\eta^2_G$ is supposed to be a measure of the proportion of variance in the DV that can be accounted for by a specific factor or IV in the model. For example, in the present case the condition effect is supposed to explain 0.4% of the variance in performance. However, I am generally not a big fan of $\eta^2_G$ or standardised effect sizes. The problem is that judging the magnitude of an effect generally requires problem-specific knowledge (e.g., is a memory difference of 2.0 large?). Standardised effect sizes attempt to circumvent this problem by normalising the observed effect in some way, for example by considering the overall variability of the DV (e.g., as done by $\eta^2_G$). This gives the standardised effect sizes an aura of objectivity. However, this aura is generally not justifiable and the values of standardised effect sizesare often misleading @lenthPracticalGuidelinesEffective2001. For example, the value of $\eta^2_G$ depends in large parts on the experimental design and DV and can therefore vary quite dramatically between studies that attempt to measure the same thing [@lakensCalculatingReportingEffect2013]. Thus, it is generally better to report simple effect sizes, such as an observed difference in memory performance of 2.0, than a standardised effect size [@baguleyStandardizedSimpleEffect2009]. However, as some journals requires standardised effect sizes the default output contains it.
