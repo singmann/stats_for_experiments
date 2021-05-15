@@ -19,6 +19,12 @@ laptop_urry <- mydata %>%
          talk = factor(whichtalklabel)) %>% 
   select(pid, condition, talk, performance)
 
+nrow(laptop_urry)
+
+laptop_urry %>% 
+  group_by(condition) %>% 
+  count()
+
 ggplot(laptop_urry, aes(x = condition, y = performance)) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
   geom_jitter(width = 0.1)

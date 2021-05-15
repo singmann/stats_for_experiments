@@ -1,5 +1,5 @@
 --- 
-title: "An Introduction to Computational Statistics for Experimental Psychology"
+title: "Introduction to Statistics with `R` for Experimental Psychology"
 author: "Henrik Singmann"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -21,7 +21,7 @@ theme_set(theme_bw(base_size = 15) +
 
 # Overview
 
-some stuff 
+At this point in time, the book is being written so only few chapters are already available.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
