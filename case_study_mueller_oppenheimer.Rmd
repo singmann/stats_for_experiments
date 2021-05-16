@@ -1,4 +1,67 @@
-# Case Study: 
+# Case Study 1: More Results from Note Taking Studies
+
+In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a look at the data from @urry2021. Additionally, we will analyse the data of the experiment by @muellerPenMightierKeyboard2014. This experiment was the first published experiment investigating the question of note taking with a laptop or in longhand format and was the basis on which @urry2021 planned their study. For the study of @muellerPenMightierKeyboard2014 we will perform a full analysis starting with reading in the data. So in addition to performing the statistical hypothesis test, we will calculate some descriptive statistics.
+
+We start the analysis in this chapter in the same way as in the previous chapter, by loading the three packages we generally use, `afex`, `emmeans`, and `tidyverse`, and set a nicer `ggplot2` theme. Before doing so it is probably a good idea to restart `R` (unless, of course, you are just starting `R`). In `RStudio` this can be conveniently done through the menu by clicking on `Session` and then `Restart R`. In other `R` environments you might need to restart the program. The benefit of restarting `R` is that it should create a blank `R` session in which no packages are loaded and no objects exist in the workspace. Only such a blank sessions ensures that, once we have obtained a set of results, we can recreate them later using the same code. That is, a blank `R` session avoids any potential problems due to analyses performed in a previous session that are still lingering. Restarting `R` should generally be done when starting a new analysis or after one is completely done with an analysis. In the latter case, it makes sense to restart `R` and the rerun all code one has saved in ones script to ensure that all results replicate based on only the code in the script (and do not require some additional code not saved).
+
+```{r}
+library("afex")
+library("emmeans")
+library("tidyverse")
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+```
+
+## Analysing the Conceptual Scores from Urry et al. (2021)
+
+As a quick reminder, @urry2021 showed their participants short lectures (TED talks) on video during which participants were allowed to take notes. One group of participants, the `laptop` condition, could take notes on a laptop, whereas the participants in the `longhand` condition could take notes with pen and paper. After the lecture participants were quizzed on two aspects of the content of the lecture, factual questions and conceptual questions. In the previous chapter we have analysed the overall memory score which was the average of the performance for the factual questions and the conceptual questions. Here, we are only concerned with the memory performance for conceptual questions. We begin our analysis by loading in the data (which is part of `afex` can be loaded with `data()`) and getting an overview of the variables using `str()`:
+
+```{r}
+data("laptop_urry")
+str(laptop_urry)
+```
+
+As before, we have the participants identifier variable in `pid` and the note taking condition in variable `condition`. We can also guess that the conceptual memory scores are in the aptly name variable `conceptual` (if we were unsure about this, we could also check the documentation of the data at `?laptop_urry`).
+
+Usually, once the data is sufficiently prepared (i.e., we have performed some sanity checks and identified DV and IV), the first step in an analysis should be plotting the data. This could be done using `ggplot2` directly. However, in cases such as the present one where it is very clear which statistical model we are going to estimate it is often a bit less effort to plot the data with `afex_plot()`. Thus, we start by estimating the statistical model for the conceptual memory performance of the data from @urry2021 and save the estimated model object as `mc_urry`. For this, we again use `aov_car()` on the `laptopt_urry` data and specify the model using the formula interface. The DV we are considering here is `conceptual`, our IV is `condition`, and the participant identifier is `pid`. Consequently, the formula is `conceptual ~ condition + Error(pid)`. Then, before looking at the inferential statistical results, we use this model object to plot the data using `afex_plot`.
+
+```{r urry-conceptual,  fig.cap='Conceptual memory scores from Urry et al. (2021) across note taking conditions'}
+mc_urry <- aov_car(conceptual ~ condition + Error(pid), laptop_urry)
+afex_plot(mc_urry, "condition")
+```
+
+The goal behind beginning with plotting the data is that it allows to see whether the data "looks alright". That is, we check whether there are any features that stand out such as clear outliers or an unusual pattern in the data. If this were the case, we would try to figure out if we can find a reason for this issue or how we deal with it. But, as the data looks alright, we continue and consider the results of the significance test:
+
+```{r}
+mc_urry
+```
+
+The ANOVA table reveals that the significance test for the effect of condition is not significant with $p = .319$. Thus, in line with the finding that there is no evidence for a difference in overall memory performance, there also is no evidence for a difference in memory for conceptual information.
+
+We can also again use `emmeans` to see the condition means (or estimated marginal means). In line with Figure \@ref(fig:urry-conceptual) (as `afex_plot` internally also uses `emmeans` it shows exactly the same means in graphical form), the memory score in the laptop condition is descriptively around 3.5 points higher than the score in the longhand condition.
+
+```{r}
+emmeans(mc_urry, "condition")
+```
+
+Before moving to the next data set, let us consider how we could report this analysis in a research report. We could for example write:
+
+> As shown in Figure \@ref(fig:urry-conceptual), participants' conceptual memory scores (on a scale from 0 to 100) are descriptively slightly larger in the laptop condition compared to the longhand condition. We analysed these scores with an ANOVA with one factor, note taking condition, with two levels (laptop vs. longhand). The effect of note taking condition was not significant, $F(1, 140) = 1.00$, $p = .319$. This indicates that the data does not provide evidence for a difference in memory for conceptual information based on how notes are taken during lectures.
+
+## Analysis of Mueller and Oppenheimer (2014)
+
+### Why are Experiments Replicated?
+
+The study by @urry2021 was not the first study investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of Study 1 by @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
+
+As we have discussed before, inferences from NHST are never conclusive as they are probabilistic and require multiple inferential steps. Replications are one of the most important tools in science for overcoming at least the probabilistic uncertainties associated with the inferences we draw from experimental data. For example consider that several independent but otherwise as similar as possible experiments -- that is, replications of the same experiments -- all obtain a significant result (i.e., indicate that the data are incompatible with the null hypothesis). Such a pattern would dramatically increase our confidence that the null hypothesis is likely false.
+
+In addition to the gain in confidence for specific results, there are good practical reasons for replicating an existing experiment. For example, when beginning to work on a new topic it is generally a good idea to replicate the experiment on which one wants to build on. If one already has problems replicating what exists that shows that the topic is maybe not as simple as portrayed in the literature.
+
+Another excellent reason for performing a replication is if one simply does not believe an existing result. Remember, one of the key components of the scientific method is scepticism (at least [according to Wikipedia](https://en.wikipedia.org/wiki/Scientific_method)). And if a results is difficult to believe, the reasonable sceptical position to take is to require more evidence. A replication is one way (if not the best way) to produce such evidence. Not believing existing experiments also does not imply that one questions the integrity of the researchers who did the experiment. There are many completely harmless reasons why a study might not replicate. For example, researchers might have just obtained a significant results by chance (which happens in 5% of cases, as discussed in the next chapters).
+
+Sadly, replicating existing experiments and then publishing the results,
 
 ```{r}
 library("afex")
@@ -35,32 +98,6 @@ ggplot(mo2014, aes(x = condition, y = performance)) +
   coord_cartesian(ylim = c(0, 100))
 ```
 
-
 ```{r}
 res2 <- aov_car(performance ~ condition + Error(pid), mo2014)
 ```
-
-
-### The Logic of Inferential Statistics
-
-Going beyond the the present sample is the goal of *inferential statistics*. There are different inferential statistical approaches, and we are focussing on the most popular one, *null hypothesis significance testing* (NHST). We will describe NHST more thoroughly in the next chapter, but will already introduce its main ideas here. For NHST, the question of generalising from sample to population is about two different possible true states of the world: There either is no difference in conditions means in the population (i.e., there only is a mean difference in our sample due to chance) or there is a difference in the condition means in the population. To decide between these possibilities, we set up a statistical model for the data. This statistical model allows us to construct a test for the possibility that there is no difference -- the *null hypothesis*. More specifically, the statistical model allows us to test how compatible the data is with the null hypothesis of no difference. The test of the null hypothesis proceeds as follows: (1) We assume that the state of the world in which there is no difference in the population means is true. (2) Based on this assumption we calculate how likely it is to observe a difference as large as the one we have observed in our sample. (3) If the probability of observing a difference as large as the one we have is very small, we take this as evidence that the null hypothesis of no difference is not true -- we reject the null hypothesis. (4) We act as if there were a difference in the population. In this case (i.e., we reject the null hypothesis and act as if there is a difference), we say our experimental manipulation *has an effect*.
-
-As is clear from this description, the logic underlying inferential statistics using NHST is not trivial. To make it clearer, let us apply the logic to our example data. We want to know whether the observed mean memory difference between note taking with a laptop and note taking in long hand format in our sample generalises to the population of students that take note in either of these formats. To do so, we set up a statistical model for our data. This model allows us to test how compatible our data is with the null hypothesis that there is no mean memory difference in the population. Specifically, the model allows us to calculate the probability of obtaining a memory difference as large as the one we have observed assuming the there is no mean memory difference in the population. If our data is incompatible with the null hypothesis (i.e., it is unlikely to obtain a memory difference as large as the one we have observed if the null hypothesis were true), we reject the null hypothesis of no mean memory difference in the population. Because we reject the null hypothesis we then act as if there was a mean memory difference in the population. In other words, we then act as if the type of note taking had an effect on memory performance in the population.
-
-Even though the logic of NHST is not necessarily intuitive, it is clearly helpful for researchers. After running an experiment we really would like to know if the difference observed in our experiment (i.e., in our sample) is meaningful in the sense that it generalises to the population from which we have sampled our participants. And in almost every actual experiment there is some mean difference between the condition (i.e., it is extreme unlikely that both conditions have exactly the same mean). Thus, we pretty much always face this question. NHST allows us to test whether the observed difference is compatible with a world in which there is no difference. If this is unlikely, we decide (i.e., act as if) there were a difference.
-
-NHST is the de facto standard procedure for inferential statistics in the cognitive and behavioural sciences. Understanding the logic of NHST will enable you to understand the majority of empirical papers and will also allow you to apply inferential statistics in your own research. Nevertheless, there exist a long list of popular criticisms of NHST [e.g., @meehl1978; @cohen1994; @rozeboom1960; @nickerson2000; @wagenmakers2007]. Most of these criticisms are related to one or more of the following four aspects or shortcomings of NHST:
-
-1.  NHST does not test what we actually want to know, but uses a backward logic to get there. We want to know whether the observed mean difference in our sample generalises to the population, but NHST does not test this directly. Instead, we construct a test of the opposite (or complement) of what we are actually interested in, the idea that there is no mean difference in the population. If the observed mean difference is unlikely to occur under the null hypothesis of no difference, we act as if there were a difference.
-
-2.  NHST does not provide evidence for or test the two possible states of the world -- either there is a true difference in the population or not -- directly. Instead, NHST again uses a somewhat backward logic to get there. We only test the compatibility of our data with the null hypothesis; how likely it is to obtain a mean difference as observed in our sample if there were no difference in the population. If this probability is low, we act as if there is a difference, but we do not really know that. Thus, inferential statistics can never prove which of the two states of the world is actually true. Based on the information we have, we make a decision and then act as if one or the other states is true, but we never really know which state is really true. There almost always is the chance we got it wrong along the way and we made the wrong choice. If one is interested in absolute and eternal truths, inferential statistics is sadly the wrong tool.
-
-3.  The logic underlying NHST is asymmetric. If the probability of obtaining a results as extreme as the one we have observed is low, we reject the null hypothesis and act as if there were a difference. However, if the probability is not low we do not generally accept the null hypothesis of no mean difference. Thus, the standard approach only lets us gather evidence for an effect of a condition, but not against it.
-
-4.  NHST is not concerned with the size of the mean difference in the population. It just tests if the data is compatible with a world in which there is no mean difference. However, in some situations a very small difference might have the same meaning for us as no difference. So just distinguishing no difference from any difference might not be that useful in such a situation.
-
-All of these points are valid arguments and describe shortcomings or complications with the NHST framework.
-
-### Effect Sizes
-
-The next column that is important is ges which stands for generalised eta-squared, in math notation, $\eta^2_G$. $\eta^2_G$ is a standardised effect size that tells us something about the absolute magnitude of the observed effect [@olejnikGeneralizedEtaOmega2003; @bakemanRecommendedEffectSize2005]. More specifically, $\eta^2_G$ is supposed to be a measure of the proportion of variance in the DV that can be accounted for by a specific factor or IV in the model. For example, in the present case the condition effect is supposed to explain 0.4% of the variance in performance. However, I am generally not a big fan of $\eta^2_G$ or standardised effect sizes. The problem is that judging the magnitude of an effect generally requires problem-specific knowledge (e.g., is a memory difference of 2.0 large?). Standardised effect sizes attempt to circumvent this problem by normalising the observed effect in some way, for example by considering the overall variability of the DV (e.g., as done by $\eta^2_G$). This gives the standardised effect sizes an aura of objectivity. However, this aura is generally not justifiable and the values of standardised effect sizesare often misleading @lenthPracticalGuidelinesEffective2001. For example, the value of $\eta^2_G$ depends in large parts on the experimental design and DV and can therefore vary quite dramatically between studies that attempt to measure the same thing [@lakensCalculatingReportingEffect2013]. Thus, it is generally better to report simple effect sizes, such as an observed difference in memory performance of 2.0, than a standardised effect size [@baguleyStandardizedSimpleEffect2009]. However, as some journals requires standardised effect sizes the default output contains it.

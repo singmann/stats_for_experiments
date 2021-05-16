@@ -3,6 +3,7 @@ eq:statmodel
 fig:laptop-model
 eq:predmodel
 fig:fig1
+fig:urry-conceptual
 overview
 standard1
 ex:urry
@@ -19,3 +20,7 @@ interpreting-the-results
 data-visualisation
 follow-up-analysis
 summary
+case-study-1-more-results-from-note-taking-studies
+analysing-the-conceptual-scores-from-urry-et-al.-2021
+analysis-of-mueller-and-oppenheimer-2014
+why-are-experiments-replicated
