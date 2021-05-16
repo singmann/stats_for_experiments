@@ -21,6 +21,6 @@ data-visualisation
 follow-up-analysis
 summary
 case-study-1-more-results-from-note-taking-studies
-analysing-the-conceptual-scores-from-urry-et-al.-2021
-analysis-of-mueller-and-oppenheimer-2014
+analysing-the-conceptual-memory-from-urry-et-al.-2021
+analysing-the-conceptual-memory-of-mueller-and-oppenheimer-2014
 why-are-experiments-replicated
