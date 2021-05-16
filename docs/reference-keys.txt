@@ -1,5 +1,6 @@
 fig:laptop-dist
 eq:statmodel
+fig:laptop-model
 eq:predmodel
 fig:fig1
 overview

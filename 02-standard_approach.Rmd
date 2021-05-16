@@ -14,12 +14,14 @@ Heather Urry and 87 of her undergraduate and graduate students [@urry2021] (yes,
 [^standard_approach-1]: Urry et al. transformed the memory scores before their analysis based on an earlier paper doing the same. However, the memory scores from 0 to 100 are easier to understand than the transformed scores. As the results are qualitatively the same for both approaches, we use the untransformed memory scores here.
 
 ```{r laptop-dist, echo=FALSE, fig.cap='Distribution of memory scores from Urry et al. (2021) across the two note taking conditions.', message=FALSE}
-ggplot(laptop_urry, aes(x = condition, y = overall)) +
+set.seed(1234566)
+p1 <- ggplot(laptop_urry, aes(x = condition, y = overall)) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
   ggbeeswarm::geom_quasirandom() +
   stat_summary(colour = "red") +
   coord_cartesian(ylim = c(0, 100)) +
   labs(y = "memory score")
+p1
 ```
 
 In Figure \@ref(fig:laptop-dist), each black point shows the memory score of one participant so the full distribution of the data is visible. The shape of the distribution is also shown via a violin plot (i.e., the black outline around the points) to which we have added three lines representing three summary statistics of the data. From top to bottom these lines are the 75% quantile, the 50% quantile (i.e., the median), and the 25% quantile. The red points show the mean and the associated error bars show the standard error of the mean[^standard_approach-2]. We see that the two means are quite similar, although the mean in the laptop condition is slightly larger, by `r formatC(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]) - mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]), 1, format = "f")` points (mean laptop = `r round(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]), 1)`, mean longhand = `r round(mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]), 1)`).
@@ -34,11 +36,13 @@ The previous paragraph provide us with *descriptive statistics* describing the r
 
 Going beyond the the present sample is the goal of *inferential statistics*. There are different inferential statistical approaches, and we are focussing on the most popular one, *null hypothesis significance testing* (NHST). We will describe NHST more thoroughly in the next chapter, but will already introduce its main ideas here. For NHST, the question of generalising from sample to population is about two different possible true states of the world: There either is no difference in conditions means in the population (i.e., there only is a mean difference in our sample due to chance) or there is a difference in the condition means in the population. To decide between these possibilities, we set up a statistical model for the data. This statistical model allows us to assess if there is no difference in the population -- we call this possible state of the world the *null hypothesis*. More specifically, the statistical model allows us to test how compatible the data is with the null hypothesis of no difference. The test of the null hypothesis proceeds as follows: (1) We assume that the state of the world in which there is no difference in the population means is true. (2) Based on this assumption we calculate how likely it is to observe a difference as large as the one we have observed in our sample. (3) If the probability of observing a difference as large as the one we have is very small, we take this as evidence that the null hypothesis of no difference is not true -- we reject the null hypothesis. (4) We act as if there were a difference in the population. In this case (i.e., we reject the null hypothesis and act as if there is a difference), we say our experimental manipulation *has an effect*.
 
-As is clear from this description, the logic underlying inferential statistics using NHST is not trivial. To make it clearer, let us apply the logic to our example data. We want to know whether the observed mean memory difference between note taking with a laptop and note taking in long hand format in our sample generalises to the population of students that take note in either of these formats. To do so, we set up a statistical model for our data. This model allows us to test how compatible our data is with the null hypothesis that there is no mean memory difference in the population. Specifically, the model allows us to calculate the probability of obtaining a memory difference as large as the one we have observed assuming the there is no mean memory difference in the population. If our data is incompatible with the null hypothesis (i.e., it is unlikely to obtain a memory difference as large as the one we have observed if the null hypothesis were true), we reject the null hypothesis of no mean memory difference in the population. Because we reject the null hypothesis we then act as if there was a mean memory difference in the population. In other words, we then act as if the type of note taking had an effect on memory after lectures in the population.
+As is clear from this description, the logic underlying inferential statistics using NHST is not trivial. To make it clearer, let us apply the logic to the example data. We want to know whether the observed mean memory difference between note taking with a laptop and note taking in long hand format in our sample generalises to the population of students that take note in either of these formats. To do so, we set up a statistical model for our data. This model allows us to test how compatible our data is with the null hypothesis that there is no mean memory difference in the population. Specifically, the model allows us to calculate the probability of obtaining a memory difference as large as the one we have observed assuming the there is no mean memory difference in the population. If our data is incompatible with the null hypothesis (i.e., it is unlikely to obtain a memory difference as large as the one we have observed if the null hypothesis were true), we reject the null hypothesis of no mean memory difference in the population. Because we reject the null hypothesis we then act as if there was a mean memory difference in the population. In other words, we then act as if the type of note taking had an effect on memory after lectures in the population.
 
 Even though the logic of NHST is not necessarily intuitive, it is clearly helpful for researchers. After running an experiment we really would like to know if the difference observed in our experiment (i.e., in our sample) is meaningful in the sense that it generalises to the population from which we have sampled our participants. And in almost every actual experiment there is some mean difference between the condition (i.e., it is extreme unlikely that both conditions have exactly the same mean). Thus, we pretty much always face this question. NHST allows us to test whether the observed difference is compatible with a world in which there is no difference. If this is unlikely, we decide (i.e., act as if) there were a difference.
 
-NHST is the de facto standard procedure for inferential statistics across empirical sciences (i.e., not only in psychology and related disciplines). Understanding the logic of NHST will enable you to understand the majority of empirical papers and will also allow you to apply inferential statistics in your own research. Nevertheless, there exist a long list of popular criticisms of NHST [e.g., @rozeboom1960; @meehl1978; @cohen1994; @nickerson2000; @wagenmakers2007]. We will discuss these criticisms in more detail in the next chapter, but for now it is important to realise that NHST does not allow to test, or prove, whether there is a mean difference in the population. The only thing NHST calculates is a probability of how compatible the data is with the null hypothesis. If this probability is low that does not necessarily mean that there is a difference. Likewise, if this probability is high that does not necessarily mean there is no difference. All inferences we draw based on NHST results are necessarily probabilistic in itself (i.e., can be false). So the most important rule when interpreting the results from NHST is to [be humble](https://youtu.be/tvTRZJ-4EyI). NHST never "proves" or "confirms" anything. Instead NHST results "suggest" or "indicate" certain interpretations. If we do not over-interpret results, but stay instead stay humble in our interpretations, we are unlikely to fall prey to the common (and often justifiable) criticisms of the NHST framework.
+What we can see from spelling out the logic in detail is that there are quite a few inferential leaps we have to make to get to what we want. We design experiments with the goal in mind to find a difference between the different experimental conditions. However, we then do not test this directly. Instead, we only test the compatibility of the data with the converse of what we are actually interested in -- the null hypothesis of no effect. If this test in a sense fails we then make two inferential steps. First we reject the null hypothesis and then we act as if there were a difference. Both of these inferential steps are not necessitated logically. What this means is that inferences based on NHST alone are never extremely strong. In many cases we can come up with plausible arguments questioning the validity of the two inferential steps.
+
+NHST is the de facto standard procedure for inferential statistics across empirical sciences (i.e., not only in psychology and related disciplines). Understanding the logic of NHST will enable you to understand the majority of empirical papers and will also allow you to apply inferential statistics in your own research. Nevertheless, there exist a long list of popular criticisms of NHST [e.g., @rozeboom1960; @meehl1978; @cohen1994; @nickerson2000; @wagenmakers2007]. We will discuss these criticisms in more detail in later chapters, but for now it is important to realise that NHST does not allow to test, or prove, whether there is a mean difference in the population. The only thing NHST calculates is a probability of how compatible the data is with the null hypothesis. If this probability is low that does not necessarily mean that there is a difference. Likewise, if this probability is high that does not necessarily mean there is no difference. All inferences we draw based on NHST results are necessarily probabilistic in itself (i.e., can be false). So the most important rule when interpreting the results from NHST is to [be humble](https://youtu.be/tvTRZJ-4EyI). NHST never "proves" or "confirms" anything. Instead NHST results "suggest" or "indicate" certain interpretations. If we do not over-interpret results, but stay instead stay humble in our interpretations, we are unlikely to fall prey to the common (and often justifiable) criticisms of the NHST framework.
 
 ### The Statistical Model
 
@@ -56,17 +60,64 @@ The basic statistical model partitions the observed DV into three parts that: th
 ```
 (For those not used to reading mathematical expressions, the point at the end of the equation is simply a full stop that ends the sentence and has no mathematical meaning.) As someone without a mathematics background myself, I know that equations in a text are often more intimidating than immediately useful. Consequently, before moving on it makes sense to go through this equation in more detail. Furthermore, all statistical analyses discussed in this book are applications of Equation \@ref(eq:statmodel). This equation forms the foundation for the statistical analysis of experimental data and thus understanding it will unlock all analyses discussed in this book. Consequently, it makes sense to spend more time on it.
 
-Let us consider the the variables in Equation \@ref(eq:statmodel) in more detail. When doing so, we also consider how many different possible values each variable can take on.[^standard_approach-4]
+Let us consider the the variables in Equation \@ref(eq:statmodel) in more detail. When doing so, we also consider how many different possible values each variable can take on.[^standard_approach-4] The following Figure, a variant of Figure \@ref(fig:laptop-dist), shows the elements graphically and we explain them in the text just below.
 
 [^standard_approach-4]: Equation \@ref(eq:statmodel) is displayed in simplified and not fully correct form. Mathematically correct would be that either each variable (i.e., $\text{DV}$, $\text{intercept}$, $\text{IV-effect}$, and $\text{residual}$) has an index, such as $i$, that goes from 1 to $N$ (where $N$ is the total number of observations) or that each variables is a vector (i.e., holds multiple values) of length $N$.
 
--   $\text{DV}$: The dependent variable, DV, are the observed values, one for each observation/participant. For the example data this are all the `r nrow(laptop_urry)` black data points shown in Figure \@ref(fig:laptop-dist). Thus, our statistical model tries to explain the individually observed values.
+```{r laptop-model, echo=FALSE, fig.cap='Data from Urry et al. (2021) showing the overall mean (intercept, blue dotted line), the condition specific effects (difference between dashed red lines for the condition means and the blue line), and the residuals (grey lines from condition means to data points).', message=FALSE}
 
--   $\text{intercept}$: The intercept represents the overall mean. Consequently, we only have one intercept (i.e., the intercept is the same for each observation). In experimental designs we define this as the mean of all condition means. For the example data the intercept is (`r round(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]), 1)` + `r round(mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]), 1)`) / 2 = `r formatC(mean(tapply(laptop_urry$overall, laptop_urry$condition, mean)), digits = 1, format = "f")`.
+set.seed(1234566)
+p1_de <- ggplot_build(p1)
+# str(p1_de$data, 2)
+# p1$data
 
--   $\text{IV-effect}$: The IV-effect represents the effect of our independent variable which we define as the difference between the condition means and the intercept (i.e., the deviation of the condition means from the intercept). Thus, we always have as many different IV-effects as we have conditions. For the example data with only two conditions, we only have two different IV-effects, both of which with the same magnitude and only differ in sign, `r formatC(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]) - mean(tapply(laptop_urry$overall, laptop_urry$condition, mean)), digits = 1, format = "f")` for the laptop condition and `r formatC(mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]) - mean(tapply(laptop_urry$overall, laptop_urry$condition, mean)), digits = 1, format = "f")` for the longhand condition. If we add these values to the intercept, we get the condition means. As we will discuss further below, this is the most relevant part for answering the statistical question of interest.
+lap2 <- laptop_urry %>% 
+  mutate(xpoint = p1_de$data[[2]]$x)
 
--   $\text{residual}$: The residuals are the idiosyncratic aspects of the data that are left unexplained by the statistical model. As the model only predicts the condition means (i.e., intercepts plus independent variable), these are the deviations of the individual observations from the condition means. Thus, as for the DV, we have as many residuals as we have values of the DV.
+lap3 <- laptop_urry %>% 
+  group_by(condition) %>% 
+  summarise(overall = mean(overall))
+
+lap4 <- lap3 %>% 
+  summarise(overall = mean(overall))
+
+lap5 <- p1_de$data[[1]] %>% 
+  group_by(x) %>% 
+  summarise(xmin = first(xmin),
+            xmax = first(xmax)) %>% 
+  bind_cols(lap3)
+
+
+lap6 <- p1_de$data[[2]] %>% 
+  group_by(group) %>% 
+  mutate(overall = mean(y)) %>% 
+  as_tibble() %>% 
+  select(-size, - fill, -alpha, - stroke)
+
+set.seed(1234566)
+ggplot(laptop_urry, aes(x = condition, y = overall)) +
+  geom_violin() +
+  geom_segment(data = lap6, 
+               mapping = aes(x = x, xend = x, y = overall, yend = y),
+               colour = "grey") +
+  ggbeeswarm::geom_quasirandom() +
+  geom_hline(yintercept = lap4$overall, linetype = 3, colour = "blue") +
+  geom_segment(data = lap5, mapping = aes(x = xmin, xend = xmax,
+                                          y = overall, yend = overall),
+               colour = "red", linetype = 2) +
+  stat_summary(colour = "red") +
+  #coord_cartesian(ylim = c(0, 100)) +
+  labs(y = "memory score")
+
+```
+
+-   $\text{DV}$: The dependent variable, DV, are the observed values, one for each observation/participant. For the example data this are all the `r nrow(laptop_urry)` black data points shown in Figure \@ref(fig:laptop-model). Thus, our statistical model tries to explain the individually observed values.
+
+-   $\text{intercept}$: The intercept represents the overall mean. Consequently, we only have one intercept (i.e., the intercept is the same for each observation). In experimental designs we define this as the mean of all condition means. For the example data the intercept is (`r round(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]), 1)` + `r round(mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]), 1)`) / 2 = `r formatC(mean(tapply(laptop_urry$overall, laptop_urry$condition, mean)), digits = 1, format = "f")` and is shown as a blue dotted line in Figure \@ref(fig:laptop-model).
+
+-   $\text{IV-effect}$: The IV-effect represents the effect of our independent variable which we define as the difference between the condition means and the intercept (i.e., the deviation of the condition means from the intercept). Thus, we always have as many different IV-effects as we have conditions. For the example data with only two conditions, we only have two different IV-effects, both of which with the same magnitude and only differ in sign, `r formatC(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]) - mean(tapply(laptop_urry$overall, laptop_urry$condition, mean)), digits = 1, format = "f")` for the laptop condition and `r formatC(mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]) - mean(tapply(laptop_urry$overall, laptop_urry$condition, mean)), digits = 1, format = "f")` for the longhand condition. If we add these values to the intercept, we get the condition means. As we will discuss further below, this is the most relevant part for answering the statistical question of interest. In Figure \@ref(fig:laptop-model), the red dashed line (and the red points) show the condition means, thus the condition effects are the differences between the blue line and the red lines.
+
+-   $\text{residual}$: The residuals are the idiosyncratic aspects of the data that are left unexplained by the statistical model. As the model only predicts the condition means (i.e., intercepts plus independent variable), these are the deviations of the individual observations from the condition means. Thus, as for the DV, we have as many residuals as we have values of the DV. In Figure \@ref(fig:laptop-model), the residuals are shown as grey lines from the condition means to each data point. This is all the information (or variability in the data) our model cannot explain.
 
 ### Model Predictions
 
@@ -208,7 +259,7 @@ The default `aov_car()` output is an "Anova Table" we will see throughout the bo
 
 The next line of the results table is only reference information. We see that the response variable, which we also know as DV, is `overall`, just as we intended.
 
-We then get a table of effects, which in this case only has one row, the effect of `condition`. This row contains all the information for our null hypothesis significance test (NHST) for the condition effect. The most important column in this output is the last column, `p.value`, or $p$-value. The $p$-value in this column is the main results of NHST and allows us to judge the compatibility of the data with the null hypothesis. It is the probability of obtaining a difference as extreme as observed when assuming that the null hypothesis of no difference is true. We see that in this case the $p$-value is not small, it is .47. Thus, the data are not incompatible with the null hypothesis.
+We then get a table of effects, which in this case only has one row, the effect of `condition`. This row contains all the information for our null hypothesis significance test (NHST) for the condition effect. The most important column in this output is the last column, `p.value`, or $p$-value. The $p$-value in this column is the main results of NHST and allows us to judge the compatibility of the data with the null hypothesis. It is the probability of obtaining a difference as extreme as observed when assuming that the null hypothesis of no difference is true. We see that in this case the $p$-value is not small, it is .47. Thus, the data are not incompatible with the null hypothesis and does not suggest that there is a memory difference between note taking with a laptop or in longhand format during lectures.
 
 In general, researchers have adopted a significance level of .05. This means that if a $p$-value is smaller than .05 we treat this as evidence that the data is incompatible with the null hypothesis. In this case we would say the result is "significant". However, as in our case the result is not smaller than .05 the result is "not significant" (I would avoid saying "insignificant" if the $p$-value is larger than .05, as "significant" is a technical term here). Thus, in the present case we do not reject the null hypothesis. The present data therefore do not provide evidence that the observed difference between the two modes of note taking generalises from the sample to the population according to NHST.
 
