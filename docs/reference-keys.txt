@@ -23,3 +23,5 @@ case-study-1-more-results-from-note-taking-studies
 conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
 conceptual-memory-data-from-mueller-and-oppenheimer-2014
+preparing-the-data
+descriptive-statistics

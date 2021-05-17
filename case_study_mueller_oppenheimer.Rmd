@@ -51,7 +51,7 @@ Before moving to the next data set, let us consider how we could report this ana
 
 ## Why are Experiments Replicated?
 
-The study by @urry2021 was not the first study investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of Study 1 by @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
+The experiment by @urry2021 was not the first experiment investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of Experiment 1 by @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
 
 As we have discussed before, inferences from NHST are never conclusive as they are probabilistic and require multiple inferential steps. Replications are one of the most important tools in science for overcoming at least the probabilistic uncertainties associated with the inferences we draw from experimental data. For example consider that several independent but otherwise as similar as possible experiments -- that is, replications of the same experiment -- all obtain a significant result (i.e., indicate that the data are incompatible with the null hypothesis). Such a pattern would dramatically increase our confidence that the null hypothesis is likely false.
 
@@ -59,36 +59,60 @@ In addition to the gain in confidence for specific results, there are good pract
 
 Another excellent reason for performing a replication is if one simply does not believe an existing result. Remember, one of the key components of the scientific method is *scepticism* (at least [according to Wikipedia](https://en.wikipedia.org/wiki/Scientific_method)). And if a results is difficult to believe, the reasonable sceptical position to take is to require more evidence. A replication is one way (if not the best way) to produce such evidence. Not believing existing experiments also does not imply that one questions the integrity of the researchers who did the experiment. There are many completely harmless reasons why a study might not replicate. For example, researchers might have just obtained a significant results by chance (which happens in 5% of cases, as discussed in the next chapters).
 
-Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many fields are currently considered to be in a "[replication crisis](https://en.wikipedia.org/wiki/Replication_crisis)". For example, a large scale effort to replicate 100 studies in psychology [@opensciencecollaborationEstimatingReproducibilityPsychological2015] showed that less than 50% could be replicated successfully. Similarly sobering results have since been observed across the social sciences [@camererEvaluatingReplicabilitySocial2018; @kleinManyLabsInvestigating2018; @camererEvaluatingReplicabilityLaboratory2016]. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers [@chambersSevenDeadlySins2017]. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research has to be somewhat low. This questions the foundations of any new work that builds up on this non-replicated research. To move forward every researcher needs to try to do better and rebuild our science on solid (i.e., replicable) grounds.
+Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many fields are currently considered to be in a [*replication crisis*](https://en.wikipedia.org/wiki/Replication_crisis). For example, a large scale effort to replicate 100 studies in psychology [@opensciencecollaborationEstimatingReproducibilityPsychological2015] showed that less than 50% could be replicated successfully. Similarly sobering results have since been observed across the social sciences [@camererEvaluatingReplicabilitySocial2018; @kleinManyLabsInvestigating2018; @camererEvaluatingReplicabilityLaboratory2016]. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers [@chambersSevenDeadlySins2017]. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research has to be somewhat low. This questions the foundations of any new work that builds up on this non-replicated research. To move forward we researchers need to replicate work that is important for our research, value replications done by others (especially if it is of our work), and let findings that do not replicate fade into obscurity.
 
 ## Conceptual Memory Data from Mueller and Oppenheimer (2014)
 
-```{r}
-library("afex")
-library("emmeans")
-library("tidyverse")
-theme_set(theme_bw(base_size = 15) + 
-            theme(legend.position="bottom", 
-                  panel.grid.major.x = element_blank()))
-```
+As @urry2021 is a direct replication of Experiment 1 of @muellerPenMightierKeyboard2014, the design is the same and uses the same materials (i.e., the same TED talks and same questions). Participants watched short lecture videos (projected onto a screen) and could take notes either on a laptop or with longhand format. 30 minutes after the lecture they were asked factual and conceptual questions about the lectures. Their answers were coded by the first author. As in the previous analysis, we will transform the answers to a memory index from 0 (= no memory) to 100 (= perfect memory). In line with the analysis of @urry2021 above, we are only interested in the conceptual memory here.
+
+Luckily for us, the data from @muellerPenMightierKeyboard2014, including the data from their Experiment 1, is available online on the [Open Science Framework (OSF)](https://osf.io/). The OSF is one of the clearly positive developments resulting from the replication crisis. It is a free website that allows researchers to share their data and other materials associated with their research. Before the replication crisis and the OSF it was very rare to get access to the data underlying published studies. Nowadays many researchers depose their (anonymised) data for published studies on the OSF and include the links to the data in their papers. This allows other researcher, such as us, to reanalyse existing data and ensure that the reported results can be *reproduced*.[^case_study_mueller_oppenheimer-1]
+
+[^case_study_mueller_oppenheimer-1]: In this book we distinguish reproducing a result from replicating a result. Reproducing means being able to obtain the (quantitatively) same results from the same data. That is, when given the data and the analysis script or a description of the analysis, we can run the analysis to end up with the same result. In contrast, replication means repeating the study with new participants and being able to obtain the (qualitatively) same result.
+
+### Preparing the Data
+
+To get into the habit of downloading data from OSF and reanalysing them, this is what we are going to do now. The file we need is called `Study 1 abbreviated data.csv` and can be found at the following OSF link: <https://osf.io/t43ua/> Please go ahead and download it now and put it in a folder so you can access it. I have already done so and copied it into folder `data`. We then use the [`tidyverse` function `read_csv()`,](https://r4ds.had.co.nz/data-import.html) which always returns a `tibble` (the `tidyverse` version of a `data.frame`), to read in the data, as object `mo2014`. Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for `tibbles`).
 
 ```{r, message=FALSE}
 mo2014 <- read_csv("data/Study 1 abbreviated data.csv")
 glimpse(mo2014)
 ```
 
+We can see data from 66 participants on 22 columns. Many of the columns have names that are not immediately clear. This is not uncommon. An important task when getting any new data set is trying to figure out what the variables mean. One usually also has to do this for the data for the own experiments. The reason for this is that software for running experiments often collects more information than needed for any specific analysis. Consequently, the first analysis step is usually to figure out what is needed and what not.
+
+Before doing so however, we note that 66 participants is not the final number of participants reported by @muellerPenMightierKeyboard2014. Instead, they only had 66 participants. Studying their OSF repository in detail (in particular the published `SPPS` script [`Study 1 Syntax.sps`](https://osf.io/28h7u/)) shows that participant with number 63 needs to be removed (the same information can be found in variable `filter_$` in the current data set). We will remove this participant below.
+
+Sadly, the OSF does not include a codebook for this particular data set (only for an earlier version of the data set with variables that only overlaps to some degree with the present one). However, looking at the data and the [codebook for the earlier data set](https://osf.io/j9472/) reveal a few things: `participant` is the participant identifier variable, `LapLong` is the condition identifier coding the experimental condition (the codebook reveals with 0 = `laptop` and 1 = `longhand`), and `whichtalk` identifies the TED talk participants saw (which we will ignore here, the codebook has the coding).
+
+In a first step, we can transform the two relevant indicator variables, `participant` and the experimental condition variable, into factors for further analysis. Transforming a variable into a `factor` guarantees that none of the analyses incorrectly treats one of the factors (i.e., categorical variables) as a numerical variable (e.g., taking the mean of the numbers in the participant identifier column is not a reasonable statistical operation). However, instead of overwriting the existing variables, we create new variable with the same name as in the analysis of @urry2021, `pid` and `condition`. We also assign human understandable labels instead of using 0 and 1 for the condition codes. This will make it easier to understand the pattern of results. To do so we use `mutate()` from the `tidyverse` in combination with the pipe operator `%>%`. We then also remove participant number 63 as discussed below using `filter()`.
+
 ```{r}
 mo2014 <- mo2014 %>% 
   mutate(
     pid = factor(participant),
     condition = factor(LapLong, 
-                      levels = c(0, 1),
-                      labels = c("laptop", "longhand")),
-    performance = (factualindex/perfectfactindexscore + 
-                     conceptualindex/perfectconceptindexscore)/2 * 100
+                       levels = c(0, 1),
+                       labels = c("laptop", "longhand"))
   ) %>% 
-  select(pid, condition, performance)
+  filter(pid != "63")  ## removes participant with id 63
+glimpse(mo2014)
 ```
+
+We now see the data set has only 65 participants remaining, in line with the description of @muellerPenMightierKeyboard2014. Furthermore, the newly created variables can be found at the end.
+
+We now need to find our dependent variable, the memory scores. We can see that for the two question types, factual and conceptual, there are multiple measures. Each has an `index` score and a `raw` score as well as `perfect` variants for both types of scores. `perfect` here means the maximal possible value that could be obtained for this score for this talk (at least this is how I understand it). We focus on the `index` score which gives participant a maximal of 1 point per question (this information is given in the paper). We can also see that the number of questions per talk differs across items (as indicated by the difference in `perfect` `indexscore` values), but the total number of items is always ten (`perfectfactindexscore` + `perfectconceptindexscore` = 10 in each row). This also aligns with the [list of items found on OSF](https://osf.io/jph7c/). From this information we can calculate our memory score from 0 to 100 by dividing each `index` score by the `perfect…indexscore` and then multiply by 100. The data also contains a number $z$-transformed variants of the scores (variables `Z…`), but we will ignore them here and instead use the easy to understand scores on the scale from 0 to 100. To simplify the coming analysis, we only retain the variable we really need for our analysis using `select()`. We then take a look at the first six rows of the data using `head()`. This shows that the data is now ready for our reanalysis.
+
+```{r}
+mo2014 <- mo2014 %>% 
+  mutate(
+    factual = factualindex / perfectfactindexscore * 100,
+    conceptual = conceptualindex / perfectconceptindexscore * 100
+  ) %>% 
+  select(pid, condition, factual, conceptual)
+head(mo2014)
+```
+
+### Descriptive Statistics
 
 ```{r}
 ggplot(mo2014, aes(x = condition, y = performance)) +
