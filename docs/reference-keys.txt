@@ -7,9 +7,8 @@ fig:urry-conceptual
 overview
 standard1
 ex:urry
-the-basic-statistical-model
 the-logic-of-inferential-statistics
-the-statistical-model
+the-basic-statistical-model
 model-predictions
 statistical-model-for-the-example-data
 understanding-the-statistical-model
@@ -21,6 +20,6 @@ data-visualisation
 follow-up-analysis
 summary
 case-study-1-more-results-from-note-taking-studies
-analysing-the-conceptual-memory-from-urry-et-al.-2021
-analysing-the-conceptual-memory-of-mueller-and-oppenheimer-2014
+conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
+conceptual-memory-data-from-mueller-and-oppenheimer-2014

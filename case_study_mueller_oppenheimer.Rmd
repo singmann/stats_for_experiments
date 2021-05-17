@@ -13,7 +13,7 @@ theme_set(theme_bw(base_size = 15) +
                   panel.grid.major.x = element_blank()))
 ```
 
-## Analysing the Conceptual Memory from Urry et al. (2021)
+## Conceptual Memory Data from Urry et al. (2021)
 
 As a quick reminder, @urry2021 showed their participants short lectures (TED talks) on video during which participants were allowed to take notes. One group of participants, the `laptop` condition, could take notes on a laptop, whereas the participants in the `longhand` condition could take notes with pen and paper. After the lecture participants were quizzed on two aspects of the content of the lecture, factual questions and conceptual questions. In the previous chapter we have analysed the overall memory score which was the average of the performance for the factual questions and the conceptual questions. Here, we are only concerned with the memory performance for conceptual questions. We begin our analysis by loading in the data (which is part of `afex` can be loaded with `data()`) and getting an overview of the variables using `str()`:
 
@@ -49,9 +49,7 @@ Before moving to the next data set, let us consider how we could report this ana
 
 > As shown in Figure \@ref(fig:urry-conceptual), participants' conceptual memory scores (on a scale from 0 to 100) are descriptively slightly larger in the laptop condition compared to the longhand condition. We analysed these scores with an ANOVA with one factor, note taking condition, with two levels (laptop vs. longhand). The effect of note taking condition was not significant, $F(1, 140) = 1.00$, $p = .319$. This indicates that the data does not provide evidence for a difference in memory for conceptual information based on how notes are taken during lectures.
 
-## Analysing the Conceptual Memory of Mueller and Oppenheimer (2014)
-
-### Why are Experiments Replicated?
+## Why are Experiments Replicated?
 
 The study by @urry2021 was not the first study investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of Study 1 by @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
 
@@ -61,7 +59,9 @@ In addition to the gain in confidence for specific results, there are good pract
 
 Another excellent reason for performing a replication is if one simply does not believe an existing result. Remember, one of the key components of the scientific method is *scepticism* (at least [according to Wikipedia](https://en.wikipedia.org/wiki/Scientific_method)). And if a results is difficult to believe, the reasonable sceptical position to take is to require more evidence. A replication is one way (if not the best way) to produce such evidence. Not believing existing experiments also does not imply that one questions the integrity of the researchers who did the experiment. There are many completely harmless reasons why a study might not replicate. For example, researchers might have just obtained a significant results by chance (which happens in 5% of cases, as discussed in the next chapters).
 
-Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many empirical disciplines are currently considered to be in a "[replication crisis](https://en.wikipedia.org/wiki/Replication_crisis)". For example, a large scale effort to replicate 100 studies in psychology [@opensciencecollaborationEstimatingReproducibilityPsychological2015] showed that less than 50% could be replicated successfully. Similarly sobering results with replication rates of 50% or less have since been observed across the social sciences [@camererEvaluatingReplicabilitySocial2018; @kleinManyLabsInvestigating2018; @camererEvaluatingReplicabilityLaboratory2016]. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers [@chambersSevenDeadlySins2017]. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research is understandable low questioning the foundations of the new work. To move forward every one of us needs to try to do better and rebuild science on solid (i.e., replicable) grounds.
+Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many fields are currently considered to be in a "[replication crisis](https://en.wikipedia.org/wiki/Replication_crisis)". For example, a large scale effort to replicate 100 studies in psychology [@opensciencecollaborationEstimatingReproducibilityPsychological2015] showed that less than 50% could be replicated successfully. Similarly sobering results have since been observed across the social sciences [@camererEvaluatingReplicabilitySocial2018; @kleinManyLabsInvestigating2018; @camererEvaluatingReplicabilityLaboratory2016]. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers [@chambersSevenDeadlySins2017]. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research has to be somewhat low. This questions the foundations of any new work that builds up on this non-replicated research. To move forward every researcher needs to try to do better and rebuild our science on solid (i.e., replicable) grounds.
+
+## Conceptual Memory Data from Mueller and Oppenheimer (2014)
 
 ```{r}
 library("afex")
