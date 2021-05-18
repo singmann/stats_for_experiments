@@ -1,6 +1,6 @@
 # Case Study 1: More Results from Note Taking Studies
 
-In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a look at the data from @urry2021. Additionally, we will analyse the data of the experiment by @muellerPenMightierKeyboard2014. This experiment was the first published experiment investigating the question of note taking with a laptop or in longhand format and was the basis on which @urry2021 planned their study. For the study of @muellerPenMightierKeyboard2014 we will perform a full analysis starting with reading in the data. So in addition to performing the statistical hypothesis test, we will calculate some descriptive statistics.
+In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a look at the data from @urry2021. Additionally, we will analyse data from @muellerPenMightierKeyboard2014. This study was the first published study investigating the question of note taking with a laptop or in longhand format and was the basis on which @urry2021 planned their study. For the data of @muellerPenMightierKeyboard2014 we will perform a full analysis starting with reading in the data. So in addition to performing the statistical hypothesis test, we will calculate some descriptive statistics.
 
 We start the analysis in this chapter in the same way as in the previous chapter, by loading the three packages we generally use, `afex`, `emmeans`, and `tidyverse`, and set a nicer `ggplot2` theme. Before doing so it is probably a good idea to restart `R` (unless, of course, you are just starting `R`). In `RStudio` this can be conveniently done through the menu by clicking on `Session` and then `Restart R`. In other `R` environments you might need to restart the program. The benefit of restarting `R` is that it should create a blank `R` session in which no packages are loaded and no objects exist in the workspace. Only such a blank sessions ensures that, once we have obtained a set of results, we can recreate them later using the same code. That is, a blank `R` session avoids any potential problems due to analyses performed in a previous session that are still lingering. Restarting `R` should generally be done when starting a new analysis or after one is completely done with an analysis. In the latter case, it makes sense to restart `R` and the rerun all code one has saved in ones script to ensure that all results replicate based on only the code in the script (and do not require some additional code not saved).
 
@@ -51,7 +51,7 @@ Before moving to the next data set, let us consider how we could report this ana
 
 ## Why are Experiments Replicated?
 
-The experiment by @urry2021 was not the first experiment investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of Experiment 1 by @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
+The experiment by @urry2021 was not the first experiment investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
 
 As we have discussed before, inferences from NHST are never conclusive as they are probabilistic and require multiple inferential steps. Replications are one of the most important tools in science for overcoming at least the probabilistic uncertainties associated with the inferences we draw from experimental data. For example consider that several independent but otherwise as similar as possible experiments -- that is, replications of the same experiment -- all obtain a significant result (i.e., indicate that the data are incompatible with the null hypothesis). Such a pattern would dramatically increase our confidence that the null hypothesis is likely false.
 
@@ -63,65 +63,145 @@ Sadly, replicating existing experiments and publishing the results, is still not
 
 ## Conceptual Memory Data from Mueller and Oppenheimer (2014)
 
-As @urry2021 is a direct replication of Experiment 1 of @muellerPenMightierKeyboard2014, the design is the same and uses the same materials (i.e., the same TED talks and same questions). Participants watched short lecture videos (projected onto a screen) and could take notes either on a laptop or with longhand format. 30 minutes after the lecture they were asked factual and conceptual questions about the lectures. Their answers were coded by the first author. As in the previous analysis, we will transform the answers to a memory index from 0 (= no memory) to 100 (= perfect memory). In line with the analysis of @urry2021 above, we are only interested in the conceptual memory here.
+As @urry2021 is a direct replication of @muellerPenMightierKeyboard2014, the design is the same and uses the same materials (i.e., the same TED talks and same questions). Participants watched short lecture videos (projected onto a screen) and could take notes either on a laptop or with longhand format. 30 minutes after the lecture they were asked factual and conceptual questions about the lectures. Their answers were coded by the first author. As in the previous analysis, we will transform the answers to a memory index from 0 (= no memory) to 100 (= perfect memory). In line with the analysis of @urry2021 above, we are only interested in the conceptual memory here.
 
-Luckily for us, the data from @muellerPenMightierKeyboard2014, including the data from their Experiment 1, is available online on the [Open Science Framework (OSF)](https://osf.io/). The OSF is one of the clearly positive developments resulting from the replication crisis. It is a free website that allows researchers to share their data and other materials associated with their research. Before the replication crisis and the OSF it was very rare to get access to the data underlying published studies. Nowadays many researchers depose their (anonymised) data for published studies on the OSF and include the links to the data in their papers. This allows other researcher, such as us, to reanalyse existing data and ensure that the reported results can be *reproduced*.[^case_study_mueller_oppenheimer-1]
+The experiment by @urry2021 was a direct replication of Experiment 1 of @muellerPenMightierKeyboard2014. Here we focus on Experiment 2 by @muellerPenMightierKeyboard2014, which is also a direct replication of their Experiment 1 and only included an additional experimental manipulation which we will ignore here. The reason for focussing on their Experiment 2 instead of Experiment 1 is that the data of Experiment 2 come out a bit more interesting (feel free to rerun the analysis reported here for their Experiment 1 to see what I mean). However, to not provide an incomplete picture for the research question of whether the mode of taking note during lectures affects memory, we will consider the overall evidence (i.e., all 3 experiments of Mueller and Oppenheimer, the experiment of Urry et al., and further data) at the end of this chapter.
+
+Luckily for us, the data from @muellerPenMightierKeyboard2014, including the data from their Experiment 2, is available online on the [Open Science Framework (OSF)](https://osf.io/). The OSF is one of the most visible developments resulting from the replication crisis. It is a free website that allows researchers to share their data and other materials associated with their research. Before the replication crisis and the OSF it was very rare to get access to the data underlying published studies. Nowadays many researchers depose their (anonymised) data for published studies on the OSF and include the links to the data in their papers. This allows other researcher, such as us, to reanalyse existing data and ensure that the reported results can be *reproduced*.[^case_study_mueller_oppenheimer-1]
 
 [^case_study_mueller_oppenheimer-1]: In this book we distinguish reproducing a result from replicating a result. Reproducing means being able to obtain the (quantitatively) same results from the same data. That is, when given the data and the analysis script or a description of the analysis, we can run the analysis to end up with the same result. In contrast, replication means repeating the study with new participants and being able to obtain the (qualitatively) same result.
 
 ### Preparing the Data
 
-To get into the habit of downloading data from OSF and reanalysing them, this is what we are going to do now. The file we need is called `Study 1 abbreviated data.csv` and can be found at the following OSF link: <https://osf.io/t43ua/> Please go ahead and download it now and put it in a folder so you can access it. I have already done so and copied it into folder `data`. We then use the [`tidyverse` function `read_csv()`,](https://r4ds.had.co.nz/data-import.html) which always returns a `tibble` (the `tidyverse` version of a `data.frame`), to read in the data, as object `mo2014`. Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for `tibbles`).
+To get into the habit of downloading data from OSF and reanalysing them, this is what we are going to do now. The file we need is called `Study 2 abbreviated data.csv` and can be found at the following OSF link: <https://osf.io/t43ua/> Please go ahead and download it now and put it in a folder so you can access it. I have already done so and copied it into folder `data`. We then use the [`tidyverse` function `read_csv()`,](https://r4ds.had.co.nz/data-import.html) which always returns a `tibble` (the `tidyverse` version of a `data.frame`), to read in the data, as object `mo2014`. Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for `tibbles`).
 
 ```{r, message=FALSE}
-mo2014 <- read_csv("data/Study 1 abbreviated data.csv")
+mo2014 <- read_csv("data/Study 2 abbreviated data.csv")
 glimpse(mo2014)
 ```
 
-We can see data from 66 participants on 22 columns. Many of the columns have names that are not immediately clear. This is not uncommon. An important task when getting any new data set is trying to figure out what the variables mean. One usually also has to do this for the data for the own experiments. The reason for this is that software for running experiments often collects more information than needed for any specific analysis. Consequently, the first analysis step is usually to figure out what is needed and what not.
+We can see data from 153 participants on 22 columns. Many of the columns have names that are not immediately clear. This is not uncommon. An important task when getting any new data set is trying to figure out what the variables mean. One usually also has to do this for the data for the own experiments. For example, software for running experiments often collects more variables than needed for analysis. Consequently, the first analysis step is usually to figure out what is needed and what not.
 
-Before doing so however, we note that 66 participants is not the final number of participants reported by @muellerPenMightierKeyboard2014. Instead, they only had 66 participants. Studying their OSF repository in detail (in particular the published `SPPS` script [`Study 1 Syntax.sps`](https://osf.io/28h7u/)) shows that participant with number 63 needs to be removed (the same information can be found in variable `filter_$` in the current data set). We will remove this participant below.
-
-Sadly, the OSF does not include a codebook for this particular data set (only for an earlier version of the data set with variables that only overlaps to some degree with the present one). However, looking at the data and the [codebook for the earlier data set](https://osf.io/j9472/) reveal a few things: `participant` is the participant identifier variable, `LapLong` is the condition identifier coding the experimental condition (the codebook reveals with 0 = `laptop` and 1 = `longhand`), and `whichtalk` identifies the TED talk participants saw (which we will ignore here, the codebook has the coding).
-
-In a first step, we can transform the two relevant indicator variables, `participant` and the experimental condition variable, into factors for further analysis. Transforming a variable into a `factor` guarantees that none of the analyses incorrectly treats one of the factors (i.e., categorical variables) as a numerical variable (e.g., taking the mean of the numbers in the participant identifier column is not a reasonable statistical operation). However, instead of overwriting the existing variables, we create new variable with the same name as in the analysis of @urry2021, `pid` and `condition`. We also assign human understandable labels instead of using 0 and 1 for the condition codes. This will make it easier to understand the pattern of results. To do so we use `mutate()` from the `tidyverse` in combination with the pipe operator `%>%`. We then also remove participant number 63 as discussed below using `filter()`.
+Before doing so however, we note that 153 participants is not the final number of participants reported by @muellerPenMightierKeyboard2014. Instead, they removed two participants before the analysis resulting. Studying their OSF repository in detail (in particular the published `SPPS` script with output [`Output and Syntax - Study 2.doc`](https://osf.io/5f3z4/)) shows that participants with number 194 and 237 needs to be removed (the same information can be found in variable `filter_$` in the current data set). This file also shows that the two relevant `notetype` conditions are 1 = `longhand` and 2 = `laptop` and we will remove `notetype == 3` before analysis. Before moving on, we filter our data and remove these observations. For this we use `filter()` from the `tidyverse` in combination with the pipe operator `%>%` (i.e., we pipe our `tibble` to `filter()` and only retain those rows that we want). Importantly, we overwrite `mo2014` with the filtered `tibble` as we do not need the filtered out observations any more (to use them, we woul dhave to read the data in again). We then see how many participants remain using `nrow()` (which returns the number of rows in the data).
 
 ```{r}
 mo2014 <- mo2014 %>% 
+  filter(notetype != 3, participantid != 194, participantid != 237)
+nrow(mo2014)
+```
+
+The reported 99 participants matches the 99 participants [reported on OSF](https://osf.io/5f3z4/) for the two conditions, `laptop` versus `longhand`. 
+
+Sadly, the OSF does not include a codebook describing all variables for this particular data set (only for an earlier version of the data set with variables that only overlaps to some degree with the present one). However, from looking at data and the information on OSF a few things are clear: `participantid` is the participant identifier variable, `notetype` is the condition identifier coding the experimental condition, and `whichtalk` identifies the TED talk participants saw (the mapping of talks to numbers is also given in the [`SPPS` output](https://osf.io/5f3z4/)).
+
+In a first step, we can transform the relevant indicator variables, `participant` and experimental condition variable, into factors for further analysis. Transforming a variable into a `factor` guarantees that none of the analyses incorrectly treats one of the factors (i.e., categorical variables) as a numerical variable (e.g., taking the mean of the numbers in the participant identifier column is not a reasonable statistical operation). However, instead of overwriting the existing variables, we create new variable with the same name as in our analysis of @urry2021, `pid` and `condition`. We also assign human understandable labels instead of using 1 and 2 for the condition codes. This will make it easier to understand the pattern of results. To do so we use `factor()` inside `mutate()` from the `tidyverse` in combination with the pipe operator `%>%`. 
+
+```{r}
+mo2014 <- mo2014 %>% 
+  filter(notetype != 3) %>% 
   mutate(
-    pid = factor(participant),
-    condition = factor(LapLong, 
-                       levels = c(0, 1),
+    pid = factor(participantid),
+    condition = factor(notetype, 
+                       levels = c(2, 1),
                        labels = c("laptop", "longhand"))
-  ) %>% 
-  filter(pid != "63")  ## removes participant with id 63
+  )
 glimpse(mo2014)
 ```
 
-We now see the data set has only 65 participants remaining, in line with the description of @muellerPenMightierKeyboard2014. Furthermore, the newly created variables can be found at the end.
+Looking at the data again reveals that the newly created variables are added to the end of the `tibble`.
 
-We now need to find our dependent variable, the memory scores. We can see that for the two question types, factual and conceptual, there are multiple measures. Each has an `index` score and a `raw` score as well as `perfect` variants for both types of scores. `perfect` here means the maximal possible value that could be obtained for this score for this talk (at least this is how I understand it). We focus on the `index` score which gives participant a maximal of 1 point per question (this information is given in the paper). We can also see that the number of questions per talk differs across items (as indicated by the difference in `perfect` `indexscore` values), but the total number of items is always ten (`perfectfactindexscore` + `perfectconceptindexscore` = 10 in each row). This also aligns with the [list of items found on OSF](https://osf.io/jph7c/). From this information we can calculate our memory score from 0 to 100 by dividing each `index` score by the `perfect…indexscore` and then multiply by 100. The data also contains a number $z$-transformed variants of the scores (variables `Z…`), but we will ignore them here and instead use the easy to understand scores on the scale from 0 to 100. To simplify the coming analysis, we only retain the variable we really need for our analysis using `select()`. We then take a look at the first six rows of the data using `head()`. This shows that the data is now ready for our reanalysis.
+The next step is to calculate our dependent variable, the memory scores from 0 to 100 as used in the analysis of @urry2021. We can see that for the two question types, factual and conceptual, there are multiple measures. Each has an `index` score and a `raw` score as well as `perfect` variants for both types of scores. `perfect` here presumably means the maximal possible value that could be obtained for this score for this observation (i.e., row). The data also contains a number of $z$-transformed variants of the scores (variables `Z…`), but we will ignore them here (the original paper used the z-scores, but as these are more difficult to interpret and the results are qualitatively the same, we ignore them here). We focus on the `index` score which gives participant a maximal of 1 point per question (this information is given in the paper/on OSF). Let us take a look at the first six observations for the relevant variables.
 
 ```{r}
-mo2014 <- mo2014 %>% 
+mo2014 %>% 
+  select(pid, condition, factualindex, conceptualindex, 
+         perfectfactindexscore, perfectconceptindexscore) %>% 
+  head()
+```
+
+We can see that the number of questions per question type and talk differs (as indicated by the difference in `perfect` `indexscore` values across rows), but the total number of items appears to always be ten (`perfectfactindexscore` + `perfectconceptindexscore` = 10 in each row). This also aligns with the [list of items found on OSF](https://osf.io/jph7c/) which show that there are ten questions per talk with the number of factual and conceptual questions differing across talks. From this information we could calculate our memory scores. However, before moving on it makes sense to run a quick sanity check to see that indeed the number of questions per row is ten. To do this, we create a new variable with the sum of the two perfect index scores, using `mutate()` (which adds a variable to the existing data), and then see whether this sum is always equal to 10, using `summarise()` (which in this case reduces the data to one row). If the number of question per observation/row sums to ten, this should return `TRUE`.
+
+```{r}
+mo2014 %>% 
+  mutate(sum_p_index = perfectfactindexscore + perfectconceptindexscore) %>% 
+  summarise(check = all(sum_p_index == 10))
+```
+
+Fortunately, the check passes so we feel that our assumption about the meaning of the variables are supported so we could go ahead and calculate our memory score.
+
+When preparing data for analysis, or running an analysis, it is important to regularly include such sanity checks in ones analysis. Any analysis involves assumptions about the underlying data -- for example, what a variable means, which values a variable can possibly take on, which observations are included in the data. Based on this assumption we calculate other variables from our data and perform our analysis. However, humans are fallible and data analysis experience shows that the assumptions are sometimes (regularly) false. Sometimes one has misunderstood (or misremembers) the meaning of a variable, there might have been some data entry error, or the data still includes some observations that should have been excluded (e.g., test runs from the researchers instead of participants). For example, in a study by @lewandowskyRoleConspiracistIdeation2013 the age of one participants was recorded as 32,757 years and this error was only uncovered after the publication of the manuscript. Luckily for them the error did not affect the conclusion drawn from the data, but they had to publish a correction [@lewandowskyCorrectionRoleConspiracist2015]. Publishing a correction is nothing dramatic (I have a few paper with published corrections because of errors discovered only after publication), but of course we would prefer not having to do so. And if the errors affect the conclusion substantially, sometimes a correction is not enough and a paper has to be retracted. Regular sanity or assumptions checks in ones analysis are on way to minimise the chance of errors in the final analysis.
+
+Based on the positive outcome of the sanity check we are now convinced we have understood the variables in the data and can now calculate our memory score from 0 to 100. For this, we divide each `index` score by the `perfect…indexscore` and then multiply the results by 100. To simplify the coming analysis, we create a new `tibble`, `mo2014a`, that only retains the variables we really need for our analysis using `select()`. We then take another look at the first six rows of the data using `head()`. This shows that the data is now ready for our reanalysis.
+
+```{r}
+mo2014a <- mo2014 %>% 
   mutate(
     factual = factualindex / perfectfactindexscore * 100,
     conceptual = conceptualindex / perfectconceptindexscore * 100
   ) %>% 
   select(pid, condition, factual, conceptual)
-head(mo2014)
+head(mo2014a)
 ```
 
 ### Descriptive Statistics
 
-```{r}
-ggplot(mo2014, aes(x = condition, y = performance)) +
-  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  ggbeeswarm::geom_quasirandom() +
-  stat_summary(colour = "red") +
-  coord_cartesian(ylim = c(0, 100))
-```
+Before performing an inferential statistical analysis of the data, we obtain some descriptive statistics. This will provide us with an overview over the data. In addition, the descriptive analysis is another way to check our data and minimise the chances of errors or problems.
+
+As a first thing, we want to calculate the number of participants per condition. For this, we again use some `tidyverse` functions and will explain the steps in more detail. We generally start our `tidyverse` analyses with the data, here our `tibble` `mo2014a`, followed by the pipe `%>%`. The pipe "pipes" the `tibble` to the next function. When obtaining descriptives statistics we often want to get them conditional on a factor/categorical variable in our data. For example, now we want to calculate the number of observations per `condition`. This can be done by piping the `tibble` to the `group_by()` function and condition on the variable of interest, `condition`. The results of this is a "grouped" `tibble` which ensures that all following operations on this `tibble` are performed grouped (i.e., conditioned on) this grouping variable. We can now pipe this grouped `tibble` to the `count()` function to get the number of observations per note taking condition.
 
 ```{r}
-res2 <- aov_car(performance ~ condition + Error(pid), mo2014)
+mo2014a %>% 
+  group_by(condition) %>% 
+  count()
 ```
+
+As another sanity check, we can compare this number to the values reported [on the OSF](https://osf.io/jph7c/) for this data (the $N$ by condition is not reported in the original paper). As the numbers match, this further increases our confidence in our data preparation.
+
+As the next descriptive statistic, we calculate the condition means for our DV of interest, `conceptual` memory scores. We also calculate the standard deviation to get an idea of the spread of the data. We again use piping and the `tidyverse` to get the result. But this time the final function in our pipe is `summarise()` which allows to calculate summary statistics.
+
+```{r}
+mo2014a %>% 
+  group_by(condition) %>% 
+  summarise(
+    mean = mean(conceptual),
+    sd = sd(conceptual)
+  )
+```
+
+This shows that the conceptual memory is more than 10 points larger in the `longhand` compared to the `laptop` condition. We also see a difference in around 5 points in the SD. 
+
+As a side note, we could have added another calculation into the `summarise()` call. For example, `n = n()` would have also calculated the number of participants per condition, as the previous code did.
+
+One important part of a descriptive analysis should always be a plot of the data. A plot of all data points is usually the best way to see if there is something wrong with the data. Above, we have used `afex_plot()` after having estimated a model with `aov_car()`, but we can also invoke `ggplot2` directly. For this, we also pipe the data to `ggplot()` and then build the figure layer by layer. The important part is the mapping of variables in the data to aesthetics in the `aes()` function. We call this directly in the `ggplot()` call and mimic the other figures we have seen so far, mapping `condition` on the $x$-axis and the DV, `conceptual` memory, to the $y$-axis. As Figure \@ref(fig:laptop-dist), we begin with a violin plot (`geom_violin()`) with different quantiles. The violin plot shows the shape of the distribution. We combine this with the individual data points, whcih we show using `geom_beeswarm()` from the `ggbeeswarm` package (here we call the function without loading the package beforehand by using `package::function()`). We then add the mean (with standard error, which will be explained later) using `stat_summary()` in red. In this plot we see that the data already spans the full range in the $y$-axis, so we do not need to use `coord_cartesian(ylim = c(0, 100))`.
+
+```{r desc-mo2014, fig.cap='Conceptual memory scores from Mueller and Oppenheimer (2014). This plot combines individual data points in black with means in red.'}
+mo2014a %>% 
+  ggplot(aes(x = condition, y = conceptual)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  ggbeeswarm::geom_beeswarm() +
+  stat_summary(colour = "red")  
+```
+
+Before looking at the figure, we see that we got a status message in the console, "No summary function supplied, defaulting to \`mean_se()\`". This message is always shown when using `stat_summary()` without additional argument and can be safely ignored (i.e., it just indicates that the red point shows the mean and the red error bars show the standard error). The plot itself does not show anything unusual. The plot just reinforces the previous descriptive results: The mean memory score, but also the three displayed quantiles, are larger in the `longhand` than in the `laptop` condition. Taken together, the descriptive analysis suggests that there is nothing preventing us from running the inferential analysis.
+
+### Inferential Analysis
+
+The inferential analysis of the conceptual scores uses exactly the same call as our previous analysis, only with a new data set, `mo2014a`.
+
+```{r}
+mc_mo <- aov_car(conceptual ~ condition + Error(pid), mo2014a)
+mc_mo
+```
+
+Looking at the ANOVA table of the results shows that the $p$-value is smaller than .05; the analysis reveals a significant effect of condition. This indicates that this data provides evidence against the null hypothesis of no difference between the note taking conditions. Consequently, we would be justified in saying that the data provides evidence for a difference. To make it easy to detect a significant result, `afex`, like most statistical software tools, indicates a significant effect with $p < .05$ with one `*` next to the $F$-value (in case of $p < .01$ the indication is `**`, in case of $p < .001$ it is `***`, and in case the effect is not significant, but $p < .1$, it is `+`).
+
+
+```{r afex-mo2014, fig.cap='afex_plot() figure for the conceptual memory scores from Mueller and Oppenheimer (2014, Experiment 2) that show a significant difference between the two note taking conditions.'}
+afex_plot(mc_mo, "condition")
+```
+
+
+## Summary
+
+One reality of research is that a significant results is generally what researchers are looking for. If a results is significant we are happy, our experiment "has worked" and we can publish it. If it is not significant, we generally have problems publishing our results. 
+

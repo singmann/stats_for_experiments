@@ -4,6 +4,8 @@ fig:laptop-model
 eq:predmodel
 fig:fig1
 fig:urry-conceptual
+fig:desc-mo2014
+fig:afex-mo2014
 overview
 standard1
 ex:urry
@@ -25,3 +27,5 @@ why-are-experiments-replicated
 conceptual-memory-data-from-mueller-and-oppenheimer-2014
 preparing-the-data
 descriptive-statistics
+inferential-analysis
+summary-1
