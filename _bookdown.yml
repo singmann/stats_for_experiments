@@ -1,4 +1,4 @@
-rmd_files: ["index.Rmd", "02-standard_approach.Rmd", "case_study_mueller_oppenheimer.Rmd","99-references.Rmd"]
+rmd_files: ["index.Rmd", "role_of_stats.Rmd","02-standard_approach.Rmd", "case_study_mueller_oppenheimer.Rmd","99-references.Rmd"]
 book_filename: "stats_for_experiments"
 delete_merged_file: true
 language:

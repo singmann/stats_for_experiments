@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Role of Statistics in the Research Process | Introduction to Statistics for Experimental Psychology with R</title>
+  <meta name="description" content="Statistics for Experimental Psychology with R using the afex package." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Role of Statistics in the Research Process | Introduction to Statistics for Experimental Psychology with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistics for Experimental Psychology with R using the afex package." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Role of Statistics in the Research Process | Introduction to Statistics for Experimental Psychology with R" />
+  
+  <meta name="twitter:description" content="Statistics for Experimental Psychology with R using the afex package." />
+  
+
+<meta name="author" content="Henrik Singmann" />
+
+
+<meta name="date" content="2021-08-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="standard1.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistics for Experimental Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html"><i class="fa fa-check"></i><b>2</b> Role of Statistics in the Research Process</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#the-research-process"><i class="fa fa-check"></i><b>2.1</b> The Research Process</a></li>
+<li class="chapter" data-level="2.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#example-i-testing-a-new-therapy"><i class="fa fa-check"></i><b>2.2</b> Example I: Testing a New Therapy</a></li>
+<li class="chapter" data-level="2.3" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#example-ii-the-psychology-of-loss-aversion"><i class="fa fa-check"></i><b>2.3</b> Example II: The Psychology of Loss Aversion</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#evidence-for-loss-aversion-the-reflection-effect"><i class="fa fa-check"></i><b>2.3.1</b> Evidence for Loss Aversion: The Reflection Effect</a></li>
+<li class="chapter" data-level="2.3.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking"><i class="fa fa-check"></i><b>2.3.2</b> Alternative Explanation: Loss Aversion or Loss Seeking?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know"><i class="fa fa-check"></i><b>2.4</b> Epistemic Gaps: The Difference Between What we Want to Know and What we can Know</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-1-underdetermination-of-theory-by-data"><i class="fa fa-check"></i><b>2.4.1</b> Epistemic Gap 1: Underdetermination of Theory by Data</a></li>
+<li class="chapter" data-level="2.4.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-2-signal-and-noise"><i class="fa fa-check"></i><b>2.4.2</b> Epistemic Gap 2: Signal and Noise</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#summary"><i class="fa fa-check"></i><b>2.5</b> Summary</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#what-shouldnt-and-what-should-we-do"><i class="fa fa-check"></i><b>2.5.1</b> What Shouldn’t and What Should we do?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="standard1.html"><a href="standard1.html"><i class="fa fa-check"></i><b>3</b> The Standard Approach for One Independent Variable</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="standard1.html"><a href="standard1.html#ex:urry"><i class="fa fa-check"></i><b>3.1</b> Example Data: Note Taking Experiment</a></li>
+<li class="chapter" data-level="3.2" data-path="standard1.html"><a href="standard1.html#the-logic-of-inferential-statistics"><i class="fa fa-check"></i><b>3.2</b> The Logic of Inferential Statistics</a></li>
+<li class="chapter" data-level="3.3" data-path="standard1.html"><a href="standard1.html#the-basic-statistical-model"><i class="fa fa-check"></i><b>3.3</b> The Basic Statistical Model</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="standard1.html"><a href="standard1.html#model-predictions"><i class="fa fa-check"></i><b>3.3.1</b> Model Predictions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="standard1.html"><a href="standard1.html#statistical-model-for-the-example-data"><i class="fa fa-check"></i><b>3.3.2</b> Statistical Model for the Example Data</a></li>
+<li class="chapter" data-level="3.3.3" data-path="standard1.html"><a href="standard1.html#understanding-the-statistical-model"><i class="fa fa-check"></i><b>3.3.3</b> Understanding the Statistical Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model-in-r"><i class="fa fa-check"></i><b>3.4</b> Estimating the Statistical Model in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="standard1.html"><a href="standard1.html#package-and-data-setup"><i class="fa fa-check"></i><b>3.4.1</b> Package and Data Setup</a></li>
+<li class="chapter" data-level="3.4.2" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model"><i class="fa fa-check"></i><b>3.4.2</b> Estimating the Statistical Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="standard1.html"><a href="standard1.html#interpreting-the-results"><i class="fa fa-check"></i><b>3.4.3</b> Interpreting the Results</a></li>
+<li class="chapter" data-level="3.4.4" data-path="standard1.html"><a href="standard1.html#data-visualisation"><i class="fa fa-check"></i><b>3.4.4</b> Data Visualisation</a></li>
+<li class="chapter" data-level="3.4.5" data-path="standard1.html"><a href="standard1.html#follow-up-analysis"><i class="fa fa-check"></i><b>3.4.5</b> Follow-Up Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="standard1.html"><a href="standard1.html#summary-1"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html"><i class="fa fa-check"></i><b>4</b> Case Study 1: More Results from Note Taking Studies</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-urry-et-al.-2021"><i class="fa fa-check"></i><b>4.1</b> Conceptual Memory Data from Urry et al. (2021)</a></li>
+<li class="chapter" data-level="4.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#why-are-experiments-replicated"><i class="fa fa-check"></i><b>4.2</b> Why are Experiments Replicated?</a></li>
+<li class="chapter" data-level="4.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-mueller-and-oppenheimer-2014"><i class="fa fa-check"></i><b>4.3</b> Conceptual Memory Data from Mueller and Oppenheimer (2014)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#preparing-the-data"><i class="fa fa-check"></i><b>4.3.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#descriptive-statistics"><i class="fa fa-check"></i><b>4.3.2</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="4.3.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#inferential-analysis"><i class="fa fa-check"></i><b>4.3.3</b> Inferential Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#summary-2"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="role-of-statistics-in-the-research-process" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Role of Statistics in the Research Process</h1>
+<p>In this book we are concerned with experimental psychology, in particular the statistical analysis of experiments in psychology and related disciplines such as language science, behavioural science, cognitive science, or neuroscience. The order expressed in the previous sentence – science first and statistical analysis second – is one of the overarching principles with which we will think about statistics. Whereas the goal here is to introduce the concepts and techniques required to perform a statistical analysis of (mostly experimental) data, the perspective taken here is that a statistical analysis can only be performed or understood within the scientific context it takes place in.</p>
+<p>One consequence of this perspective is that the start point of any statistical analysis needs to be a specific and clear research question. In the case in which both data collection and analysis is guided by such a research question, a statistical analysis is generally an indispensable part of the research process. As we will describe in more detail in this and the coming chapters, statistics is the tool that allows us to draw inferences that go beyond the data we have observed. In more technical terms, statistics is the one tool in the research tool kit that allows us to generalise from the current <strong>sample</strong> to a <strong>population</strong> from which this sample is drawn (with a number of caveats we will also discuss). This ability to generalise is what allows us to connect experimental results with the research questions and underlying theories. In sum, the statistical techniques introduced in this book can provide meaningful and scientifically helpful answers when the data is collected and analysed with a clear research question in mind.</p>
+<div id="the-research-process" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Research Process</h2>
+<p>The research process in psychology and related sciences roughly consists of four interrelated steps: the research question, the operationalisation of the research question and the data collection, the statistical analysis of the data, and finally the communication of the results. Let us explain this process in more detail.</p>
+<p>Any research should begin with a <strong>research question</strong>. For the disciplines considered here this is generally a theory or hypothesis about human behaviour or the human mind. For example, a widely accepted idea in decision making and behavioural science is that people exhibit <em>loss aversion</em> – the displeasure resulting from losing £10 is stronger than the pleasure derived from winning £10. We will look at this example in more detail in this chapter but will also consider other examples below. For now, it is sufficient to see that research questions often involve general statement that involve not directly observable quantities (such as pleasure or displeasure).</p>
+<p>The next step in the research process is the transformation of the research question into an empirical and statistical hypothesis, we can call this step <strong>operationalisation</strong> or <strong>measurement</strong>. As the example of loss aversion shows, research questions are often general. Consequently, there are a multitude of possible studies that can be performed to investigate one research question. However, for any specific study a researchers needs to decide on one specific study design. What exactly are we measuring to investigate the question we are interested in?</p>
+<p>Once the research question has been operationalised and the corresponding data is collected it is time for the <strong>statistical analysis</strong>. Generally, the statistical analysis answers one specific question: Does the data provide evidence for or against the empirical hypothesis derived from the research question? The remainder of the book will show in detail how to perform statistical analyses for common study designs and how to interpret the results in light of the research question and operationalisation.</p>
+<p>Once the data is sufficiently analysed, we have reached the final step of the research process, we need to <strong>communicate the results</strong>. There are different forms of results communication depending on your goal and audience (e.g., scientific journal article, dissertation report, conference presentation, or a press release). Whereas the different forms differ in the amount of detail and background that that is provided, they all need to provide a truthful and comprehensive account of the whole research process: What is the research question? How was it investigated? What are the results? What does this mean for the research question? Often, the difficult problem to solve during this step is to provide a comprehensive and truthful account but in a succinct manner. One important tool for doing so is through graphical means – results figures. Consequently, in this book we will discuss both how to present statistical results in a text and how to create appropriate results figures.</p>
+<p>What this abstract overview of the research process shows is three important things.</p>
+<ol style="list-style-type: decimal">
+<li><p>The primacy of the research question. The research question determines the operationalisation and thus which data is collected. The research question also determines the statistical analysis, but indirectly; the research question determines the empirical hypothesis which is then tested in the analysis.</p></li>
+<li><p>The statistically analysis is not directly connected to the research question. The statistical analysis is performed on the operationalisation of the research question, but not on the research question itself. What this means is that the statical analysis itself cannot directly inform us about the research question, or in other words, we cannot statistically test the research question itself. Instead, statistics can only tell us something about a specific operationalisation. Whether or not this allows strong inferences about the research question itself depends on the operationalisation. And as shown in the following examples, an important part of the scientific discourse is to argue whether certain operationalisations allow one to address specific research questions. However, this is generally not a statistical question.</p></li>
+<li><p>Statistics is not the end goal of the research. Instead, the end goal is usually a written communication of the research. In most cases, the statistical analysis is an indispensable part of this communication that can provide evidence for or against a specific empirical analysis. However, to understand the full meaning and implications of a particular statistical result, it is important to know its context – the research question and its operationalisation. It is the task of the research to communicate this context when communicating the research. Without the context, the impact and meaning of a statistical results is severely limited.</p></li>
+</ol>
+</div>
+<div id="example-i-testing-a-new-therapy" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Example I: Testing a New Therapy</h2>
+<p>To get a better understanding of the research process and the problems that can arise in it, let us consider a first example research question and how it can be investigated empirically. In many clinical domains, a frequent research question is whether a new therapeutical intervention works better than an existing one. The basic study design for this type of research question is quite clear, a <em>randomized controlled trial</em>. We want to compare the new treatment with a control treatment in an experimental setting – eligible participants are randomly assigned to receive either the new or the existing treatment. Whereas the general design of this study is fixed, important questions in the operationalisation step are how to measure the outcome intervention and how to implement the control treatment.</p>
+<p>For example, if we are testing a new therapy against a mental health disorder, are we interested if the new treatment reduces symptom as measured by a questionnaire, reduces the number of sick days, or the number of recurring episodes? Depending on the differences between the new and old treatment it is possible that one treatment does better on one of this measures whereas the other is better for another measure. When performing the research we need to consider these different possibilities before we can collect any data. And if we collect multiple measures, we should determine what our primary outcome is and how we deal with the additional outcomes.</p>
+<p>A further problem when comparing therapeutical interventions is how exactly to set up the control condition. If every therapists involved in the study is a proponent of the new treatment – which commonly happens as tests of new treatments are often done by those developing the new treatment – they are unlikely to invest the same amount of effort in the control treatment than in the new treatment. This difference in effort, also known as <a href="https://en.wikipedia.org/wiki/Allegiance_bias"><em>allegiance effects</em></a>, can affect the results independent of whether or not the new therapy is actually more effective.</p>
+<p>Consider a trial in which we have decided on one outcome measure, but therapists are more invested in the new treatment than in the old treatment. After we have collected the data, we run the statistical analysis which provides evidence that the new treatment performs better than the control treatment on the selected outcome measure. What would this mean for the research question? The researchers performing such a study would probably conclude that the new treatment is better than the old treatment. However, given the difference in allegiance to the two treatments, such a conclusion seems premature. It is also plausible that the therapists, because of their stronger investment with the new treatment, invested more effort into the patients treated with the new treatment. This provides an <em>alternative explanation</em> for the results: This difference in effort could be responsible for the difference in the outcome instead of the difference in the two treatments. To provide compelling evidence that the new treatment is indeed better than the old treatment, the researchers would need to test their new treatment in a setting in which this alternative explanation would not work. For example, by showing that the new treatment is also better than the old treatment for a therapist with an allegiance to the old treatment.</p>
+</div>
+<div id="example-ii-the-psychology-of-loss-aversion" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Example II: The Psychology of Loss Aversion</h2>
+<p>For our second concrete example, let us consider a less applied research question. <em>Loss aversion</em> is one of the assumptions underlying <em>prospect theory</em> <span class="citation">(<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky 1979</a>)</span>, a mathematically formalised theory combining cognitive psychology with economic theory.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> The concise description of loss aversion is that “losses loom larger than gains” <span class="citation">(<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky 1979, 279</a>)</span>. Less literary, loss aversion means that the negative psychological impact (or feeling associated with) a loss of a certain amount is larger than the positive psychological impact of a gain of the same amount. For example, loss aversion predicts that the displeasure or pain from losing £10 is larger than the pleasure or joy from winning £10.</p>
+<p>We can see that loss aversion is a theoretical statement involving <em>latent</em> - that is, unobservable - quantities such as negative or positive feelings (i.e., displeasure versus pleasure). We can ask people how they feel, but we cannot easily observe feelings without asking people. So how can we test whether people indeed show loss aversion if we cannot directly observe the theoretical constructs that form the core of it?</p>
+<p>One possibility for testing the hypothesis that individual show loss aversion is hinted at above. We could either give people a certain amount, say £10, or take it away form them, and then ask them how they feel. This procedure runs into at least two problems. First, it is clearly ethically unacceptable to perform an experiment that consists of taking £10 away from some our participants. Second, even if we were to overcome the ethical problems (e.g., by first giving participants an endowment and only take money away from that endowment) there would still be the problem of how to measure the psychological impact of the two events. More specifically, let’s say we ask the participants whom we have give £10 how much joy they feel after having received the money on a scale from 1 = no joy to 10 = maximum joy. We also ask those participants from whom we have taken £10 how much pain they have felt after the money was taken from then on a scale from 1 = no pain to 10 = maximum pain. Let us also assume that we indeed observe that participants who gained £10 said that their joy as on average a 4, whereas participants that lost £10 said their pain was on average a 5. Would this indicate evidence for loss aversion? Only if the two scales were directly comparable; that is, only if a 4 on the joy scale would be comparable in psychological impact to a 4 on the pain scale. It is easy to imagine situation in which this would not be the case. For example, if the maximum amount of joy we could perceive is larger than the maximum amount of pain, then the same value on the scale does not correspond to similar psychological impact. Given these problems, testing loss aversion using such an operationalisation is not very common <span class="citation">(for an exception see <a href="#ref-harinckWhenGainsLoom2007" role="doc-biblioref">Harinck et al. 2007</a>)</span>.</p>
+<div id="evidence-for-loss-aversion-the-reflection-effect" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Evidence for Loss Aversion: The Reflection Effect</h3>
+<p>A more common operationalisation for testing loss aversion is the comparison of choice patterns across different <em>risky choices, lotteries,</em> or <em>gambles</em> (these terms can be understood interchangeably here), a common experimental paradigm in decision making and behavioural economics. A lottery in this sense consists of different options, each of which associated with one or multiple outcomes, from which the participant has to choose one. For example, one of the lotteries used in <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span> was the following.</p>
+<p>Which option do you prefer?<br />
+<em>A</em>: An 80% chance of $4,000 or a 20% chance of $0.<br />
+<em>B</em>: 100% guarantee of $3,000.</p>
+<p>In the original study <span class="citation">(<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky 1979</a>, Problem 3)</span> 95 participants were asked this question. Of those, only 20% chose option <em>A</em> and 80% option <em>B</em>. Because the lottery above contains only gains (i.e., all outcomes are either positive or zero), these results do not allow any conclusions regarding loss aversion.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>The study by <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span> also contained the corresponding loss only lottery (i.e., all outcomes were either negative or zero):</p>
+<p>Which option do you prefer?<br />
+<em>A</em>: An 80% chance of -$4,000 or a 20% chance of $0.<br />
+<em>B</em>: 100% guarantee of -$3,000.</p>
+<p>The same 95 participants as before were asked this question and their results differed markedly from the previous results. For the loss only lottery 92% chose option <em>A</em> and only 8% option <em>B</em>. Thus, even though the only mathematical difference between both lotteries is the sign of the outcomes (i.e., the probabilities and absolute value of the outcomes are identical across lotteries), participants’ preferences are almost reversed. In the gain case, participants prefer the sure option (Option <em>B</em>), but in the loss case they prefer the risky outcome (Option <em>A</em>).</p>
+<p>This results pattern – preferring the sure option in the gain case, but the risky option in the loss case – is also known as the <em>reflection effect</em> and taken as evidence for loss aversion <span class="citation">(<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky 1979</a>)</span>. In the gain case, prefer the sure outcome to the risky outcome because they are unwilling to risk gaining nothing, even though the risky option contains the larger potential outcome. In contrast, in the loss case people are more willing to gamble on the risky option than pick the sure outcome, because they are unwilling to lose anything at all, even though the risky option has the potential of resulting in a larger loss than the sure option.</p>
+<p>So do these results provide compelling evidence that there is such a thing as loss aversion? Results such as those from <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span> that show how differently people behave whether they are dealing with a gain versus when dealing with a loss certainly appear to support this theoretical idea <span class="citation">(e.g., <a href="#ref-camererThreeCheersPsychological2005" role="doc-biblioref">C. Camerer 2005</a>)</span>. And this also make sense intuitively. Most people (me included) feel that in the gain case, they would prefer option <em>A</em> and in the loss case they would prefer option <em>B</em> even though they know and understand the mathematical details of the lotteries. However, as in the previous example, the evidence for loss aversion discussed here hinges on a particular operationalisation of the theoretical idea. From these results, we have not really learned anything about the different psychological impact of a gain and a loss of the same magnitude in the mind of people. The only thing we have learned is that for certain lotteries people change their behaviour depending on whether the outcomes are gains and losses. Can we find an alternative for this data pattern that does not involve loss aversion?</p>
+</div>
+<div id="alternative-explanation-loss-aversion-or-loss-seeking" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Alternative Explanation: Loss Aversion or Loss Seeking?</h3>
+<p>One clever alternative explanation for the why it looks like there is loss aversion was provided by <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. In their study, participants were also presented with lotteries, but they differed in a few aspects from the lotteries used by <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span>. An example of one of their lotteries is shown in Figure <a href="role-of-statistics-in-the-research-process.html#fig:lottery-example">2.1</a> below. As shown in the figure, each lottery involved mixed outcomes, that is both gains and losses (i.e., -$18 and +$20 in the example). Furthermore, each lottery only consisted of one option and not two. So instead of having to choose between two options, participants only had to choose whether to accept and play a lottery or not. Finally, both possible outcome always had a 50% probability of occuring. To make this logic clearer to participants, they were told that accepting the lottery shown in Figure <a href="role-of-statistics-in-the-research-process.html#fig:lottery-example">2.1</a> was equal to flipping a coin that has -$18 on one side and +$20 on the other side. Depending on which outcome comes out on top, their money would change accordingly. If participants rejected a lottery, they neither lost nor won any money.</p>
+<div class="figure" style="text-align: center"><span id="fig:lottery-example"></span>
+<img src="figures/walasek15-task.png" alt="Screenshot of lottery task used to investigate loss aversion. This screenshot is from Walasek and Stewart (2015, Figure 1)." width="70%" />
+<p class="caption">
+Figure 2.1: Screenshot of lottery task used to investigate loss aversion. This screenshot is from Walasek and Stewart (2015, Figure 1).
+</p>
+</div>
+<p>As many experiments that fall within a cognitive domain, the study of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> consisted of a series of similar trials in which participants had to do the same task (i.e., accept or reject the shown lottery). What differed across trials were the values of the two possible outcomes. For example, in one of the conditions of the experiment losses ranged from -$6 to -$20 in increments of -$2 (resulting in 8 different possible losses) and gains ranged from $12 to $40 in increments of $4 (resulting in 8 different possible gains). Across all trials for one participant in this condition, all possible losses were combined with all possible gains so that in total participants had to decide for <span class="math inline">\(8 \times 8 = 64\)</span> lotteries whether they accepted or rejected it.</p>
+<p>When analysing their data, <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> focussed on a mathematical model-based analysis using a variant of prospect theory. Whereas there are clear merits to such an approach, as it it able to provide informative summaries of large amounts of data, it can make it difficult to focus on interesting patterns in subsets of the data. Furthermore, analysis using a mathematical models such as prospect theory requires statistical knowledge that is beyond the scope of the current book. Consequently, we will look at a simple data pattern to see whether the data can tell us something about loss aversion.</p>
+<p>The 64 trials each participant of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> worked on contain a subset from which one can directly investigate this question. Whereas most of the lotteries shown to participants were asymmetric – that is, the potential loss differed numerically from the potential gain (such as for the example in Figure <a href="role-of-statistics-in-the-research-process.html#fig:lottery-example">2.1</a>) – a small subset of lotteries were symmetric, for these lotteries the amounts for the potential loss was equal to the amount of a potential gain. More specifically, the symmetric lotteries were -$12/+$12, -$16/+$16, and -$20/+$20.</p>
+<p>For the condition described above in which losses ranged up to -$20 and gains ranged up to +$40, the 191 participants accepted the symmetric lotteries only 21% of the time. This result makes sense in light of loss aversion. When losing a certain amount of money is worse than winning the same amount of money, I should reject a symmetric lottery in which I am equally likely to lose or to win a certain amount of money.</p>
+<p>The clever manipulation of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> was that they included three further conditions in which they changed the range of possible outcomes. In addition to the -$20/+$40 condition discussed above, the 202 participants in the $-20/+$20 condition saw lotteries with losses ranging to -$20 and gains also ranging to +$20 only. Another group of 190 participants, the -$40/+$40 condition, saw lotteries with losses ranging to -$40 and gains also ranging to +$40. Finally, <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> also included a -$40/+$20 condition with 198 participants in which the losses ranged to -$40, but the gains only to +$20 (i.e., the complement to the -$20/+$40 condition). Importantly, in all conditions the number of possible outcomes for losses and gains was 8 (so the step size was either <span class="math inline">\(\pm\)</span>$2 or <span class="math inline">\(\pm\)</span>$4). The table below shows the possible outcome for each condition</p>
+<table>
+<caption>Possible outcomes for the lotteries in Experiment 1 of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. In each condition, each participant saw 64 lotteries resulting from combining all possible gains with all possible losses in that condition.</caption>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-$20/+$40: Gains</td>
+<td>$12</td>
+<td>$16</td>
+<td>$20</td>
+<td>$24</td>
+<td>$28</td>
+<td>$32</td>
+<td>$36</td>
+<td>$40</td>
+</tr>
+<tr class="even">
+<td>-$20/+$40: Losses</td>
+<td>-$6</td>
+<td>-$8</td>
+<td>-$10</td>
+<td>-$12</td>
+<td>-$14</td>
+<td>-$16</td>
+<td>-$18</td>
+<td>-$20</td>
+</tr>
+<tr class="odd">
+<td>-$20/+$20: Gains</td>
+<td>$6</td>
+<td>$8</td>
+<td>$10</td>
+<td>$12</td>
+<td>$14</td>
+<td>$16</td>
+<td>$18</td>
+<td>$20</td>
+</tr>
+<tr class="even">
+<td>-$20/+$20: Losses</td>
+<td>-$6</td>
+<td>-$8</td>
+<td>-$10</td>
+<td>-$12</td>
+<td>-$14</td>
+<td>-$16</td>
+<td>-$18</td>
+<td>-$20</td>
+</tr>
+<tr class="odd">
+<td>-$40/+$40: Gains</td>
+<td>$12</td>
+<td>$16</td>
+<td>$20</td>
+<td>$24</td>
+<td>$28</td>
+<td>$32</td>
+<td>$36</td>
+<td>$40</td>
+</tr>
+<tr class="even">
+<td>-$40/+$40: Losses</td>
+<td>-$12</td>
+<td>-$16</td>
+<td>-$20</td>
+<td>-$24</td>
+<td>-$28</td>
+<td>-$32</td>
+<td>-$36</td>
+<td>-$40</td>
+</tr>
+<tr class="odd">
+<td>-$40/+$20: Gains</td>
+<td>$6</td>
+<td>$8</td>
+<td>$10</td>
+<td>$12</td>
+<td>$14</td>
+<td>$16</td>
+<td>$18</td>
+<td>$20</td>
+</tr>
+<tr class="even">
+<td>-$40/+$20: Losses</td>
+<td>-$12</td>
+<td>-$16</td>
+<td>-$20</td>
+<td>-$24</td>
+<td>-$28</td>
+<td>-$32</td>
+<td>-$36</td>
+<td>-$40</td>
+</tr>
+</tbody>
+</table>
+<p>As a consequence of this design, what changed across conditions was whether the symmetric lotteries were <em>relatively good</em> or <em>relatively bad</em>. To understand this, we need to look at the remaining asymmetric lotteries. In the -$20/+$40 condition discussed so far, there were more lotteries in which the possible gain was larger than the possible loss (e.g., a -$18/+$20 lottery) than lotteries for which the possible loss was larger than the gain (e.g., a -$20/+$18 lottery). Consequently, the symmetric lotteries were relatively bad (i.e., compared to the many lotteries in which the possible gain is larger than the possible loss). In the -$20/+$20 and -$40/+$40 conditions, the asymmetric lotteries were balanced. In half of the asymmetric lotteries the possible gain was larger than the possible loss, whereas for the other half the possible loss was larger than the possible gain. Consequently, the symmetric lotteries were neither relatively good nor relatively bad. Finally, in the -$40/+$20 condition the pattern was flipped with respect to the -$20/+$40 condition. There were only few lotteries in which the possible gain was larger than the possible loss compared to the many lotteries for which the possible loss was larger than the gain. Consequently, the symmetric lotteries were relatively good.</p>
+<p>So does it matter whether the symmetric lotteries are relatively good or not? Indeed it does. As a reminder, people were unlikely to accept the symmetric lotteries in the -$20/+$40 condition in which the symmetric lotteries were relatively bad. Participants in this condition only accepted 21% of the symmetric lotteries. In the -$20/+$20 condition in which the symmetric lotteries were neither relatively good nor relatively bad, participants accepted 50% of the symmetric gambles. Similarly, in the -$40/+$40 condition participants accepted 42% of the symmetric gambles. Finally, in the -$40/+$20 condition in which the symmetric lotteries were relatively good, participants accepted 71% of the symmetric gambles.</p>
+<p>What these results show is that the choice pattern for lotteries are not always in line with the idea of loss aversion. Only in a context in which a symmetric lottery is relatively bad do we see evidence in line with the idea of loss aversion. If we are in a context in which a symmetric lottery is relatively good, we see the opposite pattern that one could term <em>loss seeking</em>. What does this mean for loss aversion? The original idea of <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span> that what matters is the magnitude of a loss or gain surely is not in line with the results of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. Instead, <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> argue that what is relevant to determine the psychological impact of a gain or loss is the relative magnitude or <em>rank</em> of a possible outcome: Compared to other gains or losses I regularly experience, is this a large gain or large loss?</p>
+<p>Before moving on and linking this example of the psychology of loss aversion to the general goal of this book, let us answer one last question. If what matters is the rank (as suggested by <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>) and not the magnitude of an outcome (as proposed by <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span>), why do we see evidence for an effect of magnitude in the study of <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span> that did not manipulate the context of gains and losses? An answer to this question is provided by <span class="citation"><a href="#ref-stewartDecisionSampling2006" role="doc-biblioref">Stewart, Chater, and Brown</a> (<a href="#ref-stewartDecisionSampling2006" role="doc-biblioref">2006</a>)</span>. They argue (and also provide empirical evidence) that in our daily lives we experience more small losses (e.g., buying something at the bakery) and more larger gains (e.g., the monthly salary). As a consequence, for a gain and loss with the same magnitude the relative position of the gain compared to all other gains is lower than the corresponding relative position of the loss compared to all other losses. From this difference, we should generally observe a pattern consistent with loss aversion but for a different theoretical reason than proposed by <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span>.</p>
+</div>
+</div>
+<div id="epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Epistemic Gaps: The Difference Between What we Want to Know and What we can Know</h2>
+<p>The goal of this chapter is to provide an introduction to the role of statistics in the research process. Why do we need statistics and what can it tell us about the research questions we are interested in? However, so far we have not talked much about statistics but mostly introduced examples of the research process. The reason for this is that it is important to understand what we generally want to know when we do empirical work in psychology or related disciplines. We need statistics because we have a research question for which we want an answer.</p>
+<p>If you do not yet know about statistics in detail, the application of statistical methods can appear like a magical machinery that provides us with an answer to the research question we have. You throw your data in, turn the statistics machinery on, and get an answer to your research question out. Sadly, this image of statistics is false. The reason is that there are at least two <em>epistemic gaps</em> in the research process that prevent us from getting a straight answer to our research question. In this chapter we will introduce these gaps to ensure you can get a realistic image of the role of statistics in the research process.</p>
+<p>At this point, you might wonder what an <em>epistemic gap</em> is. <em>Epistemology</em> is a branch of analytical philosophy that is concerned with knowledge (e.g., what is knowledge, how de we know that we know) and “epistemic” is the corresponding adjective. Consequently, an epistemic gap describes the difference between what we want to know and what we can actually know.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> What we can know from scientific research is a question addressed in philosophy of science. Based on the examples above we will take a look at some arguments from philosophy of science that show that unfortunately, what we can know is often quite different from what we would like to know. A competent application of statistics requires that one is aware of this problem and avoids over-interpreting the results from ones research.</p>
+<div id="epistemic-gap-1-underdetermination-of-theory-by-data" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Epistemic Gap 1: Underdetermination of Theory by Data</h3>
+<p>Above we have provided two examples of the research process in psychology, one applied research question (Is a new therapeutical intervention better?) and one theoretical (or <em>basic</em>) research question (Is there evidence for loss aversion?). In both cases we have seen that answering the research question requires carefully thinking about the operationalisation. How exactly should we set up a study to test this question? And once we have decided on one operationalisation, we have seen that we can find alternative explanations that can explain the results without making the assumptions of the original research question. In other words, even though the operationalisation was carefully chosen, it could not unambiguously answer our research question.</p>
+<p>The fact that we could not compellingly answer the research questions despite employing a carefully chosen operationalisation is not a problem that is unique to our two examples. In contrast, an important insight from philosophy of science is that this is a problem of <em>any</em> empirical study. This issue is also known as <em>underdetermination of theory by data</em> or the <a href="https://en.wikipedia.org/wiki/Duhem%E2%80%93Quine_thesis">Duhem-Quine thesis</a> and always occurs if there is a difference between the research question and the corresponding operationalisation. And as we have seen in the examples, there essentially always is.</p>
+<p>There are different aspects or different angles with which we can look at and understand underdetermination. The first aspect has to do with the specification of the research question and its operationalisation. Research questions usually involve unobservable <em>constructs</em> – such as emotions (e.g., fear), memory, attention, comprehension, or learning – or vague phrases, such as “works better” or “improves.” An empirical investigation of such questions however requires a precise specification and operationalisation. By going from the research question to the concrete operationalisation, there is no guarantee that the operationalisation captures the intended meaning of the research question.</p>
+<p>For example, consider again our first example of the test of a therapeutical intervention. Imagine we found that the new intervention decreased patient scores on a symptom questionnaire more strongly than the old treatment, but did not reduce the number of sick days due to the disorder. Should we interpret this in the way that the new treatment “works better” than the old treatment? In some sense it does, but in another not. The problem is that the nuances that result from operationalising a research question concretely do not always align with the broad way in which we like to think about research questions.</p>
+<p>At this point you might think this does not yet sound like such a big problem. We just need to define our research questions precisely enough and then we are able to learn something about our research question. Sadly, this is easier said then done. The first problem is that it is often impossible to precisely define our research question, because we have not yet found a way to precisely define the constructs that are involved in it (this is known as the <em>problem of coordination</em>, <span class="citation">(<a href="#ref-kellenProblemCoordinationPursuit2021" role="doc-biblioref">Kellen et al. 2021</a>)</span>).</p>
+<p>For example, if you have they hypothesis that a specific emption, say fear, is related to some behavioral pattern, say aggression, you run into the problem that there is not generally agreed upon definition of either of these constructs. There probably exist questionnaires for measuring fearfulness and aggressive tendencies, but these questionnaires do not represent the corresponding constructs or a definition of them. If you were to ask a sample of participants to fill out these questionnaires and found that the scores of the participants in these two questionnares are related, it would not allow you to conclude that fearfulness and aggression are related. The only conclusion that would be allowed is that fearfulness as measured with the questionnaire is related to aggression as measured with the questionnaire. Of course, as scientists we would like to make the general conclusion that the constructs are related, but such an inference is not logically allowed.</p>
+<p>The general problem that we run into is the Duhem-Quine thesis; any empirical hypothesis that is tested in a study contains of two parts: The theoretical prediction as well as a set of <em>auxiliary assumptions</em> that link the theoretical prediction with the data. To stay with our example, our theoretical prediction could be that fear and aggression are related. The auxiliary assumption are all additional assumptions that are needed to test this question empirically as decided on as part of the operationalisation: that the questionnaire is a valid measure of the constructs (which is a big assumption), that the data collection took place without any unforeseen problems, that we have tested enough participants to find an effect, that we use appropriate statistical procedures, etc. As can be seen, the list of auxiliary assumption is somewhat limitless and difficult to enumerate fully. It also contains quite mundane assumptions such that we have to assume that the research actually took place and is not just made up by the researcher (for an exception, see <a href="https://scienceintegritydigest.com/2019/07/16/fabrication-the-diederik-stapel-case/">the case of Diederik Stapel</a>).</p>
+<p>The core of the Duhem-Quine thesis is that any empirical result does not pertain solely to the theoretical prediction of interest, but the union (or conjunction) of the theoretical prediction of interest with the auxiliary assumptions. If the results are in line with the empirical hypothesis, that only supports the theoretical prediction if all auxiliary assumptions are true. Likewise, if the results are not in line with the empirical hypothesis, this only provides evidence against the theoretical prediction if all auxiliary assumptions are true. However, testing whether all auxiliary assumptions are true cannot be done in the same study that tests the empirical hypothesis we set out to test (because we can always come up with more and more auxiliary assumptions not specifically tested). Consequently, any individual result on its own cannot provide conclusive evidence for or against a particular theoretical prediction, there can always be an alternative explanation that differs from the theory or hypothesis one has.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> That is what is meant by the underdetermination of theory by data.</p>
+<p>Whereas this issue might seem like a purely philosophical discussion, it is far from it. Most actual scientific discussions in the literature are about the auxiliary assumptions that are part of the operationalisation of a research question. For example, in the example of the therapeutical intervention, the idea that therapists apply both old and new therapy in exactly the same manner is an auxiliary assumption that is questioned by the concept of therapeutical allegiance. Likewise, the argument for loss aversion as proposed by <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span> hinges on the auxiliary assumption that participants interpret the possible outcomes of the lotteries in terms of their magnitude or absolute value. As shown by <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>, at least in some cases this auxiliary assumption does not appear to hold and participants instead interpret the relative value of the possible outcomes of the lotteries. It will be easy to find similar examples for the research area you are interested in.</p>
+<p>To sum this up, the problem of underdetermination and the first epistemic gap is that any particular results never uniquely supports or challenges one theoretical position or hypothesis. For any result that appears to support a theory there is another theory that makes the same prediction because an auxiliary hypothesis could be false and thus require a different theory. Likewise, for any results that seems to disagree with a theory, the theory can always be protected by claiming one of the auxiliary assumptions is incorrect. And this is also exactly what happens in real scientific discourse. As an example, when John Bargh, a prominent social psychologist from Yale, was confronted with results that disagreed with one of his most prominent findings <span class="citation">(<a href="#ref-doyenBehavioralPrimingIt2012" role="doc-biblioref">Doyen et al. 2012</a>)</span> he attacked (in a now deleted blog post that still can be found <a href="https://replicationindex.com/wp-content/uploads/2020/07/bargh-nothingintheirheads.pdf">here</a>) the “incompetent or ill-informed researchers” and claimed their study “had many important differences from our procedure, all of which worked to eliminate the effect​.” As this section has section has shown, questioning the methods (i.e., the auxiliary assumptions) is a legitimate defence that protects ones theory. Of course, one can question the auxiliary assumptions of the original results that appeared to support the theory in the same way. In the case of Bargh, it appears that this is exactly what happened. Most other psychologists have stopped believing his original finding <span class="citation">(e.g., <a href="#ref-harrisTrainWreckAny2021" role="doc-biblioref">Harris, Rohrer, and Pashler 2021</a>)</span>.</p>
+</div>
+<div id="epistemic-gap-2-signal-and-noise" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Epistemic Gap 2: Signal and Noise</h3>
+<p>The first epistemic gap is that there is no strong logical link between the theories underlying our research questions and the operationalisation of the research question. Thus, in terms of the steps in our research process it concerns the relationship between step 1, the research question, and step 2, the operationalisation and data collection. The next epistemic gap concerns the relationship of steps 2 and step 3, the statistical analysis.</p>
+<p>As described above (<a href="role-of-statistics-in-the-research-process.html#the-research-process">2.1</a>), the important task during the operationalisation is to transform the research questions into an empirical hypothesis. That is, figuring out and describing which possible outcome would support our theoretical hypothesis (i.e., the outcome predicted by our theory). As part of this we should also clearly designate a possible outcome that, if it were to occur, would speak against our theoretical hypothesis. Once we have decided on this, we collect the data and then run the statistical analysis. The goal is that the statistical analysis provides us with evidence with respect to the empirical hypothesis. Does the data support the empirical hypothesis or does it not?</p>
+<p>Before providing an overview of how this is done, let us go back to the second example above, the study of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. In contrast to the original formulation of loss aversion <span class="citation">(<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky 1979</a>)</span>, which is based on the magnitude or absolute value of a gain or loss, the theoretical prediction of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> was that what drives people’s behaviour is the relative value of a gain or loss. To test this, they presented participants with lotteries in different conditions in which the range of gains and losses differed. In one condition there were small losses and large gains and in another condition there were large losses and small gains (we ignore the other two conditions here). The hypothesis that follows from this design is that the relative attractiveness of the symmetric lotteries (in which magnitude of possible loss = magnitude of possible gain) differs in both conditions. In the small loss/large gains condition the symmetric lottery is relative unattractive and in the large loss/small gains condition it is relatively attractive. The resulting empirical prediction is that participants should be less willing to accept the symmetric lotteries in the small loss/large gains condition than in the large loss/small gains condition. In line with this prediction, participants in the small loss/large gains condition accepted only 21% of the symmetric lotteries whereas participants in the large loss/small gains condition accepted 72% of the symmetric lotteries.</p>
+<p>From just looking at the bare numbers, the results appear to support the empirical prediction. Participants are roughly 50% less likely to accept the symmetric lotteries in the small loss/large gains condition than in the large loss/small gains condition. However, how can we be sure this particularly observed difference is not a chance occurrence. Maybe we just got unlucky and the participants in the small loss/large gains condition are for some reasons generally less likely to accept any lotteries than the participants in the large loss/small gains condition. Maybe the former participants all had a horrible night of sleep and are in a really bad mood at the time of testing and therefore reject all gambles whereas this was not the case for the latter. If this were the case, the observed difference would not actually tell us anything about our research questions.</p>
+<p>The problem described in the previous paragraph is at the heart of the statistical approach described in this book. The core problem is that the responses we get from participants in experiments are inherently noisy. Human participants can do things for an unlimited number of reasons. Some of these reasons are related to our research question and its operationalisation and other reasons are not. For example, if participants read the lotteries carefully and think before they provide an answer, it is likely that the values of the possible outcome play a role in their answer. In this case, their responses are relevant for our research question. But what if participants are distracted by a message on their phone and do not read the problem fully? Or what if they intend to accept a lottery and accidentally reject it (i.e., press the wrong button)? We can also imagine that it matters if participants are relatively rich or relatively poor. For someone with a million on the bank, it might not really matter if they lose or win $16 so they might be inherently more likely to gamble on such a lottery than someone for which this is more than the hourly wage. In all these cases, the values of the lotteries have a minor effect and thus the responses are more or less irrelevant for our research question.</p>
+<p>For the question of whether or not the results support our empirical prediction we therefore would like to distinguish between those responses that are relevant for our research question – we can call this the <em>signal</em> – and those responses that are generated more or less randomly and are irrelevant for our research question – we can call this the <em>noise</em>. If we had a procedure that could distinguish signal from noise we could then simply see whether the signal supports our empirical prediction. If it did, the data would provide support for the hypothesis and if not the data would not support the empirical predictions. Sadly, such a procedure does not and cannot exist (as we would then know why people do what they do, which is the reason we do research in the first place).</p>
+<p>In the absence of a procedure that can definitely separate the contribution of signal and noise, the statistical approach introduced here compares an <em>estimate of the signal</em> with an <em>estimate of the noise</em>. Let us assume for a moment the estimated signal supports our empirical prediction as in our example (i.e., we predict that participants are less likely to accept a lottery in the small loss/large gains condition and this is what the data shows). We then compare this estimated signal against the estimated noise. If the estimated signal is large given the estimated level of noise, we assume that the data supports the empirical prediction. If the estimated signal is not large given the estimated noise, we assume the data does not support our empirical prediction.</p>
+<p>So how can we estimate the signal and the noise? Estimating the signal is straight forward. We just use the observed difference between the conditions as our estimate of the signal. So for the example from <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> this would be the observed difference in accepting the symmetric lotteries between the two conditions which was roughly 50%. Estimating the noise is a bit more complicated and will be described in detail in later chapter. For now it is enough to understand that it is affected by two components: (1) The variability in responses within each condition and (2) the overall sample size (i.e., number of participants). If the variability within each condition becomes smaller (i.e., measurement becomes more precise) and the sample size stays the same, the levels of noise decreases. Likewise, if the sample size increases with a constant level of variability, the level of noise decreases.</p>
+<p>Another important question is what counts as “large” when comparing the estimated signal to the estimated noise. In the following chapters we will introduce a decision threshold to make this judgement.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> If the signal to noise ratio is above the threshold, we act as if there were a signal and change our believes. If it is not, we cannot make a decision. This decision threshold is chosen such that across many such decisions we control our rate of making false positive decisions. In particular, the decision threshold is chosen such that if we were in a situation in which there was no signal, we only incorrectly assumed that there is a signal in 5% of decisions.</p>
+<p>Taken together, the statistical procedures we are using attempt to answer the question whether there is a signal that supports the empirical hypothesis given that human data is inherently random and noisy. The problem in this is that the estimated signal – the observed difference between the conditions – is also affected by the noise. We never know if the observed difference is due to the signal we are interested in or just based on noise. To overcome this problem we compare the observed signal with the observed level of noise. If the observed level is large relative to the observed noise, we decide the data supports the presence of the signal. In other words, we never really know if the current data <em>really</em> supports our prediction or not, we just act as if it does. There always is a non-zero chance that the effect is due to the noise. Because we only have this one data set we are analysing, we cannot be 100% certain our estimate of the signal and the noise is fully accurate. However, as we will describe in detail later, across decisions that use this statistical decision procedure, it controls our rate of making false positive decisions (i.e., assume there is a signal when there is none).</p>
+<p>So as in the case for the first epistemic gap, the second epistemic gap also shows that what we cannot really learn what we wanted to know, if the data supports the empirical prediction or not. If the signal is large relative to the noise, we have evidence that it does, but this evidence is never fully conclusive. The evidence might be strong, and we will later see how we can identify that, but there always should be some remaining doubt in the back of our head. Maybe we just got unlucky and the participants in our study responded in a way that made it look like there is a signal, but there isn’t. With just one data set in hand, this cannot really be ruled out</p>
+</div>
+</div>
+<div id="summary" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Summary</h2>
+<p>In this chapter we have provided a conceptual overview of the research process in psychology and related disciplines. In this concept, the research always begins with a research question. What is it that I want to know? Often this research questions stems from a particular theory that we want to test, but it can also be a purely applied hypothesis.</p>
+<p>The next important step is the operationalisation of this question followed by the data collection. That means we need to find appropriate tasks or measures and develop a study design with which we can test the empirical hypothesis following from our research question. As we have seen in the discussion of the first epistemic gap, the consequence of the separation of research question and operationalisation is that, strictly speaking, our study only let’s us learn more about the tasks and measures we are using. Because of the problem of underdetermination of theory by data, even an apparently positive result does not allow us to infer that it supports our theoretical hypothesis. The core problem is that the empirical hypothesis is a combination of theoretical hypothesis and auxiliary assumptions and we cannot rule out that one of the auxiliary assumptions is false.</p>
+<p>With the collected data in hand, the next step is to perform the statistical analysis. Here, we hope to find evidence that informs us about our empirical hypothesis. The procedure we will use in this book attempts to distinguish between the signal in the data, the part of the data relevant to our empirical hypothesis, and the noise, the randomness that is inherent in using human participants.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> However, the second epistemic gap entails that even with such a statistical procedure, we cannot find fully conclusive evidence. The problem is that we cannot estimate the true amount of noise in the data. Research participants have a myriad of potential reasons of why they show a certain behaviour and these reasons need not be related to our research question. With more precise measures and more participants, we can control this level of noise to some degree, but ultimately cannot be sure whether we did not just get unlucky and what we see is due to noise and not because of our hypothesis.</p>
+<p>The final step in the research process is the communication of our results. This step essentially combines all previous step. We need to communicate the research question, the operationalisation, the data collection process and sample, and the results from the statistical analysis. Whereas the communication of the results is ultimately the goal of any research project, it is also the step during which we have to be mindful of the limits of our research. The biggest danger is that we forget the epistemic gaps that are inherent in any empirical research and oversell our results. We of course want that our research allows us to answer our (potentially big and broad) research questions, but we should be honest with ourselves and our audience and stick to the reality that we are primarily learning something about our operationalisation. When we get a statistical result that appears to support our empirical prediction we want treat it as if it is true, but we should be clear that there always is a chance that our result might be a fluke.</p>
+<div id="what-shouldnt-and-what-should-we-do" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> What Shouldn’t and What Should we do?</h3>
+<p>Let us end this chapter with some concrete examples of what we shouldn’t and what we should do. To motivate ones research question, it is a good idea to start with the big picture. What are the real world issues and theoretical problems we want to address? Whereas this is a good idea, we should not mistake our operationalisation of the research question with this big picture.</p>
+<p>For example, in a recent paper on which I was a co-author <span class="citation">(<a href="#ref-baumannLinearThresholdModel2020" role="doc-biblioref">Baumann et al. 2020</a>)</span>, we developed a new task, the “ticket shopping task,” to investigate sequential decision making problems (in this section, the details of the tasks are not really relevant so we will only mention the names, but do not describe tasks in detail). Whereas I feel we could make a good case that we could figure out to some degree what people do in this task, this does not mean that this is what people generally do in sequential decision making problem.</p>
+<p>Likewise, whereas there might be both a model-free and model-based reinforcement learning system in the brain, the popular “two-step task” <span class="citation">(<a href="#ref-dawModelBasedInfluencesHumans2011" role="doc-biblioref">Daw et al. 2011</a>)</span> is unlikely to reveal all its mechanism or even prove its existence.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In fact, there is good evidence participants in this task show many behaviours that are unrelated to the theoreical question of interest <span class="citation">(e.g., <a href="#ref-akamSimplePlansSophisticated2015" role="doc-biblioref">Akam, Costa, and Dayan 2015</a>)</span>.</p>
+<p>Another example comes from the domain of moral reasoning. Here, a prominent procedure is the use of the “trolley problem” and similar vignettes <span class="citation">(<a href="#ref-greeneFMRIInvestigationEmotional2001" role="doc-biblioref">Greene et al. 2001</a>)</span>. Whereas these vignettes have revealed interesting results, it seems questionable to assume that participants’ responses represent the extent of their moral reasoning or that they are particularly predictive of participants real-world behaviour.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> Similar arguments can be made for many other experimental domains but also whenever particular questionnaires are used (e.g., as discussed in the examples above).</p>
+<p>It makes sense to look a bit critical at the argument we have made here. Surely, if we use a task such as the “ticket shopping task” or the “two-step task” we learn something about the underlying research question and theory? We surely do, the question that is difficult to answer is exactly what we learn.</p>
+<p>As an empirical example to illustrate this problem, let us consider the research on risk preferences in decision making. The idea of risk preferences is that some people might be more willing to take risks (e.g., when gambling or when choosing an investment) than others. There exist a number of different tasks to investigate risk preferences experimentally, such as the balloon analogue risk task [BART; <span class="citation"><a href="#ref-lejuezEvaluationBehavioralMeasure2002" role="doc-biblioref">Lejuez et al.</a> (<a href="#ref-lejuezEvaluationBehavioralMeasure2002" role="doc-biblioref">2002</a>)</span>] or the Columbia card task <span class="citation">(<a href="#ref-fignerAffectiveDeliberativeProcesses2009" role="doc-biblioref">Figner et al. 2009</a>)</span>, as well as a number of different questionnaires. A large study with around 1500 participants who each performed eight different tasks and filled out twelve different questionnaires designed to measure risk preferences <span class="citation">(<a href="#ref-pedroniRiskElicitationPuzzle2017" role="doc-biblioref">Pedroni et al. 2017</a>; <a href="#ref-freyRiskPreferenceShares2017" role="doc-biblioref">Frey et al. 2017</a>)</span> could show that participants’ behaviour across tasks and questionnaires was surprisingly unrelated. Whereas participants who scored high on one questionnaire also scored high on other questionnaires (i.e., the different questionnaires shared a common risk trait), the scores on the questionnaires were largely unrelated to the behaviours in the different tasks. Furthermore, behaviours across the different risk tasks were unrelated to each other (i.e., a participant who was specifically risky in one tasks was not particularly risky in another task). In other words, even though the tasks and questionnaires all appear to measure risk preferences their failure to find a consistent pattern across participants suggests they fail to do so in a coherent manner. One might wonder if the fact that the questionnaires were related among each other represents some sort of silver lining here. I would not share this interpretation and instead attribute this to <a href="https://en.wikipedia.org/wiki/Common-method_variance">common-method variance</a>. The important result is that the questionnaires were also unrelated to the behaviour in the tasks. This tells me that at this point we do not really understand what risk preferences are or how to measure them.</p>
+<p>To sum this up, it is important to keep in mind that the thing we learn something about in our research is primarily our operationalisation and measurement. If we want to make a case that we also learn something about the underlying research question, we have to make a good case for this and spell out which alternative explanations we rule out and which auxiliary assumption we can take for granted. This usually requires considering other results than our own study. In short, do not confuse the task or measurement with the theory or research question.</p>
+<p>When communicating the statistical results we also need to avoid overselling the results. As a general principle, we should report the results in a humble manner. To this end, we should avoid language that suggests a level of confidence that we cannot provide. This means, statistical results never “prove” or “confirm” our empirical prediction. Instead, they may “support” it or “suggest” certain interpretations.</p>
+<p>As we have discussed, a statistical analysis never gives us perfect confidence that a particular result supports an empirical prediction. The only way to get some confidence that we did not get unlucky with our sample of participants is that the study is repeated by other – a so called <em>replication</em>. If a completely independent set of researchers finds the same pattern of results, this provides us with rather strong evidence that the study design indeed gives rise to this data pattern. As the final part of this chapter, let us review the pattern of replication results for our two main examples. The results of <span class="citation"><a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">Kahneman and Tversky</a> (<a href="#ref-kahnemanProspectTheoryAnalysis1979" role="doc-biblioref">1979</a>)</span>, using their original lotteries, were recently successfully replicated in a large scale study involving 19 countries and more than 4000 participants <span class="citation">(<a href="#ref-ruggeriReplicatingPatternsProspect2020" role="doc-biblioref">Ruggeri et al. 2020</a>)</span>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> For the <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> study, the pattern is not yet as clear. Whereas I am not aware of any published exact (or direct) replication of their study, the original authors have attempted to extend their findings somewhat <span class="citation">(<a href="#ref-walasekContextdependentSensitivityLosses2019" role="doc-biblioref">Walasek and Stewart 2019</a>)</span> and found similar but less pronounced differences between condition. However, using a different study design <span class="citation"><a href="#ref-schneiderEffectsSurroundingPositive2016" role="doc-biblioref">Schneider, Kauffman, and Ranieri</a> (<a href="#ref-schneiderEffectsSurroundingPositive2016" role="doc-biblioref">2016</a>)</span> also showed that the acceptance rated of symmetric lotteries are strongly affected by which other lotteries are presented.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-akamSimplePlansSophisticated2015" class="csl-entry">
+Akam, Thomas, Rui Costa, and Peter Dayan. 2015. <span>“Simple <span>Plans</span> or <span>Sophisticated Habits</span>? <span>State</span>, <span>Transition</span> and <span>Learning Interactions</span> in the <span>Two</span>-<span>Step Task</span>.”</span> <em>PLOS Computational Biology</em> 11 (12): e1004648. <a href="https://doi.org/10.1371/journal.pcbi.1004648">https://doi.org/10.1371/journal.pcbi.1004648</a>.
+</div>
+<div id="ref-baumannLinearThresholdModel2020" class="csl-entry">
+Baumann, Christiane, Henrik Singmann, Samuel J. Gershman, and Bettina von Helversen. 2020. <span>“A Linear Threshold Model for Optimal Stopping Behavior.”</span> <em>Proceedings of the National Academy of Sciences</em> 117 (23): 12750–55. <a href="https://doi.org/10.1073/pnas.2002312117">https://doi.org/10.1073/pnas.2002312117</a>.
+</div>
+<div id="ref-camererThreeCheersPsychological2005" class="csl-entry">
+Camerer, Colin. 2005. <span>“Three <span>Cheers</span><span><span>Psychological</span></span>, <span>Theoretical</span>, <span>Empirical</span><span></span>for <span>Loss Aversion</span>.”</span> <em>Journal of Marketing Research</em> 42 (2): 129–33. <a href="https://doi.org/10.1509/jmkr.42.2.129.62286">https://doi.org/10.1509/jmkr.42.2.129.62286</a>.
+</div>
+<div id="ref-dawModelBasedInfluencesHumans2011" class="csl-entry">
+Daw, Nathaniel D., Samuel J. Gershman, Ben Seymour, Peter Dayan, and Raymond J. Dolan. 2011. <span>“Model-<span>Based Influences</span> on <span>Humans</span>’ <span>Choices</span> and <span>Striatal Prediction Errors</span>.”</span> <em>Neuron</em> 69 (6): 1204–15. <a href="https://doi.org/10.1016/j.neuron.2011.02.027">https://doi.org/10.1016/j.neuron.2011.02.027</a>.
+</div>
+<div id="ref-doyenBehavioralPrimingIt2012" class="csl-entry">
+Doyen, Stéphane, Olivier Klein, Cora-Lise Pichon, and Axel Cleeremans. 2012. <span>“Behavioral <span>Priming</span>: <span>It</span>’s <span>All</span> in the <span>Mind</span>, but <span>Whose Mind</span>?”</span> <em>PLOS ONE</em> 7 (1): e29081. <a href="https://doi.org/10.1371/journal.pone.0029081">https://doi.org/10.1371/journal.pone.0029081</a>.
+</div>
+<div id="ref-fignerAffectiveDeliberativeProcesses2009" class="csl-entry">
+Figner, Bernd, Rachael J. Mackinlay, Friedrich Wilkening, and Elke U. Weber. 2009. <span>“Affective and Deliberative Processes in Risky Choice: <span>Age</span> Differences in Risk Taking in the <span>Columbia Card Task</span>.”</span> <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 35 (3): 709–30. <a href="https://doi.org/10.1037/a0014983">https://doi.org/10.1037/a0014983</a>.
+</div>
+<div id="ref-freyRiskPreferenceShares2017" class="csl-entry">
+Frey, Renato, Andreas Pedroni, Rui Mata, Jörg Rieskamp, and Ralph Hertwig. 2017. <span>“Risk Preference Shares the Psychometric Structure of Major Psychological Traits.”</span> <em>Science Advances</em> 3 (October): e1701381. <a href="https://doi.org/10.1126/sciadv.1701381">https://doi.org/10.1126/sciadv.1701381</a>.
+</div>
+<div id="ref-greeneFMRIInvestigationEmotional2001" class="csl-entry">
+Greene, Joshua D., R. Brian Sommerville, Leigh E. Nystrom, John M. Darley, and Jonathan D. Cohen. 2001. <span>“An <span class="nocase">fMRI Investigation</span> of <span>Emotional Engagement</span> in <span>Moral Judgment</span>.”</span> <em>Science</em> 293 (5537): 2105–8. <a href="https://doi.org/10.1126/science.1062872">https://doi.org/10.1126/science.1062872</a>.
+</div>
+<div id="ref-harinckWhenGainsLoom2007" class="csl-entry">
+Harinck, Fieke, Eric Van Dijk, Ilja Van Beest, and Paul Mersmann. 2007. <span>“When <span>Gains Loom Larger Than Losses</span>: <span>Reversed Loss Aversion</span> for <span>Small Amounts</span> of <span>Money</span>.”</span> <em>Psychological Science</em> 18 (12): 1099–1105. <a href="https://doi.org/10.1111/j.1467-9280.2007.02031.x">https://doi.org/10.1111/j.1467-9280.2007.02031.x</a>.
+</div>
+<div id="ref-harrisTrainWreckAny2021" class="csl-entry">
+Harris, Christine, Doug Rohrer, and Harold Pashler. 2021. <span>“A <span>Train Wreck</span> by <span>Any Other Name</span>.”</span> <em>Psychological Inquiry</em> 32 (1): 17–23. <a href="https://doi.org/10.1080/1047840X.2021.1889317">https://doi.org/10.1080/1047840X.2021.1889317</a>.
+</div>
+<div id="ref-kahnemanProspectTheoryAnalysis1979" class="csl-entry">
+Kahneman, Daniel, and Amos Tversky. 1979. <span>“Prospect <span>Theory</span>: <span>An Analysis</span> of <span>Decision</span> Under <span>Risk</span>.”</span> <em>Econometrica</em> 47 (2): 263. <a href="https://doi.org/10.2307/1914185">https://doi.org/10.2307/1914185</a>.
+</div>
+<div id="ref-kellenProblemCoordinationPursuit2021" class="csl-entry">
+Kellen, David, Clintin P. Davis-Stober, John C. Dunn, and Michael L. Kalish. 2021. <span>“The <span>Problem</span> of <span>Coordination</span> and the <span>Pursuit</span> of <span>Structural Constraints</span> in <span>Psychology</span>.”</span> <em>Perspectives on Psychological Science</em>, January, 1745691620974771. <a href="https://doi.org/10.1177/1745691620974771">https://doi.org/10.1177/1745691620974771</a>.
+</div>
+<div id="ref-lejuezEvaluationBehavioralMeasure2002" class="csl-entry">
+Lejuez, C. W., Jennifer P. Read, Christopher W. Kahler, Jerry B. Richards, Susan E. Ramsey, Gregory L. Stuart, David R. Strong, and Richard A. Brown. 2002. <span>“Evaluation of a Behavioral Measure of Risk Taking: <span>The Balloon Analogue Risk Task</span> (<span>BART</span>).”</span> <em>Journal of Experimental Psychology: Applied</em> 8 (2): 75–84. <a href="https://doi.org/10.1037/1076-898X.8.2.75">https://doi.org/10.1037/1076-898X.8.2.75</a>.
+</div>
+<div id="ref-pedroniRiskElicitationPuzzle2017" class="csl-entry">
+Pedroni, Andreas, Renato Frey, Adrian Bruhin, Gilles Dutilh, Ralph Hertwig, and Jörg Rieskamp. 2017. <span>“The Risk Elicitation Puzzle.”</span> <em>Nature Human Behaviour</em>, October, 1. <a href="https://doi.org/10.1038/s41562-017-0219-x">https://doi.org/10.1038/s41562-017-0219-x</a>.
+</div>
+<div id="ref-ruggeriReplicatingPatternsProspect2020" class="csl-entry">
+Ruggeri, Kai, Sonia Alí, Mari Louise Berge, Giulia Bertoldo, Ludvig D. Bjørndal, Anna Cortijos-Bernabeu, Clair Davison, et al. 2020. <span>“Replicating Patterns of Prospect Theory for Decision Under Risk.”</span> <em>Nature Human Behaviour</em> 4 (6): 622–33. <a href="https://doi.org/10.1038/s41562-020-0886-x">https://doi.org/10.1038/s41562-020-0886-x</a>.
+</div>
+<div id="ref-schneiderEffectsSurroundingPositive2016" class="csl-entry">
+Schneider, Sandra, Sandra Kauffman, and Andrea Ranieri. 2016. <span>“The Effects of Surrounding Positive and Negative Experiences on Risk Taking.”</span> <em>Judgment and Decision Making</em> 11 (5): 17.
+</div>
+<div id="ref-stewartDecisionSampling2006" class="csl-entry">
+Stewart, Neil, Nick Chater, and Gordon D. A. Brown. 2006. <span>“Decision by Sampling.”</span> <em>Cognitive Psychology</em> 53 (1): 1–26. <a href="https://doi.org/10.1016/j.cogpsych.2005.10.003">https://doi.org/10.1016/j.cogpsych.2005.10.003</a>.
+</div>
+<div id="ref-walasekHowMakeLoss2015" class="csl-entry">
+Walasek, Lukasz, and Neil Stewart. 2015. <span>“How to Make Loss Aversion Disappear and Reverse: Tests of the Decision by Sampling Origin of Loss Aversion.”</span> <em>Journal of Experimental Psychology: General</em> 144 (1): 7–11. <a href="https://doi.org/10.1037/xge0000039">https://doi.org/10.1037/xge0000039</a>.
+</div>
+<div id="ref-walasekContextdependentSensitivityLosses2019" class="csl-entry">
+———. 2019. <span>“Context-Dependent Sensitivity to Losses: <span>Range</span> and Skew Manipulations.”</span> <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 45 (6): 957–68. <a href="https://doi.org/10.1037/xlm0000629">https://doi.org/10.1037/xlm0000629</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Even though prospect theory is over 40 years old, it is still very relevant today with many papers appearing every year building on it or using it. Prospect theory was also one of the contributions for which Daniel Kahneman received the Nobel prize in Economics in 2002. Amos Tverksy, the other developer of prospect theory, died of cancer in 1996 (at the age of 59) and therefore could not receive the Nobel prize (as it is only awarded to living recipients).<a href="role-of-statistics-in-the-research-process.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>However, the results reveal another interesting psychological phenomenon; participants do not behave fully rational in this task when comparing the choice pattern with the expected values of the two options. The expected value of an option is given by the sum of each possible outcome multiplied by its probability and corresponds to the long running average expected outcome when playing a lottery over and over. For option <em>A</em> we get an expected value of <span class="math inline">\(0.8 \times 4000 + 0.2 \times 0 = 3200\)</span>, whereas for option <em>B</em> we have an get an expected value of <span class="math inline">\(1 \times 3000 = 3000\)</span>. Thus, if we were to play this lottery over and over, we would win an average of $3,200 each type when choosing option <em>A</em>, but only win $3,000 for each choice of option <em>B</em>. A purely rational decision make should therefore choose option <em>A</em> over option <em>B</em>. In contrast to this, participants who are asked to make one such choice choose option <em>B</em> over option <em>A</em>.<a href="role-of-statistics-in-the-research-process.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>In some parts of philosophy, the term “epistemic gap” has a different meaning relating to questions of consciusness and feelings.<a href="role-of-statistics-in-the-research-process.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>A further consequence from the Duhem-Quine thesis is that there can be no such thing as a theory-free observation. Any empirical result that is interpreted in light of some hypothesis or research question comes with more or less explicit auxiliary assumptions.<a href="role-of-statistics-in-the-research-process.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>To foreshadow the content of the book, this decision threshold is based on the <span class="math inline">\(p\)</span>-value. A sometimes controversial but ubiquitous statistical procedures that you will find in most empirical publications.<a href="role-of-statistics-in-the-research-process.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Even though we say human participants here, this also applies to non-human participants (i.e., animals) or other biological organisms.<a href="role-of-statistics-in-the-research-process.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>I am not suggesting the original authors <span class="citation">(<a href="#ref-dawModelBasedInfluencesHumans2011" role="doc-biblioref">Daw et al. 2011</a>)</span> necessarily made these claims. This is just an example of where a particular task is portrayed in the literature as representing the underlying theoretical constructs (i.e., model-based and model-free reinforcement learning). As we have discussed, this is not a logically justifiable position. A particular task cannot represent a construct unless all auxiliary conditions are carefully spelled out and justified.<a href="role-of-statistics-in-the-research-process.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Again, I do not want to accuse the authors cited here <span class="citation">(<a href="#ref-greeneFMRIInvestigationEmotional2001" role="doc-biblioref">Greene et al. 2001</a>)</span> of making such claims. However, the literature again seems to treat “moral reasoning” and “responses to trolley-type problems” as near synonyms which seems problematic given the.<a href="role-of-statistics-in-the-research-process.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>What this replication means for the underlying theory, prospect theory, is a different question. David Kellen has written about this in a blog post: <a href="https://socialsciences.nature.com/posts/the-limited-value-of-replicating-classic-patterns-of-prospect-theory" class="uri">https://socialsciences.nature.com/posts/the-limited-value-of-replicating-classic-patterns-of-prospect-theory</a><a href="role-of-statistics-in-the-research-process.html#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standard1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["stats_for_experiments.pdf", "stats_for_experiments.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

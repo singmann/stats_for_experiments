@@ -21,7 +21,10 @@ theme_set(theme_bw(base_size = 15) +
 
 # Overview
 
-At this point in time, the book is being written so only few chapters are already available, beginning with chapter \@ref(standard1).
+At this point in time, the book is being written so only few chapters are already available.
+
+-   Chapter \@ref(role-of-statistics-in-the-research-process) provides a general introduction.
+-   Chapter \@ref(standard1) introduces the basic statistical approach.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

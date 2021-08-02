@@ -1,3 +1,4 @@
+fig:lottery-example
 fig:laptop-dist
 eq:statmodel
 fig:laptop-model
@@ -7,6 +8,17 @@ fig:urry-conceptual
 fig:desc-mo2014
 fig:afex-mo2014
 overview
+role-of-statistics-in-the-research-process
+the-research-process
+example-i-testing-a-new-therapy
+example-ii-the-psychology-of-loss-aversion
+evidence-for-loss-aversion-the-reflection-effect
+alternative-explanation-loss-aversion-or-loss-seeking
+epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know
+epistemic-gap-1-underdetermination-of-theory-by-data
+epistemic-gap-2-signal-and-noise
+summary
+what-shouldnt-and-what-should-we-do
 standard1
 ex:urry
 the-logic-of-inferential-statistics
@@ -20,7 +32,7 @@ estimating-the-statistical-model
 interpreting-the-results
 data-visualisation
 follow-up-analysis
-summary
+summary-1
 case-study-1-more-results-from-note-taking-studies
 conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
@@ -28,4 +40,4 @@ conceptual-memory-data-from-mueller-and-oppenheimer-2014
 preparing-the-data
 descriptive-statistics
 inferential-analysis
-summary-1
+summary-2
