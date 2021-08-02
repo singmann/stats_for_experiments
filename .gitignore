@@ -11,5 +11,4 @@ _bookdown_files
 _main.*
 bookdown*
 tmp-pdfcrop-*
-figures
 local
