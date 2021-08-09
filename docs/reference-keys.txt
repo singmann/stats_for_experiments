@@ -1,3 +1,4 @@
+fig:loss-feeling-scales
 fig:lottery-example
 fig:laptop-dist
 eq:statmodel
@@ -12,7 +13,7 @@ role-of-statistics-in-the-research-process
 the-research-process
 example-i-testing-a-new-therapy
 example-ii-the-psychology-of-loss-aversion
-evidence-for-loss-aversion-the-reflection-effect
+evidence-for-loss-aversion-lotteries
 alternative-explanation-loss-aversion-or-loss-seeking
 epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know
 epistemic-gap-1-underdetermination-of-theory-by-data
