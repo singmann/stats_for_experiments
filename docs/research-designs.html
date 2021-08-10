@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Introduction to Statistics for Experimental Psychology with R</title>
+  <title>Chapter 4 Research Designs | Introduction to Statistics for Experimental Psychology with R</title>
   <meta name="description" content="Statistics for Experimental Psychology with R using the afex package." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Introduction to Statistics for Experimental Psychology with R" />
+  <meta property="og:title" content="Chapter 4 Research Designs | Introduction to Statistics for Experimental Psychology with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Introduction to Statistics for Experimental Psychology with R" />
+  <meta name="twitter:title" content="Chapter 4 Research Designs | Introduction to Statistics for Experimental Psychology with R" />
   
   <meta name="twitter:description" content="Statistics for Experimental Psychology with R using the afex package." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="case-study-1-more-results-from-note-taking-studies.html"/>
-
+<link rel="prev" href="role-of-statistics-in-the-research-process.html"/>
+<link rel="next" href="standard1.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -241,180 +241,180 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="research-designs" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Research Designs</h1>
+<p>In the previous chapter (<a href="role-of-statistics-in-the-research-process.html#role-of-statistics-in-the-research-process">3</a>) we have provided an overview of the research process in psychology and related disciplines. The goal of this overview was to show that statistics is just one part of the full research endeavour and usually not the end goal. We also highlighted that an answer to our research questions requires not only the results from the statistical analysis, but the context in which this result was generated. More specifically, we argued that the most important part of the research process is usually the operationalisation of the research question: What do we measure? What is the task participants have to do? What is our study design? The goal of this chapter is to provide us with the necessary conceptual knowledge and the right terminology to answer these questions for our research.</p>
+<div id="empirical-evidence-and-data" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Empirical Evidence and Data</h2>
+<p>In this book we are concerned with <em>empirical research</em>. What this means is that we are generally not interested in research questions for which an answer or proof can be found purely through thinking hard, such as in mathematics or philosophy. Instead, we are only interested in research question for which the evidence comes in the form of observations or experiences, or <em>empirical evidence</em> for short. As we have discussed in the previous chapter, that does not mean that our theories cannot include unobservable entities such as mental states (e.g., fear, enjoyment, attention). However, if our theories include such unobservable entities, these must be causally responsible for something that is observable (e.g., behaviour). This way, we can still test the theories (e.g., if our theory predicts that fear should lead to aggression, but we can induce fear without it leading to aggression, we learn that our theory must be wrong).</p>
+<p>The fact that we are interested in empirical research means that the ultimate arbiter of whether or not we should believe in a theory is empirical evidence. It does not matter how elegant or intuitive a theory is. If the observed behaviour of people disagrees with a theory, it is wrong. It also means that theories that are so vague that there is no possible empirical evidence that would disprove them are not part of the empirical sciences (i.e., they are not empirical theories). This criterion is also known as <a href="https://en.wikipedia.org/wiki/Falsifiability"><em>falsifiability</em></a> and was introduced by the philosopher Karl Popper in the 1930s. For example, there is a never ending discussed of whether Freudian psychoanalysis is in principle falsifiable or not. Whereas Karl Popper was very strong in his belief that it is not (which would render psychoanalysis non-scientific), proponents of Freudian psychoanalysis naturally see this rather differently.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>The empirical evidence comes in at least two different types, <em>anecdotes</em> and <em>data</em>. Whereas an anecdote typically refer to a single person, data usually contains information about multiple people. However, anecdotes and data differ on more dimensions than just the number of observations, as summarised in the following aphorism: The plural of anecdote is not data.</p>
+<p>Anecdotes are unsystematic observation, typically in the form of stories (e.g., “the friend of a friend”), that somehow address our research questions. The problem with anecdotes is that they are generally difficult to verify and to investigate further. This makes it usually impossible to rule out possible alternative explanations. Consequently, for mature sciences anecdotes should only play a minor evidentiary role.</p>
+<p>Data are systematic observations that are collected for a specific purpose, such as answering a research question or bookkeeping. Data generally consists of <em>observations</em> on multiple <em>variables</em>. Each variable corresponds to a specific set of possible outcomes or states of affair, where each possible outcome corresponds to one value of the variable. An observation is the smallest unit of data corresponding to one set of values on at least one of the variables.</p>
+<p>As an example of data, consider again the study by <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> discussed in the previous chapter (<a href="role-of-statistics-in-the-research-process.html#role-of-statistics-in-the-research-process">3</a>). The task of participants was to accept or reject 50-50 lotteries (for an example, see <a href="role-of-statistics-in-the-research-process.html#fig:lottery-example">3.2</a>) and each participant had to do this for 64 trials. Table <a href="research-designs.html#tab:walasek-data">4.1</a> below shows six observations each from two different participants from this study. Observations are shown in rows and variables are shown as columns. The tabular representation of the data with observations in rows and variables in columns is common and will be used throughout this book. The way the data is shown here is exactly the format in which the data was kindly provided by Lukasz Walasek (i.e., no variables added or removed). So presumably, this is exactly the format that he used to analyse the data (of course, this table omits several thousand observations, but the format of the data is the same for the not shown observations).</p>
+<table>
+<caption><span id="tab:walasek-data">Table 4.1: </span>Selected observations of the data from Walasek &amp; Stewart (2015, Exp. 1a). The “[…]” indicates that this is only part of the whole data and some observations are not shown.</caption>
+<thead>
+<tr class="header">
+<th align="left">subno</th>
+<th align="right">loss</th>
+<th align="right">gain</th>
+<th align="left">response</th>
+<th align="left">condition</th>
+<th align="right">resp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="left">accept</td>
+<td align="left">20.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="left">accept</td>
+<td align="left">20.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">6</td>
+<td align="right">10</td>
+<td align="left">accept</td>
+<td align="left">20.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">6</td>
+<td align="right">12</td>
+<td align="left">accept</td>
+<td align="left">20.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">6</td>
+<td align="right">14</td>
+<td align="left">accept</td>
+<td align="left">20.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">6</td>
+<td align="right">16</td>
+<td align="left">accept</td>
+<td align="left">20.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">[…]</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">369</td>
+<td align="right">6</td>
+<td align="right">12</td>
+<td align="left">reject</td>
+<td align="left">40.2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">369</td>
+<td align="right">6</td>
+<td align="right">16</td>
+<td align="left">reject</td>
+<td align="left">40.2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">369</td>
+<td align="right">6</td>
+<td align="right">20</td>
+<td align="left">reject</td>
+<td align="left">40.2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">369</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="left">accept</td>
+<td align="left">40.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">369</td>
+<td align="right">6</td>
+<td align="right">28</td>
+<td align="left">accept</td>
+<td align="left">40.2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">369</td>
+<td align="right">6</td>
+<td align="right">32</td>
+<td align="left">accept</td>
+<td align="left">40.2</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>In total we can see six different variables in this data set. Let us discuss these in turn. The first variable, <code>subno</code> (we generally use a <code>monospace</code> font to refer to variable names as they appear in a data set), is the participant identifier or “subject number.” This variable should be part of any data set to uniquely identify to which participant (or more generally <em>unit of observation</em>) a specific observation belongs. Here, we see that it only takes numbers. It is not uncommon to only use numbers for the participant identifier variable, but it can also be a combination of numbers and letters, or a (ideally anonymous) name.</p>
+<p>The second and third variables, <code>loss</code> and <code>gain</code>, specify the possible outcomes of the lotteries for each trial. For example, the first observations shows a lottery in which the potential loss was $6 and the potential gain was $8. Based on these two columns, we can see that the observations are ordered by the combination of loss and gain. This means the order of observations in the data does not reflect the actual order of trials in which participants saw them (as this order was random). All values of the two variables are numbers with the lowest possible loss/gain being 6 and the largest possible loss/gain being 40, depending on the condition a participant is in.</p>
+<p>Column four shows the <code>response</code> of the participant to the lottery, either <code>accept</code> or <code>reject</code>. The sixth variable, <code>resp</code>, is a numeric version of the response. Here, an accept decision is represented by a 1 and a reject decision by a 0. So these two variables carry the same information, but in different format that have different benefits. The <code>response</code> variable makes it easy to understand what participants response was (i.e., it is clear which value corresponds to which possible response, accept or reject, in the study). The <code>resp</code> variable makes it easy to perform calculation on the results given it uses a numerical code to represent the same information. For example, because reject is mapped onto 0 and accept is mapped onto 1, we could take the mean over all observations to get the overall acceptance rate of gambles (the mean is 0.38 which corresponds to an acceptance rate of 38%). However, if we only had the <code>resp</code> variable, we would additionally need the information what 0 and what 1 corresponds to.</p>
+<p>Finally, variable five informs us in which <code>condition</code> each participant is in. Remember from the previous chapter that the experiment varied the range of gains and losses across participants resulting in four conditions in total: a condition with loss and gains raning up to -$20/+$40, a -$20/+$20 condition, a -$40/+$40 condition, and a -$40/+$40. This information is here provided in form of a decimal number with the values before the decimal point referring to the range of gains and the values after the decimal to the range of losses without the trailing 0. Thus, participant with <code>subno</code> 8 is in the -$20/+$20 condition and participant 369 in the -$20/+$40 condition (if we were showing a participant in the -$40 loss condition, there lowest possible loss outcome would also be 12).</p>
+<p>The example from <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> hopefully clarifies the abstract definition of what a variable is given above. For each variable, we have a set of possible outcomes that is defined by our research design. For example, for the participant identifier <code>subno</code>, this set encompasses all possible participants that can take part in the study. For <code>response</code> there are the two possible outcomes, to accept or to reject a lottery. We then define values for each possible outcome. In the case of <code>subno</code> we simply give every new participant we collect a new number (e.g., starting with 1 and increasing by 1 for each new participant). As this study was run over the internet and many potential participants start a study but do not finish (or do not even go beyond the instruction) the first participant we have data for is number 8. For <code>response</code>, we do not use a numeric code but use a word to represent the two outcomes.</p>
+<p>There are a few things of note in the example data shown in Table <a href="research-designs.html#tab:walasek-data">4.1</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Every observation in this data is complete; for each observations we have values on each variable and no missing data. Whereas this is common in experimental research, it is not always the case for other type of research. Whereas missing data is not something we will discuss in detail in this book, it is important to be aware that it can happen and to think about what to do in this case (sadly, there is no general solution).</p></li>
+<li><p>We have multiple observations per participant, 64 for to be precise. These 64 observations are given in different rows. We call this data format – in which the data from each participant spans multiple rows, one row per observation (i.e., 64 rows per participant in the present case) – the <em>long format</em>. This long format contrasts with a <em>wide format</em> that is also commonly found in the social sciences. In the wide format, the data of one participant only spans a single row. In case a participant has multiple observations, these are given in different columns. For the procedures introduced in this book, we generally want the data in the long format</p></li>
+<li><p>The variables differ in whether they contain non-numeric (only <code>response</code>) or numeric information (i.e., represented via numbers; all other variables).</p></li>
+</ol>
+<p>Let us discuss the last point in more detail. For many people, when they think about data, they think about numbers. As we have seen here this is not necessary, data does not have to be numbers. The example of the <code>response</code> variable shows that we can use other values, such as words or phrases, to represent values of variables. However, the conception of data primarily as numbers is also not false. For example, the statistical analyses introduced in this book need to represent all variables in terms of numbers. Fortunately for us, the software we will be using will generally help us and convert non-numeric data into numeric data when necessary. This means we can use the type of representation that is the most intuitive and easiest to understand.</p>
+<div id="data-types" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Data Types</h3>
+<p>So far we have distinguished numeric data – that is data represented through numbers – and non-numeric data. However, we can make a few further distinctions and identify more different data types.</p>
+<p>Consider the difference between</p>
+<p>In the abstract sense, data collection refers to a procedure in which we map observations onto the value of the corresponding variable.</p>
+<p>We then assign</p>
 
+</div>
+</div>
+</div>
+<h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Akam, Thomas, Rui Costa, and Peter Dayan. 2015. <span>“Simple <span>Plans</span> or <span>Sophisticated Habits</span>? <span>State</span>, <span>Transition</span> and <span>Learning Interactions</span> in the <span>Two</span>-<span>Step Task</span>.”</span> <em>PLOS Computational Biology</em> 11 (12): e1004648. <a href="https://doi.org/10.1371/journal.pcbi.1004648">https://doi.org/10.1371/journal.pcbi.1004648</a>.
-</div>
-<div class="csl-entry">
-Baguley, Thomas. 2012. <em>Serious Stats : A Guide to Advanced Statistics for the Behavioral Sciences</em>. Houndmills, Basingstoke, Hampshire; New York: Palgrave Macmillan.
-</div>
-<div class="csl-entry">
-Bakeman, Roger. 2005. <span>“Recommended Effect Size Statistics for Repeated Measures Designs.”</span> <em>Behavior Research Methods</em> 37 (3): 379–84. <a href="https://doi.org/10.3758/BF03192707">https://doi.org/10.3758/BF03192707</a>.
-</div>
-<div class="csl-entry">
-Battalio, Raymond C., John H. Kagel, and Komain Jiranyakul. 1990. <span>“Testing Between Alternative Models of Choice Under Uncertainty: <span>Some</span> Initial Results.”</span> <em>Journal of Risk and Uncertainty</em> 3 (1): 25–50. <a href="https://doi.org/10.1007/BF00213259">https://doi.org/10.1007/BF00213259</a>.
-</div>
-<div class="csl-entry">
-Baumann, Christiane, Henrik Singmann, Samuel J. Gershman, and Bettina von Helversen. 2020. <span>“A Linear Threshold Model for Optimal Stopping Behavior.”</span> <em>Proceedings of the National Academy of Sciences</em> 117 (23): 12750–55. <a href="https://doi.org/10.1073/pnas.2002312117">https://doi.org/10.1073/pnas.2002312117</a>.
-</div>
-<div class="csl-entry">
-Brooks, Peter, and Horst Zank. 2005. <span>“Loss <span>Averse Behavior</span>.”</span> <em>Journal of Risk and Uncertainty</em> 31 (3): 301–25. <a href="https://doi.org/10.1007/s11166-005-5105-7">https://doi.org/10.1007/s11166-005-5105-7</a>.
-</div>
-<div class="csl-entry">
-Camerer, Colin. 2005. <span>“Three <span>Cheers</span><span><span>Psychological</span></span>, <span>Theoretical</span>, <span>Empirical</span><span></span>for <span>Loss Aversion</span>.”</span> <em>Journal of Marketing Research</em> 42 (2): 129–33. <a href="https://doi.org/10.1509/jmkr.42.2.129.62286">https://doi.org/10.1509/jmkr.42.2.129.62286</a>.
-</div>
-<div class="csl-entry">
-Camerer, Colin F., Anna Dreber, Eskil Forsell, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2016. <span>“Evaluating Replicability of Laboratory Experiments in Economics.”</span> <em>Science</em> 351 (6280): 1433–36. <a href="https://doi.org/10.1126/science.aaf0918">https://doi.org/10.1126/science.aaf0918</a>.
-</div>
-<div class="csl-entry">
-Camerer, Colin F., Anna Dreber, Felix Holzmeister, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2018. <span>“Evaluating the Replicability of Social Science Experiments in <span>Nature</span> and <span>Science</span> Between 2010 and 2015.”</span> <em>Nature Human Behaviour</em>, August, 1. <a href="https://doi.org/10.1038/s41562-018-0399-z">https://doi.org/10.1038/s41562-018-0399-z</a>.
-</div>
-<div class="csl-entry">
-Chambers, Chris. 2017. <em>The <span>Seven Deadly Sins</span> of <span>Psychology</span>: <span>A Manifesto</span> for <span>Reforming</span> the <span>Culture</span> of <span>Scientific Practice</span></em>. <span>Princeton</span>: <span>Princeton University Press</span>.
-</div>
-<div class="csl-entry">
-Cohen, Jacob. 1994. <span>“The Earth Is Round (p &lt; .05).”</span> <em>American Psychologist</em> 49 (12): 997–1003. <a href="https://doi.org/10.1037/0003-066X.49.12.997">https://doi.org/10.1037/0003-066X.49.12.997</a>.
-</div>
-<div class="csl-entry">
-Daw, Nathaniel D., Samuel J. Gershman, Ben Seymour, Peter Dayan, and Raymond J. Dolan. 2011. <span>“Model-<span>Based Influences</span> on <span>Humans</span>’ <span>Choices</span> and <span>Striatal Prediction Errors</span>.”</span> <em>Neuron</em> 69 (6): 1204–15. <a href="https://doi.org/10.1016/j.neuron.2011.02.027">https://doi.org/10.1016/j.neuron.2011.02.027</a>.
-</div>
-<div class="csl-entry">
-Doyen, Stéphane, Olivier Klein, Cora-Lise Pichon, and Axel Cleeremans. 2012. <span>“Behavioral <span>Priming</span>: <span>It</span>’s <span>All</span> in the <span>Mind</span>, but <span>Whose Mind</span>?”</span> <em>PLOS ONE</em> 7 (1): e29081. <a href="https://doi.org/10.1371/journal.pone.0029081">https://doi.org/10.1371/journal.pone.0029081</a>.
-</div>
-<div class="csl-entry">
-Figner, Bernd, Rachael J. Mackinlay, Friedrich Wilkening, and Elke U. Weber. 2009. <span>“Affective and Deliberative Processes in Risky Choice: <span>Age</span> Differences in Risk Taking in the <span>Columbia Card Task</span>.”</span> <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 35 (3): 709–30. <a href="https://doi.org/10.1037/a0014983">https://doi.org/10.1037/a0014983</a>.
-</div>
-<div class="csl-entry">
-Fox, John, and Sanford Weisberg. 2019. <em>An <span>R</span> Companion to Applied Regression</em>. Third. <span>Thousand Oaks CA</span>: <span>Sage</span>.
-</div>
-<div class="csl-entry">
-Frey, Renato, Andreas Pedroni, Rui Mata, Jörg Rieskamp, and Ralph Hertwig. 2017. <span>“Risk Preference Shares the Psychometric Structure of Major Psychological Traits.”</span> <em>Science Advances</em> 3 (October): e1701381. <a href="https://doi.org/10.1126/sciadv.1701381">https://doi.org/10.1126/sciadv.1701381</a>.
-</div>
-<div class="csl-entry">
-Greene, Joshua D., R. Brian Sommerville, Leigh E. Nystrom, John M. Darley, and Jonathan D. Cohen. 2001. <span>“An <span class="nocase">fMRI Investigation</span> of <span>Emotional Engagement</span> in <span>Moral Judgment</span>.”</span> <em>Science</em> 293 (5537): 2105–8. <a href="https://doi.org/10.1126/science.1062872">https://doi.org/10.1126/science.1062872</a>.
-</div>
-<div class="csl-entry">
+<div id="ref-grunbaumFreudianPsychoanalyticTheory1986" class="csl-entry">
 Grunbaum, Adolf. 1986. <span>“Is <span>Freudian</span> Psychoanalytic Theory Really Falsifiable?”</span> <em>Behavioral and Brain Sciences</em> 9 (2): 250–52. <a href="https://doi.org/10.1017/S0140525X00022512">https://doi.org/10.1017/S0140525X00022512</a>.
 </div>
-<div class="csl-entry">
-Haig, Brian D. 2014. <em>Investigating the Psychological World: Scientific Method in the Behavioral Sciences</em>. <span>Cambridge, Mass.</span>: <span>MIT Press</span>.
-</div>
-<div class="csl-entry">
-Harris, Christine, Doug Rohrer, and Harold Pashler. 2021. <span>“A <span>Train Wreck</span> by <span>Any Other Name</span>.”</span> <em>Psychological Inquiry</em> 32 (1): 17–23. <a href="https://doi.org/10.1080/1047840X.2021.1889317">https://doi.org/10.1080/1047840X.2021.1889317</a>.
-</div>
-<div class="csl-entry">
-Howell, David C. 2013. <em>Statistical Methods for Psychology</em>. <span>Belmont, CA</span>: <span>Wadsworth Cengage Learning</span>.
-</div>
-<div class="csl-entry">
-Kahneman, Daniel, and Amos Tversky. 1979. <span>“Prospect <span>Theory</span>: <span>An Analysis</span> of <span>Decision</span> Under <span>Risk</span>.”</span> <em>Econometrica</em> 47 (2): 263. <a href="https://doi.org/10.2307/1914185">https://doi.org/10.2307/1914185</a>.
-</div>
-<div class="csl-entry">
-Kellen, David, Clintin P. Davis-Stober, John C. Dunn, and Michael L. Kalish. 2021. <span>“The <span>Problem</span> of <span>Coordination</span> and the <span>Pursuit</span> of <span>Structural Constraints</span> in <span>Psychology</span>.”</span> <em>Perspectives on Psychological Science</em>, January, 1745691620974771. <a href="https://doi.org/10.1177/1745691620974771">https://doi.org/10.1177/1745691620974771</a>.
-</div>
-<div class="csl-entry">
-Klein, Richard A., Michelangelo Vianello, Fred Hasselman, Byron G. Adams, Reginald B. Adams, Sinan Alper, Mark Aveyard, et al. 2018. <span>“Many <span>Labs</span> 2: <span>Investigating Variation</span> in <span>Replicability Across Samples</span> and <span>Settings</span>.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (4): 443–90. <a href="https://doi.org/10.1177/2515245918810225">https://doi.org/10.1177/2515245918810225</a>.
-</div>
-<div class="csl-entry">
-Kline, Rex B. 2015. <em>Principles and Practice of Structural Equation Modeling</em>. Guilford Press.
-</div>
-<div class="csl-entry">
-Lee, Michael D., and Eric-Jan Wagenmakers. 2013. <em>Bayesian Cognitive Modeling: A Practical Course</em>. Cambridge: Cambridge University Press.
-</div>
-<div class="csl-entry">
-Lejuez, C. W., Jennifer P. Read, Christopher W. Kahler, Jerry B. Richards, Susan E. Ramsey, Gregory L. Stuart, David R. Strong, and Richard A. Brown. 2002. <span>“Evaluation of a Behavioral Measure of Risk Taking: <span>The Balloon Analogue Risk Task</span> (<span>BART</span>).”</span> <em>Journal of Experimental Psychology: Applied</em> 8 (2): 75–84. <a href="https://doi.org/10.1037/1076-898X.8.2.75">https://doi.org/10.1037/1076-898X.8.2.75</a>.
-</div>
-<div class="csl-entry">
-Lenth, Russell. 2021. <em>Emmeans: Estimated Marginal Means, Aka Least-Squares Means</em>. <a href="https://CRAN.R-project.org/package=emmeans">https://CRAN.R-project.org/package=emmeans</a>.
-</div>
-<div class="csl-entry">
-Lewandowsky, Stephan, Gilles E. Gignac, and Klaus Oberauer. 2013. <span>“The Role of Conspiracist Ideation and Worldviews in Predicting Rejection of Science.”</span> <em>PloS One</em> 8 (10): e75637. <a href="https://doi.org/10.1371/journal.pone.0075637">https://doi.org/10.1371/journal.pone.0075637</a>.
-</div>
-<div class="csl-entry">
-———. 2015. <span>“Correction: <span>The Role</span> of <span>Conspiracist Ideation</span> and <span>Worldviews</span> in <span>Predicting Rejection</span> of <span>Science</span>.”</span> <em>PLOS ONE</em> 10 (8): e0134773. <a href="https://doi.org/10.1371/journal.pone.0134773">https://doi.org/10.1371/journal.pone.0134773</a>.
-</div>
-<div class="csl-entry">
-McGraw, A. Peter, Jeff T. Larsen, Daniel Kahneman, and David Schkade. 2010. <span>“Comparing <span>Gains</span> and <span>Losses</span>.”</span> <em>Psychological Science</em> 21 (10): 1438–45. <a href="https://doi.org/10.1177/0956797610381504">https://doi.org/10.1177/0956797610381504</a>.
-</div>
-<div class="csl-entry">
-Meehl, Paul E. 1978. <span>“Theoretical Risks and Tabular Asterisks: Sir Karl, Sir Ronald, and the Slow Progress of Soft Psychology.”</span> <em>Journal of Consulting and Clinical Psychology</em> 46: 806–34. <a href="https://doi.org/10.1037//0022-006X.46.4.806">https://doi.org/10.1037//0022-006X.46.4.806</a>.
-</div>
-<div class="csl-entry">
-Mueller, Pam A., and Daniel M. Oppenheimer. 2014. <span>“The <span>Pen Is Mightier Than</span> the <span>Keyboard</span>: <span>Advantages</span> of <span>Longhand Over Laptop Note Taking</span>.”</span> <em>Psychological Science</em> 25 (6): 1159–68. <a href="https://doi.org/10.1177/0956797614524581">https://doi.org/10.1177/0956797614524581</a>.
-</div>
-<div class="csl-entry">
-Nickerson, Raymond S. 2000. <span>“Null Hypothesis Significance Testing: A Review of an Old and Continuing Controversy.”</span> <em>Psychological Methods</em> 5 (2): 241.
-</div>
-<div class="csl-entry">
-Olejnik, Stephen, and James Algina. 2003. <span>“Generalized <span>Eta</span> and <span>Omega Squared Statistics</span>: <span>Measures</span> of <span>Effect Size</span> for <span>Some Common Research Designs</span>.”</span> <em>Psychological Methods</em> 8 (4): 434–47. <a href="https://doi.org/10.1037/1082-989X.8.4.434">https://doi.org/10.1037/1082-989X.8.4.434</a>.
-</div>
-<div class="csl-entry">
-Open Science Collaboration. 2015. <span>“Estimating the Reproducibility of Psychological Science.”</span> <em>Science</em> 349 (6251): aac4716. <a href="https://doi.org/10.1126/science.aac4716">https://doi.org/10.1126/science.aac4716</a>.
-</div>
-<div class="csl-entry">
-Pashler, Harold, Mark McDaniel, Doug Rohrer, and Robert Bjork. 2008. <span>“Learning <span>Styles</span>: <span>Concepts</span> and <span>Evidence</span>.”</span> <em>Psychological Science in the Public Interest</em> 9 (3): 105–19. <a href="https://doi.org/10.1111/j.1539-6053.2009.01038.x">https://doi.org/10.1111/j.1539-6053.2009.01038.x</a>.
-</div>
-<div class="csl-entry">
-Pedroni, Andreas, Renato Frey, Adrian Bruhin, Gilles Dutilh, Ralph Hertwig, and Jörg Rieskamp. 2017. <span>“The Risk Elicitation Puzzle.”</span> <em>Nature Human Behaviour</em>, October, 1. <a href="https://doi.org/10.1038/s41562-017-0219-x">https://doi.org/10.1038/s41562-017-0219-x</a>.
-</div>
-<div class="csl-entry">
-Rozeboom, William W. 1960. <span>“The Fallacy of the Null-Hypothesis Significance Test.”</span> <em>Psychological Bulletin</em> 57 (5): 416–28. <a href="https://doi.org/10.1037/h0042040">https://doi.org/10.1037/h0042040</a>.
-</div>
-<div class="csl-entry">
-Singmann, Henrik, Ben Bolker, Jake Westfall, Frederik Aust, and Mattan S. Ben-Shachar. 2021. <em>Afex: Analysis of Factorial Experiments</em>.
-</div>
-<div class="csl-entry">
-Steup, Matthias, and Ram Neta. 2020. <span>“Epistemology.”</span> In <em>The <span>Stanford Encyclopedia</span> of <span>Philosophy</span></em>, edited by Edward N. Zalta, Fall 2020. <span>Metaphysics Research Lab, Stanford University</span>.
-</div>
-<div class="csl-entry">
-Stewart, Neil, Nick Chater, and Gordon D. A. Brown. 2006. <span>“Decision by Sampling.”</span> <em>Cognitive Psychology</em> 53 (1): 1–26. <a href="https://doi.org/10.1016/j.cogpsych.2005.10.003">https://doi.org/10.1016/j.cogpsych.2005.10.003</a>.
-</div>
-<div class="csl-entry">
-Urry, Heather L., Chelsea S. Crittle, Victoria A. Floerke, Michael Z. Leonard, Clinton S. Perry, Naz Akdilek, Erica R. Albert, et al. 2021. <span>“Don<span>’</span>t Ditch the Laptop Just Yet: A Direct Replication of Mueller and Oppenheimer<span>’</span>s (2014) Study 1 Plus Mini Meta-Analyses Across Similar Studies.”</span> <em>Psychological Science</em>, February, 0956797620965541. <a href="https://doi.org/10.1177/0956797620965541">https://doi.org/10.1177/0956797620965541</a>.
-</div>
-<div class="csl-entry">
-Wagenmakers, Eric-Jan. 2007. <span>“A Practical Solution to the Pervasive Problems of p Values.”</span> <em>Psychonomic Bulletin &amp; Review</em> 14 (5): 779–804. <a href="https://doi.org/10.3758/BF03194105">https://doi.org/10.3758/BF03194105</a>.
-</div>
-<div class="csl-entry">
+<div id="ref-walasekHowMakeLoss2015" class="csl-entry">
 Walasek, Lukasz, and Neil Stewart. 2015. <span>“How to Make Loss Aversion Disappear and Reverse: Tests of the Decision by Sampling Origin of Loss Aversion.”</span> <em>Journal of Experimental Psychology: General</em> 144 (1): 7–11. <a href="https://doi.org/10.1037/xge0000039">https://doi.org/10.1037/xge0000039</a>.
 </div>
-<div class="csl-entry">
-Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. Sebastopol CA: O’Reilly.
 </div>
+<div class="footnotes">
+<hr />
+<ol start="12">
+<li id="fn12"><p>I think it is fair to say that nowadays most researchers believe that many parts of Freudian psychoanalysis are not falsifiable. Consequently, psychoanalysis is not considered an empirical theory and therefore largely no part of (scientific) psychology (it is of course a part of the history of psychology). For a somewhat recent discussion see: <span class="citation">(<a href="#ref-grunbaumFreudianPsychoanalyticTheory1986" role="doc-biblioref">Grunbaum 1986</a>)</span><a href="research-designs.html#fnref12" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="case-study-1-more-results-from-note-taking-studies.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="role-of-statistics-in-the-research-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standard1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

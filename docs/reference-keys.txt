@@ -1,5 +1,6 @@
 fig:loss-feeling-scales
 fig:lottery-example
+tab:walasek-data
 fig:laptop-dist
 eq:statmodel
 fig:laptop-model
@@ -9,6 +10,7 @@ fig:urry-conceptual
 fig:desc-mo2014
 fig:afex-mo2014
 overview
+acknowledgments
 role-of-statistics-in-the-research-process
 the-research-process
 example-i-testing-a-new-therapy
@@ -21,6 +23,9 @@ epistemic-gap-2-signal-and-noise
 summary
 some-further-examples-and-passing-thoughts
 conclusion
+research-designs
+empirical-evidence-and-data
+data-types
 standard1
 ex:urry
 the-logic-of-inferential-statistics
