@@ -1,5 +1,6 @@
 fig:loss-feeling-scales
 fig:lottery-example
+tab:gainloss
 tab:walasek-data
 fig:laptop-dist
 eq:statmodel
