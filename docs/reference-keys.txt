@@ -24,9 +24,12 @@ epistemic-gap-2-signal-and-noise
 summary
 some-further-examples-and-passing-thoughts
 conclusion
-research-designs
+data-and-research-designs
 empirical-evidence-and-data
 data-types
+numerical-versus-categorical-variables
+assumptions-of-numerical-variables
+measurement-scales
 standard1
 ex:urry
 the-logic-of-inferential-statistics
