@@ -105,3 +105,5 @@ The problem is that once we have numbers and treat them as a numerical variable,
 [^research_designs-3]: This quote is taken from @lordStatisticalTreatmentFootball1953, a short and humorous paper addressing the question of what mathematical operations can be performed with categorical variables, in particular with football jersey numbers. The author, Frederic M. Lord, is one of the most important researchers in the history of psychometrics, the scientific field concerned with psychological measurement. And even though this quote encapsulates an important message, the fact that we have to distinguish the numbers and what they stand for when doing statistics, the overall message of his paper is not without problems. For a modern discussion and perspective see [@zandscholtenReanalysisLordStatistical2009].
 
 ### Measurement Scales
+
+An important theoretical contribution to the question of the meaning

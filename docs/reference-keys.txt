@@ -14,8 +14,7 @@ overview
 acknowledgments
 role-of-statistics-in-the-research-process
 the-research-process
-example-i-testing-a-new-therapy
-example-ii-the-psychology-of-loss-aversion
+example-the-psychology-of-loss-aversion
 evidence-for-loss-aversion-lotteries
 alternative-explanation-loss-aversion-or-loss-seeking
 epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know

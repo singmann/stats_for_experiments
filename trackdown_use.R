@@ -8,6 +8,8 @@ upload_file("role_of_stats.Rmd")
 ## THEN ACCEPT ALL CHANGES
 ## then:
 download_file("role_of_stats.Rmd")
+writeLines(iconv(readLines("role_of_stats.Rmd"), from = "", to = "UTF8"), 
+           file("role_of_stats.Rmd", encoding="UTF-8"))
 
 ## then update again on Google docs:
 update_file(file = "role_of_stats.Rmd")
