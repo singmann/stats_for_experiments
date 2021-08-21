@@ -28,7 +28,7 @@ At this point in time, the book is being written so only few chapters are alread
 
 ## Acknowledgments
 
-This project would not exist without the help and feedback provided by others: David Kellen, Lukasz Walasek, Stuart Rosen
+This project would not exist without the help and feedback provided by others: David Kellen, Lukasz Walasek, Stuart Rosen, Anna Krason
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
