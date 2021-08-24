@@ -30,6 +30,13 @@ At this point in time, the book is being written so only few chapters are alread
 
 This project would not exist without the help and feedback provided by others: David Kellen, Lukasz Walasek, Stuart Rosen, Anna Krason
 
+## License and Attribution
+
+This book is licensed under the [Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/) license. This license allows you to share and adapt the work as long as you give appropriate attribution and do not use the materials for commercial purposes.
+
+Parts of this book uses other materials released under a compatible CC license. Where it does so, the source is clearly indicated. Please ensure to attribute the original source in case you re-use such materials. 
+
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(

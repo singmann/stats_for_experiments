@@ -2,6 +2,7 @@ fig:loss-feeling-scales
 fig:lottery-example
 tab:gainloss
 tab:walasek-data
+fig:reliability-validity-figure
 fig:laptop-dist
 eq:statmodel
 fig:laptop-model
@@ -12,6 +13,7 @@ fig:desc-mo2014
 fig:afex-mo2014
 overview
 acknowledgments
+license-and-attribution
 role-of-statistics-in-the-research-process
 the-research-process
 example-the-psychology-of-loss-aversion
@@ -19,7 +21,7 @@ evidence-for-loss-aversion-lotteries
 alternative-explanation-loss-aversion-or-loss-seeking
 epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know
 epistemic-gap-1-underdetermination-of-theory-by-data
-epistemic-gap-2-signal-and-noise
+epistemic-gap-2-signal-versus-noise
 summary
 some-further-examples-and-passing-thoughts
 conclusion
@@ -28,7 +30,14 @@ empirical-evidence-and-data
 data-types
 numerical-versus-categorical-variables
 assumptions-of-numerical-variables
+measurement
 measurement-scales
+reliability-and-validity
+independent-and-dependent-variables
+experimental-versus-observational-variables
+epistemic-gap-3-causal-inference-and-confounding-variables
+is-causal-inference-from-observational-data-possible-at-all
+summary-1
 standard1
 ex:urry
 the-logic-of-inferential-statistics
@@ -42,7 +51,7 @@ estimating-the-statistical-model
 interpreting-the-results
 data-visualisation
 follow-up-analysis
-summary-1
+summary-2
 case-study-1-more-results-from-note-taking-studies
 conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
@@ -50,4 +59,4 @@ conceptual-memory-data-from-mueller-and-oppenheimer-2014
 preparing-the-data
 descriptive-statistics
 inferential-analysis
-summary-2
+summary-3
