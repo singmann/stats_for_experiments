@@ -1,12 +1,20 @@
 bookdown::gitbook:
-  css: style.css
+  includes:
+    after_body: include/webex.js
+  css: [include/style.css, include/webex.css]
   config:
     toc:
+      collapse: section
+      scroll_highlight: yes
       before: |
         <li><a href="./">Statistics for Experimental Psychology</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

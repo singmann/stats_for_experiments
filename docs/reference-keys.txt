@@ -1,6 +1,14 @@
 fig:loss-feeling-scales
 fig:lottery-example
 tab:gainloss
+exr:unlabeled-div-1
+exr:unlabeled-div-2
+exr:unlabeled-div-3
+exr:unlabeled-div-4
+exr:unlabeled-div-5
+exr:unlabeled-div-6
+exr:unlabeled-div-7
+exr:unlabeled-div-8
 tab:walasek-data
 fig:reliability-validity-figure
 fig:laptop-dist
@@ -11,7 +19,6 @@ fig:fig1
 fig:urry-conceptual
 fig:desc-mo2014
 fig:afex-mo2014
-overview
 acknowledgments
 license-and-attribution
 role-of-statistics-in-the-research-process
@@ -25,7 +32,7 @@ epistemic-gap-2-signal-versus-noise
 summary
 some-further-examples-and-passing-thoughts
 conclusion
-data-and-research-designs
+research-designs
 empirical-evidence-and-data
 data-types
 numerical-versus-categorical-variables
