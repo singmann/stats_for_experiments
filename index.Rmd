@@ -19,11 +19,12 @@ theme_set(theme_bw(base_size = 15) +
                   panel.grid.major.x = element_blank()))
 ```
 
-# Overview
+# Overview {-}
 
 At this point in time, the book is being written so only few chapters are already available.
 
--   Chapter \@ref(role-of-statistics-in-the-research-process) provides a general introduction.
+-   Chapter \@ref(role-of-statistics-in-the-research-process) provides an introduction to the role of statistics in the research process. It also answers the important question: Why do we need statistics? 
+-   Chapter \@ref(research-designs) provides an overview over important concepts and correct terminology we need to describe research designs (e.g., what is a variable? what is the difference between dependent and independent variables?). It also introduces the distinction between experimental and observational studies.
 -   Chapter \@ref(standard1) introduces the basic statistical approach.
 
 ## Acknowledgments
