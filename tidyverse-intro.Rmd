@@ -1,0 +1,154 @@
+# Short Introduction to `R` and the `tidyverse`
+
+As empirical scientists our believes should be based on empirical evidence that comes in the form of data. Consequently, a central skill for researchers is the ability to process and analyse data. For this we will be using the statistical programming language [`R`](https://cran.r-project.org/).
+
+## What is `R`?
+
+`R` is a comprehensive tool that enables the skilled user to perform all steps or tasks of a data analysis with it. For example, with `R` we can:
+
+-   Prepare data for analysis: read data that comes in pretty much any format, data manipulation, and data wrangling
+-   Explore data using summary statistics and graphical summaries: exploratory data analysis, descriptive statistics, and data visualisation
+-   Perform statistical analysis of the data: inferential statistics
+-   Communicate the results: publication-ready results graphics, [research reports that combine narrative text and statistical results](https://rmarkdown.rstudio.com/)
+-   And much more such as: data simulations and advanced statistical methods, [machine learning](https://www.statlearning.com/), [interactive data visualisations](https://shiny.rstudio.com/), [websites](https://bookdown.org/yihui/blogdown/), [books](https://bookdown.org/home/) (such as the present one)
+
+On top of this incredible list of things that can be done with `R`, `R` is *free software* (sometimes also known as *open source software*). This means, not only is `R` completely free to download, install, and use, you are also free to inspect its source code or make changes to it (as long as you do not make your version of `R` un-free).
+
+Given the flexibility of all the things you can do with `R`, it is not completely surprising that it requires some effort to start with `R`. Especially if `R` is your first real experience of learning a programming language.
+
+The important thing to know for any new `R` user is that the beginning is hard for almost everyone (including the present author). So the most important message is to hang in there and keep on trying. In all likelihood, there will be at least some rather frustrating situations in your first weeks of interacting with `R`, but **it will get better**. I have taught `R` to many users with a great variety of backgrounds and experiences and many of them have struggled in some way in the beginning, but for anyone who kept up their hopes and continued to put in the time and effort their struggles were not in vain. You can learn `R` if you just do not give up and believe in yourself. Be assured I believe in you. Learning `R` is such an incredibly powerful skill that will surely have a positive effect on whatever comes later in your life, be it a career in Academia (i.e., at a university) or in "the real world" (as we academics like to call everything that is not a university job).
+
+## Getting Started with `R`
+
+With this somewhat scary introduction out of the way, the next important question is probably how do you get going with `R`? Providing a comprehensive answer to this question is beyond the scope of the present work. Instead, we will shortly provide pointers to other freely accessible resources that provide introductions for different levels of prior experiences. Before that, I feel it is important to highlight that the basic `R` software that performs the calculations and can be installed from [CRAN](https://cran.r-project.org/index.html), the Comprehensive R Archive Network, is particularly bare bone. Therefore, in addition to `R` I also recommend you install [`RStudio`](https://www.rstudio.com/products/rstudio/). `RStudio` is the most popular IDE -- that is, integrated development environment -- for `R` that makes using it quite a bit more comfortable. Also note that both `R` and `RStudio` need to be updated independently of each other. Especially `R` should be updated at least once per year from [CRAN](https://cran.r-project.org/index.html). So if you already have `R` installed on your computer and do not remember the last time you have updated, now is probably a good time to do so. I personally update `R` usually within a few weeks of a new version appearing.
+
+The following provides an overview of resources to get started with `R` with a brief explanations of what it offers:
+
+-   [`R` for Psychological Science](https://psyr.djnavarro.net/index.html) by Danielle Navarro. This is a series of websites that provide an introduction to the basic concepts of `R` and my recommended introductory resource. At the time of writing it is not yet complete (i.e., still in progress), but what is there is excellent. It will guide you through all the steps of getting to know `R` and learn the basics. As an introductory resource I recommend you check out:
+
+    -   [Part 1, the "core toolkit"](https://psyr.djnavarro.net/index.html#core-toolkit) covers `R` installation, variables and data types, scripts, packages, and basic programming concepts, such as loops, branches, and functions. I recommend you go through all sections of Part 1 as the first thing of getting started with `R`.
+    -   [Part 2, the "working with data"](https://psyr.djnavarro.net/index.html#working-with-data) covers more complex data types, most importantly `R`'s central data type, the `data.frame`, and already provides an introduction to the `tidyverse`, which will also be used here. I recommend you at least go through [the prelude](https://psyr.djnavarro.net/prelude-to-data.html) and [data types](https://psyr.djnavarro.net/data-types.html) (pay special attention to `dataframe`s). It discussed many of the issue also relevant for the present work.\
+
+-   In case you prefer video introductions instead of reading text, Danielle Navarro has also published a series of awesome [video lectures](https://slides.djnavarro.net/) to some introductory topics. For getting started with `R` I recommend:
+
+    -   [Installing `R`](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd): Downloading and installing `R` with specific videos for each operating system
+    -   [Project structure](https://www.youtube.com/playlist?list=PLRPB0ZzEYegPiBteC2dRn95TX9YefYFyy): This provides a great overview and introduction to a topic that is fundamental to working with computers beyond `R`: working with the file system. It covers naming files, file paths, folders, and related technical stuff that is very important when programming, but not often taught explicitly.
+
+-   [MSc Conversion: R Research Methods book](https://psyteachr.github.io/msc-conv/) by Emily Nordmann is a book with accompanying [video lectures](https://www.youtube.com/playlist?list=PLMGjq7JynlJmBbomo-_lIqJ4qWcuHcy_z). This book is aimed at a similar audience as the present book. However, the books focuses on a few concepts that we do not use here (e.g., `RMarkdown`, accessing `R` that runs on a server). The book is part of the [psychTeachR](https://psyteachr.github.io/) book plus video series developed by the University of Glasgow that contains a few more interesting books such as [Data Skills: psyTeachR Books](https://psyteachr.github.io/data-skills-v1/) which is very introductory.
+
+-   [Learning Statistics with `R`](https://learningstatisticswithr.com/) also by Danielle Navarro (as you can see, I am a big fan of Danielle's work). This is a completely free introductory book to statistics using `R`, which can be downloaded from its website (the [currently available version is 0.6](https://learningstatisticswithr.com/lsr-0.6.pdf)). Part II (i.e., Chapters 3 and 4) provides a gentle and comprehensive introduction to `R` for newcomers. From installing `R` and `RStudio`, navigating the console and `RStudio` windows, basic data types, reading in data and the file system, to the most important data types, `data.frames`, these roughly 70 pages (i.e., pp. 35 - 109) have you covered. Once you had a look at these two chapters, Chapter 8 is a great next step as it introduces `R` scripts. If you are completely new to statistics, Chapter 5 also provides a great introduction to other important concepts. One downside of this resource is that it comes in the form of a PDF and not a website, so cannot be read comfortably on all devices (but great for printing). Also note that [`R` for Psychological Science](https://psyr.djnavarro.net/index.html) is an updates version of this book, so I would probably start with that first. Finally, note that the present book has a somewhat different conceptual focus for introducing statistical tests and methods (i.e., especially compared to Part IV).
+
+-   If you prefer an introduction that has a stronger programming focus, I recommend the free book [Hands-On Programming with `R`](https://rstudio-education.github.io/hopr/) by Garrett Grolemund. Chapters 1 to 5 (i.e., pp. 1 - 99) also provide an introduction that starts with installing `R` in a gentle manner and then introduces the necessary basic concepts including the different data types and `data.frame`s.
+
+To sum this long list up, as a minimum to get through this book it is recommended to go through all sections of [Part 1](https://psyr.djnavarro.net/index.html#core-toolkit) (especially chapters [1](https://psyr.djnavarro.net/getting-started.html), [2](https://psyr.djnavarro.net/variables.html), [3](https://psyr.djnavarro.net/scripts.html), [4](https://psyr.djnavarro.net/packages.html), [5](https://psyr.djnavarro.net/workspaces.html), [6](https://psyr.djnavarro.net/vectors.html), and [11](https://psyr.djnavarro.net/file-system.html)) and at least the [`data.frame`s chapter (Chapter 13)](https://psyr.djnavarro.net/data-types.html#132_Data_frames) of [Part 2](https://psyr.djnavarro.net/index.html#working-with-data) of Danielle Navarro's [`R` for Psychological Science](https://psyr.djnavarro.net/index.html). If you are not yet super comfortable with the file system on your computer, I also recommend you check out Danielle Navarro's video lecture on [project structure](https://www.youtube.com/playlist?list=PLRPB0ZzEYegPiBteC2dRn95TX9YefYFyy).
+
+## `RStudio` Setup
+
+Our main access through `R` is through the `RStudio` IDE.
+
+## A Brief Base `R` Example Session
+
+As we have discussed in the previous chapter, the most important format of data representation is a tabular format with each column representing a single variable and typically one row per observation. Such data is represented in base `R` in a `data.frame`, the most important data format for our needs. We use the term "base `R`" here to refer to using `R` without any additional packages. Let us quickly recap how a `data.frame` in base `R` looks like and let us do some basic operations with it that also sets the stage for using `R` scripts.
+
+### Data Files, Scripts, and Working Directory
+
+In this chapter, we are mainly working with the data from @walasekHowMakeLoss2015 we have introduced in detail in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking). The data consists of two data files each representing a separate experiment we have discussed together so far as they are exact replications of another. In @walasekHowMakeLoss2015 these are reported as Experiments 1a and 1b. The original data files sent to me by Lukasz Walasek were Excel files (which can be found here: [Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx)).
+
+As base `R` does not allow to read in Excel files, I have opened the original data files of @walasekHowMakeLoss2015 in Excel and saved them as `.csv` files (i.e., comma separated files) which can be downloaded from here: [Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv). I recommend you download these files and save them in some folder so you can access them from within `R`.
+
+To follow along with the upcoming `R` code, save the downloaded data files in a folder named `data` that is in your current `R` working directory. I also recommend you create a new empty [`R` script](https://psyr.djnavarro.net/scripts.html) and also save it in the working directory. For example, say you already have already created a folder for this book/class, let's assume this folder is called `stats_r_intro-stuff` and in some easy to find location (e.g., depending on your operating system the `My Documents` folder or your home folder `~`). Let's assume you want this folder to be your working directory. Then, you create a new folder in this folder, called `data` (i.e., `stats_r_intro-stuff/data`), and download the two data files ([Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv)) into this folder. Next you create an empty `R` script in this folder for this chapter, say `tidyverse-intro.R` (i.e., it is now `stats_r_intro-stuff/tidyverse-intro.R`). You can now easily set your current `R` session to this folder as your working directory by opening `tidyverse-intro.R` in `RStudio` (if it is not yet opened) and the using the menu: `Session` - `Set Working Directory` - `To Source File Location`. This sets your working directory to the folder (i.e., location) in which thr currently active `R` script is located, which should be your `stats_r_intro-stuff` folder. Note, if you have been using the current `R` session already for some time, now is a good time to restart the session (not necessarily `RStudio`) by using the menu again: `Session` - `Restart R`.
+
+The workflow laid out in the previous paragraph represents my general recommendation for working with `R` at this stage. Have a folder that is your designated project folder. In this folder you have your `R` scripts as well as a sub folder for the data. Then you can open a script in `RStudio` and set the folder to be your working directory through the menu (i.e., `Session` - `Set Working Directory` - `To Source File Location`). You can then access the data files simply by accessing `data/my-data.file.csv`. Importantly, don't forget to restart the `R` session before starting something new through the menu: `Session` - `Restart R`.
+
+### Read Data and Inspecting it
+
+With this set-up steps out of the way, we can now load in the data from Experiment 1a using base `R`'s `read.csv()` function:
+
+```{r}
+df1a <- read.csv("data/ws2015_exp1a.csv")
+```
+
+This should read in the data file without any warnings or problems.[^tidyverse-intro-1] If for some reason you fail to download the file or set the correct working directory, you can also try to read it directly from the internet as in the following code. But please only do that after you have tried downloading and dealing with the actual file. Handling data files and working directories is an important `R` skill you need to acquire.
+
+[^tidyverse-intro-1]: It can happen that when converting Excel files to `csv` files in Excel that Excel saves them using a non-standard encoding. This can be seen that the first column name is preceded by some additional characters (i.e., in the present case the first column would be `ï..subno` instead of `subno`. In this case, changing the file encoding in the `read.csv` command might help. For example: `df1a <- read.csv("data/ws2015_exp1a.csv", fileEncoding = "UTF-8-BOM")`.
+
+```{r, eval=FALSE}
+df1a <- read.csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv")
+```
+
+The first thing we usually want to do with a `data.frame` is to inspect its structure using the `str()` function. It lists all the variables, their data types, and the number of observations and variables.
+
+```{r}
+str(df1a)
+```
+
+In the present case we have over 20 thousand observations on six variables. Most of the variables are `int` which means integers; that is, numeric variables consisting of whole numbers (i.e., discrete values). We also have one `num` -- that is, numeric -- variable (i.e., numeric variable with decimal values), `condition`. In general, `int` and `num` variables are treated in the same way, as numeric variables, so there is hardly ever a reason to transform one into the other. Finally, `condition` is a `chr` or character variable.
+
+### Transforming Categorical Variables into Factors
+
+As discussed in Section \@ref(data-types), some of the numeric variables as well as `condition` are actually categorical variables, or `Factor`s in `R` parlance. We can transform variables into `Factor`s using the apptly named `factor()` function. We general use `factor()` instead of other methods (e.g., function `as.factor()`) because it allows us to specify the ordering of the factor levels and potentially other labels for the factor levels. Let us do so for three variables now, `subno`, `response`, and `condition`. For this we use the `$` operator to access variables of a `data.frame`. After transforming the variables we take another look at the structure of the `data.frame` using `str()`.
+
+```{r}
+df1a$subno <- factor(df1a$subno)
+df1a$response <- factor(df1a$response, levels = c("reject", "accept"))
+df1a$condition <- factor(df1a$condition, 
+                         levels = c(40.2, 20.2, 40.4, 20.4), 
+                         labels = c("-$20/+$40", "-$20/+$20", "-$40/+$40", "-$40/+$20"))
+str(df1a)
+```
+
+We see that after running these commands, we have as expected three `Factor`s in the data. Let us take a look at each of these calls to `factor()` to understand why we call it in a different manner in each case.
+
+-   The call for `subno` only passes the variable (i.e., the `df1a$subno` vector) and no further arguments to `factor()`. As a consequence, the factor levels are ordered in an alpha-numerical increasing manner.
+
+-   The call for `response` specifies the ordering of the factor levels using the `levels` argument to which we have passed a vector of the levels, `c("reject", "accept")` (i.e., remember, `c()` is the function for creating vectors of any kind, such as character vectors here). The reason we do this is that otherwise the factor levels would be alphabetically ordered and then `accept` would be the first level and `reject` the second level (as "a" comes before "r" in the alphabet). This would be inconsistent with `resp`, where 0 = reject and 1 = accept.
+
+-   The call for `condition` specifies both the levels through `levels` as well as new names for the factor levels using `labels`. The labels use the ordering (i.e., potential loss first, potential gain second) we have used throughout the book and which differs from the ordering of the original `condition` (i.e., it switches the ordering to the format we are used to now). For both arguments a vector is passed, with elements mapped by position (i.e., the new label for the first level, `40.2`, is the first label, `-$20/+$40`). We again specify the ordering of factor levels here through `levels` to maintain the ordering we have used throughout with the condition that typically shows loss aversion, -\$20/+\$40 as first condition. If we had not done so, the first level would have been the -\$20/+\$20 condition (as `20.2` was the smallest number in the original vector).
+
+An interesting part of the three calls to the `factor()` function is that if you run it again, after you have already ran it, it will break the `condition` variable. If you try it out, you will see that all values of the `condition` variable change to `NA` if you run this call a second time. The reason for this is that the values passed through the `levels` argument need to be present in the variable. However, because we have replaced the original values with new labels, none of the original levels (i.e., `c(40.2, 20.2, 40.4, 20.4)`) is part of the variable any more. Consequently, all values are replaced by `NA` (i.e., "not available" which means missing data). To get the values back you need to reload the data using the `read.csv()` command from above and then you can run the `factor()` call again in a state in which the data was when you ran it for the first time.
+
+What this shows is that you cannot assume that running a piece of code twice gives the same output in all cases. The problem here is that the code changes the data itself (i.e., values of `condition`). However, the code also assumes certain values for `condition`. Because this assumption only holds the first time you run the code, but not the second time, the second calls breaks the results in somewhat unexpected ways. So what this means is that randomly re-running code can lead to unexpected results (which are called "bugs" in programming language parlance). Therefore, instead of re-running individually pieces of code it can often help to re-start at the top of a script and re-running everything in order to ensure all data is in the state you think it is (ideally after restarting the `R` session through `Session` - `Restart R`).
+
+One more tip when transforming variables into factors. It is often a bit annoying to type out the factor levels by hand, especially when it is more than say two. In this case, a handy trick to know is that you can get `R` to produce the `c()` call having all factor levels. You just need to make sure you are using the correct ordering. The heart of the trick is the `dput()` function which creates a text representation of an `R` output that can be copied from the console to your script. To use this for factors the basic structure of the call is `dput(unique(df$variable))` which returns the `c()` call for all unique elements of a variable. If you want the elements ordered you can use `dput(sort(unique(df$variable)))`. For example, to create the `levels` argument for the `condition` variable I initially executed `dput(sort(unique(df1a$condition)))` at the console which returns `c(20.2, 20.4, 40.2, 40.4)` for the original `df1a` data (i.e., before turning everything into `Factor`s). I then just copy and pasted a bit in this vector to get the ordering right (admittedly, typing might have been faster then copying and pasting, but whatever).
+
+Another thing we often want to do when reading in the data is getting an overview of how it actually looks like. One way to do so that I do not recommend for `data.frame`s is just typing the name of the variable into the console (or calling just the name from the script). What this means in `R` is that the object is printed which, for large `data.frame`s, leads to hundreds or thousands of rows being printed until some printing limit is reached. An alternative is to just look at the first few rows using the `head()` function (which prints the first 6 rows per default):
+
+```{r}
+head(df1a)
+```
+
+Alternatively, you can click on an object in the `RStudio` `Environment` pane which opens the data in a viewer pane. The equivalent `R` call is using `View(df1a)` which opens the same viewer. However, `View()` should only be used interactively at the console and not be in an `R` script as it requires user interaction beyond script and console (i.e., it opens the viewer). In other words, it is nice during development to get an overview of the data, but not for the final analysis script.
+
+## The `tidyverse`
+
+A popular alternative to base `R` is the `tidyverse` [@tidyverse2019], a selection of packages curated and in large parts developed by the [`RStudio` company](https://www.rstudio.com/about/). The mastermind behind the `tidyverse` is Hadley Wickham, the `RStudio` chief scientist and maybe the one person that can be considered an `R` superstar.[^tidyverse-intro-2] Most of the core `tidyverse` packages that will be introduced below, such as `dplyr` and `ggplot2`, are his developments (even though many other have contributed to those packages as well).
+
+[^tidyverse-intro-2]: There are other individuals that are instrumental to the existence of `R` that would also deserve a similar stardom, such as Brian Ripley, Kurt Hornik, and Uwe Ligges, the main actors maintaining the CRAN package repository.
+
+The easiest way to access the `tidyverse` is by first installing the `tidyverse` package from `CRAN` using `install.packages()`. Note that it is a good idea to only run `install.packages()` at the console and do not put it into your `R` script. The reason for this is that you only want to execute `install.packages()` once per `R` installation or after updating `R` and not every time you run a script.
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+Then, you can load all `tidyverse` packages at once. This is something we will do at the top of pretty much all scripts we will be creating.
+
+```{r}
+library("tidyverse")
+```
+
+When loading packages it is common that this produces some status or other messages in the console. For example, `tidyverse` lists the package versions of the loaded (or "attached") packages and lists function conflicts; that is, cases in which a `tidyverse` function masks a previous loaded function with the same name. We do not reproduce these messages here.
+
+The core `tidyverse` packages are (with descriptions taken or adapted from the official websites):
+
+-   [`tibble`](https://tibble.tidyverse.org/): A modern version of the `data.frame`
+
+-   [`readr`](https://readr.tidyverse.org/): Reading data in, the `RStudio` way.
+
+-   Data wrangling with [`magrittr`](https://magrittr.tidyverse.org/), [`tidyr`](https://tidyr.tidyverse.org/), and [`dplyr`](https://dplyr.tidyverse.org/): Coherent set of functions for tidying, transforming, and working with rectangular data. Supersedes many base `R` functions and makes common problems easy.
+
+-   [`ggplot2`](https://ggplot2.tidyverse.org/): System for data visualization.
+
+-   [`purr`](https://purrr.tidyverse.org/) and [`broom`](https://broom.tidymodels.org/): Advanced modeling with the `tidyverse` and [`tidymodels`](https://broom.tidymodels.org/).
+
+In the following we provide a short introduction to the core components of the `tidyverse` as they are needed for this book. A more comprehensive introduction is provided in the Wickham and Grolemund book "R for Data Science" which is available freely at <http://r4ds.had.co.nz>. To get a good grip on the `tidyverse`, I highly recommend working through chapters 1 to 21, or better 1 to 25 (the chapters in this book are usually a lot shorter than the chapters in the present book).
