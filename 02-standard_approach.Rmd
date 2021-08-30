@@ -1,5 +1,14 @@
 # The Standard Approach for One Independent Variable {#standard1}
 
+```{r setup, include=FALSE}
+library("tidyverse")
+library("afex")
+library("ggbeeswarm")
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+```
+
 In this chapter we are introducing the standard statistical approach for analysing experimental data with one independent variable (i.e., one factor). The simple case for this is a study comparing two experimental conditions on one dependent variable. We will exemplify the standard approach for this design using a recent and straightforward experiment.
 
 ## Example Data: Note Taking Experiment {#ex:urry}

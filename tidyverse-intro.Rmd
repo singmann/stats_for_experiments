@@ -46,7 +46,7 @@ To sum this long list up, as a minimum to get through this book it is recommende
 
 Our main access through `R` is through the `RStudio` IDE.
 
-## A Brief Base `R` Example Session
+## A Base `R` Example Session
 
 As we have discussed in the previous chapter, the most important format of data representation is a tabular format with each column representing a single variable and typically one row per observation. Such data is represented in base `R` in a `data.frame`, the most important data format for our needs. We use the term "base `R`" here to refer to using `R` without any additional packages. Let us quickly recap how a `data.frame` in base `R` looks like and let us do some basic operations with it that also sets the stage for using `R` scripts.
 
@@ -123,7 +123,7 @@ Alternatively, you can click on an object in the `RStudio` `Environment` pane wh
 
 A popular alternative to base `R` is the `tidyverse` [@tidyverse2019], a selection of packages curated and in large parts developed by the [`RStudio` company](https://www.rstudio.com/about/). The mastermind behind the `tidyverse` is Hadley Wickham, the `RStudio` chief scientist and maybe the one person that can be considered an `R` superstar.[^tidyverse-intro-2] Most of the core `tidyverse` packages that will be introduced below, such as `dplyr` and `ggplot2`, are his developments (even though many other have contributed to those packages as well).
 
-[^tidyverse-intro-2]: There are other individuals that are instrumental to the existence of `R` that would also deserve a similar stardom, such as Brian Ripley, Kurt Hornik, and Uwe Ligges, the main actors maintaining the CRAN package repository.
+[^tidyverse-intro-2]: There are other individuals that are instrumental to the existence of `R` that would also deserve a similar stardom. For example, without the tireless work maintaining CRAN by Brian Ripley, Kurt Hornik, and Uwe Ligges `R` would be in a very different shape. Likewise, Chris Chambers, the inventor of `S`, which is the predecessor of `R`, also deserves some significant credit.
 
 The easiest way to access the `tidyverse` is by first installing the `tidyverse` package from `CRAN` using `install.packages()`. Note that it is a good idea to only run `install.packages()` at the console and do not put it into your `R` script. The reason for this is that you only want to execute `install.packages()` once per `R` installation or after updating `R` and not every time you run a script.
 
@@ -137,7 +137,7 @@ Then, you can load all `tidyverse` packages at once. This is something we will d
 library("tidyverse")
 ```
 
-When loading packages it is common that this produces some status or other messages in the console. For example, `tidyverse` lists the package versions of the loaded (or "attached") packages and lists function conflicts; that is, cases in which a `tidyverse` function masks a previous loaded function with the same name. We do not reproduce these messages here.
+When loading packages it is common that this produces some status or other messages in the console (i.e., some packages do, some don't). For example, `tidyverse` lists the package versions of the loaded (or "attached") packages and lists function conflicts; that is, cases in which a `tidyverse` function masks a previous loaded function with the same name. We include these messages here to show that this is normal and nothing to worry about, but will generally not later in the book (as this would get repetitive). However, note that the exact version numbers of the packages that are shown here may differ from the version numbers you see (e.g., because some packages might update meanwhile).
 
 The core `tidyverse` packages are (with descriptions taken or adapted from the official websites):
 
@@ -149,6 +149,489 @@ The core `tidyverse` packages are (with descriptions taken or adapted from the o
 
 -   [`ggplot2`](https://ggplot2.tidyverse.org/): System for data visualization.
 
--   [`purr`](https://purrr.tidyverse.org/) and [`broom`](https://broom.tidymodels.org/): Advanced modeling with the `tidyverse` and [`tidymodels`](https://broom.tidymodels.org/).
+-   [`purr`](https://purrr.tidyverse.org/) and [`broom`](https://broom.tidymodels.org/): Advanced modelling with the `tidyverse` and [`tidymodels`](https://broom.tidymodels.org/) which will not be discussed here.
 
-In the following we provide a short introduction to the core components of the `tidyverse` as they are needed for this book. A more comprehensive introduction is provided in the Wickham and Grolemund book "R for Data Science" which is available freely at <http://r4ds.had.co.nz>. To get a good grip on the `tidyverse`, I highly recommend working through chapters 1 to 21, or better 1 to 25 (the chapters in this book are usually a lot shorter than the chapters in the present book).
+In the following we provide a short introduction to the core components of the `tidyverse` as they are needed for this book. A more comprehensive introduction is provided in the Wickham and Grolemund book "R for Data Science" which is available freely at <http://r4ds.had.co.nz>. To get a good grip on the `tidyverse`, I highly recommend working through chapters 1 to 21, or better 1 to 25 (the chapters in "R for Data Science" are a lot shorter than the chapters in the present book).
+
+### `tibble` and `readr`
+
+The back bone of the `tidyverse` is the [`tibble`](https://tibble.tidyverse.org/), or `tbl_df` (it's `class` name in `R`), "a modern reimagining of the `data.frame`, keeping what time has proven to be effective, and throwing out what is not" (quote from [`tibble` documentation](https://tibble.tidyverse.org/)). The main difference between `data.frame` and `tibble` in daily use is that `tibble`s do not try to print all rows and columns and thus do not overwhelm the console when just entering the name of the data at the console. This feature alone is enough for me to prefer `tibble`s over `data.frame`s. When working on an analysis one often wants to have a quick look at the data to see what has happened and the easiest way to do that is often to just enter the name of the data into the console. With `data.frame`s this regularly clutters the console and with `tibble`s it does not.
+
+To convert a `data.frame` into a `tibble` you can use the `as_tibble()` function. Let us do this for our existing `data.frame` of @walasekHowMakeLoss2015, `df1a`.
+
+```{r}
+tbl1a <- as_tibble(df1a)
+tbl1a
+```
+
+In the output of the `tibble` we can see two things. First, the output only shows the first 6 rows. Compare this to what happens when typing `df1a` in the console which will print many more rows (so you cannot any more see the column names). Second, the data type of each column is shown below the column names. This is another feature that makes `tibble`s more convenient in everyday use. We directly see that for example `subno` is a `Factor` (or `<fct>`) as it should be.
+
+An alternative way to creating a `tibble` instead of a standard `data.frame` is by loading the data using the `tidyverse` specific read functions which are in the [`readr`](https://readr.tidyverse.org/) package. Remember that above we used the base `R` read function `read.csv()`, which is one of a handful of base `R` data read in functions such as `read.table()` (for reading data separated by spaces) and `read.delim()` (for reading tab separated data). `readr` offers a similar set of functions where the main differences are that instead of using a `.` in the function name they use an `_` and instead of a `data.frame` they return a `tibble`. So in case you have a `csv` file, you could use `read_csv()` instead of `read.csv()`. Note that in this and in the following code chunks we are going to override the existing `tbl1a` object to not clutter the work space.
+
+```{r}
+tbl1a <- read_csv("data/ws2015_exp1a.csv")
+tbl1a
+```
+
+What we can see from the output is that `read_csv()` not only returns the `tibble`, but also a message showing the column specification (i.e., data type for each column). This message is actually a call to the `cols()` function that could be copied and modified to change the column specification when reading in the data. For example, if we wanted to change `subno` we could do so directly here:
+
+```{r}
+tbl1a <- read_csv("data/ws2015_exp1a.csv", 
+                  col_types = cols(
+                    subno = col_factor(),
+                    loss = col_double(),
+                    gain = col_double(),
+                    response = col_character(),
+                    condition = col_double(),
+                    resp = col_double()
+                  ))
+tbl1a
+```
+
+We could do something similar also for `response` and `condition`, but one issue is that the function for defining `Factor`s within `readr`, `col_factor()`, only allows a `level` argument and not a `labels` argument (see `?cols`). So to get the same factor structure as above, we will need to use the `factor()` function in a similar way as above, which we will show below.
+
+Another feature of `readr` compared to the corresponding base `R` functions is that it is a bit more restrictive in some cases. That is, in case the data is not as expected by a particular read function, `readr` fails more often than base `R`. Whereas this can appear annoying while programming, it has the benefit that one learns of problems in the data early compared to late. In other words, `readr` function are more likely than base `R` functions to ensure the data looks like you expect it to look like. And if your data is more likely to look like you expect it to look like, your code will be less likely to produce incorrect results.
+
+Therefore, in addition to using `read_csv()` instead of `read.csv()`, it is often better to use `read_table()` instead of `read.table()` for space separated data (or `read_table2()` if the data format is a bit sloppy), `read_tsv()` instead of `read.delim()` for tab separated data, or `read_delim()` if you want to specify the data delimiter.
+
+### The Pipe: `%>%`
+
+One of the coolest features and at the time novel features of the `tidyverse` is the pipe, which is the name of the `%>%` operator.[^tidyverse-intro-3] To understand what it does and why it is so great, it makes sense to begin by taking a step back and thinking a bit about functions and evaluation order in `R`.
+
+[^tidyverse-intro-3]: The pipe operator, `%>%`, is part of the `magrittr` package which pre-dates the `tidyverse` and was not initially written by Hadley Wickham, but by Stefan Milton Bache. The name of the package is a pun on the famous painting ["The Teachery of Images"](https://en.wikipedia.org/wiki/The_Treachery_of_Images) by Belgian surrealist painter René Magritte. However, because loading the `tidyverse` also loads the pipe (through the `dplyr` package), we do not need to load `magrittr` directly.
+
+One of the most important features of `R` is that we can use the result (or output) from one operation and use it as the input of another operation. For example, remember that the `loss` column in the data of @walasekHowMakeLoss2015 shows the potential loss for each of the lotteries, these losses range from \$6 to \$40. Now imagine that for some reason we want to know the midpoint between minimum and maximum loss (which is \$23 in the present case). One way to calculate those is by taking the mean of the minimum and maximum. To get this in `R` we would need to do two steps: get the minimum and maximum potential loss from the vector of losses and then taking the mean of the minimum and maximum. We can get the minimum and maximum of a vector using the `range()` function and the mean is obtained using the `mean()` function. So to do so in `R` for our vector of all potential losses, `tbl1a$loss`, we could do:
+
+```{r}
+# step 1: get minimum and maximum and save in temporary variables
+tmp <- range(tbl1a$loss)
+tmp # print minimum and maximum, to check everything is okay
+#step 2: calculate mean of minimum and maximum:
+mean(tmp)
+```
+
+This code above does this two step calculation explicitly and saves the results of the first step in a temporary variable we have called `tmp`. We could also combine both steps into one by passing the results of the first step to the `mean()` function:
+
+```{r}
+mean(range(tbl1a$loss))
+```
+
+We first get the minimum and maximum (i.e., the range) and then pass this to the `mean()` function. As the mean function is the last operation we want it is the outermost call in this bit. In other words, in `R` code that does not use the pipe, code is executed from the inside to the outside. This can make it difficult to chain many operations after each other without the need to create temporary variables as we did in the first bit.
+
+In contrast to executing code from innermost to outermost, the pipe allows us to chain operations from left to right. We can start with the innermost call and pipe it to the next function using `%>%`. For example, using the pipe we could do the following:
+
+```{r}
+tbl1a$loss %>% 
+  range() %>% 
+  mean()
+```
+
+This shows a typical pipe workflow. We start with our data, in the present case the `tbl1a$loss` vector. This data is piped to the first operation, the `range()` function. The output of this call is piped to the next operation, the `mean()` function. At the end, we get exactly the output we should get but with code that is easier to read. One feature of the pipe that makes the code particularly readable is that we can start a new line for each step in a chain.
+
+The pipe also works like any regular `R` operation, so we can easily save the result from the whole chain of operation in a new object for later use. For example:
+
+```{r}
+loss_midpoint <- tbl1a$loss %>%
+  range() %>% 
+  mean()
+loss_midpoint
+```
+
+Whereas this example may not seem overly impressive when combined with the `dplyr` functions introduced next, we can do quite a lot of neat things with the pipe. We will demonstrate this below.
+
+Let us end this section with two more points that are important. First, typing the pipe (i.e., typing the characters `%>%`) is annoying. If you are in `RStudio` you do not need to do it. Instead, there is a keyboard short cut for it, `Ctrl`/`Cmd` + `Shift` + `M` (i.e., on Windows/Linux `Ctrl` + `Shift` + `M` and in Mac `Cmd` + `Shift` + `M`). I highly recommend you get used to using this short cut. It is one of the few short cuts in `RStudio` I use regularly.[^tidyverse-intro-4]
+
+[^tidyverse-intro-4]: The most important short cut in `RStudio` for me is `Alt` + `-` which adds the assignment operator `<-` plus enclosing spaces. So using this saves 4 other key presses and is really much better.
+
+Second, base `R` now has its own pipe, `|>`. It works very similar to the `tidyverse` pipe (i.e., can in many situations used instead of the `tidyverse` pipe) and can be used without loading any packages. I am not using it here for the only reason that I have adapted the `tidyverse` pipe before there was a base `R` pipe and there does not seem to be many reason to prefer one over the other if the `tiydverse` is already loaded. So if you see `|>` instead of `%>%` somewhere, assume it does pretty much the exact same thing.
+
+### `dplyr`
+
+Whereas the back bone of the `tidyverse` are the `tibble` and the pipe, the package that most significantly improves ones workflow is [`dplyr`](https://dplyr.tidyverse.org/). The core of `dplyr` are five functions that combine the most common data manipulation operations. Or to quote the [official documentation](): "`dplyr` is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges." These five verbs/functions are:
+
+-   `mutate()` adds new variables or changes variables as a function of existing variables
+-   `select()` picks variables based on their names
+-   `filter()` picks cases based on their values
+-   `summarise()` reduces multiple values down to a summary
+-   `arrange()` changes the ordering of the rows
+
+A great introduction and overview of the functionality of these functions is provided on the official [getting started](https://dplyr.tidyverse.org/articles/dplyr.html) page, but we will do so here as well, if only somewhat briefly.
+
+One important part of the `dplyr` functions is that they all are developed to work with the pipe so can be chained. Furthermore, all `dplyr` functions work with what is called *non-standard evaluation*. This means we can refer to variable names of the `data.frame`/`tibble` we are working with in any of the `dplyr` functions without enclosing them in quotes.
+
+#### `mutate()`
+
+Let us show this behaviour here by replicating the call above to convert some variables in our data to factors. We start again by reading the data in. We then pipe this freshly read in data to the `mutate()` function to convert three variables to factors as done above and save it again in the same object, `tbl1a`. We then get an overview of the object.
+
+```{r, message=FALSE}
+tbl1a <- read_csv("data/ws2015_exp1a.csv")
+tbl1a <- tbl1a %>% 
+  mutate(
+    subno = factor(subno),
+    response = factor(response, levels = c("reject", "accept")),
+    condition = factor(condition, 
+                        levels = c(40.2, 20.2, 40.4, 20.4), 
+                        labels = c("-$20/+$40", "-$20/+$20", "-$40/+$40", "-$40/+$20"))
+  )
+tbl1a
+ 
+```
+
+Compared to the code above in which we have changed the variables to factors, there a few changes:
+
+-   The block of code in which variables are converted to factors is wrapped into the `mutate()` call to which we have piped the data, `tbl1a`.
+-   For each call that converts one variable to a factor, we use the `=` sign and not the assignment operator `<-`. The reason for this is that all the operations are performed within the `mutate()` call. We generally only use the assignment operator `<-` outside of function calls (if you try it out and replace the `=` with `<-` you will see which horrible consequences this has).
+-   The first two calls for changing a variable are ended by a `,`. The reason again is that we are inside one `mutate()` call so to tell mutate we are not yet done, we end one operation with a `,`.
+-   Instead of passing the full vector to `factor()` as above, for example `df1a$subno`, we can refer to each variable, such as `subno`, by name (and without quotes) directly (this is what is meant with non-standard evaluation). The reason for this is that we are working within the context of the data that we have piped to the `mutate()` call.
+
+#### `summarise()`
+
+The second most important function from `dplyr` is `summarise()` which as the name suggests creates summaries. What this means is that we are usually reducing the number of rows in a data, often the data is reduced to one row. For example, we could use `summarise()` to get the average probability with which lotteries were accepted across all conditions and lotteries. For this we just need to take the overall mean of the `resp` variable.
+
+```{r}
+tbl1a %>% 
+  summarise(mean_acc = mean(resp))
+```
+
+We see that summarise also returns a `tibble` so the return values differs quite a bit from how one could do it in base `R` (e.g., `mean(tbl1a$resp)`). We can also see that `summarise()` works structurally quite similarly to the `mutate()`. In the `summarise()` call we can create new variables using a `name = operation` syntax. We can also create multiple summary statistics by separating them using `,`. We can also add comments to the code as usual using `#`, as long as it is to the right side of the `,`.
+
+```{r}
+tbl1a %>% 
+  summarise(
+    mean_acc = mean(resp),
+    sd_acc = sd(resp),  ## sd() returns the standard deviation
+    mean_pot_loss = mean(loss),
+    mean_pot_gain = mean(gain)
+  )
+```
+
+#### `filter()`, `select()`, and `arrange()`
+
+As we have discussed above, one of the key ways of using the `tidyverse` is by chaining different operations together. For example, we could first select only the `"-$20/+$40"` condition and then calculate the summaries for this condition. For this we pipe first to the `filter()` function and then pipe the results to the summarise function:
+
+```{r}
+tbl1a %>%
+  filter(condition == "-$20/+$40") %>% 
+  summarise(
+    mean_acc = mean(resp),
+    sd_acc = sd(resp),
+    mean_pot_loss = mean(loss),
+    mean_pot_gain = mean(gain)
+  )
+```
+
+Note that `filter()` requires to use the `==` operator and not the `=` operator. The reason is that you do not want to set something equal to something, which is done using `=`, but want to check for equality, which is done using `==`. `filter()` also allows you to chain multiple comparisons together, either by separating them using `,` or `&` (i.e., logical and). If only one of multiple conditions needs to hold you can use `|` (logical or).
+
+`filter()` is also the function for removing observations in the `tidyverse`. This is done by writing a filter that retains all observations but the ones you want to remove. For this you can also use the logical not operator, `!` which inverts a logical vector, or the unequal operator, `!=`.
+
+For example, we discussed that what we are actually interested in in the data from @walasekHowMakeLoss2015 are the responses to the symmetric lotteries for which the potential loss is equal to the potential gain. We could select those with `filter()`:
+
+```{r}
+symm1 <- tbl1a %>%
+  filter(loss == gain)
+symm1
+```
+
+Or equivalently:
+
+```{r}
+symm2 <- tbl1a %>%
+  filter(!(loss != gain))
+all.equal(symm1, symm2)
+```
+
+Here, we use the `all.equal()` function to show that the two objects are the same. This function can compare arbitrary `R` objects and only returns `TRUE` if two objects are the same.
+
+One problem with the filter is used above is that there are more symmetric lotteries than those that occur in all conditions. The following code, which shows all symmetric lotteries for each condition, demonstrates this.
+
+```{r}
+tbl1a %>%
+  filter(loss == gain) %>% 
+  select(loss, gain, condition) %>% 
+  unique() %>% 
+  arrange(condition) %>% 
+  print(n = Inf)
+```
+
+In particular, the output shows that in the asymmetric conditions, -\$20/+\$40 and -\$40/+\$20, we only have three symmetric lotteries, whereas in the two symmetric conditions we have quite a lot more. However, the three symmetric lotteries that appear in the asymmetric conditions, 12-12, 16-16, and 20-20, appear in all conditions.
+
+Before focussing on how we can build a better filter, let us first see how the code above exactly did what it did. We again first filter all symmetric lotteries. From this data we then retain or `select()` only the `loss`, `gain`, and `condition` columns. We then use the `unique()` function to only retain the unique rows. Because we have a specific ordering in which we think about the conditions (which is expressed in the order of the factor levels) we then sort the `tibble` along the `condition` variable using `arrange()`. Finally, because per default a `tibble` only prints a few rows we use `print(n = Inf)` which for any `tibble` prints all rows (i.e., up to row infinity). To better understand the code, you are encouraged to run it line by line to see what the output at each intermediate step is (to get the output at a subset of lines of codes, do not select the `%>%` at the end of the last line when running it).
+
+So how can we select only the symmetric lotteries that appear in all conditions? There clearly are multiple possible filters to do so. The one that easiest comes to my mind is to combine the filter that selects all symmetric lotteries with a filter that only selects lotteries in which the potential loss is either 12, 16, or 20. For the latter we introduce a new operator, the `%in%` operator. It returns `TRUE` for any element of a vector that matches an element *in* another vector. For example in our case, we want to retain all those lotteries where the potential loss is *in* `c(12, 16, 20)`. This is shown below. We also include the code that shows that we now have the same set of symmetric lotteries in all conditions.
+
+```{r}
+tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  select(loss, gain, condition) %>% 
+  unique() %>% 
+  arrange(condition) 
+```
+
+#### `group_by()`
+
+You might remember that the main hypothesis of @walasekHowMakeLoss2015 was that it is not the absolute value of a lottery, but the relative rank, that matters for whether or not participants think a lottery is attractive. The main evidence for this hypothesis was that the proportion with which the symmetric lotteries are accepted differs across the four conditions. How could we calculate this with the `tiydverse`?
+
+If we only apply what we know so far the only way to do so would be to split the data into four subsets using filter, and then apply `summarise()` to each of these subsets. Let us do this exemplary by only splitting the data into two subsets, one for the `"-\$20/+\$40"` condition that shows loss aversion and one for the "-\$40/+\$20" condition that shows loss seeking. We have to combine this filter with the filter only selecting the symmetric lotteries. To make the logic easier, we separate these two steps into separate `filter()` calls (but we could also combine them into one).
+
+```{r}
+## "loss aversion" condition:
+tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  filter(condition == "-$20/+$40") %>% 
+  summarise(mean_acc = mean(resp))
+
+## "loss seeking" condition:
+tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  filter(condition == "-$40/+$20") %>% 
+  summarise(mean_acc = mean(resp))
+```
+
+The results show the previously discussed pattern. Participants in the -\$20/+\$40 condition are around 50% less likely to accept the symmetric lotteries than participants in the -\$40/+\$20. Whereas this is great, the code is a bit verbose and clunky. For example, the first `filter()` call and the `summarise()` call are identical in both parts. So the question is: Is there not a better way to get these results?
+
+This is of course a rhetorical question and the answer is yes, there is a better way to get these results. The answer is the `group_by()` function, the function that gives `dplyr` all its power. To use `group_by()` you need to pass it one or multiple (categorical) grouping variables. `group_by()` then creates a grouped `tibble` with the consequence that if any of the further `dplyr` verbs are applied to this grouped `tibble` they are applied to each group separately. Let's show it for our example to see what this means in practice:
+
+```{r}
+tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  group_by(condition) %>% 
+  summarise(mean_acc = mean(resp))
+```
+
+We can see that the output now contains the average proportion to accept the symmetric lotteries for each of the four conditions separately. So instead of first splitting the data and then calculating the summary statistics (here: mean of `resp` column) for each split by hand, `group_by()` does exactly this internally.
+
+In other words, whenever we have a categorical variable in our data we can use `group_by()` to perform operations conditionally across the levels of the categorical variable. Given the ubiquity of categorical variables, at least in experiments the experimental factor is one, but other data sets also usually have at least one categorical variable, this is a huge time and effort saver.
+
+And whereas we have shown this here for `summarise()`, which is probably the most common use case, this also works for the other `dplyr` verbs for which the results can depend on other rows, `mutate()` and `arrange()`.
+
+In the example above, we have only passed one variable to `group_by()`, `condition`. We can also pass multiple variables. This will perform the operations conditional on the combination of both variables. For example, here we have selected exactly the lotteries with the three symmetric lotteries that are the same across conditions. With `group_by()` it is easy to get the average accept proportion separately for each of these symmetric lotteries per condition:
+
+```{r}
+tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  group_by(condition, loss, gain) %>% 
+  summarise(mean_acc = mean(resp))
+```
+
+Note that pretty much the same result would be obtained if only passing one of the `gain`/`loss` variable pair to `group_by()` here. Feel free to try it out.
+
+The results are not straight forward to interpret as they do not show a consistent pattern across conditions. For the symmetric conditions the difference in acceptance rate seems to be small. However, for the asymmetric conditions we see somewhat more noticeable differences that suggest that the 16-16 lottery may have somewhat lower acceptance rates than both the 12-12 and 20-20 lottery. However, as these are only descriptive results without any additional inferential statistical evidence, it is very much possible that this small differences within conditions reflects pure noise and should not be taken too seriously.
+
+Before ending this section on `group_by()`, there is one more thing to discuss. As shown in the output above, `summarise()` still returns a grouped `tibble` in case one calls `group_by()` initially with more than one variable. This can be seen by both the status message "`summarise()` has grouped output by ..." and because the output still shows `# Groups: ...`. This means that if we were to do any further operations on this result it would still be performed grouped. To remove the grouping created by `group_by()` use the `ungroup()` function as shown next.
+
+```{r}
+tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  group_by(condition, loss, gain) %>% 
+  summarise(mean_acc = mean(resp)) %>% 
+  ungroup()
+```
+
+## `ggplot2`
+
+The perhaps most prominent member of the `tidyverse`, which technically also pre-dates the `tidyverse` by several years, is [`ggplot2`](https://ggplot2.tidyverse.org/), a system for declaratively creating graphics, based on the book "The Grammar of Graphics" [@wilkinsonGrammarGraphics1999].
+
+To understand what how `ggplot2` works, it makes sense to contrast it to the base `R` graphics engine around the `plot()` function. For `plot()` creating a plot is done by drawing individual graphical elements such as `points()` or `lines()`. These functions generally only accept individual vectors or data points.
+
+In contrast, `ggplot2` requires that the data is passed either as a `data.frame` or `tibble`. With this in hand, "you provide the data, tell `ggplot2` how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details." ([quote from the official documentation](https://ggplot2.tidyverse.org/)).
+
+### First `ggplot2` Example
+
+What this means in practice is the first thing to think about is which variables in your data you want to show on which of the two axes? Once you have decided on this you have to consider which graphical elements, which are called `geom`s in `ggplot2` terminology, you want to use to show the data. Let us exemplify this with a first example from the @walasekHowMakeLoss2015 data.
+
+One intuition we could have is that the probability that a lottery is accepted is related to the size of the potential gain, if we average over all other variables (i.e., potential loss and condition). One way to investigate this would be to calculate the average acceptance probability for each possible gain and plot this on the x-axis against the average accept probability on the y-axis. For this, we first summarise the data in this way.
+
+```{r}
+lot_sum <- tbl1a %>% 
+  group_by(gain) %>% 
+  summarise(mean_acceptance = mean(resp))
+lot_sum
+```
+
+Looking at the returned `tibble` already shows that our intuition is probably not too off, but let us plot the data to get a better look. For this, we pass it to the `ggplot()` function as shown next.
+
+```{r}
+ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
+  geom_point()
+```
+
+This plot shows a clear relationship between the mean acceptance rate of a lottery and its potential gain. Let us now describe the call in detail:
+
+-   To create a plot with `ggplot2` we generally want to call the `ggplot()` function for which the first argument is the data we want to plot. Because the data is the first argument, we can also directly pipe into the `ggplot()` function as shown below.
+-   The second argument is the `aes()` function which is used to map variables in the data onto aesthetics. In this call we only consider two aesthetics, the `x` and `y` axes. These two are probably the most important aesthetics, but we will also use other aesthetics such as `linetype`, `size`, or `shape` of the data points. In general, an aesthetic is a feature of the plot which changes as a function of the values of the variable.
+-   After passing the data and specifying the aesthetics, we close the `ggplot()` call (i.e., close the opening parenthesis) and then add further arguments, which are passed as function calls, to the plot using `+`.
+-   The most important set of arguments to pass are `geom`s (or geometric objects). Here we pass `geom_point()` to indicate that we want to plot all points of the data.
+
+Another important thing with `ggplot2` is that we cannot only use one `geom`, but multiple. For example, we could add a line on top connecting all the data points:
+
+```{r}
+ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
+  geom_point() +
+  geom_line()
+```
+
+One thing of note is that usually `geom_line()` requires the use of the `groups` aesthetic. And if all data points are connected, as in the present case, group should be 1 (i.e., `geom_line(aes(group = 1))`). So the following is equivalent in the present case, but is an idiom one should be aware of.
+
+```{r}
+ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
+  geom_point() +
+  geom_line(aes(group = 1))
+```
+
+### Two Continuous Variables
+
+The examples above show a simple case of plotting two continuous variables, the dependent variable is shown on the y-axis and the independent variable (for this plot) on the x-axis. Let us now consider a few more cases of plotting two continuous variables, by extending the data we are looking at.
+
+In the plots above we have averaged over all possible potential losses when looking at the effect of gain on average acceptance rates. We will now plot the case in which we consider each individual lottery -- that is, each unique combination of potential gain and loss -- as one data point (i.e., we will not average over all potential losses for one gain). Additionally, to reduce the influence of the condition manipulation we will only consider the two symmetric condition in which the range for losses is equal to the range for gains. Let us begin the analysis by preparing the corresponding data.
+
+```{r}
+lot_sum2 <- tbl1a %>% 
+  filter(condition %in% c("-$20/+$20", "-$40/+$40")) %>% 
+  group_by(loss, gain) %>% 
+  summarise(mean_acceptance = mean(resp))
+lot_sum2
+```
+
+For our first plot, we begin with the same call as above and only change the data that is passed to the `ggplot()` function.
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
+  geom_point()
+```
+
+This plot is difficult to interpret. We see that there are some lotteries with very low acceptance rates between 0 and around 0.2 as well as another group with acceptance rates between around 0.3 and 0.85. In this plot it does not look as if a larger potential gain is associated with a larger mean acceptance rates.
+
+One possibility for these differing visual impressions might be that there is some overlap of data points that are near 0. That means that in the current plot we cannot differentiate between one or multiple data points that share the same or approximately same x and y coordinates. One way to allow for this differentiation is by decreasing the alpha blending value to values below 1 to create the visual impression of semi transparency. For example, we can set `alpha = 0.25` for `geom_point()` as shown below. In this plot, overlapping points appear darker whereas non-overlapping points do not.
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
+  geom_point(alpha = 0.25)
+```
+
+Whereas this plot provides some evidence for over-plotting, especially for mean acceptance rates near 0 (and especially for low values of potential gains), it is still not very clear. One possibility to further improve on this figure is by introducing some random jitter for the plotted points using `geom_jitter()`. Given that the points are all on discrete x-axis points (i.e., the even whole numbers that act as potentially gains) it makes sense to only add a small amount of jitter on the x-axis (by specifying the `width` argument). This way the points retain their exact y-axis positions but are still shown around their original x-axis position.
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
+  geom_jitter(width = 0.4, alpha = 0.25)
+```
+
+Note that due to the randomness that is used to add the jotter, this plot will look slightly different every time it is created. This plot also makes it easier to see why we see such an effect of potential gain on mean acceptance rates when averaging over losses. There are many more data points with very low mean acceptance rates on the left side of the plot and many more data points with medium to high acceptance rates on the right side of the plot. If we imagine taking the mean of this points we can imagine a monotonically increasing mean acceptance rate.
+
+However, one question that this plot leaves open is the question of why we see this qualitatively different pattern for mean acceptance rates of lotteries. Why are some so low and other larger? To elucidate this question we are going to create a new factor, `ev`, which separates the expected value of the lottery (i.e., loss plus gain) into three bins: expected value = 0 (i.e., symmetric lotteries), negative expected value (i.e., potential loss larger than potential gain), and positive expected value (potential loss smaller than potential gain).
+
+To create the `ev` variable, we use another `dplyr` function, `case_when()`. `case_when()` is a vectorised variant of multiple branching (i.e., if-else). This allows to create a new variable based on multiple logical conditions in a convenient way. Each argument to `case_when()` consists of a logical statement, the `~` operator (which I call the tilde-operator), and a return value that is returned in case the logical condition is true. Here we have three logical cases which are each mapped onto one label describing the sign of the expected value. We also convert the `ev` variable into a `Factor` using `factor()`.
+
+```{r}
+lot_sum2 <- lot_sum2 %>% 
+  mutate(ev = factor(case_when(
+    gain == loss ~ "EV = 0",
+    gain < loss ~ "EV negative",
+    gain > loss ~ "EV positive"
+  )))
+lot_sum2
+```
+
+We can then use the new `ev` variable to print points in a different colour depending on the value of the `ev` variable. For this we just need to map the `ev` variable to the `colour` aesthetic in the `aes()` call and get a very interesting plot.
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev)) +
+  geom_jitter(width = 0.25, alpha = 0.5)
+```
+
+And whereas this plot already looks very interesting, it uses both green and red colours which can be difficult to see for individuals with colour blindness (such as me, even if my colour blindness is very mild). Therefore, we can make this plot nicer in two regards: (1) by using a somewhat nicer theme than the default which removes the grey background (e.g., my favourite is `theme_bw()`) and (2) we can use a colour blind friendly colour palette. For this we use `ggthemes::scale_colour_colorblind()` (here `ggthemes::` just means we use a a function from the `ggthemes` package without loading it explicitly beforehand). This gives us a very appealing and interesting plot.
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+  ggthemes::scale_colour_colorblind() +
+  theme_bw()
+```
+
+This plot shows that if the expected value is negative, participants are highly unlikely to accept a lottery. If the expected value is 0 (i.e., for symmetric lotteries) the acceptance rates start out at around 0.5 for small potentials losses and gains and decrease a bit with increasing loss/gain (just as predicted by loss aversion, see Section \@ref(evidence-for-loss-aversion-lotteries)). Finally, for lotteries with positive expected value (i.e., where on average we should win money) acceptance rate are at or above 0.5. Just as one would expect. 
+
+Are we done yet with this data? Not yet. There is one more trick we can use to make the plot even more informative. We can map the `loss` variable onto the size of the data points. For this, we just add `size = loss` to the `aes()` call. This allows us to further understand the pattern. 
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev, size = loss)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+  ggthemes::scale_colour_colorblind() +
+  theme_bw()
+```
+
+We can now see something that should not be too surprising. If the potential loss is small, which is now indicated by a small data point, the average acceptance rate is high. And the higher the potential gain for one specific potential loss (i.e., point size) the larger the mean acceptance rate. For each x-axis position on which we have data, we can also nicely see a size based ordering: The small losses have the largest mean acceptance rates and the large losses the smallest. In sum, even though the plot reveals a few pattern that should not be too surprising, it provides a comprehensive overview of the data of @walasekHowMakeLoss2015 (at least the two symmetric conditions).
+
+### One Continuous and one Categorical Variable
+
+So far we have looked at two continuous variables and seen how by mapping different variables to different aesthetics and by changing the arguments to the aesthetics, we can create appealing figures. Now we are trying to do the same for a situation that is potentially more common for experimental data. A situation with one continuous dependent variable and one categorical independent variable.
+
+Before producing the data, we are going to do something we will continue to do throughout this book. We will change the default theme (i.e., the theme that will be automatically used by all plots in one `R` session unless a different theme is specifically requested) to a theme without the grey background. In this call, we also make a few more changes such as larger axes labels and remove unnecessary grid lines which I feel makes such plots generally nicer.
+
+```{r}
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+```
+
+Note, this is a global options that will affect all plots created after executing this command within an `R` session (i.e., to reset to the default theme you would have to restart your `R` session).
+
+We then create a new data set that we will be using for the plots here. Before creating this plot we need to consider exactly what we want to plot. In the plots above we have aggregated the data on the level of the individual lotteries (i.e., unique combination of gains and losses). Whereas this made sense for this plot, it ignored the different participants, which are usually considered a major source of noise. What this means that it usually is a good idea to show the distribution of responses across participants to allow to get a visual impression of the level of noise in the data. Therefore, instead of aggregating across participants we will now first calculate one score per participant and then show the distribution across participants. We begin by creating this data for all lotteries. Whereas this might not be the most informative substantively (e.g., compared to only plotting the shared symmetric lotteries), it allows us to try out a few different plotting options.
+
+```{r}
+part_sum <- tbl1a %>%
+  group_by(condition, subno) %>% 
+  summarise(mean_acc = mean(resp)) %>% 
+  ungroup()
+part_sum
+```
+
+
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_point()
+```
+
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+```
+
+
+only the symmetric lotteries that are shared across conditions separately for each participant and condition.
+
+```{r}
+part_sum <- tbl1a %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  group_by(condition, subno) %>% 
+  summarise(mean_acc = mean(resp)) %>% 
+  ungroup()
+part_sum
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_point()
+```
+
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+```
+
+
+### One Continuous Variables: Histograms
+
+## Cheat Sheets
+

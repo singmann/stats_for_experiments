@@ -1,5 +1,12 @@
 # Data and Research Designs {#research-designs}
 
+```{r setup, include=FALSE}
+library("tidyverse")
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+```
+
 In the previous chapter (Chapter \@ref(role-of-statistics-in-the-research-process)) we have provided an overview of the research process in psychology and related disciplines. The goal of this overview was to show that statistics is just one part of the full research endeavour and usually not the end goal. We also highlighted that an answer to our research questions requires not only the results from the statistical analysis, but the context in which this result was generated. More specifically, we argued that the most important part of the research process is usually the operationalisation of the research question: What are our measures? What is the task participants have to do? What is our study design? The goal of this chapter is to provide us with the necessary conceptual knowledge and the right terminology to answer these questions for our research.
 
 ## Empirical Evidence and Data

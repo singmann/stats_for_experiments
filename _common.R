@@ -13,5 +13,5 @@ knitr::opts_chunk$set(
 
 options(dplyr.print_min = 6, dplyr.print_max = 6)
 
-# Supress crayon output
+# Suppress crayon output
 options(crayon.enabled = FALSE)

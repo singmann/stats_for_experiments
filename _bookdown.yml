@@ -1,3 +1,5 @@
+new_session: yes
+
 rmd_files: [
   "index.Rmd", 
   "role_of_stats.Rmd","quiz-intro-chapter.Rmd",

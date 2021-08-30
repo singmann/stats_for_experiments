@@ -10,15 +10,6 @@ link-citations: yes
 description: "Statistics for Experimental Psychology with R using the afex package."
 ---
 
-```{r setup, include=FALSE}
-library("tidyverse")
-library("afex")
-library("ggbeeswarm")
-theme_set(theme_bw(base_size = 15) + 
-            theme(legend.position="bottom", 
-                  panel.grid.major.x = element_blank()))
-library("webex")
-```
 
 # Overview {-}
 
