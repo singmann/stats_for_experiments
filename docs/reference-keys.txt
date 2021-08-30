@@ -46,6 +46,15 @@ epistemic-gap-3-causal-inference-and-confounding-variables
 is-causal-inference-from-observational-data-possible-at-all
 internal-versus-external-validity
 summary-1
+short-introduction-to-r-and-the-tidyverse
+what-is-r
+getting-started-with-r
+rstudio-setup
+a-brief-base-r-example-session
+data-files-scripts-and-working-directory
+read-data-and-inspecting-it
+transforming-categorical-variables-into-factors
+the-tidyverse
 standard1
 ex:urry
 the-logic-of-inferential-statistics

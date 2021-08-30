@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Short Introduction to R and the tidyverse | Introduction to Statistics for Experimental Psychology with R</title>
+  <meta name="description" content="Statistics for Experimental Psychology with R using the afex package." />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Short Introduction to R and the tidyverse | Introduction to Statistics for Experimental Psychology with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistics for Experimental Psychology with R using the afex package." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Short Introduction to R and the tidyverse | Introduction to Statistics for Experimental Psychology with R" />
+  
+  <meta name="twitter:description" content="Statistics for Experimental Psychology with R using the afex package." />
+  
+
+<meta name="author" content="Henrik Singmann" />
+
+
+<meta name="date" content="2021-08-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="research-designs.html"/>
+<link rel="next" href="standard1.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="include/style.css" type="text/css" />
+<link rel="stylesheet" href="include/webex.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistics for Experimental Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>0.1</b> Acknowledgments</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#license-and-attribution"><i class="fa fa-check"></i><b>0.2</b> License and Attribution</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html"><i class="fa fa-check"></i><b>1</b> Role of Statistics in the Research Process</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#the-research-process"><i class="fa fa-check"></i><b>1.1</b> The Research Process</a></li>
+<li class="chapter" data-level="1.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#example-the-psychology-of-loss-aversion"><i class="fa fa-check"></i><b>1.2</b> Example: The Psychology of Loss Aversion</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#evidence-for-loss-aversion-lotteries"><i class="fa fa-check"></i><b>1.2.1</b> Evidence for Loss Aversion: Lotteries</a></li>
+<li class="chapter" data-level="1.2.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking"><i class="fa fa-check"></i><b>1.2.2</b> Alternative Explanation: Loss Aversion or Loss Seeking?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know"><i class="fa fa-check"></i><b>1.3</b> Epistemic Gaps: The Difference Between What we Want to Know and What we can Know</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-1-underdetermination-of-theory-by-data"><i class="fa fa-check"></i><b>1.3.1</b> Epistemic Gap 1: Underdetermination of Theory by Data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-2-signal-versus-noise"><i class="fa fa-check"></i><b>1.3.2</b> Epistemic Gap 2: Signal versus Noise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#some-further-examples-and-passing-thoughts"><i class="fa fa-check"></i><b>1.4.1</b> Some Further Examples and Passing Thoughts</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-1-quiz.html"><a href="chapter-1-quiz.html"><i class="fa fa-check"></i>Chapter 1: Quiz</a></li>
+<li class="chapter" data-level="2" data-path="research-designs.html"><a href="research-designs.html"><i class="fa fa-check"></i><b>2</b> Data and Research Designs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="research-designs.html"><a href="research-designs.html#empirical-evidence-and-data"><i class="fa fa-check"></i><b>2.1</b> Empirical Evidence and Data</a></li>
+<li class="chapter" data-level="2.2" data-path="research-designs.html"><a href="research-designs.html#data-types"><i class="fa fa-check"></i><b>2.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="research-designs.html"><a href="research-designs.html#numerical-versus-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Numerical Versus Categorical Variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="research-designs.html"><a href="research-designs.html#assumptions-of-numerical-variables"><i class="fa fa-check"></i><b>2.2.2</b> Assumptions of Numerical Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="research-designs.html"><a href="research-designs.html#measurement"><i class="fa fa-check"></i><b>2.3</b> Measurement</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="research-designs.html"><a href="research-designs.html#measurement-scales"><i class="fa fa-check"></i><b>2.3.1</b> Measurement Scales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="research-designs.html"><a href="research-designs.html#reliability-and-validity"><i class="fa fa-check"></i><b>2.3.2</b> Reliability and Validity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="research-designs.html"><a href="research-designs.html#independent-and-dependent-variables"><i class="fa fa-check"></i><b>2.4</b> Independent and Dependent Variables</a></li>
+<li class="chapter" data-level="2.5" data-path="research-designs.html"><a href="research-designs.html#experimental-versus-observational-variables"><i class="fa fa-check"></i><b>2.5</b> Experimental versus Observational Variables</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="research-designs.html"><a href="research-designs.html#epistemic-gap-3-causal-inference-and-confounding-variables"><i class="fa fa-check"></i><b>2.5.1</b> Epistemic Gap 3: Causal Inference and Confounding Variables</a></li>
+<li class="chapter" data-level="2.5.2" data-path="research-designs.html"><a href="research-designs.html#is-causal-inference-from-observational-data-possible-at-all"><i class="fa fa-check"></i><b>2.5.2</b> Is Causal Inference from Observational Data Possible at All?</a></li>
+<li class="chapter" data-level="2.5.3" data-path="research-designs.html"><a href="research-designs.html#internal-versus-external-validity"><i class="fa fa-check"></i><b>2.5.3</b> Internal versus External Validity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="research-designs.html"><a href="research-designs.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Short Introduction to <code>R</code> and the <code>tidyverse</code></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is <code>R</code>?</a></li>
+<li class="chapter" data-level="3.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#getting-started-with-r"><i class="fa fa-check"></i><b>3.2</b> Getting Started with <code>R</code></a></li>
+<li class="chapter" data-level="3.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#rstudio-setup"><i class="fa fa-check"></i><b>3.3</b> <code>RStudio</code> Setup</a></li>
+<li class="chapter" data-level="3.4" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#a-brief-base-r-example-session"><i class="fa fa-check"></i><b>3.4</b> A Brief Base <code>R</code> Example Session</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#data-files-scripts-and-working-directory"><i class="fa fa-check"></i><b>3.4.1</b> Data Files, Scripts, and Working Directory</a></li>
+<li class="chapter" data-level="3.4.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#read-data-and-inspecting-it"><i class="fa fa-check"></i><b>3.4.2</b> Read Data and Inspecting it</a></li>
+<li class="chapter" data-level="3.4.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#transforming-categorical-variables-into-factors"><i class="fa fa-check"></i><b>3.4.3</b> Transforming Categorical Variables into Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#the-tidyverse"><i class="fa fa-check"></i><b>3.5</b> The <code>tidyverse</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="standard1.html"><a href="standard1.html"><i class="fa fa-check"></i><b>4</b> The Standard Approach for One Independent Variable</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="standard1.html"><a href="standard1.html#ex:urry"><i class="fa fa-check"></i><b>4.1</b> Example Data: Note Taking Experiment</a></li>
+<li class="chapter" data-level="4.2" data-path="standard1.html"><a href="standard1.html#the-logic-of-inferential-statistics"><i class="fa fa-check"></i><b>4.2</b> The Logic of Inferential Statistics</a></li>
+<li class="chapter" data-level="4.3" data-path="standard1.html"><a href="standard1.html#the-basic-statistical-model"><i class="fa fa-check"></i><b>4.3</b> The Basic Statistical Model</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="standard1.html"><a href="standard1.html#model-predictions"><i class="fa fa-check"></i><b>4.3.1</b> Model Predictions</a></li>
+<li class="chapter" data-level="4.3.2" data-path="standard1.html"><a href="standard1.html#statistical-model-for-the-example-data"><i class="fa fa-check"></i><b>4.3.2</b> Statistical Model for the Example Data</a></li>
+<li class="chapter" data-level="4.3.3" data-path="standard1.html"><a href="standard1.html#understanding-the-statistical-model"><i class="fa fa-check"></i><b>4.3.3</b> Understanding the Statistical Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model-in-r"><i class="fa fa-check"></i><b>4.4</b> Estimating the Statistical Model in R</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="standard1.html"><a href="standard1.html#package-and-data-setup"><i class="fa fa-check"></i><b>4.4.1</b> Package and Data Setup</a></li>
+<li class="chapter" data-level="4.4.2" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model"><i class="fa fa-check"></i><b>4.4.2</b> Estimating the Statistical Model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="standard1.html"><a href="standard1.html#interpreting-the-results"><i class="fa fa-check"></i><b>4.4.3</b> Interpreting the Results</a></li>
+<li class="chapter" data-level="4.4.4" data-path="standard1.html"><a href="standard1.html#data-visualisation"><i class="fa fa-check"></i><b>4.4.4</b> Data Visualisation</a></li>
+<li class="chapter" data-level="4.4.5" data-path="standard1.html"><a href="standard1.html#follow-up-analysis"><i class="fa fa-check"></i><b>4.4.5</b> Follow-Up Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="standard1.html"><a href="standard1.html#summary-2"><i class="fa fa-check"></i><b>4.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html"><i class="fa fa-check"></i><b>5</b> Case Study 1: More Results from Note Taking Studies</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-urry-et-al.-2021"><i class="fa fa-check"></i><b>5.1</b> Conceptual Memory Data from Urry et al. (2021)</a></li>
+<li class="chapter" data-level="5.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#why-are-experiments-replicated"><i class="fa fa-check"></i><b>5.2</b> Why are Experiments Replicated?</a></li>
+<li class="chapter" data-level="5.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-mueller-and-oppenheimer-2014"><i class="fa fa-check"></i><b>5.3</b> Conceptual Memory Data from Mueller and Oppenheimer (2014)</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#preparing-the-data"><i class="fa fa-check"></i><b>5.3.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#descriptive-statistics"><i class="fa fa-check"></i><b>5.3.2</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="5.3.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#inferential-analysis"><i class="fa fa-check"></i><b>5.3.3</b> Inferential Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#summary-3"><i class="fa fa-check"></i><b>5.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="short-introduction-to-r-and-the-tidyverse" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Short Introduction to <code>R</code> and the <code>tidyverse</code></h1>
+<p>As empirical scientists our believes should be based on empirical evidence that comes in the form of data. Consequently, a central skill for researchers is the ability to process and analyse data. For this we will be using the statistical programming language <a href="https://cran.r-project.org/"><code>R</code></a>.</p>
+<div id="what-is-r" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> What is <code>R</code>?</h2>
+<p><code>R</code> is a comprehensive tool that enables the skilled user to perform all steps or tasks of a data analysis with it. For example, with <code>R</code> we can:</p>
+<ul>
+<li>Prepare data for analysis: read data that comes in pretty much any format, data manipulation, and data wrangling</li>
+<li>Explore data using summary statistics and graphical summaries: exploratory data analysis, descriptive statistics, and data visualisation</li>
+<li>Perform statistical analysis of the data: inferential statistics</li>
+<li>Communicate the results: publication-ready results graphics, <a href="https://rmarkdown.rstudio.com/">research reports that combine narrative text and statistical results</a></li>
+<li>And much more such as: data simulations and advanced statistical methods, <a href="https://www.statlearning.com/">machine learning</a>, <a href="https://shiny.rstudio.com/">interactive data visualisations</a>, <a href="https://bookdown.org/yihui/blogdown/">websites</a>, <a href="https://bookdown.org/home/">books</a> (such as the present one)</li>
+</ul>
+<p>On top of this incredible list of things that can be done with <code>R</code>, <code>R</code> is <em>free software</em> (sometimes also known as <em>open source software</em>). This means, not only is <code>R</code> completely free to download, install, and use, you are also free to inspect its source code or make changes to it (as long as you do not make your version of <code>R</code> un-free).</p>
+<p>Given the flexibility of all the things you can do with <code>R</code>, it is not completely surprising that it requires some effort to start with <code>R</code>. Especially if <code>R</code> is your first real experience of learning a programming language.</p>
+<p>The important thing to know for any new <code>R</code> user is that the beginning is hard for almost everyone (including the present author). So the most important message is to hang in there and keep on trying. In all likelihood, there will be at least some rather frustrating situations in your first weeks of interacting with <code>R</code>, but <strong>it will get better</strong>. I have taught <code>R</code> to many users with a great variety of backgrounds and experiences and many of them have struggled in some way in the beginning, but for anyone who kept up their hopes and continued to put in the time and effort their struggles were not in vain. You can learn <code>R</code> if you just do not give up and believe in yourself. Be assured I believe in you. Learning <code>R</code> is such an incredibly powerful skill that will surely have a positive effect on whatever comes later in your life, be it a career in Academia (i.e., at a university) or in “the real world” (as we academics like to call everything that is not a university job).</p>
+</div>
+<div id="getting-started-with-r" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Getting Started with <code>R</code></h2>
+<p>With this somewhat scary introduction out of the way, the next important question is probably how do you get going with <code>R</code>? Providing a comprehensive answer to this question is beyond the scope of the present work. Instead, we will shortly provide pointers to other freely accessible resources that provide introductions for different levels of prior experiences. Before that, I feel it is important to highlight that the basic <code>R</code> software that performs the calculations and can be installed from <a href="https://cran.r-project.org/index.html">CRAN</a>, the Comprehensive R Archive Network, is particularly bare bone. Therefore, in addition to <code>R</code> I also recommend you install <a href="https://www.rstudio.com/products/rstudio/"><code>RStudio</code></a>. <code>RStudio</code> is the most popular IDE – that is, integrated development environment – for <code>R</code> that makes using it quite a bit more comfortable. Also note that both <code>R</code> and <code>RStudio</code> need to be updated independently of each other. Especially <code>R</code> should be updated at least once per year from <a href="https://cran.r-project.org/index.html">CRAN</a>. So if you already have <code>R</code> installed on your computer and do not remember the last time you have updated, now is probably a good time to do so. I personally update <code>R</code> usually within a few weeks of a new version appearing.</p>
+<p>The following provides an overview of resources to get started with <code>R</code> with a brief explanations of what it offers:</p>
+<ul>
+<li><p><a href="https://psyr.djnavarro.net/index.html"><code>R</code> for Psychological Science</a> by Danielle Navarro. This is a series of websites that provide an introduction to the basic concepts of <code>R</code> and my recommended introductory resource. At the time of writing it is not yet complete (i.e., still in progress), but what is there is excellent. It will guide you through all the steps of getting to know <code>R</code> and learn the basics. As an introductory resource I recommend you check out:</p>
+<ul>
+<li><a href="https://psyr.djnavarro.net/index.html#core-toolkit">Part 1, the “core toolkit”</a> covers <code>R</code> installation, variables and data types, scripts, packages, and basic programming concepts, such as loops, branches, and functions. I recommend you go through all sections of Part 1 as the first thing of getting started with <code>R</code>.</li>
+<li><a href="https://psyr.djnavarro.net/index.html#working-with-data">Part 2, the “working with data”</a> covers more complex data types, most importantly <code>R</code>’s central data type, the <code>data.frame</code>, and already provides an introduction to the <code>tidyverse</code>, which will also be used here. I recommend you at least go through <a href="https://psyr.djnavarro.net/prelude-to-data.html">the prelude</a> and <a href="https://psyr.djnavarro.net/data-types.html">data types</a> (pay special attention to <code>dataframe</code>s). It discussed many of the issue also relevant for the present work.<br />
+</li>
+</ul></li>
+<li><p>In case you prefer video introductions instead of reading text, Danielle Navarro has also published a series of awesome <a href="https://slides.djnavarro.net/">video lectures</a> to some introductory topics. For getting started with <code>R</code> I recommend:</p>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd">Installing <code>R</code></a>: Downloading and installing <code>R</code> with specific videos for each operating system</li>
+<li><a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegPiBteC2dRn95TX9YefYFyy">Project structure</a>: This provides a great overview and introduction to a topic that is fundamental to working with computers beyond <code>R</code>: working with the file system. It covers naming files, file paths, folders, and related technical stuff that is very important when programming, but not often taught explicitly.</li>
+</ul></li>
+<li><p><a href="https://psyteachr.github.io/msc-conv/">MSc Conversion: R Research Methods book</a> by Emily Nordmann is a book with accompanying <a href="https://www.youtube.com/playlist?list=PLMGjq7JynlJmBbomo-_lIqJ4qWcuHcy_z">video lectures</a>. This book is aimed at a similar audience as the present book. However, the books focuses on a few concepts that we do not use here (e.g., <code>RMarkdown</code>, accessing <code>R</code> that runs on a server). The book is part of the <a href="https://psyteachr.github.io/">psychTeachR</a> book plus video series developed by the University of Glasgow that contains a few more interesting books such as <a href="https://psyteachr.github.io/data-skills-v1/">Data Skills: psyTeachR Books</a> which is very introductory.</p></li>
+<li><p><a href="https://learningstatisticswithr.com/">Learning Statistics with <code>R</code></a> also by Danielle Navarro (as you can see, I am a big fan of Danielle’s work). This is a completely free introductory book to statistics using <code>R</code>, which can be downloaded from its website (the <a href="https://learningstatisticswithr.com/lsr-0.6.pdf">currently available version is 0.6</a>). Part II (i.e., Chapters 3 and 4) provides a gentle and comprehensive introduction to <code>R</code> for newcomers. From installing <code>R</code> and <code>RStudio</code>, navigating the console and <code>RStudio</code> windows, basic data types, reading in data and the file system, to the most important data types, <code>data.frames</code>, these roughly 70 pages (i.e., pp. 35 - 109) have you covered. Once you had a look at these two chapters, Chapter 8 is a great next step as it introduces <code>R</code> scripts. If you are completely new to statistics, Chapter 5 also provides a great introduction to other important concepts. One downside of this resource is that it comes in the form of a PDF and not a website, so cannot be read comfortably on all devices (but great for printing). Also note that <a href="https://psyr.djnavarro.net/index.html"><code>R</code> for Psychological Science</a> is an updates version of this book, so I would probably start with that first. Finally, note that the present book has a somewhat different conceptual focus for introducing statistical tests and methods (i.e., especially compared to Part IV).</p></li>
+<li><p>If you prefer an introduction that has a stronger programming focus, I recommend the free book <a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with <code>R</code></a> by Garrett Grolemund. Chapters 1 to 5 (i.e., pp. 1 - 99) also provide an introduction that starts with installing <code>R</code> in a gentle manner and then introduces the necessary basic concepts including the different data types and <code>data.frame</code>s.</p></li>
+</ul>
+<p>To sum this long list up, as a minimum to get through this book it is recommended to go through all sections of <a href="https://psyr.djnavarro.net/index.html#core-toolkit">Part 1</a> (especially chapters <a href="https://psyr.djnavarro.net/getting-started.html">1</a>, <a href="https://psyr.djnavarro.net/variables.html">2</a>, <a href="https://psyr.djnavarro.net/scripts.html">3</a>, <a href="https://psyr.djnavarro.net/packages.html">4</a>, <a href="https://psyr.djnavarro.net/workspaces.html">5</a>, <a href="https://psyr.djnavarro.net/vectors.html">6</a>, and <a href="https://psyr.djnavarro.net/file-system.html">11</a>) and at least the <a href="https://psyr.djnavarro.net/data-types.html#132_Data_frames"><code>data.frame</code>s chapter (Chapter 13)</a> of <a href="https://psyr.djnavarro.net/index.html#working-with-data">Part 2</a> of Danielle Navarro’s <a href="https://psyr.djnavarro.net/index.html"><code>R</code> for Psychological Science</a>. If you are not yet super comfortable with the file system on your computer, I also recommend you check out Danielle Navarro’s video lecture on <a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegPiBteC2dRn95TX9YefYFyy">project structure</a>.</p>
+</div>
+<div id="rstudio-setup" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> <code>RStudio</code> Setup</h2>
+<p>Our main access through <code>R</code> is through the <code>RStudio</code> IDE.</p>
+</div>
+<div id="a-brief-base-r-example-session" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> A Brief Base <code>R</code> Example Session</h2>
+<p>As we have discussed in the previous chapter, the most important format of data representation is a tabular format with each column representing a single variable and typically one row per observation. Such data is represented in base <code>R</code> in a <code>data.frame</code>, the most important data format for our needs. We use the term “base <code>R</code>” here to refer to using <code>R</code> without any additional packages. Let us quickly recap how a <code>data.frame</code> in base <code>R</code> looks like and let us do some basic operations with it that also sets the stage for using <code>R</code> scripts.</p>
+<div id="data-files-scripts-and-working-directory" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Data Files, Scripts, and Working Directory</h3>
+<p>In this chapter, we are mainly working with the data from <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> we have introduced in detail in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>. The data consists of two data files each representing a separate experiment we have discussed together so far as they are exact replications of another. In <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> these are reported as Experiments 1a and 1b. The original data files sent to me by Lukasz Walasek were Excel files (which can be found here: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx">Experiment 1b</a>).</p>
+<p>As base <code>R</code> does not allow to read in Excel files, I have opened the original data files of <span class="citation"><a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> in Excel and saved them as <code>.csv</code> files (i.e., comma separated files) which can be downloaded from here: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>. I recommend you download these files and save them in some folder so you can access them from within <code>R</code>.</p>
+<p>To follow along with the upcoming <code>R</code> code, save the downloaded data files in a folder named <code>data</code> that is in your current <code>R</code> working directory. I also recommend you create a new empty <a href="https://psyr.djnavarro.net/scripts.html"><code>R</code> script</a> and also save it in the working directory. For example, say you already have already created a folder for this book/class, let’s assume this folder is called <code>stats_r_intro-stuff</code> and in some easy to find location (e.g., depending on your operating system the <code>My Documents</code> folder or your home folder <code>~</code>). Let’s assume you want this folder to be your working directory. Then, you create a new folder in this folder, called <code>data</code> (i.e., <code>stats_r_intro-stuff/data</code>), and download the two data files (<a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>) into this folder. Next you create an empty <code>R</code> script in this folder for this chapter, say <code>tidyverse-intro.R</code> (i.e., it is now <code>stats_r_intro-stuff/tidyverse-intro.R</code>). You can now easily set your current <code>R</code> session to this folder as your working directory by opening <code>tidyverse-intro.R</code> in <code>RStudio</code> (if it is not yet opened) and the using the menu: <code>Session</code> - <code>Set Working Directory</code> - <code>To Source File Location</code>. This sets your working directory to the folder (i.e., location) in which thr currently active <code>R</code> script is located, which should be your <code>stats_r_intro-stuff</code> folder. Note, if you have been using the current <code>R</code> session already for some time, now is a good time to restart the session (not necessarily <code>RStudio</code>) by using the menu again: <code>Session</code> - <code>Restart R</code>.</p>
+<p>The workflow laid out in the previous paragraph represents my general recommendation for working with <code>R</code> at this stage. Have a folder that is your designated project folder. In this folder you have your <code>R</code> scripts as well as a sub folder for the data. Then you can open a script in <code>RStudio</code> and set the folder to be your working directory through the menu (i.e., <code>Session</code> - <code>Set Working Directory</code> - <code>To Source File Location</code>). You can then access the data files simply by accessing <code>data/my-data.file.csv</code>. Importantly, don’t forget to restart the <code>R</code> session before starting something new through the menu: <code>Session</code> - <code>Restart R</code>.</p>
+</div>
+<div id="read-data-and-inspecting-it" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Read Data and Inspecting it</h3>
+<p>With this set-up steps out of the way, we can now load in the data from Experiment 1a using base <code>R</code>’s <code>read.csv()</code> function:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb1-1" aria-hidden="true" tabindex="-1"></a>df1a <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ws2015_exp1a.csv&quot;</span>)</span></code></pre></div>
+<p>This should read in the data file without any warnings or problems.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> If for some reason you fail to download the file or set the correct working directory, you can also try to read it directly from the internet as in the following code. But please only do that after you have tried downloading and dealing with the actual file. Handling data files and working directories is an important <code>R</code> skill you need to acquire.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb2-1" aria-hidden="true" tabindex="-1"></a>df1a <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv&quot;</span>)</span></code></pre></div>
+<p>The first thing we usually want to do with a <code>data.frame</code> is to inspect its structure using the <code>str()</code> function. It lists all the variables, their data types, and the number of observations and variables.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df1a)</span>
+<span id="cb3-2"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;data.frame&#39;:    22912 obs. of  6 variables:</span></span>
+<span id="cb3-3"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ subno    : int  8 8 8 8 8 8 8 8 8 8 ...</span></span>
+<span id="cb3-4"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ loss     : int  6 6 6 6 6 6 6 6 8 8 ...</span></span>
+<span id="cb3-5"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ gain     : int  6 8 10 12 14 16 18 20 6 8 ...</span></span>
+<span id="cb3-6"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ response : chr  &quot;accept&quot; &quot;accept&quot; &quot;accept&quot; &quot;accept&quot; ...</span></span>
+<span id="cb3-7"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ condition: num  20.2 20.2 20.2 20.2 20.2 20.2 20.2 20.2 20.2 20.2 ...</span></span>
+<span id="cb3-8"><a href="short-introduction-to-r-and-the-tidyverse.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ resp     : int  1 1 1 1 1 1 1 1 0 1 ...</span></span></code></pre></div>
+<p>In the present case we have over 20 thousand observations on six variables. Most of the variables are <code>int</code> which means integers; that is, numeric variables consisting of whole numbers (i.e., discrete values). We also have one <code>num</code> – that is, numeric – variable (i.e., numeric variable with decimal values), <code>condition</code>. In general, <code>int</code> and <code>num</code> variables are treated in the same way, as numeric variables, so there is hardly ever a reason to transform one into the other. Finally, <code>condition</code> is a <code>chr</code> or character variable.</p>
+</div>
+<div id="transforming-categorical-variables-into-factors" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Transforming Categorical Variables into Factors</h3>
+<p>As discussed in Section <a href="research-designs.html#data-types">2.2</a>, some of the numeric variables as well as <code>condition</code> are actually categorical variables, or <code>Factor</code>s in <code>R</code> parlance. We can transform variables into <code>Factor</code>s using the apptly named <code>factor()</code> function. We general use <code>factor()</code> instead of other methods (e.g., function <code>as.factor()</code>) because it allows us to specify the ordering of the factor levels and potentially other labels for the factor levels. Let us do so for three variables now, <code>subno</code>, <code>response</code>, and <code>condition</code>. For this we use the <code>$</code> operator to access variables of a <code>data.frame</code>. After transforming the variables we take another look at the structure of the <code>data.frame</code> using <code>str()</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-1" aria-hidden="true" tabindex="-1"></a>df1a<span class="sc">$</span>subno <span class="ot">&lt;-</span> <span class="fu">factor</span>(df1a<span class="sc">$</span>subno)</span>
+<span id="cb4-2"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-2" aria-hidden="true" tabindex="-1"></a>df1a<span class="sc">$</span>response <span class="ot">&lt;-</span> <span class="fu">factor</span>(df1a<span class="sc">$</span>response, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;reject&quot;</span>, <span class="st">&quot;accept&quot;</span>))</span>
+<span id="cb4-3"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-3" aria-hidden="true" tabindex="-1"></a>df1a<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(df1a<span class="sc">$</span>condition, </span>
+<span id="cb4-4"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="fl">40.2</span>, <span class="fl">20.2</span>, <span class="fl">40.4</span>, <span class="fl">20.4</span>), </span>
+<span id="cb4-5"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;-$20/+$40&quot;</span>, <span class="st">&quot;-$20/+$20&quot;</span>, <span class="st">&quot;-$40/+$40&quot;</span>, <span class="st">&quot;-$40/+$20&quot;</span>))</span>
+<span id="cb4-6"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df1a)</span>
+<span id="cb4-7"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;data.frame&#39;:    22912 obs. of  6 variables:</span></span>
+<span id="cb4-8"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ subno    : Factor w/ 358 levels &quot;5&quot;,&quot;8&quot;,&quot;13&quot;,&quot;24&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span id="cb4-9"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ loss     : int  6 6 6 6 6 6 6 6 8 8 ...</span></span>
+<span id="cb4-10"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ gain     : int  6 8 10 12 14 16 18 20 6 8 ...</span></span>
+<span id="cb4-11"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ response : Factor w/ 2 levels &quot;reject&quot;,&quot;accept&quot;: 2 2 2 2 2 2 2 2 1 2 ...</span></span>
+<span id="cb4-12"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ condition: Factor w/ 4 levels &quot;-$20/+$40&quot;,&quot;-$20/+$20&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span id="cb4-13"><a href="short-introduction-to-r-and-the-tidyverse.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ resp     : int  1 1 1 1 1 1 1 1 0 1 ...</span></span></code></pre></div>
+<p>We see that after running these commands, we have as expected three <code>Factor</code>s in the data. Let us take a look at each of these calls to <code>factor()</code> to understand why we call it in a different manner in each case.</p>
+<ul>
+<li><p>The call for <code>subno</code> only passes the variable (i.e., the <code>df1a$subno</code> vector) and no further arguments to <code>factor()</code>. As a consequence, the factor levels are ordered in an alpha-numerical increasing manner.</p></li>
+<li><p>The call for <code>response</code> specifies the ordering of the factor levels using the <code>levels</code> argument to which we have passed a vector of the levels, <code>c("reject", "accept")</code> (i.e., remember, <code>c()</code> is the function for creating vectors of any kind, such as character vectors here). The reason we do this is that otherwise the factor levels would be alphabetically ordered and then <code>accept</code> would be the first level and <code>reject</code> the second level (as “a” comes before “r” in the alphabet). This would be inconsistent with <code>resp</code>, where 0 = reject and 1 = accept.</p></li>
+<li><p>The call for <code>condition</code> specifies both the levels through <code>levels</code> as well as new names for the factor levels using <code>labels</code>. The labels use the ordering (i.e., potential loss first, potential gain second) we have used throughout the book and which differs from the ordering of the original <code>condition</code> (i.e., it switches the ordering to the format we are used to now). For both arguments a vector is passed, with elements mapped by position (i.e., the new label for the first level, <code>40.2</code>, is the first label, <code>-$20/+$40</code>). We again specify the ordering of factor levels here through <code>levels</code> to maintain the ordering we have used throughout with the condition that typically shows loss aversion, -$20/+$40 as first condition. If we had not done so, the first level would have been the -$20/+$20 condition (as <code>20.2</code> was the smallest number in the original vector).</p></li>
+</ul>
+<p>An interesting part of the three calls to the <code>factor()</code> function is that if you run it again, after you have already ran it, it will break the <code>condition</code> variable. If you try it out, you will see that all values of the <code>condition</code> variable change to <code>NA</code> if you run this call a second time. The reason for this is that the values passed through the <code>levels</code> argument need to be present in the variable. However, because we have replaced the original values with new labels, none of the original levels (i.e., <code>c(40.2, 20.2, 40.4, 20.4)</code>) is part of the variable any more. Consequently, all values are replaced by <code>NA</code> (i.e., “not available” which means missing data). To get the values back you need to reload the data using the <code>read.csv()</code> command from above and then you can run the <code>factor()</code> call again in a state in which the data was when you ran it for the first time.</p>
+<p>What this shows is that you cannot assume that running a piece of code twice gives the same output in all cases. The problem here is that the code changes the data itself (i.e., values of <code>condition</code>). However, the code also assumes certain values for <code>condition</code>. Because this assumption only holds the first time you run the code, but not the second time, the second calls breaks the results in somewhat unexpected ways. So what this means is that randomly re-running code can lead to unexpected results (which are called “bugs” in programming language parlance). Therefore, instead of re-running individually pieces of code it can often help to re-start at the top of a script and re-running everything in order to ensure all data is in the state you think it is (ideally after restarting the <code>R</code> session through <code>Session</code> - <code>Restart R</code>).</p>
+<p>One more tip when transforming variables into factors. It is often a bit annoying to type out the factor levels by hand, especially when it is more than say two. In this case, a handy trick to know is that you can get <code>R</code> to produce the <code>c()</code> call having all factor levels. You just need to make sure you are using the correct ordering. The heart of the trick is the <code>dput()</code> function which creates a text representation of an <code>R</code> output that can be copied from the console to your script. To use this for factors the basic structure of the call is <code>dput(unique(df$variable))</code> which returns the <code>c()</code> call for all unique elements of a variable. If you want the elements ordered you can use <code>dput(sort(unique(df$variable)))</code>. For example, to create the <code>levels</code> argument for the <code>condition</code> variable I initially executed <code>dput(sort(unique(df1a$condition)))</code> at the console which returns <code>c(20.2, 20.4, 40.2, 40.4)</code> for the original <code>df1a</code> data (i.e., before turning everything into <code>Factor</code>s). I then just copy and pasted a bit in this vector to get the ordering right (admittedly, typing might have been faster then copying and pasting, but whatever).</p>
+<p>Another thing we often want to do when reading in the data is getting an overview of how it actually looks like. One way to do so that I do not recommend for <code>data.frame</code>s is just typing the name of the variable into the console (or calling just the name from the script). What this means in <code>R</code> is that the object is printed which, for large <code>data.frame</code>s, leads to hundreds or thousands of rows being printed until some printing limit is reached. An alternative is to just look at the first few rows using the <code>head()</code> function (which prints the first 6 rows per default):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df1a)</span>
+<span id="cb5-2"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   subno loss gain response condition resp</span></span>
+<span id="cb5-3"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     8    6    6   accept -$20/+$20    1</span></span>
+<span id="cb5-4"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     8    6    8   accept -$20/+$20    1</span></span>
+<span id="cb5-5"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     8    6   10   accept -$20/+$20    1</span></span>
+<span id="cb5-6"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     8    6   12   accept -$20/+$20    1</span></span>
+<span id="cb5-7"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     8    6   14   accept -$20/+$20    1</span></span>
+<span id="cb5-8"><a href="short-introduction-to-r-and-the-tidyverse.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6     8    6   16   accept -$20/+$20    1</span></span></code></pre></div>
+<p>Alternatively, you can click on an object in the <code>RStudio</code> <code>Environment</code> pane which opens the data in a viewer pane. The equivalent <code>R</code> call is using <code>View(df1a)</code> which opens the same viewer. However, <code>View()</code> should only be used interactively at the console and not be in an <code>R</code> script as it requires user interaction beyond script and console (i.e., it opens the viewer). In other words, it is nice during development to get an overview of the data, but not for the final analysis script.</p>
+</div>
+</div>
+<div id="the-tidyverse" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> The <code>tidyverse</code></h2>
+<p>A popular alternative to base <code>R</code> is the <code>tidyverse</code> <span class="citation">(<a href="#ref-tidyverse2019" role="doc-biblioref">Wickham et al. 2019</a>)</span>, a selection of packages curated and in large parts developed by the <a href="https://www.rstudio.com/about/"><code>RStudio</code> company</a>. The mastermind behind the <code>tidyverse</code> is Hadley Wickham, the <code>RStudio</code> chief scientist and maybe the one person that can be considered an <code>R</code> superstar.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> Most of the core <code>tidyverse</code> packages that will be introduced below, such as <code>dplyr</code> and <code>ggplot2</code>, are his developments (even though many other have contributed to those packages as well).</p>
+<p>The easiest way to access the <code>tidyverse</code> is by first installing the <code>tidyverse</code> package from <code>CRAN</code> using <code>install.packages()</code>. Note that it is a good idea to only run <code>install.packages()</code> at the console and do not put it into your <code>R</code> script. The reason for this is that you only want to execute <code>install.packages()</code> once per <code>R</code> installation or after updating <code>R</code> and not every time you run a script.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>Then, you can load all <code>tidyverse</code> packages at once. This is something we will do at the top of pretty much all scripts we will be creating.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="short-introduction-to-r-and-the-tidyverse.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>When loading packages it is common that this produces some status or other messages in the console. For example, <code>tidyverse</code> lists the package versions of the loaded (or “attached”) packages and lists function conflicts; that is, cases in which a <code>tidyverse</code> function masks a previous loaded function with the same name. We do not reproduce these messages here.</p>
+<p>The core <code>tidyverse</code> packages are (with descriptions taken or adapted from the official websites):</p>
+<ul>
+<li><p><a href="https://tibble.tidyverse.org/"><code>tibble</code></a>: A modern version of the <code>data.frame</code></p></li>
+<li><p><a href="https://readr.tidyverse.org/"><code>readr</code></a>: Reading data in, the <code>RStudio</code> way.</p></li>
+<li><p>Data wrangling with <a href="https://magrittr.tidyverse.org/"><code>magrittr</code></a>, <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a>, and <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>: Coherent set of functions for tidying, transforming, and working with rectangular data. Supersedes many base <code>R</code> functions and makes common problems easy.</p></li>
+<li><p><a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a>: System for data visualization.</p></li>
+<li><p><a href="https://purrr.tidyverse.org/"><code>purr</code></a> and <a href="https://broom.tidymodels.org/"><code>broom</code></a>: Advanced modeling with the <code>tidyverse</code> and <a href="https://broom.tidymodels.org/"><code>tidymodels</code></a>.</p></li>
+</ul>
+<p>In the following we provide a short introduction to the core components of the <code>tidyverse</code> as they are needed for this book. A more comprehensive introduction is provided in the Wickham and Grolemund book “R for Data Science” which is available freely at <a href="http://r4ds.had.co.nz" class="uri">http://r4ds.had.co.nz</a>. To get a good grip on the <code>tidyverse</code>, I highly recommend working through chapters 1 to 21, or better 1 to 25 (the chapters in this book are usually a lot shorter than the chapters in the present book).</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-walasekHowMakeLoss2015" class="csl-entry">
+Walasek, Lukasz, and Neil Stewart. 2015. <span>“How to Make Loss Aversion Disappear and Reverse: Tests of the Decision by Sampling Origin of Loss Aversion.”</span> <em>Journal of Experimental Psychology: General</em> 144 (1): 7–11. <a href="https://doi.org/10.1037/xge0000039">https://doi.org/10.1037/xge0000039</a>.
+</div>
+<div id="ref-tidyverse2019" class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="25">
+<li id="fn25"><p>It can happen that when converting Excel files to <code>csv</code> files in Excel that Excel saves them using a non-standard encoding. This can be seen that the first column name is preceded by some additional characters (i.e., in the present case the first column would be <code>ï..subno</code> instead of <code>subno</code>. In this case, changing the file encoding in the <code>read.csv</code> command might help. For example: <code>df1a &lt;- read.csv("data/ws2015_exp1a.csv", fileEncoding = "UTF-8-BOM")</code>.<a href="short-introduction-to-r-and-the-tidyverse.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>There are other individuals that are instrumental to the existence of <code>R</code> that would also deserve a similar stardom, such as Brian Ripley, Kurt Hornik, and Uwe Ligges, the main actors maintaining the CRAN package repository.<a href="short-introduction-to-r-and-the-tidyverse.html#fnref26" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  if (t = document.getElementById("webex-total_correct")) {
+    t.innerHTML =
+      document.getElementsByClassName("webex-correct").length + " of " +
+      document.getElementsByClassName("webex-solveme").length + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+  
+  if (my_answer !== "" & real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+  } else {
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);  
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }  
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }  
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+  
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off"); 
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+    
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+    
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  update_total_correct();
+}
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="research-designs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standard1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["stats_for_experiments.pdf", "stats_for_experiments.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
