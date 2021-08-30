@@ -39,7 +39,7 @@ d1 <- bind_rows(d1a, d1b) %>%
 str(d1)
 
 d1 %>% 
-  filter(gamble == "EV = 0") %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>%
   group_by(loss_c, gain_c) %>% 
   summarise(n = length(unique(subno)), 
             acc = mean(resp),
