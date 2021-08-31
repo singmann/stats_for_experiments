@@ -1,0 +1,105 @@
+# Chapter 2: Quiz {-}
+
+
+Note: The pull-down menu for selecting an answer turns green after selecting the correct answer. 
+
+
+::: {.exercise}
+What does it mean if statistical assumptions are perfectly met? 
+
+1. The results of the statistical analysis are true.
+2. The results of the statistical analysis are likely true.
+3. The evidence provided by the statistical analysis is stronger than if the assumptions were not met.
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+
+
+::: {.exercise}
+Which one of the following is NOT a good way of checking the quality of a measurement? 
+
+1. Reliability
+2. Validity 
+3. Operationalisation 
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+
+::: {.exercise}
+What does it mean if a measure has low reliability? 
+
+1. It means that reliability analysis has not been conducted
+2. It means that repeated applications under the same conditions lead to widely different outcomes
+3. It means that the level of noise in a measurement is low
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+:::
+
+::: {.exercise}
+Which one of the following is NOT a measure of reliability? 
+
+1. Test-retest reliability
+2. Inter-rater reliability
+3. Split-half reliability
+4. Criterion reliability
+
+Answer: `r webex::mcq(c("1", "2", "3", answer = "4"))`
+:::
+
+::: {.exercise}
+Which one of these is NOT a synonym for a dependent variable? 
+
+1. Result variable
+2. Outcome variable
+3. Response variable
+4. Criterion
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3", "4"))`
+:::
+
+::: {.exercise}
+Why is randomisation important in experimental studies? 
+
+1. It allows researchers to theoretically rule out confounders as cause for the effect observed in the dependent variable
+2. It allows researchers to run statistical analysis 
+3. It allows researchers to correctly choose dependent and independent variables
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+:::
+
+::: {.exercise}
+What is true about numbers? 
+1. Numbers can represent categorical information
+2. Numbers can only represent numerical information
+3. If we apply a mathematical operation to numbers, we can interpret the results independent of the meaning of the numbers
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+:::
+
+::: {.exercise}
+Which one of these is NOT a  type of a variable in a research design? 
+1. Dependent variable
+2. Epistemic variable
+3. Control variable
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+:::
+
+::: {.exercise}
+What does it mean if the data is presented in a wide format?
+1. The data of one participant only spans a single row
+2. The data of one participant spans multiple rows
+3. There is one row per observation
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+:::
+
+::: {.exercise}
+What does it mean if a variable represents ‘continuous numerical information’?
+1. A variable can in principle take on any real-valued (i.e., decimal) number
+2. A certain difference or interval has the same meaning anywhere on the scale
+3. Both answers are correct
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+

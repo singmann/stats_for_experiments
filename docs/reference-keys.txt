@@ -11,6 +11,16 @@ exr:unlabeled-div-7
 exr:unlabeled-div-8
 tab:walasek-data
 fig:reliability-validity-figure
+exr:unlabeled-div-9
+exr:unlabeled-div-10
+exr:unlabeled-div-11
+exr:unlabeled-div-12
+exr:unlabeled-div-13
+exr:unlabeled-div-14
+exr:unlabeled-div-15
+exr:unlabeled-div-16
+exr:unlabeled-div-17
+exr:unlabeled-div-18
 fig:laptop-dist
 eq:statmodel
 fig:laptop-model
