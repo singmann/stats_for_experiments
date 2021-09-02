@@ -12,3 +12,5 @@ _main.*
 bookdown*
 tmp-pdfcrop-*
 local
+lukasz_notes.Rmd
+not used.Rmd
