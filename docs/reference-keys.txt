@@ -21,6 +21,8 @@ exr:unlabeled-div-15
 exr:unlabeled-div-16
 exr:unlabeled-div-17
 exr:unlabeled-div-18
+fig:pipe-screenshot
+fig:datasaurus
 fig:laptop-dist
 eq:statmodel
 fig:laptop-model
@@ -59,7 +61,6 @@ summary-1
 short-introduction-to-r-and-the-tidyverse
 what-is-r
 getting-started-with-r
-rstudio-setup
 a-base-r-example-session
 data-files-scripts-and-working-directory
 read-data-and-inspecting-it
@@ -72,10 +73,19 @@ mutate
 summarise
 filter-select-and-arrange
 group_by
-ggplot2
+counting
+dplyr-summary
+summary-2
+data-visualisation-with-ggplot2
 first-ggplot2-example
 two-continuous-variables
+changing-ggplot2-theme-for-r-session
 one-continuous-and-one-categorical-variable
+displaying-all-data-points
+bee-swarm-plot
+box-plot
+violin-plots
+plotting-the-mean
 one-continuous-variables-histograms
 cheat-sheets
 standard1
@@ -91,7 +101,7 @@ estimating-the-statistical-model
 interpreting-the-results
 data-visualisation
 follow-up-analysis
-summary-2
+summary-3
 case-study-1-more-results-from-note-taking-studies
 conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
@@ -99,4 +109,4 @@ conceptual-memory-data-from-mueller-and-oppenheimer-2014
 preparing-the-data
 descriptive-statistics
 inferential-analysis
-summary-3
+summary-4

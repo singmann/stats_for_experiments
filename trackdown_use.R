@@ -3,6 +3,7 @@ library("trackdown")
 
 rel_file <- "role_of_stats.Rmd"
 rel_file <- "research_designs.Rmd"
+rel_file <- "tidyverse-intro.Rmd"
 
 ## step 1: upload file the first time you want to use it:
 upload_file(rel_file)
