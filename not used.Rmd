@@ -1,3 +1,17 @@
+For example, in a recent paper on which I was a co-author [@baumannLinearThresholdModel2020], we developed a new task, the "ticket shopping task", to investigate sequential decision making problems (in this section, the details of the tasks are not really relevant so we will only mention the names, but do not describe tasks in detail). Whereas I feel we could make a good case that we could figure out to some degree what people do in this task, this does not mean that this is what people generally do in sequential decision making problems.
+
+Likewise, whereas there might be both a model-free and model-based reinforcement learning system in the brain, the popular "two-step task" [@dawModelBasedInfluencesHumans2011] is unlikely to reveal all its mechanism or even prove its existence.[^role_of_stats-11] In fact, there is good evidence t participants in this task show many behaviours that are unrelated to the theoretical question of interest [e.g., @akamSimplePlansSophisticated2015].
+
+[^role_of_stats-11]: I am not suggesting the original authors [@dawModelBasedInfluencesHumans2011] necessarily made these claims. This is just an example of where a particular task is portrayed in the literature as representing the underlying theoretical constructs (i.e., model-based and model-free reinforcement learning). As we have discussed, this is not a logically justifiable position. A particular task cannot represent a construct unless all auxiliary conditions are carefully spelled out and justified.
+
+Another example comes from the domain of moral reasoning. Here, a prominent procedure is the use of the "trolley problem" and similar vignettes [@greeneFMRIInvestigationEmotional2001]. Whereas these vignettes have revealed interesting results, it seems questionable to assume that participants' responses represent the extent of their moral reasoning or that they are particularly predictive of participants real-world behaviour.[^role_of_stats-12] Similar arguments can be made for many other experimental domains but also whenever particular questionnaires are used.
+
+[^role_of_stats-12]: Again, I do not want to accuse the authors cited here [@greeneFMRIInvestigationEmotional2001] of making such claims. However, the literature seems to treat "moral reasoning" and "responses to trolley-type problems" as near synonyms which seems problematic as it clearly these problems are clearly only one possible operationalisation of moral reasoning.
+
+It makes sense to look a bit critical at the argument we have made here
+
+
+
 ## `RStudio` Setup
 
 Our main access through `R` is through the `RStudio` IDE.
