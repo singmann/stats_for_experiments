@@ -1,518 +1,281 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Introduction to Statistics for Experimental Psychology with R</title>
-  <meta name="description" content="Statistics for Experimental Psychology with R using the afex package." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="References | Introduction to Statistics for Experimental Psychology with R" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Statistics for Experimental Psychology with R using the afex package." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Introduction to Statistics for Experimental Psychology with R" />
-  
-  <meta name="twitter:description" content="Statistics for Experimental Psychology with R using the afex package." />
-  
-
-<meta name="author" content="Henrik Singmann" />
-
-
-<meta name="date" content="2021-09-03" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="case-study-1-more-results-from-note-taking-studies.html"/>
-
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="include/style.css" type="text/css" />
-<link rel="stylesheet" href="include/webex.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>References | Introduction to Statistics for Experimental Psychology with R</title>
+<meta name="author" content="Henrik Singmann">
+<meta name="description" content="Baguley, Thomas. 2012. Serious Stats : A Guide to Advanced Statistics for the Behavioral Sciences. Houndmills, Basingstoke, Hampshire; New York: Palgrave Macmillan.  Bakeman, Roger. 2005....">
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
+<meta property="og:title" content="References | Introduction to Statistics for Experimental Psychology with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Baguley, Thomas. 2012. Serious Stats : A Guide to Advanced Statistics for the Behavioral Sciences. Houndmills, Basingstoke, Hampshire; New York: Palgrave Macmillan.  Bakeman, Roger. 2005....">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="References | Introduction to Statistics for Experimental Psychology with R">
+<meta name="twitter:description" content="Baguley, Thomas. 2012. Serious Stats : A Guide to Advanced Statistics for the Behavioral Sciences. Houndmills, Basingstoke, Hampshire; New York: Palgrave Macmillan.  Bakeman, Roger. 2005....">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Statistics for Experimental Psychology</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>0.1</b> Acknowledgments</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#license-and-attribution"><i class="fa fa-check"></i><b>0.2</b> License and Attribution</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html"><i class="fa fa-check"></i><b>1</b> Role of Statistics in the Research Process</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#the-research-process"><i class="fa fa-check"></i><b>1.1</b> The Research Process</a></li>
-<li class="chapter" data-level="1.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#example-the-psychology-of-loss-aversion"><i class="fa fa-check"></i><b>1.2</b> Example: The Psychology of Loss Aversion</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#evidence-for-loss-aversion-lotteries"><i class="fa fa-check"></i><b>1.2.1</b> Evidence for Loss Aversion: Lotteries</a></li>
-<li class="chapter" data-level="1.2.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking"><i class="fa fa-check"></i><b>1.2.2</b> Alternative Explanation: Loss Aversion or Loss Seeking?</a></li>
-</ul></li>
-<li class="chapter" data-level="1.3" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know"><i class="fa fa-check"></i><b>1.3</b> Epistemic Gaps: The Difference Between What we Want to Know and What we can Know</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-1-underdetermination-of-theory-by-data"><i class="fa fa-check"></i><b>1.3.1</b> Epistemic Gap 1: Underdetermination of Theory by Data</a></li>
-<li class="chapter" data-level="1.3.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-2-signal-versus-noise"><i class="fa fa-check"></i><b>1.3.2</b> Epistemic Gap 2: Signal versus Noise</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#some-further-examples-and-passing-thoughts"><i class="fa fa-check"></i><b>1.4.1</b> Some Further Examples and Passing Thoughts</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="chapter-1-quiz.html"><a href="chapter-1-quiz.html"><i class="fa fa-check"></i>Chapter 1: Quiz</a></li>
-<li class="chapter" data-level="2" data-path="research-designs.html"><a href="research-designs.html"><i class="fa fa-check"></i><b>2</b> Data and Research Designs</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="research-designs.html"><a href="research-designs.html#empirical-evidence-and-data"><i class="fa fa-check"></i><b>2.1</b> Empirical Evidence and Data</a></li>
-<li class="chapter" data-level="2.2" data-path="research-designs.html"><a href="research-designs.html#data-types"><i class="fa fa-check"></i><b>2.2</b> Data Types</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="research-designs.html"><a href="research-designs.html#numerical-versus-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Numerical Versus Categorical Variables</a></li>
-<li class="chapter" data-level="2.2.2" data-path="research-designs.html"><a href="research-designs.html#assumptions-of-numerical-variables"><i class="fa fa-check"></i><b>2.2.2</b> Assumptions of Numerical Variables</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="research-designs.html"><a href="research-designs.html#measurement"><i class="fa fa-check"></i><b>2.3</b> Measurement</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="research-designs.html"><a href="research-designs.html#measurement-scales"><i class="fa fa-check"></i><b>2.3.1</b> Measurement Scales</a></li>
-<li class="chapter" data-level="2.3.2" data-path="research-designs.html"><a href="research-designs.html#reliability-and-validity"><i class="fa fa-check"></i><b>2.3.2</b> Reliability and Validity</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="research-designs.html"><a href="research-designs.html#independent-and-dependent-variables"><i class="fa fa-check"></i><b>2.4</b> Independent and Dependent Variables</a></li>
-<li class="chapter" data-level="2.5" data-path="research-designs.html"><a href="research-designs.html#experimental-versus-observational-variables"><i class="fa fa-check"></i><b>2.5</b> Experimental versus Observational Variables</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="research-designs.html"><a href="research-designs.html#epistemic-gap-3-causal-inference-and-confounding-variables"><i class="fa fa-check"></i><b>2.5.1</b> Epistemic Gap 3: Causal Inference and Confounding Variables</a></li>
-<li class="chapter" data-level="2.5.2" data-path="research-designs.html"><a href="research-designs.html#is-causal-inference-from-observational-data-possible-at-all"><i class="fa fa-check"></i><b>2.5.2</b> Is Causal Inference from Observational Data Possible at All?</a></li>
-<li class="chapter" data-level="2.5.3" data-path="research-designs.html"><a href="research-designs.html#internal-versus-external-validity"><i class="fa fa-check"></i><b>2.5.3</b> Internal versus External Validity</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="research-designs.html"><a href="research-designs.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="chapter-2-quiz.html"><a href="chapter-2-quiz.html"><i class="fa fa-check"></i>Chapter 2: Quiz</a></li>
-<li class="chapter" data-level="3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Short Introduction to <code>R</code> and the <code>tidyverse</code></a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is <code>R</code>?</a></li>
-<li class="chapter" data-level="3.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#getting-started-with-r"><i class="fa fa-check"></i><b>3.2</b> Getting Started with <code>R</code></a></li>
-<li class="chapter" data-level="3.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#a-base-r-example-session"><i class="fa fa-check"></i><b>3.3</b> A Base <code>R</code> Example Session</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#data-files-scripts-and-working-directory"><i class="fa fa-check"></i><b>3.3.1</b> Data Files, Scripts, and Working Directory</a></li>
-<li class="chapter" data-level="3.3.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#read-data-and-inspecting-it"><i class="fa fa-check"></i><b>3.3.2</b> Read Data and Inspecting it</a></li>
-<li class="chapter" data-level="3.3.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#transforming-categorical-variables-into-factors"><i class="fa fa-check"></i><b>3.3.3</b> Transforming Categorical Variables into Factors</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#the-tidyverse"><i class="fa fa-check"></i><b>3.4</b> The <code>tidyverse</code></a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#tibble-and-readr"><i class="fa fa-check"></i><b>3.4.1</b> <code>tibble</code> and <code>readr</code></a></li>
-<li class="chapter" data-level="3.4.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>3.4.2</b> The Pipe: <code>%&gt;%</code></a></li>
-<li class="chapter" data-level="3.4.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#dplyr"><i class="fa fa-check"></i><b>3.4.3</b> <code>dplyr</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#summary-2"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Data Visualisation with <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#first-ggplot2-example"><i class="fa fa-check"></i><b>4.1</b> First <code>ggplot2</code> Example</a></li>
-<li class="chapter" data-level="4.2" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.2</b> Two Continuous Variables</a></li>
-<li class="chapter" data-level="4.3" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#changing-ggplot2-theme-for-r-session"><i class="fa fa-check"></i><b>4.3</b> Changing <code>ggplot2</code> Theme for <code>R</code> Session</a></li>
-<li class="chapter" data-level="4.4" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#one-continuous-and-one-categorical-variable"><i class="fa fa-check"></i><b>4.4</b> One Continuous and one Categorical Variable</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#displaying-all-data-points"><i class="fa fa-check"></i><b>4.4.1</b> Displaying All Data Points</a></li>
-<li class="chapter" data-level="4.4.2" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#bee-swarm-plot"><i class="fa fa-check"></i><b>4.4.2</b> Bee Swarm Plot</a></li>
-<li class="chapter" data-level="4.4.3" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#box-plot"><i class="fa fa-check"></i><b>4.4.3</b> Box Plot</a></li>
-<li class="chapter" data-level="4.4.4" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#violin-plots"><i class="fa fa-check"></i><b>4.4.4</b> Violin Plots</a></li>
-<li class="chapter" data-level="4.4.5" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#plotting-the-mean"><i class="fa fa-check"></i><b>4.4.5</b> Plotting The Mean</a></li>
-<li class="chapter" data-level="4.4.6" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#one-continuous-variables-histograms"><i class="fa fa-check"></i><b>4.4.6</b> One Continuous Variables: Histograms</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#cheat-sheets"><i class="fa fa-check"></i><b>4.5</b> Cheat Sheets</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="standard1.html"><a href="standard1.html"><i class="fa fa-check"></i><b>5</b> The Standard Approach for One Independent Variable</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="standard1.html"><a href="standard1.html#ex:urry"><i class="fa fa-check"></i><b>5.1</b> Example Data: Note Taking Experiment</a></li>
-<li class="chapter" data-level="5.2" data-path="standard1.html"><a href="standard1.html#the-logic-of-inferential-statistics"><i class="fa fa-check"></i><b>5.2</b> The Logic of Inferential Statistics</a></li>
-<li class="chapter" data-level="5.3" data-path="standard1.html"><a href="standard1.html#the-basic-statistical-model"><i class="fa fa-check"></i><b>5.3</b> The Basic Statistical Model</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="standard1.html"><a href="standard1.html#model-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Model Predictions</a></li>
-<li class="chapter" data-level="5.3.2" data-path="standard1.html"><a href="standard1.html#statistical-model-for-the-example-data"><i class="fa fa-check"></i><b>5.3.2</b> Statistical Model for the Example Data</a></li>
-<li class="chapter" data-level="5.3.3" data-path="standard1.html"><a href="standard1.html#understanding-the-statistical-model"><i class="fa fa-check"></i><b>5.3.3</b> Understanding the Statistical Model</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model-in-r"><i class="fa fa-check"></i><b>5.4</b> Estimating the Statistical Model in R</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="standard1.html"><a href="standard1.html#package-and-data-setup"><i class="fa fa-check"></i><b>5.4.1</b> Package and Data Setup</a></li>
-<li class="chapter" data-level="5.4.2" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model"><i class="fa fa-check"></i><b>5.4.2</b> Estimating the Statistical Model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="standard1.html"><a href="standard1.html#interpreting-the-results"><i class="fa fa-check"></i><b>5.4.3</b> Interpreting the Results</a></li>
-<li class="chapter" data-level="5.4.4" data-path="standard1.html"><a href="standard1.html#data-visualisation"><i class="fa fa-check"></i><b>5.4.4</b> Data Visualisation</a></li>
-<li class="chapter" data-level="5.4.5" data-path="standard1.html"><a href="standard1.html#follow-up-analysis"><i class="fa fa-check"></i><b>5.4.5</b> Follow-Up Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="standard1.html"><a href="standard1.html#summary-3"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html"><i class="fa fa-check"></i><b>6</b> Case Study 1: More Results from Note Taking Studies</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-urry-et-al.-2021"><i class="fa fa-check"></i><b>6.1</b> Conceptual Memory Data from Urry et al. (2021)</a></li>
-<li class="chapter" data-level="6.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#why-are-experiments-replicated"><i class="fa fa-check"></i><b>6.2</b> Why are Experiments Replicated?</a></li>
-<li class="chapter" data-level="6.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-mueller-and-oppenheimer-2014"><i class="fa fa-check"></i><b>6.3</b> Conceptual Memory Data from Mueller and Oppenheimer (2014)</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#preparing-the-data"><i class="fa fa-check"></i><b>6.3.1</b> Preparing the Data</a></li>
-<li class="chapter" data-level="6.3.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#descriptive-statistics"><i class="fa fa-check"></i><b>6.3.2</b> Descriptive Statistics</a></li>
-<li class="chapter" data-level="6.3.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#inferential-analysis"><i class="fa fa-check"></i><b>6.3.3</b> Inferential Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#summary-4"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></li>
+<li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
+<li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
+<li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
+<li><a class="" href="short-introduction-to-r-and-the-tidyverse.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
+<li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
+<li><a class="active" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/singmann/stats_for_experiments">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="references" class="section level1 unnumbered">
+<h1>References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
+</h1>
 
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
+<div id="ref-baguleySeriousStatsGuide2012" class="csl-entry">
 Baguley, Thomas. 2012. <em>Serious Stats : A Guide to Advanced Statistics for the Behavioral Sciences</em>. Houndmills, Basingstoke, Hampshire; New York: Palgrave Macmillan.
 </div>
-<div class="csl-entry">
+<div id="ref-bakemanRecommendedEffectSize2005" class="csl-entry">
 Bakeman, Roger. 2005. <span>“Recommended Effect Size Statistics for Repeated Measures Designs.”</span> <em>Behavior Research Methods</em> 37 (3): 379–84. <a href="https://doi.org/10.3758/BF03192707">https://doi.org/10.3758/BF03192707</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-battalioTestingAlternativeModels1990" class="csl-entry">
 Battalio, Raymond C., John H. Kagel, and Komain Jiranyakul. 1990. <span>“Testing Between Alternative Models of Choice Under Uncertainty: <span>Some</span> Initial Results.”</span> <em>Journal of Risk and Uncertainty</em> 3 (1): 25–50. <a href="https://doi.org/10.1007/BF00213259">https://doi.org/10.1007/BF00213259</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-bikThoughtsGautretPaper2020" class="csl-entry">
 Bik, Elisabeth. 2020. <span>“Thoughts on the <span>Gautret</span> Et Al. Paper about <span>Hydroxychloroquine</span> and <span>Azithromycin</span> Treatment of <span>COVID</span>-19 Infections.”</span> <em>Science Integrity Digest</em>.
 </div>
-<div class="csl-entry">
+<div id="ref-brooksLossAverseBehavior2005" class="csl-entry">
 Brooks, Peter, and Horst Zank. 2005. <span>“Loss <span>Averse Behavior</span>.”</span> <em>Journal of Risk and Uncertainty</em> 31 (3): 301–25. <a href="https://doi.org/10.1007/s11166-005-5105-7">https://doi.org/10.1007/s11166-005-5105-7</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-camererThreeCheersPsychological2005" class="csl-entry">
 Camerer, Colin F. 2005. <span>“Three <span>Cheers</span><span><span>Psychological</span></span>, <span>Theoretical</span>, <span>Empirical</span><span></span>for <span>Loss Aversion</span>.”</span> <em>Journal of Marketing Research</em> 42 (2): 129–33. <a href="https://doi.org/10.1509/jmkr.42.2.129.62286">https://doi.org/10.1509/jmkr.42.2.129.62286</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-camererEvaluatingReplicabilityLaboratory2016" class="csl-entry">
 Camerer, Colin F., Anna Dreber, Eskil Forsell, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2016. <span>“Evaluating Replicability of Laboratory Experiments in Economics.”</span> <em>Science</em> 351 (6280): 1433–36. <a href="https://doi.org/10.1126/science.aaf0918">https://doi.org/10.1126/science.aaf0918</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-camererEvaluatingReplicabilitySocial2018" class="csl-entry">
 Camerer, Colin F., Anna Dreber, Felix Holzmeister, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2018. <span>“Evaluating the Replicability of Social Science Experiments in <span>Nature</span> and <span>Science</span> Between 2010 and 2015.”</span> <em>Nature Human Behaviour</em>, August, 1. <a href="https://doi.org/10.1038/s41562-018-0399-z">https://doi.org/10.1038/s41562-018-0399-z</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-chambersSevenDeadlySins2017" class="csl-entry">
 Chambers, Chris. 2017. <em>The <span>Seven Deadly Sins</span> of <span>Psychology</span>: <span>A Manifesto</span> for <span>Reforming</span> the <span>Culture</span> of <span>Scientific Practice</span></em>. <span>Princeton</span>: <span>Princeton University Press</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-cohen1994" class="csl-entry">
 Cohen, Jacob. 1994. <span>“The Earth Is Round (p &lt; .05).”</span> <em>American Psychologist</em> 49 (12): 997–1003. <a href="https://doi.org/10.1037/0003-066X.49.12.997">https://doi.org/10.1037/0003-066X.49.12.997</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-dixonModelsAccuracyRepeatedmeasures2008" class="csl-entry">
 Dixon, Peter. 2008. <span>“Models of Accuracy in Repeated-Measures Designs.”</span> <em>Journal of Memory and Language</em> 59 (4): 447–56. <a href="https://doi.org/10.1016/j.jml.2007.11.004">https://doi.org/10.1016/j.jml.2007.11.004</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-doyenBehavioralPrimingIt2012" class="csl-entry">
 Doyen, Stéphane, Olivier Klein, Cora-Lise Pichon, and Axel Cleeremans. 2012. <span>“Behavioral <span>Priming</span>: <span>It</span>’s <span>All</span> in the <span>Mind</span>, but <span>Whose Mind</span>?”</span> <em>PLOS ONE</em> 7 (1): e29081. <a href="https://doi.org/10.1371/journal.pone.0029081">https://doi.org/10.1371/journal.pone.0029081</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-fignerAffectiveDeliberativeProcesses2009" class="csl-entry">
 Figner, Bernd, Rachael J. Mackinlay, Friedrich Wilkening, and Elke U. Weber. 2009. <span>“Affective and Deliberative Processes in Risky Choice: <span>Age</span> Differences in Risk Taking in the <span>Columbia Card Task</span>.”</span> <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em> 35 (3): 709–30. <a href="https://doi.org/10.1037/a0014983">https://doi.org/10.1037/a0014983</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-foxCompanionAppliedRegression2019" class="csl-entry">
 Fox, John, and Sanford Weisberg. 2019. <em>An <span>R</span> Companion to Applied Regression</em>. Third. <span>Thousand Oaks CA</span>: <span>Sage</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-freyRiskPreferenceShares2017" class="csl-entry">
 Frey, Renato, Andreas Pedroni, Rui Mata, Jörg Rieskamp, and Ralph Hertwig. 2017. <span>“Risk Preference Shares the Psychometric Structure of Major Psychological Traits.”</span> <em>Science Advances</em> 3 (October): e1701381. <a href="https://doi.org/10.1126/sciadv.1701381">https://doi.org/10.1126/sciadv.1701381</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-gautretHydroxychloroquineAzithromycinTreatment2020" class="csl-entry">
 Gautret, Philippe, Jean-Christophe Lagier, Philippe Parola, Van Thuan Hoang, Line Meddeb, Morgane Mailhe, Barbara Doudier, et al. 2020. <span>“Hydroxychloroquine and Azithromycin as a Treatment of <span>COVID</span>-19: Results of an Open-Label Non-Randomized Clinical Trial.”</span> <em>International Journal of Antimicrobial Agents</em> 56 (1): 105949. <a href="https://doi.org/10.1016/j.ijantimicag.2020.105949">https://doi.org/10.1016/j.ijantimicag.2020.105949</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-gelmanRegressionOtherStories2021" class="csl-entry">
 Gelman, Andrew, Jennifer Hill, and Aki Vehtari. 2021. <em>Regression and Other Stories</em>. <span>Cambridge, UK</span>: <span>Cambridge University Press</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-grunbaumFreudianPsychoanalyticTheory1986" class="csl-entry">
 Grunbaum, Adolf. 1986. <span>“Is <span>Freudian</span> Psychoanalytic Theory Really Falsifiable?”</span> <em>Behavioral and Brain Sciences</em> 9 (2): 250–52. <a href="https://doi.org/10.1017/S0140525X00022512">https://doi.org/10.1017/S0140525X00022512</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-haigInvestigatingPsychologicalWorld2014" class="csl-entry">
 Haig, Brian D. 2014. <em>Investigating the Psychological World: Scientific Method in the Behavioral Sciences</em>. <span>Cambridge, Mass.</span>: <span>MIT Press</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-harrisTrainWreckAny2021" class="csl-entry">
 Harris, Christine, Doug Rohrer, and Harold Pashler. 2021. <span>“A <span>Train Wreck</span> by <span>Any Other Name</span>.”</span> <em>Psychological Inquiry</em> 32 (1): 17–23. <a href="https://doi.org/10.1080/1047840X.2021.1889317">https://doi.org/10.1080/1047840X.2021.1889317</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-hernanCausalInference2021" class="csl-entry">
 Hernán, Miguel, and James M. Robins. 2021. <em>Causal Inference</em>. Chapman &amp; <span>Hall</span>/<span>CRC</span> Monographs on Statistics &amp; Applied Probability.
 </div>
-<div class="csl-entry">
+<div id="ref-hinzeTestingLimitsTesting2011" class="csl-entry">
 Hinze, Scott R., and Jennifer Wiley. 2011. <span>“Testing the Limits of Testing Effects Using Completion Tests.”</span> <em>Memory</em> 19 (3): 290–304. <a href="https://doi.org/10.1080/09658211.2011.560121">https://doi.org/10.1080/09658211.2011.560121</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-howellStatisticalMethodsPsychology2013" class="csl-entry">
 Howell, David C. 2013. <em>Statistical Methods for Psychology</em>. <span>Belmont, CA</span>: <span>Wadsworth Cengage Learning</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-jaegerCategoricalDataAnalysis2008" class="csl-entry">
 Jaeger, T. Florian. 2008. <span>“Categorical Data Analysis: <span>Away</span> from <span>ANOVAs</span> (Transformation or Not) and Towards Logit Mixed Models.”</span> <em>Journal of Memory and Language</em> 59 (4): 434–46. <a href="https://doi.org/10.1016/j.jml.2007.11.007">https://doi.org/10.1016/j.jml.2007.11.007</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-kahnemanProspectTheoryAnalysis1979" class="csl-entry">
 Kahneman, Daniel, and Amos Tversky. 1979. <span>“Prospect <span>Theory</span>: <span>An Analysis</span> of <span>Decision</span> Under <span>Risk</span>.”</span> <em>Econometrica</em> 47 (2): 263. <a href="https://doi.org/10.2307/1914185">https://doi.org/10.2307/1914185</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-kellenProblemCoordinationPursuit2021" class="csl-entry">
 Kellen, David, Clintin P. Davis-Stober, John C. Dunn, and Michael L. Kalish. 2021. <span>“The <span>Problem</span> of <span>Coordination</span> and the <span>Pursuit</span> of <span>Structural Constraints</span> in <span>Psychology</span>.”</span> <em>Perspectives on Psychological Science</em>, January, 1745691620974771. <a href="https://doi.org/10.1177/1745691620974771">https://doi.org/10.1177/1745691620974771</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-kleinManyLabsInvestigating2018" class="csl-entry">
 Klein, Richard A., Michelangelo Vianello, Fred Hasselman, Byron G. Adams, Reginald B. Adams, Sinan Alper, Mark Aveyard, et al. 2018. <span>“Many <span>Labs</span> 2: <span>Investigating Variation</span> in <span>Replicability Across Samples</span> and <span>Settings</span>.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (4): 443–90. <a href="https://doi.org/10.1177/2515245918810225">https://doi.org/10.1177/2515245918810225</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-kline2015" class="csl-entry">
 Kline, Rex B. 2015. <em>Principles and Practice of Structural Equation Modeling</em>. Guilford Press.
 </div>
-<div class="csl-entry">
+<div id="ref-lawlorThoseConfoundedVitamins2004" class="csl-entry">
 Lawlor, Debbie A, George Davey Smith, K Richard Bruckdorfer, Devi Kundu, and Shah Ebrahim. 2004. <span>“Those Confounded Vitamins: What Can We Learn from the Differences Between Observational Versus Randomised Trial Evidence?”</span> <em>The Lancet</em> 363 (9422): 1724–27. <a href="https://doi.org/10.1016/S0140-6736(04)16260-0">https://doi.org/10.1016/S0140-6736(04)16260-0</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-lee2013" class="csl-entry">
 Lee, Michael D., and Eric-Jan Wagenmakers. 2013. <em>Bayesian Cognitive Modeling: A Practical Course</em>. Cambridge: Cambridge University Press.
 </div>
-<div class="csl-entry">
+<div id="ref-lejuezEvaluationBehavioralMeasure2002" class="csl-entry">
 Lejuez, C. W., Jennifer P. Read, Christopher W. Kahler, Jerry B. Richards, Susan E. Ramsey, Gregory L. Stuart, David R. Strong, and Richard A. Brown. 2002. <span>“Evaluation of a Behavioral Measure of Risk Taking: <span>The Balloon Analogue Risk Task</span> (<span>BART</span>).”</span> <em>Journal of Experimental Psychology: Applied</em> 8 (2): 75–84. <a href="https://doi.org/10.1037/1076-898X.8.2.75">https://doi.org/10.1037/1076-898X.8.2.75</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-lenth2021" class="csl-entry">
 Lenth, Russell. 2021. <em>Emmeans: Estimated Marginal Means, Aka Least-Squares Means</em>. <a href="https://CRAN.R-project.org/package=emmeans">https://CRAN.R-project.org/package=emmeans</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-lewandowskyRoleConspiracistIdeation2013" class="csl-entry">
 Lewandowsky, Stephan, Gilles E. Gignac, and Klaus Oberauer. 2013. <span>“The Role of Conspiracist Ideation and Worldviews in Predicting Rejection of Science.”</span> <em>PloS One</em> 8 (10): e75637. <a href="https://doi.org/10.1371/journal.pone.0075637">https://doi.org/10.1371/journal.pone.0075637</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-lewandowskyCorrectionRoleConspiracist2015" class="csl-entry">
 ———. 2015. <span>“Correction: <span>The Role</span> of <span>Conspiracist Ideation</span> and <span>Worldviews</span> in <span>Predicting Rejection</span> of <span>Science</span>.”</span> <em>PLOS ONE</em> 10 (8): e0134773. <a href="https://doi.org/10.1371/journal.pone.0134773">https://doi.org/10.1371/journal.pone.0134773</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-lordStatisticalTreatmentFootball1953" class="csl-entry">
 Lord, Frederic M. 1953. <span>“On the <span>Statistical Treatment</span> of <span>Football Numbers</span>.”</span> <em>American Psychologist</em> 8 (12): 750–51. <a href="https://doi.org/10.1037/h0063675">https://doi.org/10.1037/h0063675</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-maniPovertyImpedesCognitive2013" class="csl-entry">
 Mani, Anandi, Sendhil Mullainathan, Eldar Shafir, and Jiaying Zhao. 2013a. <span>“Poverty Impedes Cognitive Function.”</span> <em>Science</em> 341 (6149): 976–80. <a href="https://doi.org/10.1126/science.1238041">https://doi.org/10.1126/science.1238041</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-maniResponseCommentPoverty2013" class="csl-entry">
 ———. 2013b. <span>“Response to <span>Comment</span> on <span>‘<span>Poverty Impedes Cognitive Function</span>’</span>.”</span> <em>Science</em> 342 (6163): 1169–69. <a href="https://doi.org/10.1126/science.1246799">https://doi.org/10.1126/science.1246799</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-matejkaSameStatsDifferent2017" class="csl-entry">
 Matejka, Justin, and George Fitzmaurice. 2017. <span>“Same <span>Stats</span>, <span>Different Graphs</span>: <span>Generating Datasets</span> with <span>Varied Appearance</span> and <span>Identical Statistics</span> Through <span>Simulated Annealing</span>.”</span> In <em>Proceedings of the 2017 <span>CHI Conference</span> on <span>Human Factors</span> in <span>Computing Systems</span></em>, 1290–94. <span>New York, NY, USA</span>: <span>Association for Computing Machinery</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-mcelreathStatisticalRethinkingBayesian2020" class="csl-entry">
 McElreath, Richard. 2020. <em>Statistical Rethinking: A <span>Bayesian</span> Course with Examples in <span>R</span> and <span>Stan</span></em>. Second. <span>CRC</span> Texts in Statistical Science. <span>Boca Raton</span>: <span>Taylor and Francis, CRC Press</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-mcgrawComparingGainsLosses2010" class="csl-entry">
 McGraw, A. Peter, Jeff T. Larsen, Daniel Kahneman, and David Schkade. 2010. <span>“Comparing <span>Gains</span> and <span>Losses</span>.”</span> <em>Psychological Science</em> 21 (10): 1438–45. <a href="https://doi.org/10.1177/0956797610381504">https://doi.org/10.1177/0956797610381504</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-meehl1978" class="csl-entry">
 Meehl, Paul E. 1978. <span>“Theoretical Risks and Tabular Asterisks: Sir Karl, Sir Ronald, and the Slow Progress of Soft Psychology.”</span> <em>Journal of Consulting and Clinical Psychology</em> 46: 806–34. <a href="https://doi.org/10.1037//0022-006X.46.4.806">https://doi.org/10.1037//0022-006X.46.4.806</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-michellQuantitativeScienceDefinition1997" class="csl-entry">
 Michell, Joel. 1997. <span>“Quantitative Science and the Definition of Measurement in Psychology.”</span> <em>British Journal of Psychology</em> 88 (3): 355–83. <a href="https://doi.org/10.1111/j.2044-8295.1997.tb02641.x">https://doi.org/10.1111/j.2044-8295.1997.tb02641.x</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-michellMeasurementPsychologyCritical1999" class="csl-entry">
 ———. 1999. <em>Measurement in Psychology: Critical History of a Methodological Concept</em>. Ideas in Context. <span>New York</span>: <span>Cambridge University Press</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-michellStevensTheoryScales2002" class="csl-entry">
 ———. 2002. <span>“Stevens’s Theory of Scales of Measurement and Its Place in Modern Psychology.”</span> <em>Australian Journal of Psychology</em> 54 (2): 99–104. <a href="https://doi.org/10.1080/00049530210001706563">https://doi.org/10.1080/00049530210001706563</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-mozaffarianHistoryModernNutrition2018" class="csl-entry">
 Mozaffarian, Dariush, Irwin Rosenberg, and Ricardo Uauy. 2018. <span>“History of Modern Nutrition Science<span></span>implications for Current Research, Dietary Guidelines, and Food Policy.”</span> <em>BMJ</em> 361 (June): k2392. <a href="https://doi.org/10.1136/bmj.k2392">https://doi.org/10.1136/bmj.k2392</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-muellerPenMightierKeyboard2014" class="csl-entry">
 Mueller, Pam A., and Daniel M. Oppenheimer. 2014. <span>“The <span>Pen Is Mightier Than</span> the <span>Keyboard</span>: <span>Advantages</span> of <span>Longhand Over Laptop Note Taking</span>.”</span> <em>Psychological Science</em> 25 (6): 1159–68. <a href="https://doi.org/10.1177/0956797614524581">https://doi.org/10.1177/0956797614524581</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-nickerson2000" class="csl-entry">
 Nickerson, Raymond S. 2000. <span>“Null Hypothesis Significance Testing: A Review of an Old and Continuing Controversy.”</span> <em>Psychological Methods</em> 5 (2): 241.
 </div>
-<div class="csl-entry">
+<div id="ref-oberguggenbergerAnalysisComputerScientists2018" class="csl-entry">
 Oberguggenberger, Michael, and Alexander Ostermann. 2018. <em>Analysis for <span>Computer Scientists</span>: <span>Foundations</span>, <span>Methods</span>, and <span>Algorithms</span></em>. Undergraduate <span>Topics</span> in <span>Computer Science</span>. <span>Cham</span>: <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-319-91155-7">https://doi.org/10.1007/978-3-319-91155-7</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-olejnikGeneralizedEtaOmega2003" class="csl-entry">
 Olejnik, Stephen, and James Algina. 2003. <span>“Generalized <span>Eta</span> and <span>Omega Squared Statistics</span>: <span>Measures</span> of <span>Effect Size</span> for <span>Some Common Research Designs</span>.”</span> <em>Psychological Methods</em> 8 (4): 434–47. <a href="https://doi.org/10.1037/1082-989X.8.4.434">https://doi.org/10.1037/1082-989X.8.4.434</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-opensciencecollaborationEstimatingReproducibilityPsychological2015" class="csl-entry">
 Open Science Collaboration. 2015. <span>“Estimating the Reproducibility of Psychological Science.”</span> <em>Science</em> 349 (6251): aac4716. <a href="https://doi.org/10.1126/science.aac4716">https://doi.org/10.1126/science.aac4716</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-pashlerLearningStylesConcepts2008" class="csl-entry">
 Pashler, Harold, Mark McDaniel, Doug Rohrer, and Robert Bjork. 2008. <span>“Learning <span>Styles</span>: <span>Concepts</span> and <span>Evidence</span>.”</span> <em>Psychological Science in the Public Interest</em> 9 (3): 105–19. <a href="https://doi.org/10.1111/j.1539-6053.2009.01038.x">https://doi.org/10.1111/j.1539-6053.2009.01038.x</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-pedroniRiskElicitationPuzzle2017" class="csl-entry">
 Pedroni, Andreas, Renato Frey, Adrian Bruhin, Gilles Dutilh, Ralph Hertwig, and Jörg Rieskamp. 2017. <span>“The Risk Elicitation Puzzle.”</span> <em>Nature Human Behaviour</em>, October, 1. <a href="https://doi.org/10.1038/s41562-017-0219-x">https://doi.org/10.1038/s41562-017-0219-x</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-polackSafetyEfficacyBNT162b22020" class="csl-entry">
 Polack, Fernando P., Stephen J. Thomas, Nicholas Kitchin, Judith Absalon, Alejandra Gurtman, Stephen Lockhart, John L. Perez, et al. 2020. <span>“Safety and <span>Efficacy</span> of the <span class="nocase">BNT162b2 mRNA Covid</span>-19 <span>Vaccine</span>.”</span> <em>New England Journal of Medicine</em> 383 (27): 2603–15. <a href="https://doi.org/10.1056/NEJMoa2034577">https://doi.org/10.1056/NEJMoa2034577</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-roedigerPowerTestingMemory2006" class="csl-entry">
 Roediger, Henry L., and Jeffrey D. Karpicke. 2006. <span>“The <span>Power</span> of <span>Testing Memory</span>: <span>Basic Research</span> and <span>Implications</span> for <span>Educational Practice</span>.”</span> <em>Perspectives on Psychological Science</em> 1 (3): 181–210. <a href="https://doi.org/10.1111/j.1745-6916.2006.00012.x">https://doi.org/10.1111/j.1745-6916.2006.00012.x</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-rohrerThinkingClearlyCorrelations2018" class="csl-entry">
 Rohrer, Julia M. 2018. <span>“Thinking <span>Clearly About Correlations</span> and <span>Causation</span>: <span>Graphical Causal Models</span> for <span>Observational Data</span>.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (1): 27–42. <a href="https://doi.org/10.1177/2515245917745629">https://doi.org/10.1177/2515245917745629</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-rosendaalReviewHydroxychloroquineAzithromycin2020" class="csl-entry">
 Rosendaal, Frits R. 2020. <span>“Review of: “<span>Hydroxychloroquine</span> and Azithromycin as a Treatment of <span>COVID</span>-19: Results of an Open-Label Non-Randomized Clinical Trial <span>Gautret</span> Et Al 2010, <span>DOI</span>:10.1016/j.ijantimicag.2020.105949.”</span> <em>International Journal of Antimicrobial Agents</em> 56 (1): 106063. <a href="https://doi.org/10.1016/j.ijantimicag.2020.106063">https://doi.org/10.1016/j.ijantimicag.2020.106063</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-rozeboom1960" class="csl-entry">
 Rozeboom, William W. 1960. <span>“The Fallacy of the Null-Hypothesis Significance Test.”</span> <em>Psychological Bulletin</em> 57 (5): 416–28. <a href="https://doi.org/10.1037/h0042040">https://doi.org/10.1037/h0042040</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-sattuiSwingingPendulumLessons2020" class="csl-entry">
 Sattui, Sebastian E., Jean W. Liew, Elizabeth R. Graef, Ariella Coler-Reilly, Francis Berenbaum, Alí Duarte-García, Carly Harrison, et al. 2020. <span>“Swinging the Pendulum: Lessons Learned from Public Discourse Concerning Hydroxychloroquine and <span>COVID</span>-19.”</span> <em>Expert Review of Clinical Immunology</em> 16 (7): 659–66. <a href="https://doi.org/10.1080/1744666X.2020.1792778">https://doi.org/10.1080/1744666X.2020.1792778</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-sayareHeWasScience2020" class="csl-entry">
 Sayare, Scott. 2020. <span>“He <span>Was</span> a <span>Science Star</span>. <span>Then He Promoted</span> a <span>Questionable Cure</span> for <span>Covid</span>-19.”</span> <em>The New York Times</em>, May.
 </div>
-<div class="csl-entry">
+<div id="ref-shadishExperimentalQuasiexperimentalDesigns2002" class="csl-entry">
 Shadish, William R., Thomas D. Cook, and Donald T. Campbell. 2002. <em>Experimental and Quasi-Experimental Designs for Generalized Causal Inference.</em> <span>Houghton, Mifflin and Company</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-steupEpistemology2020" class="csl-entry">
 Steup, Matthias, and Ram Neta. 2020. <span>“Epistemology.”</span> In <em>The <span>Stanford Encyclopedia</span> of <span>Philosophy</span></em>, edited by Edward N. Zalta, Fall 2020. <span>Metaphysics Research Lab, Stanford University</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-stevensTheoryScalesMeasurement1946" class="csl-entry">
 Stevens, S. S. 1946. <span>“On the <span>Theory</span> of <span>Scales</span> of <span>Measurement</span>.”</span> <em>Science</em> 103 (2684): 677–80.
 </div>
-<div class="csl-entry">
+<div id="ref-stewartDecisionSampling2006" class="csl-entry">
 Stewart, Neil, Nick Chater, and Gordon D. A. Brown. 2006. <span>“Decision by Sampling.”</span> <em>Cognitive Psychology</em> 53 (1): 1–26. <a href="https://doi.org/10.1016/j.cogpsych.2005.10.003">https://doi.org/10.1016/j.cogpsych.2005.10.003</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-urry2021" class="csl-entry">
 Urry, Heather L., Chelsea S. Crittle, Victoria A. Floerke, Michael Z. Leonard, Clinton S. Perry, Naz Akdilek, Erica R. Albert, et al. 2021. <span>“Don<span>’</span>t Ditch the Laptop Just Yet: A Direct Replication of Mueller and Oppenheimer<span>’</span>s (2014) Study 1 Plus Mini Meta-Analyses Across Similar Studies.”</span> <em>Psychological Science</em>, February, 0956797620965541. <a href="https://doi.org/10.1177/0956797620965541">https://doi.org/10.1177/0956797620965541</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-wagenmakers2007" class="csl-entry">
 Wagenmakers, Eric-Jan. 2007. <span>“A Practical Solution to the Pervasive Problems of p Values.”</span> <em>Psychonomic Bulletin &amp; Review</em> 14 (5): 779–804. <a href="https://doi.org/10.3758/BF03194105">https://doi.org/10.3758/BF03194105</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-walasekHowMakeLoss2015" class="csl-entry">
 Walasek, Lukasz, and Neil Stewart. 2015. <span>“How to Make Loss Aversion Disappear and Reverse: Tests of the Decision by Sampling Origin of Loss Aversion.”</span> <em>Journal of Experimental Psychology: General</em> 144 (1): 7–11. <a href="https://doi.org/10.1037/xge0000039">https://doi.org/10.1037/xge0000039</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-wichertsCommentPovertyImpedes2013" class="csl-entry">
 Wicherts, Jelte M., and Annemarie Zand Scholten. 2013. <span>“Comment on <span>‘<span>Poverty Impedes Cognitive Function</span>’</span>.”</span> <em>Science</em> 342 (6163): 1169–69. <a href="https://doi.org/10.1126/science.1246680">https://doi.org/10.1126/science.1246680</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-tidyverse2019" class="csl-entry">
 Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the Tidyverse.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-wickham2017" class="csl-entry">
 Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. Sebastopol CA: O’Reilly.
 </div>
-<div class="csl-entry">
+<div id="ref-wilkinsonGrammarGraphics1999" class="csl-entry">
 Wilkinson, Leland I. 1999. <em>The Grammar of Graphics</em>. <span>New York</span>: <span>Springer</span>.
 </div>
-<div class="csl-entry">
+<div id="ref-woodsideMicronutrientsDietaryIntake2005" class="csl-entry">
 Woodside, Jayne V., Damian McCall, Claire McGartland, and Ian S. Young. 2005. <span>“Micronutrients: Dietary Intake v. Supplement Use.”</span> <em>Proceedings of the Nutrition Society</em> 64 (4): 543–53. <a href="https://doi.org/10.1079/PNS2005464">https://doi.org/10.1079/PNS2005464</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-zandscholtenReanalysisLordStatistical2009" class="csl-entry">
 Zand Scholten, Annemarie, and Denny Borsboom. 2009. <span>“A Reanalysis of <span>Lord</span>’s Statistical Treatment of Football Numbers.”</span> <em>Journal of Mathematical Psychology</em> 53 (2): 69–75. <a href="https://doi.org/10.1016/j.jmp.2009.01.002">https://doi.org/10.1016/j.jmp.2009.01.002</a>.
 </div>
 </div>
@@ -661,71 +424,37 @@ window.onload = function() {
   update_total_correct();
 }
 
-</script>
-            </section>
+</script><div class="chapter-nav">
+<div class="prev"><a href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#references">References</a></li></ul>
 
-          </div>
-        </div>
-      </div>
-<a href="case-study-1-more-results-from-note-taking-studies.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/singmann/stats_for_experiments/blob/main/99-references.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/singmann/stats_for_experiments/edit/main/99-references.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
-    </div>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-05.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["stats_for_experiments.pdf", "stats_for_experiments.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"scroll_highlight": true
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -737,7 +466,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

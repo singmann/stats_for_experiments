@@ -1,20 +1,12 @@
-bookdown::gitbook:
+bookdown::bs4_book:
   includes:
     after_body: include/webex.js
   css: [include/style.css, include/webex.css]
-  config:
-    toc:
-      collapse: section
-      scroll_highlight: yes
-      before: |
-        <li><a href="./">Statistics for Experimental Psychology</a></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    download: ["pdf", "epub"]
-    fontsettings:
-      theme: white
-      family: sans
-      size: 2
+  theme:
+    primary: "#096B72"
+  repo:
+    base: https://github.com/singmann/stats_for_experiments
+    branch: main
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

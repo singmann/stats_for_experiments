@@ -1,307 +1,65 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to Statistics for Experimental Psychology with R</title>
-  <meta name="description" content="Statistics for Experimental Psychology with R using the afex package." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Introduction to Statistics for Experimental Psychology with R" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Statistics for Experimental Psychology with R using the afex package." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to Statistics for Experimental Psychology with R" />
-  
-  <meta name="twitter:description" content="Statistics for Experimental Psychology with R using the afex package." />
-  
-
-<meta name="author" content="Henrik Singmann" />
-
-
-<meta name="date" content="2021-09-03" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-
-<link rel="next" href="role-of-statistics-in-the-research-process.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="include/style.css" type="text/css" />
-<link rel="stylesheet" href="include/webex.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Overview | Introduction to Statistics for Experimental Psychology with R</title>
+<meta name="author" content="Henrik Singmann">
+<meta name="description" content="Statistics for Experimental Psychology with R using the afex package.">
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
+<meta property="og:title" content="Overview | Introduction to Statistics for Experimental Psychology with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Statistics for Experimental Psychology with R using the afex package.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Overview | Introduction to Statistics for Experimental Psychology with R">
+<meta name="twitter:description" content="Statistics for Experimental Psychology with R using the afex package.">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Statistics for Experimental Psychology</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>0.1</b> Acknowledgments</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#license-and-attribution"><i class="fa fa-check"></i><b>0.2</b> License and Attribution</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html"><i class="fa fa-check"></i><b>1</b> Role of Statistics in the Research Process</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#the-research-process"><i class="fa fa-check"></i><b>1.1</b> The Research Process</a></li>
-<li class="chapter" data-level="1.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#example-the-psychology-of-loss-aversion"><i class="fa fa-check"></i><b>1.2</b> Example: The Psychology of Loss Aversion</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#evidence-for-loss-aversion-lotteries"><i class="fa fa-check"></i><b>1.2.1</b> Evidence for Loss Aversion: Lotteries</a></li>
-<li class="chapter" data-level="1.2.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking"><i class="fa fa-check"></i><b>1.2.2</b> Alternative Explanation: Loss Aversion or Loss Seeking?</a></li>
-</ul></li>
-<li class="chapter" data-level="1.3" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know"><i class="fa fa-check"></i><b>1.3</b> Epistemic Gaps: The Difference Between What we Want to Know and What we can Know</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-1-underdetermination-of-theory-by-data"><i class="fa fa-check"></i><b>1.3.1</b> Epistemic Gap 1: Underdetermination of Theory by Data</a></li>
-<li class="chapter" data-level="1.3.2" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#epistemic-gap-2-signal-versus-noise"><i class="fa fa-check"></i><b>1.3.2</b> Epistemic Gap 2: Signal versus Noise</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#some-further-examples-and-passing-thoughts"><i class="fa fa-check"></i><b>1.4.1</b> Some Further Examples and Passing Thoughts</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="role-of-statistics-in-the-research-process.html"><a href="role-of-statistics-in-the-research-process.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="chapter-1-quiz.html"><a href="chapter-1-quiz.html"><i class="fa fa-check"></i>Chapter 1: Quiz</a></li>
-<li class="chapter" data-level="2" data-path="research-designs.html"><a href="research-designs.html"><i class="fa fa-check"></i><b>2</b> Data and Research Designs</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="research-designs.html"><a href="research-designs.html#empirical-evidence-and-data"><i class="fa fa-check"></i><b>2.1</b> Empirical Evidence and Data</a></li>
-<li class="chapter" data-level="2.2" data-path="research-designs.html"><a href="research-designs.html#data-types"><i class="fa fa-check"></i><b>2.2</b> Data Types</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="research-designs.html"><a href="research-designs.html#numerical-versus-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Numerical Versus Categorical Variables</a></li>
-<li class="chapter" data-level="2.2.2" data-path="research-designs.html"><a href="research-designs.html#assumptions-of-numerical-variables"><i class="fa fa-check"></i><b>2.2.2</b> Assumptions of Numerical Variables</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="research-designs.html"><a href="research-designs.html#measurement"><i class="fa fa-check"></i><b>2.3</b> Measurement</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="research-designs.html"><a href="research-designs.html#measurement-scales"><i class="fa fa-check"></i><b>2.3.1</b> Measurement Scales</a></li>
-<li class="chapter" data-level="2.3.2" data-path="research-designs.html"><a href="research-designs.html#reliability-and-validity"><i class="fa fa-check"></i><b>2.3.2</b> Reliability and Validity</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="research-designs.html"><a href="research-designs.html#independent-and-dependent-variables"><i class="fa fa-check"></i><b>2.4</b> Independent and Dependent Variables</a></li>
-<li class="chapter" data-level="2.5" data-path="research-designs.html"><a href="research-designs.html#experimental-versus-observational-variables"><i class="fa fa-check"></i><b>2.5</b> Experimental versus Observational Variables</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="research-designs.html"><a href="research-designs.html#epistemic-gap-3-causal-inference-and-confounding-variables"><i class="fa fa-check"></i><b>2.5.1</b> Epistemic Gap 3: Causal Inference and Confounding Variables</a></li>
-<li class="chapter" data-level="2.5.2" data-path="research-designs.html"><a href="research-designs.html#is-causal-inference-from-observational-data-possible-at-all"><i class="fa fa-check"></i><b>2.5.2</b> Is Causal Inference from Observational Data Possible at All?</a></li>
-<li class="chapter" data-level="2.5.3" data-path="research-designs.html"><a href="research-designs.html#internal-versus-external-validity"><i class="fa fa-check"></i><b>2.5.3</b> Internal versus External Validity</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="research-designs.html"><a href="research-designs.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="chapter-2-quiz.html"><a href="chapter-2-quiz.html"><i class="fa fa-check"></i>Chapter 2: Quiz</a></li>
-<li class="chapter" data-level="3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Short Introduction to <code>R</code> and the <code>tidyverse</code></a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is <code>R</code>?</a></li>
-<li class="chapter" data-level="3.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#getting-started-with-r"><i class="fa fa-check"></i><b>3.2</b> Getting Started with <code>R</code></a></li>
-<li class="chapter" data-level="3.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#a-base-r-example-session"><i class="fa fa-check"></i><b>3.3</b> A Base <code>R</code> Example Session</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#data-files-scripts-and-working-directory"><i class="fa fa-check"></i><b>3.3.1</b> Data Files, Scripts, and Working Directory</a></li>
-<li class="chapter" data-level="3.3.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#read-data-and-inspecting-it"><i class="fa fa-check"></i><b>3.3.2</b> Read Data and Inspecting it</a></li>
-<li class="chapter" data-level="3.3.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#transforming-categorical-variables-into-factors"><i class="fa fa-check"></i><b>3.3.3</b> Transforming Categorical Variables into Factors</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#the-tidyverse"><i class="fa fa-check"></i><b>3.4</b> The <code>tidyverse</code></a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#tibble-and-readr"><i class="fa fa-check"></i><b>3.4.1</b> <code>tibble</code> and <code>readr</code></a></li>
-<li class="chapter" data-level="3.4.2" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>3.4.2</b> The Pipe: <code>%&gt;%</code></a></li>
-<li class="chapter" data-level="3.4.3" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#dplyr"><i class="fa fa-check"></i><b>3.4.3</b> <code>dplyr</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="short-introduction-to-r-and-the-tidyverse.html"><a href="short-introduction-to-r-and-the-tidyverse.html#summary-2"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Data Visualisation with <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#first-ggplot2-example"><i class="fa fa-check"></i><b>4.1</b> First <code>ggplot2</code> Example</a></li>
-<li class="chapter" data-level="4.2" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#two-continuous-variables"><i class="fa fa-check"></i><b>4.2</b> Two Continuous Variables</a></li>
-<li class="chapter" data-level="4.3" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#changing-ggplot2-theme-for-r-session"><i class="fa fa-check"></i><b>4.3</b> Changing <code>ggplot2</code> Theme for <code>R</code> Session</a></li>
-<li class="chapter" data-level="4.4" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#one-continuous-and-one-categorical-variable"><i class="fa fa-check"></i><b>4.4</b> One Continuous and one Categorical Variable</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#displaying-all-data-points"><i class="fa fa-check"></i><b>4.4.1</b> Displaying All Data Points</a></li>
-<li class="chapter" data-level="4.4.2" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#bee-swarm-plot"><i class="fa fa-check"></i><b>4.4.2</b> Bee Swarm Plot</a></li>
-<li class="chapter" data-level="4.4.3" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#box-plot"><i class="fa fa-check"></i><b>4.4.3</b> Box Plot</a></li>
-<li class="chapter" data-level="4.4.4" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#violin-plots"><i class="fa fa-check"></i><b>4.4.4</b> Violin Plots</a></li>
-<li class="chapter" data-level="4.4.5" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#plotting-the-mean"><i class="fa fa-check"></i><b>4.4.5</b> Plotting The Mean</a></li>
-<li class="chapter" data-level="4.4.6" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#one-continuous-variables-histograms"><i class="fa fa-check"></i><b>4.4.6</b> One Continuous Variables: Histograms</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="data-visualisation-with-ggplot2.html"><a href="data-visualisation-with-ggplot2.html#cheat-sheets"><i class="fa fa-check"></i><b>4.5</b> Cheat Sheets</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="standard1.html"><a href="standard1.html"><i class="fa fa-check"></i><b>5</b> The Standard Approach for One Independent Variable</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="standard1.html"><a href="standard1.html#ex:urry"><i class="fa fa-check"></i><b>5.1</b> Example Data: Note Taking Experiment</a></li>
-<li class="chapter" data-level="5.2" data-path="standard1.html"><a href="standard1.html#the-logic-of-inferential-statistics"><i class="fa fa-check"></i><b>5.2</b> The Logic of Inferential Statistics</a></li>
-<li class="chapter" data-level="5.3" data-path="standard1.html"><a href="standard1.html#the-basic-statistical-model"><i class="fa fa-check"></i><b>5.3</b> The Basic Statistical Model</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="standard1.html"><a href="standard1.html#model-predictions"><i class="fa fa-check"></i><b>5.3.1</b> Model Predictions</a></li>
-<li class="chapter" data-level="5.3.2" data-path="standard1.html"><a href="standard1.html#statistical-model-for-the-example-data"><i class="fa fa-check"></i><b>5.3.2</b> Statistical Model for the Example Data</a></li>
-<li class="chapter" data-level="5.3.3" data-path="standard1.html"><a href="standard1.html#understanding-the-statistical-model"><i class="fa fa-check"></i><b>5.3.3</b> Understanding the Statistical Model</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model-in-r"><i class="fa fa-check"></i><b>5.4</b> Estimating the Statistical Model in R</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="standard1.html"><a href="standard1.html#package-and-data-setup"><i class="fa fa-check"></i><b>5.4.1</b> Package and Data Setup</a></li>
-<li class="chapter" data-level="5.4.2" data-path="standard1.html"><a href="standard1.html#estimating-the-statistical-model"><i class="fa fa-check"></i><b>5.4.2</b> Estimating the Statistical Model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="standard1.html"><a href="standard1.html#interpreting-the-results"><i class="fa fa-check"></i><b>5.4.3</b> Interpreting the Results</a></li>
-<li class="chapter" data-level="5.4.4" data-path="standard1.html"><a href="standard1.html#data-visualisation"><i class="fa fa-check"></i><b>5.4.4</b> Data Visualisation</a></li>
-<li class="chapter" data-level="5.4.5" data-path="standard1.html"><a href="standard1.html#follow-up-analysis"><i class="fa fa-check"></i><b>5.4.5</b> Follow-Up Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="standard1.html"><a href="standard1.html#summary-3"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html"><i class="fa fa-check"></i><b>6</b> Case Study 1: More Results from Note Taking Studies</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-urry-et-al.-2021"><i class="fa fa-check"></i><b>6.1</b> Conceptual Memory Data from Urry et al. (2021)</a></li>
-<li class="chapter" data-level="6.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#why-are-experiments-replicated"><i class="fa fa-check"></i><b>6.2</b> Why are Experiments Replicated?</a></li>
-<li class="chapter" data-level="6.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#conceptual-memory-data-from-mueller-and-oppenheimer-2014"><i class="fa fa-check"></i><b>6.3</b> Conceptual Memory Data from Mueller and Oppenheimer (2014)</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#preparing-the-data"><i class="fa fa-check"></i><b>6.3.1</b> Preparing the Data</a></li>
-<li class="chapter" data-level="6.3.2" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#descriptive-statistics"><i class="fa fa-check"></i><b>6.3.2</b> Descriptive Statistics</a></li>
-<li class="chapter" data-level="6.3.3" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#inferential-analysis"><i class="fa fa-check"></i><b>6.3.3</b> Inferential Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="case-study-1-more-results-from-note-taking-studies.html"><a href="case-study-1-more-results-from-note-taking-studies.html#summary-4"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">Overview</a></li>
+<li><a class="" href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></li>
+<li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
+<li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
+<li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
+<li><a class="" href="short-introduction-to-r-and-the-tidyverse.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
+<li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/singmann/stats_for_experiments">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introduction to Statistics for Experimental Psychology with <code>R</code></h1>
-<p class="author"><em>Henrik Singmann</em></p>
-<p class="date"><em>2021-09-03</em></p>
+      </nav>
 </div>
-<div id="overview" class="section level1 unnumbered">
-<h1>Overview</h1>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="overview" class="section level1 unnumbered">
+<h1>Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+</h1>
 <p>At this point in time, the book is being written so only few chapters are already available.</p>
 <ul>
 <li>Chapter <a href="role-of-statistics-in-the-research-process.html#role-of-statistics-in-the-research-process">1</a> provides an introduction to the role of statistics in the research process. It also answers the important question: Why do we need statistics?</li>
@@ -309,11 +67,15 @@ div.csl-indent {
 <li>Chapter <a href="standard1.html#standard1">5</a> introduces the basic statistical approach.</li>
 </ul>
 <div id="acknowledgments" class="section level2" number="0.1">
-<h2><span class="header-section-number">0.1</span> Acknowledgments</h2>
+<h2>
+<span class="header-section-number">0.1</span> Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"><i class="fas fa-link"></i></a>
+</h2>
 <p>This project would not exist without the help and feedback provided by others: David Kellen, Lukasz Walasek, Stuart Rosen, Anna Krason</p>
 </div>
 <div id="license-and-attribution" class="section level2" number="0.2">
-<h2><span class="header-section-number">0.2</span> License and Attribution</h2>
+<h2>
+<span class="header-section-number">0.2</span> License and Attribution<a class="anchor" aria-label="anchor" href="#license-and-attribution"><i class="fas fa-link"></i></a>
+</h2>
 <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a> license. This license allows you to share and adapt the work as long as you give appropriate attribution and do not use the materials for commercial purposes.</p>
 <p>Parts of this book uses other materials released under a compatible CC license. Where it does so, the source is clearly indicated. Please ensure to attribute the original source in case you re-use such materials.</p>
 
@@ -420,71 +182,41 @@ window.onload = function() {
   update_total_correct();
 }
 
-</script>
-            </section>
+</script><div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#overview">Overview</a></li>
+<li><a class="nav-link" href="#acknowledgments"><span class="header-section-number">0.1</span> Acknowledgments</a></li>
+<li><a class="nav-link" href="#license-and-attribution"><span class="header-section-number">0.2</span> License and Attribution</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/singmann/stats_for_experiments/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/singmann/stats_for_experiments/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
-<a href="role-of-statistics-in-the-research-process.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-05.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["stats_for_experiments.pdf", "stats_for_experiments.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"scroll_highlight": true
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -496,7 +228,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

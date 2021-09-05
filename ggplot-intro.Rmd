@@ -35,7 +35,7 @@ lot_sum
 
 Looking at the returned `tibble` already shows that our intuition is probably not too off, but let us plot the data to get a better look. For this, we pass it to the `ggplot()` function as shown next.
 
-```{r}
+```{r first-fig}
 ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
   geom_point()
 ```
