@@ -46,7 +46,7 @@ To sum this long list up, as a minimum to get through this book it is recommende
 
 As we have discussed in the previous chapter, the most important format of data representation is a tabular format with each column representing a single variable and typically one row per observation. Such data is represented in base `R` in a `data.frame`, the most important data format for our needs. We use the term "base `R`" here to refer to using `R` without any additional packages. Let us quickly recap how a `data.frame` in base `R` looks like and let us do some basic operations with it that also sets the stage for using `R` scripts.
 
-### Data Files, Scripts, and Working Directory
+### Data Files, Scripts, and Working Directory {#files}
 
 In this chapter, we are mainly working with the data from @walasekHowMakeLoss2015 we have introduced in detail in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking). The data consists of two data files each representing a separate experiment we have discussed together so far as they are exact replications of another. In @walasekHowMakeLoss2015 these are reported as Experiments 1a and 1b. The original data files sent to me by Lukasz Walasek were Excel files (which can be found here: [Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx)).
 
@@ -369,7 +369,7 @@ tbl1a %>%
   arrange(condition) 
 ```
 
-#### `group_by()`
+#### `group_by()`  {#group-by}
 
 You might remember that the main hypothesis of @walasekHowMakeLoss2015 was that it is not the absolute value of a lottery, but the relative rank, that matters for whether or not participants think a lottery is attractive. The main evidence for this hypothesis was that the proportion with which the symmetric lotteries are accepted differs across the four conditions. How could we calculate this with the `tiydverse`?
 

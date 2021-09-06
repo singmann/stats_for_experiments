@@ -1,0 +1,144 @@
+# `tidyverse`: Examples and Exercises {.unnumbered}
+
+To get into the habit of doing it regularly when starting a new task or analysis, now is probably a good time to restart your `R` session. As a reminder, do so through the `RStudio` menu with `Session` - `Restart R`. After this, we need to load the `tidyverse` again:
+
+```{r, results='hide', message=FALSE}
+library("tidyverse")
+```
+
+## Extended `tidyverse` Example: Walasek & Stewart (2015) Exp. 1a & 1b
+
+### Reading Both Data Sets
+
+As an extended `tidyverse` example, let us once again get back to the data of @walasekHowMakeLoss2015. As described in Section \@ref(files), there are two similar data sets, Experiments 1a and 1b, that we can consider together (and have done so in in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking)). To follow the extended examples, download them both into folder `data` that is in your current working directory: [Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv). Then, we can load them both as separate objects using `read_csv()`.
+
+```{r}
+ws1a <- read_csv("data/ws2015_exp1a.csv")
+ws1b <- read_csv("data/ws2015_exp1b.csv")
+```
+
+We use new names for the resulting data objects to help us remember that this is the data from @walasekHowMakeLoss2015, Experiments 1a and 1b. It generally is a good idea to use descriptive object names as this makes code more easy to read later on. Especially if the code becomes longer, one could even use more descriptive names such as `walasek_stewart_2015_1a` and `walasek_stewart_2015_1b`. However, as this example stays relatively short, the first letter of the last names and no year will suffice.
+
+Note that as in the previous chapter, if you have problems downloading these two files or setting up the correct working directory, you can load them directly from the internet as well. However, this is not recommended and only shown here to make sure you can follow all steps in this example.
+
+```{r, eval=FALSE}
+ws1a <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv")
+ws1b <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv")
+```
+
+We know have two data sets that have the same structure (i.e., same columns and data types) as we can see by just printing them both:
+
+```{r}
+ws1a
+ws1b
+```
+
+What this output shows is that not only do the two data sets have the same columns in the same order, they also appear to have the same condition names. To ensure this is the case, let us check this by printing the unique values for each `condition` column in a sort manner:
+
+```{r}
+ws1a$condition %>% 
+  unique() %>% 
+  sort()
+ws1b$condition %>% 
+  unique() %>% 
+  sort()
+```
+
+This confirms that indeed, the condition names are the same in both data sets.
+
+### Combining Both Data Sets
+
+To analyse these two data sets together, as we have done in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking), we now have to combine these two `tibble`s into one. Specifically, we need to add the *rows* of one of the data sets to the other data sets (in contrast to adding additional *columns* to one of the data sets). The `tidyverse` function to combine multiple `tibble`s by rows is `bind_rows()`. So the code for combining the two data sets is simply `bind_rows(ws1a, ws1b)` (which will only work in a case as this where, not only do we have the same columns, but they are also in the same order) .
+
+However, before combining the data we have to consider one further complication. We can see that in both data sets the participant identifier column, `subno`, appears to consistent of whole numbers. This means, that the same number may be used for different participants across both experiments. If we do not check and control for this before combining the data, this could lead to the problem that data from different participants are treated as coming from the same participant. For example, the output above shows that there is a participant with `subno` 8 in Experiment 1a. If there is also a participants with `subno` 8 in Experiment 1b, the data from these two different participants (i.e., 8 in Experiment 1a and 8 in Experiment 1b, who are different individuals) would be treated as being from the same participant. To see whether this is indeed a potential problem, we print all individual `subno` values for both experiments.
+
+```{r}
+ws1a$subno %>% 
+  unique() %>% 
+  sort()
+ws1b$subno %>% 
+  unique() %>% 
+  sort()
+```
+
+The output confirms our suspicion. `subno` values are not unique across experiments. Therefore, we need to make them unique before combining the data. We do so by appending a string to each `subno`, either `e1a_` or `e1b_`, that indicates to which data set each participant belongs to. For this we use the `paste0()` function which allows to paste strings together into one (`paste0()` does so without adding any separation character to the combined strings).
+
+In the same call we also convert the `subno` variable to a factor (as it is a categorical variable). We can the combine both data sets into one called `ws1` using the `bind_rows()` call discussed above. We then get an overview of the combined data using the `glimpse()` function which is the `tidyverse` equivalent of `str()` (`glimpse()` often produces less verbose output for tibbles than `str()`, try it out yourself to see).
+
+```{r}
+ws1a <- ws1a %>%
+  mutate(subno = factor(paste0("e1a_", subno)))
+ws1b <- ws1b %>%
+  mutate(subno = factor(paste0("e1b_", subno)))
+ws1 <- bind_rows(ws1a, ws1b)
+glimpse(ws1)
+```
+
+The output shows that the `subno` for first participant in Experiment 1 is now `e1a_8` and not any more `8`. This indicates that `subno`'s are now unique within each experiment and we could combine the data.
+
+To verify this logic, we can count the number of unique values of `subno` for each data set. For this we can use the `length()` function on the `unique()` elements of the `subno` vectors. `length()` is a function that returns a number, the number of elements in a vector, so can be directly used in calculations. The calculation here shows that indeed, the combined data has the same number of participants, 781, as Experiments 1a and 1b together.
+
+```{r}
+length(unique(ws1a$subno)) + length(unique(ws1b$subno))
+length(unique(ws1$subno))
+```
+
+Before continuing with the analysis of the combined data it makes sense to take a step back and consider briefly why we discussed the question of how to combine these two data sets rather extensively. One the one hand, the code above uses a few new functions that we have not yet introduced such as `bind_rows()` or `length()`. As before, we want to introduce new functions explicitly by discussing their functionality explicitly.
+
+On the other hand, the discussion above shows us one way of handling and checking the assumptions in our code, an issue we had already mentioned before. The issue here is that when combining two data sets using `bind_rows()`, the code assumes that the participant identifiers are unique. This is not necessarily an obvious assumption we have when writing the code, but it is a consequence of the fact that we simply concatenate both data sets (i.e., add one to the end of the other). Because this is not an assumption that is obvious, we may overlook it which may lead to downstream problems (i.e., problems that happen later on in our code). Specifically, treating data from different participants that coincidentally share the same `subno` as coming from the same participant is probably no appropriate in our statistical analysis. By checking whether the number of participants (i.e., unique `subno` values) in the combined data is equal to the sum of the number of participants in the separate data sets, we make sure combining the two data sets did what we hoped it did.
+
+Another reason why we are discussing this issue in detail is that in one of the papers on which I am a co-author, @skovgaard-olsenRelevanceEffectConditionals2016, I overlooked this exact problem. The experiment reported in the paper consisted of three conditions that needed to be combined for the analysis. The problem was that the participant identifiers were only unique within conditions and not across conditions and I combined the data sets without considering this fact. Consequently, the statistical analysis incorrectly treated observations from different participants as belonging to the same participants. In fact, all statistical results reported in @skovgaard-olsenRelevanceEffectConditionals2016 are affected by this error as I only recognised the error after publication of the article. Luckily for us, once I recognised the error and re-analysed the data after correctly combining it, it turned out that the error had no substantive effects on the results. The details of the results changed (i.e., some numbers), but not the qualitative pattern of results. Consequently, we could fix this error by publishing a correction describing our error and its effect on the results [@skovgaard-olsenCorrigendumRelevanceEffect2018]. The larger point here is that such errors can and will happen. The best way to avoid them is by regularly checking explicitly whether the assumptions we make about our data and our code hold.
+
+### Preparing and Descriptive Analysis
+
+Now that we have combined the two data from the experiments into one `tibble`, we can further prepare it for analysis. For this, we turn all categorical variables into factors as shown before.
+
+```{r}
+ws1 <- ws1 %>% 
+  mutate(
+    subno = factor(subno),
+    response = factor(response, levels = c("reject", "accept")),
+    condition = factor(
+      condition, 
+      levels = c(40.2, 20.2, 40.4, 20.4), 
+      labels = c("-$20/+$40", "-$20/+$20", "-$40/+$40", "-$40/+$20")
+    )
+  )
+ws1
+```
+
+Next, we calculate the number of participants per condition and check if every participant has 64 trials. This is one way to check our assumptions about the data and ensure data integrity (we use the same code as described in Section \@ref(counting)).
+
+```{r}
+ws1 %>% 
+  group_by(condition, subno) %>% 
+  summarise(n = n()) %>% 
+  group_by(condition) %>% 
+  summarise(
+    n_participants = n(),
+    all_64 = all(n == 64)
+    )
+```
+
+
+Finally, it is time to perform a descriptive analysis of the data. The main result we have reported for this data, was the mean acceptance rates for the symmetric lotteries that appear in all conditions. The code for this is the same as given in Section \@ref(group_by), but now we use the combined data. This code reproduces the results reported in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking).
+
+```{r}
+ws1 %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  group_by(condition) %>% 
+  summarise(mean_acc = mean(resp)) %>% 
+  ungroup()
+```
+
+## Practical Helpers: Cheatsheets
+
+Applying all the `tidyverse` tools yourself can be a bit overwhelming at the beginning. There are quite a few functions and one has to remember for each what it does and what its syntax is. Furthermore, so far we have introduced the most important functions, but there are more in `dplyr` and other `tidyverse` packages that we did not have the space to introduce (for more see ["`R` for data science"](https://r4ds.had.co.nz/)). 
+
+One way for you to keep an overview of which functions does what is with the help of **cheat sheets** (*or* cheatsheets). Cheat sheets are short (usually 1 or 2 pages) documents that provide an overview of a package or tool and are a common resource across programming languages. Their benefit compared to other learning resources such as books or the documentation is that they provide a concise overview and can point you to the right tool. In the case of `R`, once you know which function to use (e.g., thanks to the cheat sheet) it might then make sense to follow up by looking at the documentation. The documentation can be obtained for each function by entering `?functionname` (e.g., `?summarise`) at the `R` prompt. It usually does not only contain an explanation of what the function does plus of all of its arguments, it also usually contains helpful examples.
+
+For the `tiydverse` packages, `RStudio`  provides an almost complete list of [cheat sheets](https://www.rstudio.com/resources/cheatsheets/). The most relevant for us at the moment is the [`dplyr` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf). Furthermore, there are also cheat sheets for [the `RStudio` IDE iteself](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf),  [reading in data](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf), and even [base `R`](http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf). Before diving into the examples below, it might make sense to download (or even print) the cheat sheets and have them by your side while trying to solve the problems.
+
+## `tiydverse` Exercises
+
+
