@@ -1,4 +1,5 @@
 bookdown::bs4_book:
+  fig_width: 5.5
   includes:
     after_body: include/webex.js
   css: [include/style.css, include/webex.css]

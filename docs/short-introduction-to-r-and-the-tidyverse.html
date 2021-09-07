@@ -116,9 +116,9 @@
 <span class="header-section-number">3.3</span> A Base <code>R</code> Example Session<a class="anchor" aria-label="anchor" href="#a-base-r-example-session"><i class="fas fa-link"></i></a>
 </h2>
 <p>As we have discussed in the previous chapter, the most important format of data representation is a tabular format with each column representing a single variable and typically one row per observation. Such data is represented in base <code>R</code> in a <code>data.frame</code>, the most important data format for our needs. We use the term “base <code>R</code>” here to refer to using <code>R</code> without any additional packages. Let us quickly recap how a <code>data.frame</code> in base <code>R</code> looks like and let us do some basic operations with it that also sets the stage for using <code>R</code> scripts.</p>
-<div id="data-files-scripts-and-working-directory" class="section level3" number="3.3.1">
+<div id="files" class="section level3" number="3.3.1">
 <h3>
-<span class="header-section-number">3.3.1</span> Data Files, Scripts, and Working Directory<a class="anchor" aria-label="anchor" href="#data-files-scripts-and-working-directory"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.1</span> Data Files, Scripts, and Working Directory<a class="anchor" aria-label="anchor" href="#files"><i class="fas fa-link"></i></a>
 </h3>
 <p>In this chapter, we are mainly working with the data from <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> we have introduced in detail in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>. The data consists of two data files each representing a separate experiment we have discussed together so far as they are exact replications of another. In <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> these are reported as Experiments 1a and 1b. The original data files sent to me by Lukasz Walasek were Excel files (which can be found here: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.xlsx">Experiment 1b</a>).</p>
 <p>As base <code>R</code> does not allow to read in Excel files, I have opened the original data files of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> in Excel and saved them as <code>.csv</code> files (i.e., comma separated files) which can be downloaded from here: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>. I recommend you download these files and save them in some folder so you can access them from within <code>R</code>.</p>
@@ -503,9 +503,9 @@ Figure 3.1: Comparison of execution order without pipe (upper part) or with pipe
 <span class="co">#&gt; <span style="color: #555555;">6</span>    20    20 -$20/+$20</span>
 <span class="co">#&gt; <span style="color: #555555;"># ... with 6 more rows</span></span></code></pre></div>
 </div>
-<div id="group_by" class="section level4" number="3.4.3.4">
+<div id="group-by" class="section level4" number="3.4.3.4">
 <h4>
-<span class="header-section-number">3.4.3.4</span> <code>group_by()</code><a class="anchor" aria-label="anchor" href="#group_by"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.3.4</span> <code>group_by()</code><a class="anchor" aria-label="anchor" href="#group-by"><i class="fas fa-link"></i></a>
 </h4>
 <p>You might remember that the main hypothesis of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> was that it is not the absolute value of a lottery, but the relative rank, that matters for whether or not participants think a lottery is attractive. The main evidence for this hypothesis was that the proportion with which the symmetric lotteries are accepted differs across the four conditions. How could we calculate this with the <code>tiydverse</code>?</p>
 <p>If we only apply what we know so far the only way to do so would be to split the data into four subsets using filter, and then apply <code>summarise()</code> to each of these subsets. Let us do this exemplary by only splitting the data into two subsets, one for the <code>"-\$20/+\$40"</code> condition that shows loss aversion and one for the “-$40/+$20” condition that shows loss seeking. We have to combine this filter with the filter only selecting the symmetric lotteries. To make the logic easier, we separate these two steps into separate <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> calls (but we could also combine them into one).</p>
@@ -783,7 +783,7 @@ window.onload = function() {
 <li><a class="nav-link" href="#getting-started-with-r"><span class="header-section-number">3.2</span> Getting Started with R</a></li>
 <li>
 <a class="nav-link" href="#a-base-r-example-session"><span class="header-section-number">3.3</span> A Base R Example Session</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-files-scripts-and-working-directory"><span class="header-section-number">3.3.1</span> Data Files, Scripts, and Working Directory</a></li>
+<li><a class="nav-link" href="#files"><span class="header-section-number">3.3.1</span> Data Files, Scripts, and Working Directory</a></li>
 <li><a class="nav-link" href="#read-data-and-inspecting-it"><span class="header-section-number">3.3.2</span> Read Data and Inspecting it</a></li>
 <li><a class="nav-link" href="#transforming-categorical-variables-into-factors"><span class="header-section-number">3.3.3</span> Transforming Categorical Variables into Factors</a></li>
 </ul>
@@ -813,7 +813,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-05.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

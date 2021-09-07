@@ -47,7 +47,7 @@ summary
 some-further-examples-and-passing-thoughts
 conclusion
 research-designs
-empirical-evidence-and-data
+evidence-data
 data-types
 numerical-versus-categorical-variables
 assumptions-of-numerical-variables
@@ -64,7 +64,7 @@ short-introduction-to-r-and-the-tidyverse
 what-is-r
 getting-started-with-r
 a-base-r-example-session
-data-files-scripts-and-working-directory
+files
 read-data-and-inspecting-it
 transforming-categorical-variables-into-factors
 the-tidyverse
@@ -74,7 +74,7 @@ dplyr
 mutate
 summarise
 filter-select-and-arrange
-group_by
+group-by
 counting
 dplyr-summary
 summary-2
