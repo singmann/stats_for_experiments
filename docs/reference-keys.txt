@@ -21,6 +21,8 @@ exr:unlabeled-div-15
 exr:unlabeled-div-16
 exr:unlabeled-div-17
 exr:unlabeled-div-18
+fig:rstudio1
+fig:rstudio2
 fig:pipe-screenshot
 exr:unlabeled-div-19
 exr:unlabeled-div-20
@@ -73,6 +75,11 @@ summary-1
 short-introduction-to-r-and-the-tidyverse
 what-is-r
 getting-started-with-r
+step-1-installing-r-and-rstudio
+step-2-getting-comfortable-with-r
+optional-step-3-file-system
+additional-optional-resources
+rstudio
 a-base-r-example-session
 files
 read-data-and-inspecting-it
