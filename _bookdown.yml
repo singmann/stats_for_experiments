@@ -5,7 +5,8 @@ rmd_files: [
   "role_of_stats.Rmd","quiz-intro-chapter.Rmd",
   "research_designs.Rmd","quiz-research-designs.Rmd",
   
-  "tidyverse-intro.Rmd", "ggplot-intro.Rmd",
+  "tidyverse-intro.Rmd", "tidyverse-examples-exercises.Rmd",
+  "ggplot-intro.Rmd",
   "02-standard_approach.Rmd", "case_study_mueller_oppenheimer.Rmd",
   "99-references.Rmd"]
 book_filename: "stats_for_experiments"
@@ -14,5 +15,7 @@ language:
   ui:
     chapter_name: "Chapter "
 
-before_chapter_script: "_common.R"
+before_chapter_script:
+- R/_common.R
+- R/webex.R
 output_dir: "docs"

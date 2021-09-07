@@ -1,49 +1,49 @@
-id,group,earworm_falling_asleep,earworm_night,earworm_morning,earworm_control,sleep_efficiency,sleep_time,age,gender,raceethnicity,nativeenglishspeaker,bilingual,height_inches,weight_lbs,handedness,classrank
-102,Lyrics,0,0,0,1,90,487.6,19,Female,Caucasian,Yes,No,66,145,R,Sophomore
-103,Lyrics,0,0,0,1,95.7,519.4,21,Female,Caucasian,Yes,No,68,183,L,Junior
-104,Instrumental,0,0,0,0,89.8,472.1,19,Female,Caucasian,Yes,No,64,135,R,Freshman
-105,Instrumental,0,0,0,0,94.1,494.8,20,Male,Hispanic,Yes,No,69,155,R,Junior
-106,Instrumental,0,0,0,0,98.5,492.2,27,Female,Asian,No,No,53,89,R,Graduate
-107,Lyrics,0,0,0,0,95.5,498.4,18,Female,Caucasian,Yes,No,62,120,R,Freshman
-108,Instrumental,0,0,1,1,87.4,497.4,22,Male,Caucasian,Yes,No,76,200,L,Senior
-109,Instrumental,0,0,0,0,96.9,520.9,19,Male,Caucasian,Yes,No,73,145,R,Freshman
-110,Instrumental,0,0,0,0,90.5,485.5,18,Male,Caucasian,Yes,No,70,167,L,Freshman
-111,Lyrics,0,0,0,1,96.8,510.2,19,Female,Caucasian,Yes,No,67,135,R,Freshman
-112,Lyrics,0,0,0,0,92.8,487.5,19,Male,Asian,Yes,No,67,138,R,Freshman
-113,Instrumental,0,0,0,0,98.2,509.5,20,Male,Hispanic,Yes,Yes,67,190,R,Junior
-114,Lyrics,0,0,0,1,91.3,433.1,22,Female,Hispanic,Yes,Yes,62,120,R,Senior
-115,Instrumental,1,0,1,0,92.1,493.1,19,Male,Caucasian,Yes,Yes,70,160,R,Freshman
-116,Lyrics,0,0,0,1,97.5,526,20,Male,Caucasian,Yes,No,68,178,R,Junior
-117,Lyrics,0,0,0,0,91.8,487,23,Male,Asian,Yes,No,69,145,R,-
-118,Lyrics,0,0,1,1,95.8,530,18,Female,Caucasian,Yes,No,67,160,L,Freshman
-119,Instrumental,0,0,0,0,95.6,493.5,21,Female,Hispanic,No,Yes,66,150,R,Senior
-120,Instrumental,1,0,0,0,90.8,487.5,21,Male,Caucasian,Yes,No,79,235,R,Senior
-121,Instrumental,1,1,1,1,85.5,458.3,21,Male,Caucasian,Yes,No,68,150,R,Junior
-122,Lyrics,0,0,0,0,94.3,485,20,Male,Asian,Yes,Yes,68,160,R,Junior
-123,Lyrics,0,1,0,1,97.5,522.5,21,Female,Hispanic,Yes,Yes,63,162,R,Senior
-124,Instrumental,0,0,1,1,93.4,513,21,Female,Hispanic,Yes,Yes,62,130,R,Senior
-125,Lyrics,0,0,0,1,96.4,506.5,21,Female,Asian,Yes,Yes,62,115,R,Senior
-126,Lyrics,1,0,0,0,90.3,514.5,22,Female,Caucasian,Yes,No,64,185,R,Junior
-127,Instrumental,0,0,0,0,89.6,475.7,21,Female,Hispanic,NA,NA,68,155,R,Junior
-128,Instrumental,0,0,1,1,94.4,517.3,28,Female,Caucasian,Yes,No,66,168,R,NIA (Staff)
-129,Lyrics,0,0,1,0,92.7,471.5,21,Female,Caucasian,No,Yes,67,134,R,Senior
-130,Instrumental,0,0,1,1,87.2,481.7,22,Female,Caucasian,Yes,No,66,150,R,Senior
-132,Lyrics,0,0,0,0,96.4,510.6,20,Female,Asian,Yes,Yes,63,115,R,Senior
-133,Instrumental,0,0,0,1,97.9,512.8,22,Female,Caucasian,Yes,No,65,125,R,Senior
-134,Instrumental,0,0,1,1,96.3,560.6,26,Female,Caucasian,Yes,No,59,152,L,Graduate
-135,Lyrics,0,0,0,0,93.9,512.5,21,Female,African American,Yes,No,74,181,R,Senior
-136,Lyrics,0,0,0,0,98.6,534.1,24,Female,Caucasian,Yes,No,62,110,R,Senior
-137,Instrumental,0,0,0,0,87.7,460.7,25,Male,Caucasian,No,Yes,72,245,R,Graduate
-138,Lyrics,1,1,0,0,87.7,501.7,23,Female,Hispanic,Yes,Yes,64,190,R,Senior
-139,Lyrics,0,0,0,0,98.1,532.3,18,Female,Caucasian,Yes,No,66,140,R,Freshman
-140,Instrumental,1,0,1,1,80.8,468.2,22,Female,Caucasian,Yes,No,71,155,L,Graduate
-141,Instrumental,0,0,0,1,84.6,471.2,20,Female,African American,Yes,No,69,162,R,Senior
-142,Lyrics,0,0,0,0,93,487,20,Female,African American,Yes,Yes,61,157,R,Senior
-143,Instrumental,0,0,1,0,93.4,509,21,Female,Caucasian,Yes,No,66,132,R,Senior
-144,Lyrics,0,0,0,1,93.5,504,19,Female,Caucasian,Yes,No,63,121,R,Sophomore
-145,Lyrics,1,0,0,0,91.4,522.5,20,Female,Caucasian,Yes,No,63,115,R,Sophomore
-146,Instrumental,1,0,0,1,93.6,536,20,Male,Caucasian,Yes,No,75,225,R,Junior
-147,Lyrics,0,0,0,0,97.7,546.8,20,Female,African American,Yes,Yes,66,140,R,Senior
-148,Lyrics,0,0,1,1,91.6,521.5,22,Female,Hispanic,Yes,No,62,140,R,Senior
-149,Lyrics,0,0,0,0,97.4,533.2,19,Female,Caucasian,Yes,No,65,120,R,Sophomore
-151,Instrumental,1,0,0,1,95,537,21,Female,Caucasian,Yes,No,63,140,L,Junior
+id,group,relaxed,sleepy,earworm_falling_asleep,earworm_night,earworm_morning,earworm_control,sleep_efficiency,sleep_time,age,gender,raceethnicity,nativeenglishspeaker,bilingual,height_inches,weight_lbs,handedness,classrank
+102,Lyrics,37,49,0,0,0,1,90,487.6,19,Female,Caucasian,Yes,No,66,145,R,Sophomore
+103,Lyrics,96,10,0,0,0,1,95.7,519.4,21,Female,Caucasian,Yes,No,68,183,L,Junior
+104,Instrumental,62,44,0,0,0,0,89.8,472.1,19,Female,Caucasian,Yes,No,64,135,R,Freshman
+105,Instrumental,83,97,0,0,0,0,94.1,494.8,20,Male,Hispanic,Yes,No,69,155,R,Junior
+106,Instrumental,68,42,0,0,0,0,98.5,492.2,27,Female,Asian,No,No,53,89,R,Graduate
+107,Lyrics,78,52,0,0,0,0,95.5,498.4,18,Female,Caucasian,Yes,No,62,120,R,Freshman
+108,Instrumental,60,41,0,0,1,1,87.4,497.4,22,Male,Caucasian,Yes,No,76,200,L,Senior
+109,Instrumental,93,71,0,0,0,0,96.9,520.9,19,Male,Caucasian,Yes,No,73,145,R,Freshman
+110,Instrumental,60,59,0,0,0,0,90.5,485.5,18,Male,Caucasian,Yes,No,70,167,L,Freshman
+111,Lyrics,56,34,0,0,0,1,96.8,510.2,19,Female,Caucasian,Yes,No,67,135,R,Freshman
+112,Lyrics,71,69,0,0,0,0,92.8,487.5,19,Male,Asian,Yes,No,67,138,R,Freshman
+113,Instrumental,61,68,0,0,0,0,98.2,509.5,20,Male,Hispanic,Yes,Yes,67,190,R,Junior
+114,Lyrics,90,43,0,0,0,1,91.3,433.1,22,Female,Hispanic,Yes,Yes,62,120,R,Senior
+115,Instrumental,80,52,1,0,1,0,92.1,493.1,19,Male,Caucasian,Yes,Yes,70,160,R,Freshman
+116,Lyrics,38,44,0,0,0,1,97.5,526,20,Male,Caucasian,Yes,No,68,178,R,Junior
+117,Lyrics,84,74,0,0,0,0,91.8,487,23,Male,Asian,Yes,No,69,145,R,-
+118,Lyrics,59,75,0,0,1,1,95.8,530,18,Female,Caucasian,Yes,No,67,160,L,Freshman
+119,Instrumental,75,73,0,0,0,0,95.6,493.5,21,Female,Hispanic,No,Yes,66,150,R,Senior
+120,Instrumental,78,75,1,0,0,0,90.8,487.5,21,Male,Caucasian,Yes,No,79,235,R,Senior
+121,Instrumental,88,81,1,1,1,1,85.5,458.3,21,Male,Caucasian,Yes,No,68,150,R,Junior
+122,Lyrics,91,88,0,0,0,0,94.3,485,20,Male,Asian,Yes,Yes,68,160,R,Junior
+123,Lyrics,48,90,0,1,0,1,97.5,522.5,21,Female,Hispanic,Yes,Yes,63,162,R,Senior
+124,Instrumental,100,100,0,0,1,1,93.4,513,21,Female,Hispanic,Yes,Yes,62,130,R,Senior
+125,Lyrics,100,100,0,0,0,1,96.4,506.5,21,Female,Asian,Yes,Yes,62,115,R,Senior
+126,Lyrics,70,44,1,0,0,0,90.3,514.5,22,Female,Caucasian,Yes,No,64,185,R,Junior
+127,Instrumental,77,52,0,0,0,0,89.6,475.7,21,Female,Hispanic,NA,NA,68,155,R,Junior
+128,Instrumental,35,58,0,0,1,1,94.4,517.3,28,Female,Caucasian,Yes,No,66,168,R,NIA (Staff)
+129,Lyrics,48,62,0,0,1,0,92.7,471.5,21,Female,Caucasian,No,Yes,67,134,R,Senior
+130,Instrumental,57,53,0,0,1,1,87.2,481.7,22,Female,Caucasian,Yes,No,66,150,R,Senior
+132,Lyrics,50,70,0,0,0,0,96.4,510.6,20,Female,Asian,Yes,Yes,63,115,R,Senior
+133,Instrumental,96,97,0,0,0,1,97.9,512.8,22,Female,Caucasian,Yes,No,65,125,R,Senior
+134,Instrumental,8,81,0,0,1,1,96.3,560.6,26,Female,Caucasian,Yes,No,59,152,L,Graduate
+135,Lyrics,51,75,0,0,0,0,93.9,512.5,21,Female,African American,Yes,No,74,181,R,Senior
+136,Lyrics,78,73,0,0,0,0,98.6,534.1,24,Female,Caucasian,Yes,No,62,110,R,Senior
+137,Instrumental,75,64,0,0,0,0,87.7,460.7,25,Male,Caucasian,No,Yes,72,245,R,Graduate
+138,Lyrics,80,49,1,1,0,0,87.7,501.7,23,Female,Hispanic,Yes,Yes,64,190,R,Senior
+139,Lyrics,91,98,0,0,0,0,98.1,532.3,18,Female,Caucasian,Yes,No,66,140,R,Freshman
+140,Instrumental,60,32,1,0,1,1,80.8,468.2,22,Female,Caucasian,Yes,No,71,155,L,Graduate
+141,Instrumental,64,63,0,0,0,1,84.6,471.2,20,Female,African American,Yes,No,69,162,R,Senior
+142,Lyrics,91,77,0,0,0,0,93,487,20,Female,African American,Yes,Yes,61,157,R,Senior
+143,Instrumental,98,77,0,0,1,0,93.4,509,21,Female,Caucasian,Yes,No,66,132,R,Senior
+144,Lyrics,74,71,0,0,0,1,93.5,504,19,Female,Caucasian,Yes,No,63,121,R,Sophomore
+145,Lyrics,60,86,1,0,0,0,91.4,522.5,20,Female,Caucasian,Yes,No,63,115,R,Sophomore
+146,Instrumental,72,70,1,0,0,1,93.6,536,20,Male,Caucasian,Yes,No,75,225,R,Junior
+147,Lyrics,91,98,0,0,0,0,97.7,546.8,20,Female,African American,Yes,Yes,66,140,R,Senior
+148,Lyrics,99,96,0,0,1,1,91.6,521.5,22,Female,Hispanic,Yes,No,62,140,R,Senior
+149,Lyrics,78,91,0,0,0,0,97.4,533.2,19,Female,Caucasian,Yes,No,65,120,R,Sophomore
+151,Instrumental,76,72,1,0,0,1,95,537,21,Female,Caucasian,Yes,No,63,140,L,Junior
