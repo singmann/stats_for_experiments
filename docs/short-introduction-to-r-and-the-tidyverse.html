@@ -46,7 +46,7 @@
 <li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
 <li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
 <li><a class="active" href="short-introduction-to-r-and-the-tidyverse.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
-<li><a class="" href="tidyverse-examples-and-exercises.html">tidyverse: Examples and Exercises</a></li>
+<li><a class="" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
 <li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
 <li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
@@ -542,7 +542,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span class="header-section-number">3.5.3.4</span> <code>group_by()</code><a class="anchor" aria-label="anchor" href="#group-by"><i class="fas fa-link"></i></a>
 </h4>
 <p>You might remember that the main hypothesis of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> was that it is not the absolute value of a lottery, but the relative rank, that matters for whether or not participants think a lottery is attractive. The main evidence for this hypothesis was that the proportion with which the symmetric lotteries are accepted differs across the four conditions. How could we calculate this with the <code>tiydverse</code>?</p>
-<p>If we only apply what we know so far the only way to do so would be to split the data into four subsets using filter, and then apply <code>summarise()</code> to each of these subsets. Let us do this exemplary by only splitting the data into two subsets, one for the <code>"-\$20/+\$40"</code> condition that shows loss aversion and one for the “-$40/+$20” condition that shows loss seeking. We have to combine this filter with the filter only selecting the symmetric lotteries. To make the logic easier, we separate these two steps into separate <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> calls (but we could also combine them into one).</p>
+<p>If we only apply what we know so far the only way to do so would be to split the data into four subsets using filter, and then apply <code>summarise()</code> to each of these subsets. Let us do this exemplary by only splitting the data into two subsets, one for the “-$20/+$40” condition that shows loss aversion and one for the “-$40/+$20” condition that shows loss seeking. We have to combine this filter with the filter only selecting the symmetric lotteries. To make the logic easier, we separate these two steps into separate <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> calls (but we could also combine them into one).</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## "loss aversion" condition:</span>
 <span class="va">tbl1a</span> <span class="op">%&gt;%</span>
@@ -808,7 +808,7 @@ window.onload = function() {
 
 </script><div class="chapter-nav">
 <div class="prev"><a href="chapter-2-quiz.html">Chapter 2: Quiz</a></div>
-<div class="next"><a href="tidyverse-examples-and-exercises.html">tidyverse: Examples and Exercises</a></div>
+<div class="next"><a href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -855,7 +855,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-07.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -34,6 +34,16 @@ exr:unlabeled-div-25
 exr:unlabeled-div-26
 exr:unlabeled-div-27
 exr:unlabeled-div-28
+exr:unlabeled-div-29
+exr:unlabeled-div-30
+exr:unlabeled-div-31
+exr:unlabeled-div-32
+exr:unlabeled-div-33
+exr:unlabeled-div-34
+exr:unlabeled-div-35
+exr:unlabeled-div-36
+exr:unlabeled-div-37
+exr:unlabeled-div-38
 fig:datasaurus
 fig:laptop-dist
 eq:statmodel
@@ -99,6 +109,7 @@ extended-tidyverse-example-walasek-stewart-2015-exp.-1a-1b
 reading-both-data-sets
 combining-both-data-sets
 preparing-and-descriptive-analysis
+quiz
 practical-helpers-cheatsheets
 tiydverse-exercise-earworms-and-sleep
 data-visualisation-with-ggplot2

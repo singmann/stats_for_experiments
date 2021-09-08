@@ -1,4 +1,4 @@
-# `tidyverse`: Examples and Exercises {.unnumbered}
+# `tidyverse`: Example, Quiz, and Exercises {#tidyverse-exercises .unnumbered}
 
 To get into the habit of doing it regularly when starting a new task or analysis, now is probably a good time to restart your `R` session. As a reminder, do so through the `RStudio` menu with `Session` - `Restart R`. After this, we need to load the `tidyverse` again:
 
@@ -130,6 +130,118 @@ ws1 %>%
   ungroup()
 ```
 
+## Quiz 
+
+Note: The pull-down menu for selecting an answer turns green after selecting the correct answer. 
+
+::: {.exercise}
+What does `NA` stand for in `R`? 
+
+1. "not available", i.e., missing data
+2. "no answer", i.e, `R` couldn't find an answer to your command
+3. "nothing applicable", i.e., there are no values/variables that match your request
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+:::
+
+::: {.exercise}
+Which of the following is NOT true for an `R` package? 
+
+1. Is a collection of functions that extend `R`.
+2. Needs to be installed from CRAN every time you use it .
+3. Needs to be loaded every time you use it.
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+:::
+
+::: {.exercise}
+What are "bugs" in programming languages? 
+
+1. variables that are not of interest for a specific analysis
+2. the same code is used multiple times for different datasets
+3. error in the code that lead to unexpected/wrong results
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+
+::: {.exercise}
+What is a `tibble`?
+
+1. a variant of a `data.frame`
+2. the `tiydverse` version of a vector 
+3. the result you get from data wrangling
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+:::
+
+::: {.exercise}
+This operator `%>%` means we are using...
+
+1. base R
+2. pipe
+3. data.frame
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+:::
+
+
+::: {.exercise}
+The `dplyr` package is NOT useful for:
+
+1. picking variables based on their names
+2. adding new variables
+3. summarizing multiple values
+4. changing the ordering of the rows
+5. reading file in as csv
+
+Answer: `r webex::mcq(c("1", "2", "3", "4", answer = "5"))`
+:::
+
+::: {.exercise}
+Using the `dplyr` package, which function is used for adding/changing variables in the current data?
+
+1. `mutate()`
+2. `summarise()`
+3. ``filter()`
+4. `select()`
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3", "4"))`
+:::
+
+::: {.exercise}
+Using the `dplyr` package, which function is used for selecting subsets of rows?
+
+1. `mutate()`
+2. `summarise()`
+3. ``filter()`
+4. `select()`
+
+Answer: `r webex::mcq(c("1", "2", answer = "3", "4"))`
+:::
+
+::: {.exercise}
+Using the `dplyr` package, which function is used for selecting subsets of columns?
+
+1. `mutate()`
+2. `summarise()`
+3. ``filter()`
+4. `select()`
+
+Answer: `r webex::mcq(c("1", "2", "3", answer = "4"))`
+:::
+
+
+::: {.exercise}
+When using the pipe operator `%>%`, `R` executes operations in which order?
+
+1. From innermost to outermost function
+2. That depends on which other packages are loaded.
+3. From left to right.
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+
+
 ## Practical Helpers: Cheatsheets
 
 Applying all the `tidyverse` tools yourself can be a bit overwhelming at the beginning. There are quite a few functions and one has to remember for each what it does and what its syntax is. Furthermore, so far we have introduced the most important functions, but there are more in `dplyr` and other `tidyverse` packages that we did not have the space to introduce (for more see ["`R` for data science"](https://r4ds.had.co.nz/)).
@@ -152,14 +264,24 @@ The researcher were interested in two research questions:
 
 Before looking at the data, take a guess yourself. Do you believe you sleep better after listening to music that makes it likely that you develop and earworm?
 
-A version of the original data file made available by @scullinBedtimeMusicInvoluntary2021 can be downloaded from [here](). I recommend you download it to the `data` folder in the working directory and then you can read in the data via the following code. It makes sense to restart `R` before doing that so we also reload the `tidyverse`.
+A version of the original data file made available by @scullinBedtimeMusicInvoluntary2021 can be downloaded from [here](https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv). I recommend you download it to the `data` folder in the working directory and then you can read in the data via the following code. It makes sense to restart `R` before doing that so we also reload the `tidyverse`.
 
 ```{r}
 library("tidyverse")
 earworm <- read_csv("data/earworm_study.csv")
-glimpse(earworm)
 ```
 
+Alternatively, you can also download directly from the internet for this exercise, but I really recommend getting comfortable with files, folder, and the `R` working directory. The code for downloading from the internet is:
+
+```{r, eval=FALSE}
+earworm <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv")
+```
+
+Let us take a first look at the data:
+
+```{r}
+glimpse(earworm)
+```
 
 In addition to the variables relevant to our research questions, the data also contains a number of control variables also included here (the original data made available even control more variables). We can see a total of 19 variables that we describe here:
 
@@ -200,7 +322,7 @@ How can you categorise the other variables, such as `relaxed`, `age`, etc., that
 
 
 `r hide("Solution")`
-The other variables can all be understood as control variables. The two explicitly psychological measures, `relaxed` and `sleepy`, are taken right after the experimental manipulation (i.e., listening to either lyrical or instrumental music). We hope that the type of music does not affect this measure. The other control variables, `age` and following, are all demographic variables. We can use them to check whether the randomisation indeed lead to unbalanced conditions.
+The other variables can all be understood as control variables. The two explicitly psychological measures, `relaxed` and `sleepy`, are taken right after the experimental manipulation (i.e., listening to either lyrical or instrumental music). We hope that the type of music does not affect this measure. The other control variables, `age` and following, are all demographic variables. We can use them to check whether the randomisation indeed lead to unbalanced conditions. And as we have discussed before, the participant identifier, `id`, is also a control variable.
 `r unhide()`
 :::
 
