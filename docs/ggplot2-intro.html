@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Data Visualisation with ggplot2 | Introduction to Statistics for Experimental Psychology with R</title>
+<meta name="author" content="Henrik Singmann">
+<meta name="description" content="So far we have only considered data analysis that exclusively happens in the R console. That is, we put numbers and text into the console and get numbers and text out. However, this is only one...">
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Data Visualisation with ggplot2 | Introduction to Statistics for Experimental Psychology with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="So far we have only considered data analysis that exclusively happens in the R console. That is, we put numbers and text into the console and get numbers and text out. However, this is only one...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Data Visualisation with ggplot2 | Introduction to Statistics for Experimental Psychology with R">
+<meta name="twitter:description" content="So far we have only considered data analysis that exclusively happens in the R console. That is, we put numbers and text into the console and get numbers and text out. However, this is only one...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></li>
+<li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
+<li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
+<li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
+<li><a class="" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
+<li><a class="active" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
+<li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
+<li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/singmann/stats_for_experiments">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ggplot2-intro" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Data Visualisation with <code>ggplot2</code><a class="anchor" aria-label="anchor" href="#ggplot2-intro"><i class="fas fa-link"></i></a>
+</h1>
+<p>So far we have only considered data analysis that exclusively happens in the <code>R</code> console. That is, we put numbers and text into the console and get numbers and text out. However, this is only one part of any comprehensive data analysis. Another part of any data analysis is the transformation of numbers into pictures – data visualisation.</p>
+<p>As before, we employ the <code>tidyverse</code> approach for data visualisation, <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a>. <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> is a system for declaratively creating graphics, based on the book “The Grammar of Graphics” <span class="citation">(<a href="references.html#ref-wilkinsonGrammarGraphics1999" role="doc-biblioref">Wilkinson 1999</a>)</span>. <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> is also the perhaps most prominent member of the <code>tidyverse</code>, which technically pre-dates the <code>tidyverse</code> by several years.</p>
+<p>To understand how <code>ggplot2</code> works, it makes sense to contrast it to the base <code>R</code> graphics engine around the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function. For <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> creating a plot is done by drawing individual graphical elements such as <code><a href="https://rdrr.io/r/graphics/points.html">points()</a></code> or <code><a href="https://rdrr.io/r/graphics/lines.html">lines()</a></code>. These functions generally only accept individual vectors or data points.</p>
+<p>In contrast, <code>ggplot2</code> requires that the data is passed either as a <code>data.frame</code> or <code>tibble</code>. With this in hand, “you provide the data, tell <code>ggplot2</code> how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.” (<a href="https://ggplot2.tidyverse.org/">quote from the official documentation</a>).</p>
+<div id="first-ggplot2-example" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> First <code>ggplot2</code> Example<a class="anchor" aria-label="anchor" href="#first-ggplot2-example"><i class="fas fa-link"></i></a>
+</h2>
+<p>What this means in practice is the first thing to think about is which variables in your data you want to show on which of the two axes? Once you have decided on this you have to consider which graphical elements, which are called <code>geom</code>s in <code>ggplot2</code> terminology, you want to use to show the data. Let us exemplify this with a first example from the <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> data we have also used in Chapter <a href="tidyverse-intro.html#tidyverse-intro">3</a>. Let us begin by loading the data as done there (we suppress some status messages in the output here):</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+<span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span>
+<span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/ws2015_exp1b.csv"</span><span class="op">)</span>
+<span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="va">ws1a</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1a_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="va">ws1b</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1b_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ws1</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">ws1a</span>, <span class="va">ws1b</span><span class="op">)</span>
+<span class="va">ws1</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">response</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"reject"</span>, <span class="st">"accept"</span><span class="op">)</span><span class="op">)</span>,
+    condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+      <span class="va">condition</span>, 
+      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40.2</span>, <span class="fl">20.2</span>, <span class="fl">40.4</span>, <span class="fl">20.4</span><span class="op">)</span>, 
+      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-$20/+$40"</span>, <span class="st">"-$20/+$20"</span>, <span class="st">"-$40/+$40"</span>, <span class="st">"-$40/+$20"</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">)</span>
+<span class="fu">glimpse</span><span class="op">(</span><span class="va">ws1</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 49,984</span>
+<span class="co">#&gt; Columns: 6</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">subno    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> e1a_8, e1a_8, e1a_8, e1a_8, e1a_8, e1a_8~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">loss     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">gain     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 8, 10, 12, 14, 16, 18, 20, 6, 8, 10, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> accept, accept, accept, accept, accept, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> -$20/+$20, -$20/+$20, -$20/+$20, -$20/+$~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1~</span></code></pre></div>
+<p>One intuition we could have is that the probability that a lottery is accepted is related to the size of the potential gain, if we average over all other variables (i.e., potential loss and condition). To investigate this, we first need to calculate the average acceptance probability for each possible gain. Then, we can create a plot with each possible gain on the x-axis against the average accept probability on the y-axis. To summarise the data, we use the now well-known combination of <code>group_by()</code> and <code>summarise()</code>.</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lot_sum</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">gain</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean_acceptance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span>
+<span class="va">lot_sum</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 13 x 2</span></span>
+<span class="co">#&gt;    <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span>     6          0.093<span style="text-decoration: underline;">8</span></span>
+<span class="co">#&gt; <span style="color: #555555;">2</span>     8          0.134 </span>
+<span class="co">#&gt; <span style="color: #555555;">3</span>    10          0.229 </span>
+<span class="co">#&gt; <span style="color: #555555;">4</span>    12          0.239 </span>
+<span class="co">#&gt; <span style="color: #555555;">5</span>    14          0.358 </span>
+<span class="co">#&gt; <span style="color: #555555;">6</span>    16          0.345 </span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 7 more rows</span></span></code></pre></div>
+<p>Looking at the returned <code>tibble</code> already shows that our intuition is probably not too far off. To understand the pattern better, let us plot the data. For this, we pass the newly created <code>tibble</code> to the <code>ggplot()</code> function as shown next.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/first-fig-1.png" width="100%"></div>
+<p>This plot shows a clear relationship between the mean acceptance rate of a lottery and its potential gain. On average it holds that the larger the gain the larger the mean acceptance probability.</p>
+<p>Let us now describe the call that produces the plot in detail:</p>
+<ul>
+<li>To create a plot with <code>ggplot2</code> we generally want to call the <code>ggplot()</code> function. The first argument to <code>ggplot()</code> is the data we want to plot. Because the data is the first argument, we can also directly pipe a <code>tibble</code> into the <code>ggplot()</code> function, which we will see later.</li>
+<li>The second argument is the <code>aes()</code> function, which is used to map variables in the data onto aesthetics. Understanding how to use the <code>aes()</code> function is the conceptually most difficult part of learning <code>ggplot2</code>. In the present call we only consider two aesthetics, the <code>x</code> and <code>y</code> axes. These two are probably the most important aesthetics, but we will also use other aesthetics such as <code>linetype</code>, <code>size</code>, or <code>shape</code> of the data points. In general, an aesthetic is a feature of the plot which changes as a function of the values of the variable. And with <code>aes()</code> we can assign based on which variables in our data the aesthetic should change. More specifically, <code>x = gain</code> means that the x-axis should vary as a function of <code>gain</code>. Likewise, <code>y = mean_acceptance</code> means that the y-axis should vary as a function of <code>mean_acceptance</code>.</li>
+<li>After passing the data and specifying the aesthetics, we close the <code>ggplot()</code> call (i.e., close the opening parenthesis) and then add further arguments, which are passed as function calls, to the plot using <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>.</li>
+<li>The most important set of arguments to pass are <code>geom</code>s (or geometric objects). Here we pass <code>geom_point()</code> to indicate that we want to plot all points of the data.</li>
+</ul>
+<p>Another important thing with <code>ggplot2</code> is that we cannot only use one <code>geom</code>, but multiple. For example, we could add a line on top connecting all the data points:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;One thing of note is that usually &lt;code&gt;geom_line()&lt;/code&gt; requires the use of the &lt;code&gt;groups&lt;/code&gt; aesthetic to work properly. For example, if all data points should be connected, as in the present case, &lt;code&gt;group&lt;/code&gt; should be 1, that is, &lt;code&gt;geom_line(aes(group = 1))&lt;/code&gt;. Try it out yourself by replacing the &lt;code&gt;geom_line()&lt;/code&gt; call in the example with the one that includes the &lt;code&gt;aes()&lt;/code&gt; to see that they are equivalent. Given that this is a bit an unusual way of using &lt;code&gt;aes()&lt;/code&gt; it is good to know it exists. This also shows that you can have multiple &lt;code&gt;aes()&lt;/code&gt; calls in one &lt;code&gt;ggplot2&lt;/code&gt; call.&lt;/p&gt;"><sup>30</sup></a></p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-3-1.png" width="100%"></div>
+</div>
+<div id="two-continuous-variables" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Two Continuous Variables<a class="anchor" aria-label="anchor" href="#two-continuous-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>The examples above show a simple case of plotting two continuous variables, the dependent variable is shown on the y-axis and the independent variable (for this plot) on the x-axis, which is the usual convention for creating plots. Let us now consider a few more cases of plotting two continuous variables, by extending the data we are looking at.</p>
+<p>In the plots above we have averaged over all possible potential losses when looking at the effect of gain on average acceptance rates. We will now plot the case in which we consider each individual lottery – that is, each unique combination of potential gain and loss – as one data point (i.e., we will not average over all potential losses for one gain). Additionally, to reduce the influence of the condition manipulation when doing so we will only consider the two symmetric conditions in which the range for losses is equal to the range for gains. Let us begin the analysis by preparing the corresponding data.</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lot_sum2</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">condition</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-$20/+$20"</span>, <span class="st">"-$40/+$40"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">loss</span>, <span class="va">gain</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean_acceptance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; `summarise()` has grouped output by 'loss'. You can override using the `.groups` argument.</span>
+<span class="va">lot_sum2</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 119 x 3</span></span>
+<span class="co">#&gt; <span style="color: #555555;"># Groups:   loss [13]</span></span>
+<span class="co">#&gt;    <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span>     6     6           0.520</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span>     6     8           0.614</span>
+<span class="co">#&gt; <span style="color: #555555;">3</span>     6    10           0.777</span>
+<span class="co">#&gt; <span style="color: #555555;">4</span>     6    12           0.881</span>
+<span class="co">#&gt; <span style="color: #555555;">5</span>     6    14           0.876</span>
+<span class="co">#&gt; <span style="color: #555555;">6</span>     6    16           0.916</span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 113 more rows</span></span></code></pre></div>
+<p>For our first plot, we begin with the same call as above and only change the data that is passed to the <code>ggplot()</code> function.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-5-1.png" width="100%"></div>
+<p>This plot is difficult to interpret. We see that there are some lotteries with very low acceptance rates between 0 and around 0.2 as well as another group with acceptance rates between around 0.3 and 0.85. In this plot it does not look as if a larger potential gain is associated with a larger mean acceptance rate.</p>
+<p>One possibility for these differing visual impressions might be that there is some overlap of data points that are near 0; that is, there is evidence for <em>over-plotting</em>. That means that in the current plot we cannot differentiate between one or multiple data points that share the same or approximately same x and y coordinates.</p>
+<p>One way to allow for this differentiation and see whether there potentially is over-plotting is through alpha blending (i.e., by choosing <code>alpha</code> &lt; 1). Alpha blending is a computer graphics effect that creates the visual impression of semi transparency. What this means is that with alpha blending overlapping points appear darker whereas non-overlapping points do not. Thus, alpha blending is a helpful technique for investigating if there is over-plotting and for judging the degree of over-plotting. For example, we can set <code>alpha = 0.25</code> for <code>geom_point()</code> as shown below.</p>
+<p>If you are wondering why <code>alpha = 0.25</code> and not any other value? The answer is trial-and-error. I just tried some values (I usually start with a value below 0.5) and then tried a few different ones until I saw a plot that looked good to me.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-6-1.png" width="100%"></div>
+<p>As you can see in the plot, there is some evidence for over-plotting. Especially for mean acceptance rates near 0 (and especially for low values of potential gains), we see several points clearly darker than the rest of the data points. This means that in this case several points are at exactly the same position (i.e., there is over-plotting). However, the plot is still not very clear. For example, it is still difficult to judge how many points there are for the points that appear clearly darker.</p>
+<p>One possibility to further improve on this figure is by introducing some random jitter for the plotted points using <code>geom_jitter()</code>. Given that the points are all on discrete x-axis positions (i.e., the even whole numbers that act as potentially gains) it makes sense to only add a small amount of jitter on the x-axis. This is done by specifying the <code>width</code> argument to <code>geom_jitter()</code>, which requires a number specifying the amount of (horizontal) jitter in units of the x-axis. Trial-and-error led me to conclude that <code>width = 0.4</code> produces an appealing result.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that the jitter width determines the horizontal amount of jitter in each direction. That means that the total area reserved for jittered points is 2 * &lt;code&gt;width&lt;/code&gt; (or 0.8 in the present case). Given that the distance between adjacent x-axis positions is 2 (i.e., potential gain values are always at least 2 apart) a jitter width of 0.4 here means that the area occupied for points with the same potential gain is slightly smaller than the empty area between adjacent potential gain values (which occupies 1.2 units of the x-axis).&lt;/p&gt;"><sup>31</sup></a> With jitter only on the x-axis the points retain their exact y-axis positions but are still shown around their original x-axis position.</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.4</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-7-1.png" width="100%"></div>
+<p>An important thing to know about using <code>geom_jitter()</code> is that due to the randomness that is used to add the jitter, this plot will look slightly different every time it is created (i.e., the code above executed). Try it out a few times to see what I mean. And while you are at it feel free to try out a few different values for the amount of jitter or what happens if you remove <code>width = 0.4</code> from the <code>geom_jitter()</code> call. You can also try and see what happens of you add some value for <code>height</code> (e.g., <code>height = 0.05</code>).</p>
+<p>The plot above that combines jitter and alpha blending makes it easier to see why we see such an effect of potential gain on mean acceptance rates when averaging over losses. There are many more data points with very low mean acceptance rates on the left side of the plot and many more data points with medium to high acceptance rates on the right side of the plot. If we imagine taking the mean of these points we can imagine an essentially monotonically increasing mean acceptance rate (i.e., an essentially continuously increasing and not decreasing mean acceptance rate).</p>
+<p>One question that this plot leaves open is the question of why we see this qualitatively different pattern for mean acceptance rates of lotteries. Why are some so low and others larger? To provide an answer to this question we are going to create a new factor, <code>ev</code> (for <em>expected value</em>), which separates the expected value of the lottery (i.e., loss plus gain) into three bins: expected value = 0 (i.e., symmetric lotteries), negative expected value (i.e., potential loss larger than potential gain), and positive expected value (potential loss smaller than potential gain).</p>
+<p>To create the <code>ev</code> variable, we use another <code>dplyr</code> function, <code>case_when()</code>. <code>case_when()</code> is a vectorised variant of multiple branching (i.e., if-else). This allows us to create a new variable based on multiple logical conditions in a convenient way. Each argument to <code>case_when()</code> consists of a logical statement, the <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> operator (which I call the tilde-operator), and a return value that is returned in case the logical condition is true. Here we have three logical cases which are each mapped onto one label describing the sign of the expected value. We also convert the <code>ev</code> variable into a <code>factor</code> using <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>. In the call to <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> we also specify the order of factor <code>levels</code>.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lot_sum2</span> <span class="op">&lt;-</span> <span class="va">lot_sum2</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>ev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu">case_when</span><span class="op">(</span>
+    <span class="va">gain</span> <span class="op">==</span> <span class="va">loss</span> <span class="op">~</span> <span class="st">"EV = 0"</span>,
+    <span class="va">gain</span> <span class="op">&lt;</span> <span class="va">loss</span> <span class="op">~</span> <span class="st">"EV negative"</span>,
+    <span class="va">gain</span> <span class="op">&gt;</span> <span class="va">loss</span> <span class="op">~</span> <span class="st">"EV positive"</span>
+  <span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EV negative"</span>, <span class="st">"EV = 0"</span>, <span class="st">"EV positive"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">lot_sum2</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 119 x 4</span></span>
+<span class="co">#&gt; <span style="color: #555555;"># Groups:   loss [13]</span></span>
+<span class="co">#&gt;    <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span> <span style="font-weight: bold;">ev</span>         </span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      </span>
+<span class="co">#&gt; <span style="color: #555555;">1</span>     6     6           0.520 EV = 0     </span>
+<span class="co">#&gt; <span style="color: #555555;">2</span>     6     8           0.614 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">3</span>     6    10           0.777 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">4</span>     6    12           0.881 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">5</span>     6    14           0.876 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">6</span>     6    16           0.916 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 113 more rows</span></span></code></pre></div>
+<p>We can then use the new <code>ev</code> variable to print points in a different colour depending on the value of the <code>ev</code> variable. For this we just need to map the <code>ev</code> variable to the <code>colour</code> aesthetic in the <code>aes()</code> call and get a very interesting plot.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, colour <span class="op">=</span> <span class="va">ev</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-9-1.png" width="100%"></div>
+<p>Whereas this plot already looks very interesting, it uses both green and red colours which can be difficult to see for individuals with colour blindness (such as me, even if my colour blindness is rather mild). Therefore, we can make this plot nicer in two regards: (1) by using a somewhat nicer <code>ggolot2</code> theme which removes the grey background (e.g., my favourite is <code>theme_bw()</code>) and (2) we can use a colour blind friendly colour palette. For this we use <code><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">ggthemes::scale_colour_colorblind()</a></code> (here <code>ggthemes::</code> just means we use a function from the <code>ggthemes</code> package without loading it explicitly beforehand). This gives us a very appealing and interesting plot.</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, colour <span class="op">=</span> <span class="va">ev</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">scale_colour_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-10-1.png" width="100%"></div>
+<p>To be clear, this plot shows exactly the same data as the previous plot, but just uses a different theme and different colours. And at least to my eyes, this plot looks visually a lot more appealing and clearer than the previous plot. Before describing what a theme is in more detail, let us first discuss what we see in the plot.</p>
+<p>The plot shows that if the expected value is negative, participants are rather unlikely to accept a lottery (i.e., mean acceptance rates below 0.2). If the expected value is 0 (i.e., for symmetric lotteries) the acceptance rates start out at around 0.5 for small potentials losses and gains and generally decrease a bit with increasing loss/gain (just as predicted by loss aversion, see Section <a href="role-of-statistics-in-the-research-process.html#evidence-for-loss-aversion-lotteries">1.2.1</a>). Finally, for lotteries with positive expected value (i.e., where on average we should win money) acceptance rates are at or above 0.5. Overall, the plot shows results one would expect to see and which make a lot of sense (i.e., anyone should be more willing to accept a bet if they expect to win money compared to when they expect to lose money).</p>
+<p>The call above shows a first example of how powerful the <code>ggplot2</code> idea of mapping variables to aesthetics using the <code>aes()</code> function is. We wanted to improve the plot by distinguishing different types of data points. So we just need a variable in our data that represents this distinction – here, we create the <code>ev</code> variable for that. We then can just map this variable to a fitting aesthetic. Here, we use the <code>colour</code> aesthetic which allows us to distinguish different data points by colour. However, we could also use a different aesthetic to distinguish different data points. Can you think of one? Take a few seconds to think about it before clicking on the solution below.</p>
+<div class="webex-solution">
+<button>
+Another aesthetic to distinguish different points
+</button>
+<p>Another way to distinguish different points is through their shape. In all examples we have seen so far, we only used circles to show data points. However, we could also use other shapes to display data points such as squares or triangles.</p>
+<p>The <code>ggplot2</code> aesthetic to distinguish data points belonging to different categories using different shapes is called <code>shape</code>. Thus, we can easily can change the plot by changing the corresponding argument in the <code>aes()</code> call:</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, shape <span class="op">=</span> <span class="va">ev</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">scale_colour_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-11-1.png" width="100%"></div>
+<p><code>gglot2</code> even allows us to combine different aesthetics, such as shape and colour:</p>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, 
+                     shape <span class="op">=</span> <span class="va">ev</span>, colour <span class="op">=</span> <span class="va">ev</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">scale_colour_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-12-1.png" width="100%"></div>
+</div>
+<p>Before moving to the next plot, let us quickly discuss what a “theme” is. In <code>ggplot2</code>, a theme is a setting (or function call) that determines all non-data display elements of a plot such as fonts, font size, background and foreground colours, and so forth. The default <code>ggplot2</code> theme uses a grey background, which I personally do not like too much, which is why I prefer <code>theme_bw()</code>. <code>ggplot2</code> comes with a few more themes which you can see in the <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">online documentation</a> (scroll to <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html#examples">examples</a> to see them all).</p>
+<p>Are we done yet with this data? Not yet. There is one more trick we can use to make the plot even more informative. We can map the <code>loss</code> variable onto the size of the data points. That is, we again need to change the <code>aes()</code> part of the call. Specifically, we add <code>size = loss</code> to the <code>aes()</code> call. This allows us to further understand the pattern shown in the data.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, 
+                     colour <span class="op">=</span> <span class="va">ev</span>, size <span class="op">=</span> <span class="va">loss</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">scale_colour_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-13-1.png" width="100%"></div>
+<p>We can now see something that in hindsight should not be too surprising. If the potential loss is small, which is now indicated by a small data point, the average acceptance rate is comparatively high.</p>
+<p>Furthermore, the larger the potential gain for one specific potential loss, the larger the mean acceptance rate (i.e., if we focus on one point size across different potential gains). For example, if you look at the very small data points beginning with the orange one on the very left around .5, we see that with increasing gain the average acceptance rate for this potential loss increases almost continuously.</p>
+<p>We can also see an interesting pattern if we only focus on one potential gain (i.e., one x-axis position) for which we have data. If we look at the data this way, we can nicely see a size based ordering: The small losses have the largest mean acceptance rates and the large losses the smallest.</p>
+<p>In sum, the plot above provides a very comprehensive summary of the data of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> (at least for the two symmetric conditions that are displayed here). The plot now not only allows us to see what is happening in the data across different lotteries, it also shows a number of patterns we would expect to see in the data (such as participants’ sensitivity to the size of gains and losses). This combination allows the plot to serve two functions:</p>
+<ol style="list-style-type: decimal">
+<li>It allows us to gain new and interesting insight from the data. For example, we can see that participants on average decrease their willingness to accept symmetric lotteries with increasing gain/loss, just as predicted by loss aversion. So this plot allows us to address our research question.</li>
+<li>The fact that we see many pattern we <em>would expect to see</em> provides us some assurances that there are no obvious problems with the data. As we have discussed before, many things can go wrong during study design, data collection, or analysis. Therefore, the fact that the data shows several patterns that intuitively make a lot of sense (such as the difference in whether the expected values are negative, neutral, or positive) can be seen as an assurance that not too much went wrong.</li>
+</ol>
+<p>In other words, this plot not only shows us new insight about our research question, it also allows us to judge the quality of the evidence provided. We learn that in addition to the theoretically interesting pattern the data looks very reasonable. This means the evidence from this data is stronger than evidence from data where we would not be able to judge if it otherwise looks reasonable.</p>
+</div>
+<div id="faceting-creating-sub-plots-across-a-variable" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Faceting: Creating Sub-Plots Across a Variable<a class="anchor" aria-label="anchor" href="#faceting-creating-sub-plots-across-a-variable"><i class="fas fa-link"></i></a>
+</h2>
+<p>The plots above focussed on the two symmetric conditions. However, we could be interested whether the pattern we saw above looks similar across the four different conditions (i.e., also the two asymmetric loss/gain range conditions). For this, it might make sense to create one plot for each condition. One naive way to create sub plots would be to split the data into different data sets and create one plot for each sub data set.</p>
+<p>A different way is provided through the <code>ggplot2</code> technique of faceting. This means letting <code>ggplot2</code> create sub-plots based on one variable. To show this for the present data, we again need to prepare a new <code>tibble</code> that is similar to the one above. However, now we aggregate the data such that we have one average mean acceptance value for each lottery (i.e., unique combination of loss and gain) in each condition. Then we also add the <code>ev</code> variable as above.</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lot_sum_all</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">condition</span>, <span class="va">loss</span>, <span class="va">gain</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean_acceptance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>ev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu">case_when</span><span class="op">(</span>
+    <span class="va">gain</span> <span class="op">==</span> <span class="va">loss</span> <span class="op">~</span> <span class="st">"EV = 0"</span>,
+    <span class="va">gain</span> <span class="op">&lt;</span> <span class="va">loss</span> <span class="op">~</span> <span class="st">"EV negative"</span>,
+    <span class="va">gain</span> <span class="op">&gt;</span> <span class="va">loss</span> <span class="op">~</span> <span class="st">"EV positive"</span>
+  <span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EV negative"</span>, <span class="st">"EV = 0"</span>, <span class="st">"EV positive"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; `summarise()` has grouped output by 'condition', 'loss'. You can override using the `.groups` argument.</span>
+<span class="va">lot_sum_all</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 256 x 5</span></span>
+<span class="co">#&gt; <span style="color: #555555;"># Groups:   condition, loss [32]</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span> <span style="font-weight: bold;">ev</span>         </span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      </span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40     6    12           0.613 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> -$20/+$40     6    16           0.702 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">3</span> -$20/+$40     6    20           0.874 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40     6    24           0.890 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40     6    28           0.916 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40     6    32           0.942 EV positive</span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 250 more rows</span></span></code></pre></div>
+<p>To create a faceted plot for this data, we need to use yet another <code>ggplot2</code> function, <code>facet_wrap()</code>, to which we pass the variable the plot should be faceted on. We specify the variables to facet on in the call to <code>facet_wrap()</code> using the <code>vars()</code> function (this is described in the documentation, see <code>?facet_wrap()</code>). So with our new <code>tibble</code> that has the data aggregated for each condition, <code>lot_sum_all</code>, the call is the same as above, we only need to add <code>facet_wrap(vars(condition))</code>:</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum_all</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, 
+                        colour <span class="op">=</span> <span class="va">ev</span>, size <span class="op">=</span> <span class="va">loss</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">scale_colour_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">condition</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-15-1.png" width="100%"></div>
+<p>This plot is a bit busy and not all details are very clear. One problem is that the legend takes up a rather large space on the right side. We can change the position of the legend using a call to the <code>theme()</code> function specifying the <code>legend.position</code> argument to <code>"bottom"</code>.</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">lot_sum_all</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, 
+                        colour <span class="op">=</span> <span class="va">ev</span>, size <span class="op">=</span> <span class="va">loss</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.25</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/colorblind.html">scale_colour_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-16-1.png" width="100%"></div>
+<p>This plot shows the data a bit clearer, even though now not the complete legend is visible. For now, this is as much effort as we invest.</p>
+<p>The plot also shows quite large differences across conditions. The largest differences can be seen for the two asymmetric conditions. As discussed before, we can now clearly see that when there are many lotteries with positive expected value (i.e., in the -$20/+$40 condition) participants dislike the symmetric lotteries with expected value of 0. In contrast, when there are many lotteries with negative expected value (i.e., in the -$40/+$20 condition) the symmetric lotteries are relatively attractive and participants tend to like them nearly as much as the few lotteries with positive expected value. These results are not compatible with a theory assuming that only the values of lotteries matter, but not the context in which they appear.</p>
+</div>
+<div id="changing-ggplot2-theme-for-r-session" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Changing <code>ggplot2</code> Theme for <code>R</code> Session<a class="anchor" aria-label="anchor" href="#changing-ggplot2-theme-for-r-session"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the last few plots we have always changed the plot theme from the default theme to <code>theme_bw()</code> by passing it to the plot. Whereas we can do that for each plot, we can also do this globally for the rest of the <code>R</code> session. For this we have to call the <code>theme_set()</code> function as shown next. In this call, we also make a few more changes – larger axis labels, remove unnecessary grid lines, and change the default position of the legend – which I feel makes such plots generally nicer.</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span> 
+            <span class="fu">theme</span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span>, 
+                  panel.grid.major.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Note, this is a global option that will affect all plots created after executing this command within an <code>R</code> session (i.e., to reset to the default theme you would have to restart your <code>R</code> session).</p>
+</div>
+<div id="one-continuous-and-one-categorical-variable" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> One Continuous and one Categorical Variable<a class="anchor" aria-label="anchor" href="#one-continuous-and-one-categorical-variable"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far we have looked at two continuous variables and seen how by mapping different variables to different aesthetics and by changing the arguments to the aesthetics, we can create appealing figures. Now we are trying to do the same for a situation that is potentially more common for experimental data, a situation with one continuous dependent variable and one categorical independent variable.</p>
+<p>Before creating plots with one continuous dependent variable and one categorical independent variable, we need to create the corresponding data. In the plots above we have aggregated the data of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> on the level of the individual lotteries (i.e., unique combination of potential losses and gains). Whereas this made sense for the plots above, it ignored the different participants (i.e., we aggregated across participants). In other words, the plots above focussed on differences across lotteries but ignored differences across participants.</p>
+<p>Remember, our general goal is to find the signal (i.e., the response to the independent variable) among the noise in the data. For experimental data, participants are usually considered a major source of noise. As we have discussed before, different people can do what they do for a number of different reasons that may be related or unrelated to our research question. What this means concretely for when we produce data visualisation is that it usually is a good idea to show the distribution of responses over participants. This provides a visual impression of the level of noise produced by one of the main sources of noise in the data.</p>
+<p>Therefore, instead of aggregating across participants we will create a new data set for which first calculate one score per participant and condition. Then, we will plot the distribution across participants for each condition. We begin by creating this data for all lotteries. Whereas this might not be the most informative plot substantively (e.g., compared to only plotting the shared symmetric lotteries), it is more instructive in the present case as our main goal right now is to try out a few different plotting options (and not necessarily solving the conundrum behind loss aversion). In a later section we will produce a plot of only the shared lotteries that will be more interesting for the research question of loss aversion.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">part_sum</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">condition</span>, <span class="va">subno</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># aggregate for both, condition and subno</span>
+  <span class="fu">summarise</span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span> 
+<span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can override using the `.groups` argument.</span>
+<span class="va">part_sum</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 781 x 3</span></span>
+<span class="co">#&gt; <span style="color: #555555;"># Groups:   condition [4]</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">subno</span>   <span style="font-weight: bold;">mean_acc</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40 e1a_109    0.203</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> -$20/+$40 e1a_113    0.859</span>
+<span class="co">#&gt; <span style="color: #555555;">3</span> -$20/+$40 e1a_125    0.516</span>
+<span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40 e1a_129    0.844</span>
+<span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40 e1a_13     0.5  </span>
+<span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40 e1a_133    0.5  </span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 775 more rows</span></span></code></pre></div>
+<p>The output shows that the individual mean acceptance rates already for the first few participants in one condition are quite variable. It also shows that the returned <code>tibble</code> is still grouped (See message and <code>Groups ...</code>):. If we were to perform other operations with it, instead of just plotting, it might be necessary to add an <code>ungroup()</code> as a call to the pipe to remove the grouping before performing other operations. However, as we just pass it to the <code>ggplot()</code> function, this is not necessary here.</p>
+<div id="displaying-all-data-points" class="section level3" number="4.5.1">
+<h3>
+<span class="header-section-number">4.5.1</span> Displaying All Data Points<a class="anchor" aria-label="anchor" href="#displaying-all-data-points"><i class="fas fa-link"></i></a>
+</h3>
+<p>As in the plots above and following the general convention, we plot the dependent variable, the average acceptance rate per participant, on the y-axis and the independent variable, experimental condition, on the x-axis. As above we begin by plotting the individual data point as points using the point geom (i.e., <code>geom_point()</code>).</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-19-1.png" width="100%"></div>
+<p>The resulting plot is a bit difficult to interpret. We can see that there seems to be some differences between conditions (e.g., less large mean acceptance rates in the two rightmost conditions), but it is difficult to judge if points are on top of each other – that is, whether there is over-plotting or not. Because of this, it is difficult to adequately perceive the distribution of points.</p>
+<p>We can begin as above and add jitter to the points using <code>geom_jitter()</code> and also use alpha blending (i.e., <code>alpha = 0.25</code>). In contrast to above, let us start without specifying any amount of horizontal (i.e., <code>width</code>) or vertical (i.e., <code>height</code>) jitter. In this case, <code>geom_jitter()</code> automatically adds both horizontal and vertical jitter.</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-20-1.png" width="100%"></div>
+<p>The resulting plot is not very visually appealing. The amount of horizontal jitter is too large making it difficult to see to which x-axis position (i.e., experimental condition) a point belongs to. To improve the visual impression, it is better to choose the amount of jitter by hand (as we have done above). To do so, we need to choose the amount of jitter in x-axis units and pass it to the <code>width</code> argument.</p>
+<p>The problem here is that the x-axis shows a categorical variable which does not have an easily identifiable unit. The solution to this problem is that for a categorical variable, each x-axis position is shown at one whole number, starting at 1, with a difference of 1 between levels of the categorical variable. That means, in the plot above the “actual” x-axis positions of the four factor levels are 1, 2, 3, and 4. Thus, let us try to improve the plot by specifying an amount of horizontal jitter, such as <code>width = 0.2</code> (which again was found by trial-and-error) and no <code>height</code> argument (which means <code>height = 0</code> as long as <code>width</code> is specified).</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.2</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-21-1.png" width="100%"></div>
+<p>This plot provides a better overview of the distribution. We can for example clearly see that only for the -$40/+$20 (i.e., right-most) condition the majority of data points is below 0.25.</p>
+</div>
+<div id="bee-swarm-plot-et-al." class="section level3" number="4.5.2">
+<h3>
+<span class="header-section-number">4.5.2</span> Bee Swarm Plot et al.<a class="anchor" aria-label="anchor" href="#bee-swarm-plot-et-al."><i class="fas fa-link"></i></a>
+</h3>
+<p>Alternatives to <code>geom_jitter()</code> that provide more structure for how the points are displayed are offered by the two geoms in the <a href="https://cran.r-project.org/package=ggbeeswarm"><code>ggbeeswarm</code></a> package, <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code> and <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>. To use both geoms, we first need to load the <code>ggbeeswarm</code> package (and if it is not yet installed, do so first through <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>).</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/eclarke/ggbeeswarm">"ggbeeswarm"</a></span><span class="op">)</span></code></pre></div>
+<p>We then can replace the call to <code>geom_jitter()</code> with a call to one of the two other geoms.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-23-1.png" width="100%"></div>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-24-1.png" width="100%"></div>
+<p>As you can see, both geoms provide a lot more structure of how the overlapping data points are distributed. <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code> produces a so-called bee swarm plot; that is, a plot in which over-plotted points are displaced so they are shown adjacent or next to each other (in this case on the x-axis). <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> uses a similar approach but adds some random noise between points to also provide a visual representation of the shape of the distribution.</p>
+<p>In general, the choice between both geoms usually depends on the amount of data and the degree of overlap among data points. To me the amount of data points is so large that I prefer the visual impression by <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>. In situations with fewer data points, <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code> can be preferred.</p>
+<p>Both plots allow some interesting conclusions about the data. For example, for the -$20/+$40 condition the distribution is rather wide with data points along the whole range. That is, there is no clear visual peak in the shape or cluster of data. The most noticeable pattern is somewhat less data points with low average acceptance rates (i.e., below 0.25). In contrast, the other conditions have a more or less clearly identifiable centre with a cluster of data points (around 0.5 for the two symmetric distributions and near the bottom for the -$40/+$20 condition).</p>
+</div>
+<div id="box-plot" class="section level3" number="4.5.3">
+<h3>
+<span class="header-section-number">4.5.3</span> Box Plot<a class="anchor" aria-label="anchor" href="#box-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p>Alternatives for visualising the distribution of data points are geoms that do not plot each data point, but a summary of the distribution. The most popular of these are the box plot and the violin plot, <code>geom_boxplot()</code> and <code>geom_violin()</code>.</p>
+<p>Box plots, also known as a box and whiskers plot, visualise a distribution through several summary statistics plus showing potential “outliers.” This provides a compact summary of the data that can also be used in case of many data points. Let us show how it looks for our data, before explaining the visual elements in detail.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-25-1.png" width="100%"></div>
+<p>We can see that each box plot consists of a box, with a thicker line somewhere inside, as well as two whiskers. In some cases, we see additional data points outside the whiskers, these are the “outliers.”</p>
+<p>The thick line inside the box is a measure of the central tendency of the data (i.e., a measure of the centre of the distribution). Here it shows the <a href="https://en.wikipedia.org/wiki/Median">median</a>, which is the most common choice for box plots (sometimes box plots also show the mean as the measure of central tendency). The median is the value that separates or cuts the distribution of points into a lower and upper half. Technically, this means the median is the 50% <a href="https://en.wikipedia.org/wiki/Quantile">quantile</a>, the data points for which 50% of data points are smaller and 50% of points are larger.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;One way to understand (and calculate) quantiles is to think about the data in an ordered manner (i.e., ordered from smallest to largest value). If the data is ordered this way the 50% quantile (the median) is the data point right in the middle cutting the data into half (in case of an even number of data points, there is no single centre data point that cuts the data in half; in this case the 50% quantile is the average of the two data points in the centre). Any other quantile cuts the ordered data at another point. For example, the 25% quantile is the data points that cuts the data into the lower 25% and larger 75%.&lt;/p&gt;"><sup>32</sup></a></p>
+<p>The upper and lower bound of the box, the two hinges, show the 25% and 75% quantiles of the data. That is, the data point for which either 25% or 75% of data points are smaller. As a consequence, the box encompasses 50% of all data points. This allows one to judge where most of the data is. For example, in line with the earlier visual impression that the -$20/+$40 distribution is the widest, the box encompassing 50% of the data is also the largest. For the other conditions with a more clearly defined centre, the box is noticeably smaller.</p>
+<p>The two whiskers on both ends of the box, or hinges, extend from the hinges to the largest value no further than 1.5 times the size of the box. The size of the box is given by the 75% quantile minus the 25% quantile, which is also known as the <a href="https://en.wikipedia.org/wiki/Interquartile_range">interquartile range</a>. The idea of the whiskers is that they represent, in some sense, the <em>typical range</em> of a distribution. Therefore, data points that are outside this typical range can be considered untypical. Such untypical data points are often called "outliers’’, but it is unclear in what sense this terminology is appropriate. For example, in the present case we have quite a few data points per condition (between 190 and 200) so it does not seem unlikely to observe some cases that look somewhat different from the other cases (i.e., are untypical).</p>
+<p>The issue of what to do with “outliers” such as those identified by a box plot is not trivial. If the “outlier” is a genuine response of a participant then simply removing it seems not appropriate. More specifically, omitting data because it does not fit with our idea of the data can be seen as an instance of data fabrication. On the other hand, if a single response has an extraordinary influence on the results (e.g., a single data point is so far away from all the others that it is solely responsible for an observed effect) this is also problematic. We usually want our results to represent the data overall and not just a single observation. Thus, as with many issues that can happen in a statistical analysis, how to deal with “outliers” depends on the specific context and situation. A generally reasonable strategy is to see if the qualitative pattern of results changes whether extreme or untypical data points are included or not. If not, this shows that our results are robust and the “outliers” do not have an extraordinary influence on the results.</p>
+</div>
+<div id="violin-plots" class="section level3" number="4.5.4">
+<h3>
+<span class="header-section-number">4.5.4</span> Violin Plots<a class="anchor" aria-label="anchor" href="#violin-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another possibility for visualising a distribution is through its shapes and not only through summary statistics. One popular way of doing so is through a violin plot. To create a violin plot with <code>ggplot2</code>, we simply need to change the geom to <code>geom_violin()</code>.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-26-1.png" width="100%"></div>
+<p>As is clear from the plot, a violin plot makes it easy to see whether a distribution is relatively flat, like for the -$20/+$40 condition, or has one or multiple <em>peaks</em>, which we would call <em>mode</em> in statistical terminology.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;In statistics the &lt;a href="https://en.wikipedia.org/wiki/Mode_(statistics)"&gt;&lt;em&gt;mode&lt;/em&gt;&lt;/a&gt; is generally defined as the most common value. However, when speaking about the shape of a distribution, any clearly visible peak is a mode. This is the meaning of &lt;em&gt;mode&lt;/em&gt; we are using here.&lt;/p&gt;'><sup>33</sup></a> In the absence of a clear mode, we could call a distribution <em>uniform</em>. In the present case, we might say <em>relatively uniform</em>, because of the lower amount of data for lower values of mean acceptance (i.e., the distribution is not completely uniform).</p>
+<p>The distributions for the other three conditions, which all have a clear mode, could be called unimodal. For these conditions, the modes are located where we would expect them to be, given the previous plots. For the symmetric conditions the modes are around 0.5 and for the -$40/+$20 condition the mode is near the bottom. If a distribution had two clear modes or peaks, we would call it bimodal, but this does not appear to be justified for any of the distributions shown here.</p>
+<p>We can also see a commonality between the <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> plot and the violin plot. The shape in which the data points are distributed “quasi randomly” in <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>, is the shape of the violin plot.</p>
+<p>One way to increase the amount of information shown in a violin plot is by adding lines that correspond to different quantiles of the distribution. For example, to add the 25%, the 50% (i.e., median), and 75% quantile as in the box plot we could do as follows:</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span>draw_quantiles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-27-1.png" width="100%"></div>
+</div>
+<div id="plotting-the-mean" class="section level3" number="4.5.5">
+<h3>
+<span class="header-section-number">4.5.5</span> Plotting The Mean<a class="anchor" aria-label="anchor" href="#plotting-the-mean"><i class="fas fa-link"></i></a>
+</h3>
+<p>The section above has discussed plots of one continuous dependent variable and one categorical independent variable. Given that this is the basic structure of an experiment, this is probably the most common type of data visualisation in the scientific literature. If you already have some experience with this literature, you might have also noticed that the plots we have created so far diverge quite considerably from the plots you find in the literature. In particular, many published plots do not show all data points or a visualisation of the whole distribution of the data, as we have done above. Instead, most published plots focus on one particular summary statistic of the data, the condition means.</p>
+<p>For example, one common plot type is the so-called <a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">dynamite plot</a> in which the means are shown in terms of a bar graph. In addition, an error bar is added to the mean as a measure of uncertainty for the mean (we will provide a more thorough explanation of error bars in later chapters). An example for the present data looks like the following.</p>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-28-1.png" width="100%"></div>
+<p>As can be seen, the bar graph together with the error bar looks like a <a href="https://www.popularmechanics.com/technology/a27085/how-a-looney-tunes-style-tnt-detonator-works/">cartoon dynamite plunger</a>, which is how the plot got its name. Even though this plot can be created in <code>R</code>, I am hiding the code here so you do not learn how to create it. As you can probably read between the lines, I am not a big fan of this type of plot and so are many other people interested in statistics (e.g., <a href="https://biostat.app.vumc.org/wiki/Main/DynamitePlots">the Vanderbilt biostatistics department</a>).</p>
+<p>So what is the problem with dynamite plots? Clearly the issue is not that the plot shows the means. If you remember the discussion of specific results (e.g., in Chapter <a href="role-of-statistics-in-the-research-process.html#role-of-statistics-in-the-research-process">1</a>), it always focussed on the conditions means (e.g., the mean acceptance rate of symmetric lotteries was 21% in the -$20/+$40 condition, but 71% in the -$40/+$20 condition). What this shows is that clearly the means are very important. As we will see in the coming chapters, there is a statistical reason for that. We could even go so far and say that the mean is generally the most important summary statistic of the data.</p>
+<p>The problem with the dynamite plot is not that it shows the mean, but that it <em>only</em> shows the mean.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Another problem that is particular to the dynamite plot is that it gives off the visual impression that there are data points below the mean (because this area is shaded), but not above the mean (because this area is unshaded). This is misleading as the mean is usually somewhere in the middle of the data (i.e., it is a measure of the central tendency of the data). Furthermore, the dynamite plot visually highlights the distance of the mean from 0, which is not always important (e.g., if 0 has no meaning, such as for a rating scale that goes from 1 to 5).&lt;/p&gt;"><sup>34</sup></a> The problem with this is that one and the same mean can result from many different underlying sets of data. Thus, the mean only tells us a partial story. To fully understand the data, we need to see the full distribution. Either all data points or a visualisation of the distribution as discussed above.</p>
+<p>The best example of the problem that means and other summary statistics can hide the real distribution of the data is shown in the “datasaurus plot” below <span class="citation">(<a href="references.html#ref-matejkaSameStatsDifferent2017" role="doc-biblioref">Matejka and Fitzmaurice 2017</a>)</span>. Note that this plot shows two continuous variables and not one continuous and one categorical variable, but it nicely exemplifies the point. What the datasaurus plot shows is data that dramatically changes its shape – it cycles through 13 qualitatively different patterns one of which is a dinosaur – while maintaining its means plus other summary statistics (up to two decimal points) on both x-axis and y-axis.</p>
+<div class="figure">
+<span style="display:block;" id="fig:datasaurus"></span>
+<img src="figures/DinoSequentialSmaller.gif" alt='The "datasaurus dozen". Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: https://www.autodesk.com/research/publications/same-stats-different-graphs' width="100%"><p class="caption">
+Figure 4.1: The “datasaurus dozen.” Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" class="uri">https://www.autodesk.com/research/publications/same-stats-different-graphs</a>
+</p>
+</div>
+<p>What the datasaurus impressively shows is that if one just focuses on the means or other summary statistics, there is a high chance one can miss important features in the data. Consequently, a better approach for plotting one’s data is by combining a visualisation of the full distribution of the data with the mean. This is the approach we will be using throughout this book.</p>
+<p>Another benefit of showing a visualisation of the full distribution of the data instead of just the means is that it provides a more realistic picture of the noise in the data. Remember that we said that one goal of statistics is to help us distinguish what is signal and what is noise. If we only focus on the means, even if it includes a measure of the uncertainty of the means through the error bars, we can forget the actual level of noise in the data. By ignoring the actual level of noise, we may be inclined to draw overly optimistic conclusions from our data. The problem with such overly optimistic conclusions is that they are less likely to be correct than appropriate conclusions that consider the actual level of noise in the data.</p>
+<p>Combining a visualisation of the distribution of the data with the mean can be achieved by adding a call to the <code>stat_summary()</code> function to the plot. In general, this function allows us to add any summary function to the plot. But if it is called without additional arguments (i.e., its default behaviour) is to add the mean of the data plus an error bar. Let us add this call to our quasi-random data cloud plot from above and see what happens.</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-29-1.png" width="100%"></div>
+<p>We can see that just doing this does not lead to a dramatically different plot. The most noticeable difference is the status message telling us that the default summary function, <code>mean_se()</code>, was used. As we want to add the mean and are fine with the error bars, we can generally ignore this message. The problem with this plot is that we add the black summary point on top of the black data points. One way to improve this plot is by plotting the data points in the background in a semi-transparent manner using <code>alpha = 0.2</code>.</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-30-1.png" width="100%"></div>
+<p>This plot now makes it easy to see both, the full distribution of the data as well as the mean (plus error bar). As said above, we ignore the technical meaning of the error bars until later and for now accept that they represent the uncertainty we have in the means.</p>
+<p>An alternative would be to not change the <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> plot, but the <code>stat_summary()</code> plot (e.g., by passing <code>colour = "red"</code>), but this is left as an exercise to the reader. Likewise, you might want to try out what happens if you change the order of the two calls (i.e., <code>stat_summary()</code> first and <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> second).</p>
+<p>The plot above allows us an interesting conclusion with regards to the distribution and the mean. For the three conditions that have a clearly visible mode (or peak; i.e., all but the -$20/+$40 condition), the mode differs noticeably from the mean. The reason for this is that the distributions are asymmetric around the mode, with a long tail towards one end of the distribution. Such a long tail pushes the mean away from the mode towards the tail as can be seen here. What this means is that any statistical analysis that only focuses on the mean (which are all statistical analyses discussed in this book) provides in some sense an imperfect picture of the data. Whereas the mean of course represents the average of all values (because it is defined that way) it might not always represent the most <em>typical</em> value of a distribution (if we want to understand a typical value as one near the mode). This provides another reason why we want to show the distribution of the data in addition to the mean. It allows us to judge how well of a summary of the data the mean is.</p>
+<p>Let me be clear: The message from the previous paragraph is not that in a case with a rather asymmetric distribution focussing on the mean as a summary statistic is necessarily wrong, because it is not wrong. The message is something else: If we only focus on the mean, and do not show the actual data, we miss out on the nuances that real data usually have. Of course it is interesting to see what happens to the mean, it is the most important summary statistic (and in the absence of additional information the best prediction for a new observation from data is the mean, even if it is an asymmetric distribution). However, if the mean is not very typical for the distribution because of an asymmetric shape, this is an important result in addition to whatever happens to the mean. To fully understand the evidence provided by a data set, we have to understand the data fully, including it’s level of noise, peculiarities, and nuances. Therefore, always plot the full distribution when plotting the mean.</p>
+</div>
+</div>
+<div id="one-continuous-variable-histograms" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> One Continuous Variable: Histograms<a class="anchor" aria-label="anchor" href="#one-continuous-variable-histograms"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far, we have always created plots involving two variables. However, sometimes we only want to display one variable. That is, we only want to see the distribution of one variable, but not conditional on another variable. The most important type of plot for this task is a histogram.</p>
+<p>For example, instead of considering the distribution of the mean acceptability ratings for each participant across conditions, as done before, we could also look at this distribution across all conditions. The call to do so in <code>ggplot2</code> is:</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with</span>
+<span class="co">#&gt; `binwidth`.</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-32-1.png" width="100%"></div>
+<p>What this plot shows is a number of adjacent bars showing the frequency (or “count”) with which an individual participants’ mean acceptability value is within a specific range or <em>bin</em> in the data. The width of each bar indicates the range of the bin, and the height of the bar determines the count of values within this range. In other words, the larger the bar at a specific x-axis range, the more values are within the range.</p>
+<p>It is also helpful to clearly distinguish the histogram from a bar graph or dynamite plot used for displaying means. In the bar graph, the height of the bar corresponds to the frequency of a value so has a clear interpretation. That means we can use the shaded area as a visual cue that allows us to infer how much data there is for a given range of values. This is not the case for a bar graph showing the mean. Here, we have data both above and below the mean, so the shaded area does not provide a good visual representation of the data.</p>
+<p>So how can we interpret this plot? In the absence of a clear question as here, the usual way to interpret a histogram is to simply describe the visual impression one can derive from the plot. Here, we see that there is one clear mode (i.e., peak) around 0.6 as well as another mode somewhere around 0.15. Furthermore, the distribution is rather flat with overall not too much data above values of around 0.7. At the other end of the scale (i.e., between 0 and around 0.35), there is comparatively more data around the second largest mode. As we had seen before, the data is clearly not symmetric around the main peak.</p>
+<div id="choosing-the-number-of-bins" class="section level3" number="4.6.1">
+<h3>
+<span class="header-section-number">4.6.1</span> Choosing the Number of Bins<a class="anchor" aria-label="anchor" href="#choosing-the-number-of-bins"><i class="fas fa-link"></i></a>
+</h3>
+<p>One question one should always consider when interpreting histograms is whether the visual impression is affected by the width of the bins used to create the histogram. As stated in the message that appears when evoking <code>geom_histogram()</code> without additional arguments, the default setting is to use 30 bins. The width of the bins is a function of the number of bins in this case.</p>
+<p>One way to change the width of the binds is to change the number of bins. This can be done using the <code>bins</code> argument. For example, if we change the number of bins to 50 we get the following plot.</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-33-1.png" width="100%"></div>
+<p>In contrast to the first histogram, we now have a much stronger main mode that is also more “peaky” (i.e., with little data just around it). The second mode around 0.15 is much less clear, where it now appears as if there might be one around 0.4. However, we can still clearly see the asymmetric distribution with more data to the left than to the right of the main mode.</p>
+<p>Again a different visual impression is achieved by using 20 bins. The plot below clearly shows the main mode but the distribution looks comparatively flat on both sides of it. It also maintains the asymmetric impression.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-34-1.png" width="100%"></div>
+<p>Instead of letting the number of bins determine the width of the bins, we could also directly specify the width using the <code>binwidth</code> argument. When doing so it also generally makes sense to either specify the <code>center</code> or <code>boundary</code> argument to specify either the centre or boundary of the bins (only one can be specified). Here it makes sense to specify the <code>boundary</code> as 0 (i.e., bins should start at 0 and not before that as in the plots above). As <code>binwidth</code> we could use 0.333… (i.e., <code>0.1 / 3</code>) which will result in three bins per 0.1 interval. This produces a plot with 30 bins as shown below.</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span> <span class="op">/</span> <span class="fl">3</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-35-1.png" width="100%"></div>
+<p>This plot complements the one above and clearly shows the main mode, the asymmetry, as well as relatively flat distributions on both sides of the main mode. We can also see a trough (i.e., the opposite of a mode) at 0.475.</p>
+<p>What this exploration of different bin numbers and bin widths shows is that it is generally not obvious which bin width to choose. The best approach is to do as we have done here: Trying out a few different values in a more or less systematic fashion and seeing how the visual impression changes. The goal is to figure out what the important and robust patterns in oour data are. Or as summarised in the <code>geom_histogram</code> documentation (see <code>?geom_histogram</code>) when discussing how to choose the bin width: “You may need to look at a few options to uncover the full story behind your data.”</p>
+</div>
+<div id="probability-instead-of-frequency-plots" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> Probability Instead of Frequency Plots<a class="anchor" aria-label="anchor" href="#probability-instead-of-frequency-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>All histograms so far have shown the frequency with which a value falls within each bin. Whereas this makes it easy to interpret the results, it can be difficult for comparing histograms across different groups that markedly differ in their number of observations. The problem in this case is that the same frequency with which an observation appears in a specific bin can mean very different things depending on how many cases there are in the data. In other words, the problem with frequencies is that they are not normalised. Here, we will consider alternative variants of the histogram that do not have this problem.</p>
+<p>As an example, consider that we want to plot the frequency separately for the conditions. To lead to a situation with markedly different numbers of observations, let us pool the two conditions with symmetric ranges of gains and losses into one. Let us call this new variable <code>condition2</code>. Let us also transform this variable into a factor.</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">part_sum</span> <span class="op">&lt;-</span> <span class="va">part_sum</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    condition2 <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">condition</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-$20/+$20"</span>, <span class="st">"-$40/+$40"</span><span class="op">)</span>, 
+                         <span class="st">"symmetric"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">condition</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>condition2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+    <span class="va">condition2</span>, 
+    levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-$20/+$40"</span>, <span class="st">"symmetric"</span>, <span class="st">"-$40/+$20"</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+<p>Let’s see how the resulting histogram looks if we produce the same histogram as above (i.e., using <code>binwidth = 0.1 / 3, boundary = 0</code>), but now facet the plot into three panels using our new condition variable, <code>condition2</code>. Note, we explicitly use <code>aes(x = mean_acc)</code> here to make clear that <code>mean_acc</code> is mapped onto the x-axis (we had done so implicitly above).</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span> <span class="op">/</span> <span class="fl">3</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">condition2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-37-1.png" width="100%"></div>
+<p>This plot shows clear differences between conditions, but it is difficult to compare the symmetric condition with the other two. More specifically, for the symmetric condition most of the bars are larger than all individual bars for the -$20/+$40 condition. This is of course not really possible if both conditions have similar amounts of data. Thus, this plot is more misleading than informative.</p>
+<p>One alternative is to plot the <em>density</em> instead of the frequency. The density is a measure that is normalised within each panel. More specifically, density is defined such that the total area within each panel is equal to 1.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;To calculate the area in a panel, you first need to calculate the area of each bin. That is given by the height of the bin times its width (in x-axis units). A density histogram is then scaled such that the total area of all bins is equal to 1.&lt;/p&gt;"><sup>35</sup></a> To get this plot, we need to map the density (instead of the count) to the y-axis, this can be done with <code>y = after_stat(density)</code>. To be perfectly honest, you do not need to understand fully what <code>y = after_stat(density)</code> does. This is one of those a bit obscure <code>ggplot2</code> options that one just needs to remember (or know where to look up), but not necessarily understand fully how they work.</p>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">mean_acc</span>, y <span class="op">=</span> <span class="fu">after_stat</span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span> <span class="op">/</span> <span class="fl">3</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">condition2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-38-1.png" width="100%"></div>
+<p>If we look at this plot, we can see that the pattern looks just as the previous one, but now the scale in the non-symmetric conditions is comparable to the symmetric ones. The reason is that each panel is normalised to a density of 1. This allows that the panel can be compared across conditions, even though the panels have markedly different numbers of observations.</p>
+<p>One problem with the density histogram is that density is not the most intuitive to interpret quantity. So what could be better than density? One alternative is to display the <em>probability</em> or <em>proportion</em> of the data in each bins. This can also be achieved quite easily, we just need to map the density times the width of the plot to the y-axis. Using the same approach as above this can be achieved via <code>y = after_stat(density * width)</code>:</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">mean_acc</span>, y <span class="op">=</span> <span class="fu">after_stat</span><span class="op">(</span><span class="va">density</span> <span class="op">*</span> <span class="va">width</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span> <span class="op">/</span> <span class="fl">3</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">condition2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-39-1.png" width="100%"></div>
+<p>This plot shows the exact same data, only the scale of the y-axis has changed and now shows the probability of data being in each bin. To reflect this better in the plot, we can change the y-axis label by adding <code>label(y = "probability")</code> to the plot.</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">mean_acc</span>, y <span class="op">=</span> <span class="fu">after_stat</span><span class="op">(</span><span class="va">density</span> <span class="op">*</span> <span class="va">width</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span> <span class="op">/</span> <span class="fl">3</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">condition2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-40-1.png" width="100%"></div>
+<p>Note that the trick of passing <code>y = after_stat(density * width)</code> works for any histogram for turning it from frequency to probability. As far as I know, this is not documented in the official documentation. But as discussed, whenever one wants to plot multiple histograms across conditions that differ in their number of observations, the count (i.e., frequency) is not very informative. Therefore, the trick shown here is something I like to use quite regularly.</p>
+<p>As the final paragraph in this section, let us quickly sum up what we can see in the histograms across conditions. For the symmetric conditions we can see one large peak (or one large and one slightly smaller) at around 0.5 with more data to the left than the right of the peak. For the -$40/+$20 condition, we have one large peak near the left end of the scale with not much data above 0.5. Finally, for the -$20/+$40 condition the data does not have a clear shape. It can be interpreted as multiple modes, but also as a rather uniform distribution above values of around 0.25.</p>
+</div>
+</div>
+<div id="summary-3" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Summary<a class="anchor" aria-label="anchor" href="#summary-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter we have provided a brief introduction to data visualisation with <code>ggplot2</code>. Specifically, we have covered data visualisation for three common cases: solely one continuous variable, one continuous and one categorical variable (e.g., as in an experiment), and two continuous variables. For pedagogical reasons, the order in which the three cases were presented in this chapter was the other way round (i.e., beginning with two continuous variables).</p>
+<p>For plots with solely <em>one continuous variable</em> we have introduced different variants of histograms. A histogram shows the distribution of one variable by displaying the count across different bins of the variable. This provides an easy to interpret visual representation of the distribution of the variable. One problem when applying histograms to data is that the choice of the bin width is sometimes not obvious, so one usually needs to try out different values. We have also shown how to create histograms with a normalised variant of the count – using either the density or the probability/proportion – which can be used when comparing histograms across conditions with different numbers of observations.</p>
+<p>For plots with <em>one continuous and one categorical variable</em> – the typical situation for experimental data – we have considered two different levels of data that we can plot. All observations, that is the full distribution, or just the mean.</p>
+<p>Firstly, we have considered how to plot all observations conditional on the categorical variable. We have shown that when plotting all individual observations in this case a common problem is over-plotting (i.e., observations on top of each other). To address over-plotting we can display points semi-transparently (using <code>alpha</code> &lt; 1) or add random jitter using <code>geom_jitter()</code>. A more principled approach for avoiding over-plotting in this case are the two geoms provided by the <code>ggbeeswarm</code> package: <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code>, which creates a bee swarm plot plotting overlapping points adjacent to each other and is preferable for situations with lower numbers of observations, and <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>, which plots the points in the shape of the distribution adding quasi-random white space between the points and is preferable for situations with more observations. Instead of plotting all observations, we can also plot graphical summaries of the distribution, either using a box plot, or through a violin plot which also shows the shape of the distribution (which is the same shape as used by <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>).</p>
+<p>Secondly, We have considered how to plot the mean from a distribution of observations across conditions and shown that this can be done using <code>stat_summary()</code>. We have also discussed that only plotting the mean and not also a visualisation of the full distribution of the data can hide important information and should be avoided. Thus, we should ideally always combine a plot of the full distribution, depending on the number of observations either all observations or through some graphical summaries, with the mean. Ideally, the mean is made visually more salient, for example by making it larger or in a different colour, compared to the visualisation of the distribution of all observations.</p>
+<p>For plots with <em>two continuous variables</em>, we have only shown how to plot all observations using <code>geom_point()</code>. In addition, we introduced a number of <code>ggplot2</code> basic functionalities. Specifically, we have shown how to map variables to aesthetics using the <code>aes()</code> function and how to use this to distinguish data points in different ways.</p>
+<p>In addition to the graphical options specific to certain combinations of variable, we have introduced a few more general `ggplot2 functionalities: Themes as a means to change the overall look of a plot and faceting to create sub-plots or panels that split the plot along a categorical variable.</p>
+<p>To sum up, <code>ggplot2</code> is a powerful tool for creating visually appealing data visualisations. The basic functionality is to pass the data to the <code>ggplot()</code> function and then specify the mapping of variables to aesthetics using the <code>aes()</code> function (e.g., <code>aes(x = indepdenent_variable, y = dependent_variable)</code>). We then add elements to this plot using <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;As you will see in the following, using &lt;code&gt;+&lt;/code&gt; makes &lt;code&gt;ggplot2&lt;/code&gt; calls different from other types of chained calls that use the pipe (&lt;code&gt;%&amp;gt;%&lt;/code&gt;). The reason for this is that &lt;code&gt;ggplot2&lt;/code&gt; pre-dates the pipe by several years. &lt;code&gt;ggplot2&lt;/code&gt; author Hadley Wickham now thinks that it would be more consistent to also chain &lt;code&gt;ggplot2&lt;/code&gt; calls using the pipe, but given the already large popularity of &lt;code&gt;ggplot2&lt;/code&gt; feels that it is too late for this change now.&lt;/p&gt;"><sup>36</sup></a> The most important element to add to a plot are geoms, geometric objects that produce some visualisation of the observations. We have mainly looked at <code>geom_point()</code>, <code>geom_jitter()</code>, <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code>, <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> (last two are both from package <code>ggbeeswarm</code>), <code>geom_boxplot()</code>, <code>geom_violin()</code>, and <code>geom_histogram()</code>. We can also add a summary statistic of the data to our plot using <code>stat_summary()</code>.</p>
+<p>In addition to these basic graphical elements, we have seen we can also change the plot in other ways. For example, to create a faceted plots with panels we add a call to function <code>facet_wrap()</code>. To change the look of graphical elements we can use pre-specified themes, such as add a call to <code>theme_bw()</code> or change individual elements through the <code>theme()</code> function. To change the text of axis labels, we can add a call to the <code>labs()</code> function.</p>
+<p>As <code>ggplot2</code> is an extremely comprehensive tool, remembering all the details immediately is a bit much to ask. Therefore, like for the other <code>tidyverse</code> packages, <code>RStudio</code> provides a <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf"><code>ggplot2</code> cheat sheet</a>. I highly encourage you to take a look at this cheat sheet before moving to the next page.</p>
+
+</div>
+</div>
+
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  if (t = document.getElementById("webex-total_correct")) {
+    t.innerHTML =
+      document.getElementsByClassName("webex-correct").length + " of " +
+      document.getElementsByClassName("webex-solveme").length + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+  
+  if (my_answer !== "" & real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+  } else {
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);  
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }  
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }  
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+  
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off"); 
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+    
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+    
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
+<div class="prev"><a href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></div>
+<div class="next"><a href="ggplot-exercises.html">ggplot2 Exercises</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ggplot2-intro"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="nav-link" href="#first-ggplot2-example"><span class="header-section-number">4.1</span> First ggplot2 Example</a></li>
+<li><a class="nav-link" href="#two-continuous-variables"><span class="header-section-number">4.2</span> Two Continuous Variables</a></li>
+<li><a class="nav-link" href="#faceting-creating-sub-plots-across-a-variable"><span class="header-section-number">4.3</span> Faceting: Creating Sub-Plots Across a Variable</a></li>
+<li><a class="nav-link" href="#changing-ggplot2-theme-for-r-session"><span class="header-section-number">4.4</span> Changing ggplot2 Theme for R Session</a></li>
+<li>
+<a class="nav-link" href="#one-continuous-and-one-categorical-variable"><span class="header-section-number">4.5</span> One Continuous and one Categorical Variable</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#displaying-all-data-points"><span class="header-section-number">4.5.1</span> Displaying All Data Points</a></li>
+<li><a class="nav-link" href="#bee-swarm-plot-et-al."><span class="header-section-number">4.5.2</span> Bee Swarm Plot et al.</a></li>
+<li><a class="nav-link" href="#box-plot"><span class="header-section-number">4.5.3</span> Box Plot</a></li>
+<li><a class="nav-link" href="#violin-plots"><span class="header-section-number">4.5.4</span> Violin Plots</a></li>
+<li><a class="nav-link" href="#plotting-the-mean"><span class="header-section-number">4.5.5</span> Plotting The Mean</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#one-continuous-variable-histograms"><span class="header-section-number">4.6</span> One Continuous Variable: Histograms</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#choosing-the-number-of-bins"><span class="header-section-number">4.6.1</span> Choosing the Number of Bins</a></li>
+<li><a class="nav-link" href="#probability-instead-of-frequency-plots"><span class="header-section-number">4.6.2</span> Probability Instead of Frequency Plots</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-3"><span class="header-section-number">4.7</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/singmann/stats_for_experiments/blob/main/ggplot-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/singmann/stats_for_experiments/edit/main/ggplot-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

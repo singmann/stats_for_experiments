@@ -45,9 +45,10 @@
 <li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
 <li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
 <li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
-<li><a class="active" href="short-introduction-to-r-and-the-tidyverse.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="active" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
 <li><a class="" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
-<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
 <li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
 <li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -58,9 +59,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="short-introduction-to-r-and-the-tidyverse" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tidyverse-intro" class="section level1" number="3">
 <h1>
-<span class="header-section-number">3</span> Short Introduction to <code>R</code> and the <code>tidyverse</code><a class="anchor" aria-label="anchor" href="#short-introduction-to-r-and-the-tidyverse"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Short Introduction to <code>R</code> and the <code>tidyverse</code><a class="anchor" aria-label="anchor" href="#tidyverse-intro"><i class="fas fa-link"></i></a>
 </h1>
 <p>The previous two chapters have provided the theoretical and conceptual background we need for performing a statistical analysis. In this chapter we switch the focus to the practical side and introduce the basics of the tool that we use to perform a statistical analysis in practice, the statistical programming language <a href="https://cran.r-project.org/"><code>R</code></a>.</p>
 <p>As we have discussed in the previous chapters, the value of a scientific theory or hypotheses depends ultimately on the evidence that supports it. This evidence comes in the form of data. Thus to be able to judge the strength of the evidence provided by the data, a central task in the research practice is to analyse and then interpret data. <code>R</code> is the tool that we will use for this task. It is one of the most comprehensive and popular tools for all aspects of data analysis.</p>
@@ -124,7 +125,7 @@
 <h2>
 <span class="header-section-number">3.3</span> <code>RStudio</code><a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
 </h2>
-<p>After you are comfortable with <code>R</code>, let us take a quick look at the <code>RStudio</code> interface together. Figure <a href="short-introduction-to-r-and-the-tidyverse.html#fig:rstudio1">3.1</a> shows the basic <code>RStudio</code> interface once an empty <code>R</code> script is opened. If it does not yet look like that to you, open an empty <code>R</code> script through “File” - “New File” - “R script.”</p>
+<p>After you are comfortable with <code>R</code>, let us take a quick look at the <code>RStudio</code> interface together. Figure <a href="tidyverse-intro.html#fig:rstudio1">3.1</a> shows the basic <code>RStudio</code> interface once an empty <code>R</code> script is opened. If it does not yet look like that to you, open an empty <code>R</code> script through “File” - “New File” - “R script.”</p>
 <div class="figure">
 <span style="display:block;" id="fig:rstudio1"></span>
 <img src="figures/rstudio-window.png" alt="Screenshot of `RStudio` window with empty `R` script and default layout. The script is shown top left, the `R` console bottom left, the Environment pane in the top right, and the Files and Plot viewer in the bottom right." width="100%"><p class="caption">
@@ -132,7 +133,7 @@ Figure 3.1: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 </p>
 </div>
 <p>This screenshot shows the four panes in their default location. The <code>R</code> script in the top left, the <code>R</code> console in the bottom left, the environment and history pane in the top right, and the files and plot pane in the bottom left.</p>
-<p>An alternative to the default location is possible by switching the position of console and environment pane. For this, click on the small button to the left of <code>Addins</code> just below the menu bar. The button looks a bit like a version of the windows logo. When clicking this button you can choose between the default “console on the left” and an alternative “console on the right.” Especially if you work a lot with <code>R</code> scripts, which we will do, it make sense to put the console on the right, as shown in the Figure <a href="short-introduction-to-r-and-the-tidyverse.html#fig:rstudio2">3.2</a>.</p>
+<p>An alternative to the default location is possible by switching the position of console and environment pane. For this, click on the small button to the left of <code>Addins</code> just below the menu bar. The button looks a bit like a version of the windows logo. When clicking this button you can choose between the default “console on the left” and an alternative “console on the right.” Especially if you work a lot with <code>R</code> scripts, which we will do, it make sense to put the console on the right, as shown in the Figure <a href="tidyverse-intro.html#fig:rstudio2">3.2</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:rstudio2"></span>
 <img src="figures/rstudio-window2.png" alt="Screenshot of `RStudio` window with empty `R` script and alternative layout. In this image, console and environment pane have switched their position which allows both `R` script and console to occupy a larger space." width="100%"><p class="caption">
@@ -224,7 +225,7 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <span class="co">#&gt; 4     8    6   12   accept -$20/+$20    1</span>
 <span class="co">#&gt; 5     8    6   14   accept -$20/+$20    1</span>
 <span class="co">#&gt; 6     8    6   16   accept -$20/+$20    1</span></code></pre></div>
-<p>Alternatively, you can click on an object in the <code>RStudio</code> “Environment” pane (see Figures <a href="short-introduction-to-r-and-the-tidyverse.html#fig:rstudio1">3.1</a> and <a href="short-introduction-to-r-and-the-tidyverse.html#fig:rstudio2">3.2</a>) which opens the data in a viewer pane. The equivalent <code>R</code> call is using <code><a href="https://rdrr.io/r/utils/View.html">View(df1a)</a></code> which opens the same viewer. However, <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> should only be used interactively at the console and not be in an <code>R</code> script as it requires user interaction beyond <a href="https://psyr.djnavarro.net/scripts.html">script</a> and console (i.e., it opens the viewer). In other words, it is nice during development to get an overview of the data, but not for the final analysis script.</p>
+<p>Alternatively, you can click on an object in the <code>RStudio</code> “Environment” pane (see Figures <a href="tidyverse-intro.html#fig:rstudio1">3.1</a> and <a href="tidyverse-intro.html#fig:rstudio2">3.2</a>) which opens the data in a viewer pane. The equivalent <code>R</code> call is using <code><a href="https://rdrr.io/r/utils/View.html">View(df1a)</a></code> which opens the same viewer. However, <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> should only be used interactively at the console and not be in an <code>R</code> script as it requires user interaction beyond <a href="https://psyr.djnavarro.net/scripts.html">script</a> and console (i.e., it opens the viewer). In other words, it is nice during development to get an overview of the data, but not for the final analysis script.</p>
 </div>
 </div>
 <div id="the-tidyverse" class="section level2" number="3.5">
@@ -812,7 +813,7 @@ window.onload = function() {
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#short-introduction-to-r-and-the-tidyverse"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="nav-link" href="#tidyverse-intro"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
 <li><a class="nav-link" href="#what-is-r"><span class="header-section-number">3.1</span> What is R?</a></li>
 <li>
 <a class="nav-link" href="#getting-started-with-r"><span class="header-section-number">3.2</span> Getting Started with R</a><ul class="nav navbar-nav">
@@ -855,7 +856,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-08.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

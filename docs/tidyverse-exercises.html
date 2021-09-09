@@ -45,9 +45,10 @@
 <li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
 <li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
 <li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
-<li><a class="" href="short-introduction-to-r-and-the-tidyverse.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
 <li><a class="active" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
-<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
 <li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
 <li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -65,15 +66,15 @@
 <p>To get into the habit of doing it regularly when starting a new task or analysis, now is probably a good time to restart your <code>R</code> session. As a reminder, do so through the <code>RStudio</code> menu with <code>Session</code> - <code>Restart R</code>. After this, we need to load the <code>tidyverse</code> again:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></code></pre></div>
-<div id="extended-tidyverse-example-walasek-stewart-2015-exp.-1a-1b" class="section level2" number="3.7">
+<div id="extended-walasek-example" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.7</span> Extended <code>tidyverse</code> Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b<a class="anchor" aria-label="anchor" href="#extended-tidyverse-example-walasek-stewart-2015-exp.-1a-1b"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Extended <code>tidyverse</code> Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b<a class="anchor" aria-label="anchor" href="#extended-walasek-example"><i class="fas fa-link"></i></a>
 </h2>
 <div id="reading-both-data-sets" class="section level3" number="3.7.1">
 <h3>
 <span class="header-section-number">3.7.1</span> Reading Both Data Sets<a class="anchor" aria-label="anchor" href="#reading-both-data-sets"><i class="fas fa-link"></i></a>
 </h3>
-<p>As an extended <code>tidyverse</code> example, let us once again get back to the data of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. As described in Section <a href="short-introduction-to-r-and-the-tidyverse.html#files">3.4.1</a>, there are two similar data sets, Experiments 1a and 1b, that we can consider together (and have done so in in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>). To follow the extended examples, download them both into folder <code>data</code> that is in your current working directory: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>. Then, we can load them both as separate objects using <code>read_csv()</code>.</p>
+<p>As an extended <code>tidyverse</code> example, let us once again get back to the data of <span class="citation"><a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">Walasek and Stewart</a> (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. As described in Section <a href="tidyverse-intro.html#files">3.4.1</a>, there are two similar data sets, Experiments 1a and 1b, that we can consider together (and have done so in in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>). To follow the extended examples, download them both into folder <code>data</code> that is in your current working directory: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>. Then, we can load them both as separate objects using <code>read_csv()</code>.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span>
 <span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">22912</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
@@ -263,7 +264,7 @@
 <span class="co">#&gt; <span style="color: #555555;">5</span> e1a_8     6    14 accept   -$20/+$20     1</span>
 <span class="co">#&gt; <span style="color: #555555;">6</span> e1a_8     6    16 accept   -$20/+$20     1</span>
 <span class="co">#&gt; <span style="color: #555555;"># ... with 49,978 more rows</span></span></code></pre></div>
-<p>Next, we calculate the number of participants per condition and check if every participant has 64 trials. This is one way to check our assumptions about the data and ensure data integrity (we use the same code as described in Section <a href="short-introduction-to-r-and-the-tidyverse.html#counting">3.5.3.5</a>).</p>
+<p>Next, we calculate the number of participants per condition and check if every participant has 64 trials. This is one way to check our assumptions about the data and ensure data integrity (we use the same code as described in Section <a href="tidyverse-intro.html#counting">3.5.3.5</a>).</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ws1</span> <span class="op">%&gt;%</span> 
   <span class="fu">group_by</span><span class="op">(</span><span class="va">condition</span>, <span class="va">subno</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -1094,14 +1095,14 @@ window.onload = function() {
 }
 
 </script><div class="chapter-nav">
-<div class="prev"><a href="short-introduction-to-r-and-the-tidyverse.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></div>
-<div class="next"><a href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></div>
+<div class="prev"><a href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></div>
+<div class="next"><a href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#tidyverse-exercises">tidyverse: Example, Quiz, and Exercises</a></li>
 <li>
-<a class="nav-link" href="#extended-tidyverse-example-walasek-stewart-2015-exp.-1a-1b"><span class="header-section-number">3.7</span> Extended tidyverse Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#extended-walasek-example"><span class="header-section-number">3.7</span> Extended tidyverse Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#reading-both-data-sets"><span class="header-section-number">3.7.1</span> Reading Both Data Sets</a></li>
 <li><a class="nav-link" href="#combining-both-data-sets"><span class="header-section-number">3.7.2</span> Combining Both Data Sets</a></li>
 <li><a class="nav-link" href="#preparing-and-descriptive-analysis"><span class="header-section-number">3.7.3</span> Preparing and Descriptive Analysis</a></li>
@@ -1127,7 +1128,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-08.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

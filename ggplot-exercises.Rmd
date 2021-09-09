@@ -1,0 +1,91 @@
+# `ggplot2` Exercises {#ggplot-exercises .unnumbered}
+
+## `ggplot2` Extended Example:  Walasek & Stewart (2015) Exp. 1a & 1b {#ggplot-walasek-example}
+
+```{r, message=FALSE}
+library("tidyverse")
+ws1a <- read_csv("data/ws2015_exp1a.csv")
+ws1b <- read_csv("data/ws2015_exp1b.csv")
+ws1a <- ws1a %>%
+  mutate(subno = factor(paste0("e1a_", subno)))
+ws1b <- ws1b %>%
+  mutate(subno = factor(paste0("e1b_", subno)))
+ws1 <- bind_rows(ws1a, ws1b)
+ws1 <- ws1 %>% 
+  mutate(
+    response = factor(response, levels = c("reject", "accept")),
+    condition = factor(
+      condition, 
+      levels = c(40.2, 20.2, 40.4, 20.4), 
+      labels = c("-$20/+$40", "-$20/+$20", "-$40/+$40", "-$40/+$20")
+    )
+  )
+glimpse(ws1)
+```
+
+only the symmetric lotteries that are shared across conditions separately for each participant and condition.
+
+
+```{r}
+part_sum <- ws1 %>%
+  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
+  group_by(condition, subno) %>% 
+  summarise(mean_acc = mean(resp)) %>% 
+  ungroup()
+part_sum
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_point()
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+```
+
+
+
+## Quiz 
+
+Note: The pull-down menu for selecting an answer turns green after selecting the correct answer. 
+
+::: {.exercise}
+Which variable is typically plotted on the y-axis? 
+
+1. The independent variable
+2. The dependent variable
+3. The control variable
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+:::
+
+
+::: {.exercise}
+Consider you have data from an experiment with dependent variable `score` and  independent variable `condition`. What would be the `aes()` call to plot this data in the conventional way?
+
+1. `aes(condition = x, score = y)`
+2. `aes(condition = y, score = x)`
+3. `aes(x = condition, y = score)`
+4. `aes(y = condition, x = score)`
+
+Answer: `r webex::mcq(c("1", "2", answer = "3", "4"))`
+:::
+
+
+::: {.exercise}
+What is the appropriate way to handle outliers that are identified by a box-plot?
+
+1. Outliers should be removed from the analysis as they can influence the results to a large degree.
+2. Any real data point that is collected needs to be included in the analysis. Removing an outlier can be seen as an instance of data fabrication. 
+3. We should repeat the analysis with and without outlier, to see if the results are robust to the presence or absence of the outlier.
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+

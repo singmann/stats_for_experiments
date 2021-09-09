@@ -1,53 +1,66 @@
-# Data Visualisation with `ggplot2`
+# Data Visualisation with `ggplot2` {#ggplot2-intro}
 
-The perhaps most prominent member of the `tidyverse`, which technically also pre-dates the `tidyverse` by several years, is [`ggplot2`](https://ggplot2.tidyverse.org/), a system for declaratively creating graphics, based on the book "The Grammar of Graphics" [@wilkinsonGrammarGraphics1999].
+So far we have only considered data analysis that exclusively happens in the `R` console. That is, we put numbers and text into the console and get numbers and text out. However, this is only one part of any comprehensive data analysis. Another part of any data analysis is the transformation of numbers into pictures -- data visualisation.
 
-To understand what how `ggplot2` works, it makes sense to contrast it to the base `R` graphics engine around the `plot()` function. For `plot()` creating a plot is done by drawing individual graphical elements such as `points()` or `lines()`. These functions generally only accept individual vectors or data points.
+As before, we employ the `tidyverse` approach for data visualisation, [`ggplot2`](https://ggplot2.tidyverse.org/). [`ggplot2`](https://ggplot2.tidyverse.org/) is a system for declaratively creating graphics, based on the book "The Grammar of Graphics" [@wilkinsonGrammarGraphics1999]. [`ggplot2`](https://ggplot2.tidyverse.org/) is also the perhaps most prominent member of the `tidyverse`, which technically pre-dates the `tidyverse` by several years.
+
+To understand how `ggplot2` works, it makes sense to contrast it to the base `R` graphics engine around the `plot()` function. For `plot()` creating a plot is done by drawing individual graphical elements such as `points()` or `lines()`. These functions generally only accept individual vectors or data points.
 
 In contrast, `ggplot2` requires that the data is passed either as a `data.frame` or `tibble`. With this in hand, "you provide the data, tell `ggplot2` how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details." ([quote from the official documentation](https://ggplot2.tidyverse.org/)).
 
-```{r}
-library("tidyverse")
-tbl1a <- read_csv("data/ws2015_exp1a.csv")
-tbl1a <- tbl1a %>% 
-  mutate(
-    subno = factor(subno),
-    response = factor(response, levels = c("reject", "accept")),
-    condition = factor(condition, 
-                        levels = c(40.2, 20.2, 40.4, 20.4), 
-                        labels = c("-$20/+$40", "-$20/+$20", "-$40/+$40", "-$40/+$20"))
-  )
-glimpse(tbl1a)
-```
-
 ## First `ggplot2` Example
 
-What this means in practice is the first thing to think about is which variables in your data you want to show on which of the two axes? Once you have decided on this you have to consider which graphical elements, which are called `geom`s in `ggplot2` terminology, you want to use to show the data. Let us exemplify this with a first example from the @walasekHowMakeLoss2015 data.
+What this means in practice is the first thing to think about is which variables in your data you want to show on which of the two axes? Once you have decided on this you have to consider which graphical elements, which are called `geom`s in `ggplot2` terminology, you want to use to show the data. Let us exemplify this with a first example from the @walasekHowMakeLoss2015 data we have also used in Chapter \@ref(tidyverse-intro). Let us begin by loading the data as done there (we suppress some status messages in the output here):
 
-One intuition we could have is that the probability that a lottery is accepted is related to the size of the potential gain, if we average over all other variables (i.e., potential loss and condition). One way to investigate this would be to calculate the average acceptance probability for each possible gain and plot this on the x-axis against the average accept probability on the y-axis. For this, we first summarise the data in this way.
+```{r, message=FALSE}
+library("tidyverse")
+ws1a <- read_csv("data/ws2015_exp1a.csv")
+ws1b <- read_csv("data/ws2015_exp1b.csv")
+ws1a <- ws1a %>%
+  mutate(subno = factor(paste0("e1a_", subno)))
+ws1b <- ws1b %>%
+  mutate(subno = factor(paste0("e1b_", subno)))
+ws1 <- bind_rows(ws1a, ws1b)
+ws1 <- ws1 %>% 
+  mutate(
+    response = factor(response, levels = c("reject", "accept")),
+    condition = factor(
+      condition, 
+      levels = c(40.2, 20.2, 40.4, 20.4), 
+      labels = c("-$20/+$40", "-$20/+$20", "-$40/+$40", "-$40/+$20")
+    )
+  )
+glimpse(ws1)
+```
+
+One intuition we could have is that the probability that a lottery is accepted is related to the size of the potential gain, if we average over all other variables (i.e., potential loss and condition). To investigate this, we first need to calculate the average acceptance probability for each possible gain. Then, we can create a plot with each possible gain on the x-axis against the average accept probability on the y-axis. To summarise the data, we use the now well-known combination of `group_by()` and `summarise()`.
 
 ```{r}
-lot_sum <- tbl1a %>% 
+lot_sum <- ws1 %>% 
   group_by(gain) %>% 
   summarise(mean_acceptance = mean(resp))
 lot_sum
 ```
 
-Looking at the returned `tibble` already shows that our intuition is probably not too off, but let us plot the data to get a better look. For this, we pass it to the `ggplot()` function as shown next.
+Looking at the returned `tibble` already shows that our intuition is probably not too far off. To understand the pattern better, let us plot the data. For this, we pass the newly created `tibble` to the `ggplot()` function as shown next.
 
 ```{r first-fig}
 ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
   geom_point()
 ```
 
-This plot shows a clear relationship between the mean acceptance rate of a lottery and its potential gain. Let us now describe the call in detail:
+This plot shows a clear relationship between the mean acceptance rate of a lottery and its potential gain. On average it holds that the larger the gain the larger the mean acceptance probability.
 
--   To create a plot with `ggplot2` we generally want to call the `ggplot()` function for which the first argument is the data we want to plot. Because the data is the first argument, we can also directly pipe into the `ggplot()` function as shown below.
--   The second argument is the `aes()` function which is used to map variables in the data onto aesthetics. In this call we only consider two aesthetics, the `x` and `y` axes. These two are probably the most important aesthetics, but we will also use other aesthetics such as `linetype`, `size`, or `shape` of the data points. In general, an aesthetic is a feature of the plot which changes as a function of the values of the variable.
+Let us now describe the call that produces the plot in detail:
+
+-   To create a plot with `ggplot2` we generally want to call the `ggplot()` function. The first argument to `ggplot()` is the data we want to plot. Because the data is the first argument, we can also directly pipe a `tibble` into the `ggplot()` function, which we will see later.
+-   The second argument is the `aes()` function, which is used to map variables in the data onto aesthetics. Understanding how to use the `aes()` function is the conceptually most difficult part of learning `ggplot2`. In the present call we only consider two aesthetics, the `x` and `y` axes. These two are probably the most important aesthetics, but we will also use other aesthetics such as `linetype`, `size`, or `shape` of the data points. In general, an aesthetic is a feature of the plot which changes as a function of the values of the variable. And with `aes()` we can assign based on which variables in our data the aesthetic should change. More specifically, `x = gain` means that the x-axis should vary as a function of `gain`. Likewise, `y = mean_acceptance` means that the y-axis should vary as a function of `mean_acceptance`.
 -   After passing the data and specifying the aesthetics, we close the `ggplot()` call (i.e., close the opening parenthesis) and then add further arguments, which are passed as function calls, to the plot using `+`.
 -   The most important set of arguments to pass are `geom`s (or geometric objects). Here we pass `geom_point()` to indicate that we want to plot all points of the data.
 
-Another important thing with `ggplot2` is that we cannot only use one `geom`, but multiple. For example, we could add a line on top connecting all the data points:
+Another important thing with `ggplot2` is that we cannot only use one `geom`, but multiple. For example, we could add a line on top connecting all the data points:[^ggplot-intro-1]
+
+[^ggplot-intro-1]: One thing of note is that usually `geom_line()` requires the use of the `groups` aesthetic to work properly. For example, if all data points should be connected, as in the present case, `group` should be 1, that is, `geom_line(aes(group = 1))`. Try it out yourself by replacing the `geom_line()` call in the example with the one that includes the `aes()` to see that they are equivalent. Given that this is a bit an unusual way of using `aes()` it is good to know it exists. This also shows that you can have multiple `aes()` calls in one `ggplot2` call.
 
 ```{r}
 ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
@@ -55,22 +68,14 @@ ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
   geom_line()
 ```
 
-One thing of note is that usually `geom_line()` requires the use of the `groups` aesthetic. And if all data points are connected, as in the present case, group should be 1 (i.e., `geom_line(aes(group = 1))`). So the following is equivalent in the present case, but is an idiom one should be aware of.
-
-```{r}
-ggplot(lot_sum, aes(x = gain, y = mean_acceptance)) +
-  geom_point() +
-  geom_line(aes(group = 1))
-```
-
 ## Two Continuous Variables
 
-The examples above show a simple case of plotting two continuous variables, the dependent variable is shown on the y-axis and the independent variable (for this plot) on the x-axis. Let us now consider a few more cases of plotting two continuous variables, by extending the data we are looking at.
+The examples above show a simple case of plotting two continuous variables, the dependent variable is shown on the y-axis and the independent variable (for this plot) on the x-axis, which is the usual convention for creating plots. Let us now consider a few more cases of plotting two continuous variables, by extending the data we are looking at.
 
-In the plots above we have averaged over all possible potential losses when looking at the effect of gain on average acceptance rates. We will now plot the case in which we consider each individual lottery -- that is, each unique combination of potential gain and loss -- as one data point (i.e., we will not average over all potential losses for one gain). Additionally, to reduce the influence of the condition manipulation we will only consider the two symmetric condition in which the range for losses is equal to the range for gains. Let us begin the analysis by preparing the corresponding data.
+In the plots above we have averaged over all possible potential losses when looking at the effect of gain on average acceptance rates. We will now plot the case in which we consider each individual lottery -- that is, each unique combination of potential gain and loss -- as one data point (i.e., we will not average over all potential losses for one gain). Additionally, to reduce the influence of the condition manipulation when doing so we will only consider the two symmetric conditions in which the range for losses is equal to the range for gains. Let us begin the analysis by preparing the corresponding data.
 
 ```{r}
-lot_sum2 <- tbl1a %>% 
+lot_sum2 <- ws1 %>% 
   filter(condition %in% c("-$20/+$20", "-$40/+$40")) %>% 
   group_by(loss, gain) %>% 
   summarise(mean_acceptance = mean(resp))
@@ -84,22 +89,24 @@ ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
   geom_point()
 ```
 
-This plot is difficult to interpret. We see that there are some lotteries with very low acceptance rates between 0 and around 0.2 as well as another group with acceptance rates between around 0.3 and 0.85. In this plot it does not look as if a larger potential gain is associated with a larger mean acceptance rates.
+This plot is difficult to interpret. We see that there are some lotteries with very low acceptance rates between 0 and around 0.2 as well as another group with acceptance rates between around 0.3 and 0.85. In this plot it does not look as if a larger potential gain is associated with a larger mean acceptance rate.
 
 One possibility for these differing visual impressions might be that there is some overlap of data points that are near 0; that is, there is evidence for *over-plotting*. That means that in the current plot we cannot differentiate between one or multiple data points that share the same or approximately same x and y coordinates.
 
-One way to allow for this differentiation an see whether there potentially is over-plotting is through alpha blending (i.e., by choosing `alpha` \< 1). Alpha blending is a computer graphics effect that creates the visual impression of semi transparency and one of the most helpful techniques for learning about over-plotting. What this means is that with alpha blending overlapping points appear darker whereas non-overlapping points do not. For example, we can set `alpha = 0.25` for `geom_point()` as shown below. If you are wondering why `alpha = 0.25` and not any other value? The answer is trial-and-error. I just tried some value (I usually start with a value below 0.5) and the tried a few until I saw a plot that looked good to me.
+One way to allow for this differentiation and see whether there potentially is over-plotting is through alpha blending (i.e., by choosing `alpha` \< 1). Alpha blending is a computer graphics effect that creates the visual impression of semi transparency. What this means is that with alpha blending overlapping points appear darker whereas non-overlapping points do not. Thus, alpha blending is a helpful technique for investigating if there is over-plotting and for judging the degree of over-plotting. For example, we can set `alpha = 0.25` for `geom_point()` as shown below.
+
+If you are wondering why `alpha = 0.25` and not any other value? The answer is trial-and-error. I just tried some values (I usually start with a value below 0.5) and then tried a few different ones until I saw a plot that looked good to me.
 
 ```{r}
 ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
   geom_point(alpha = 0.25)
 ```
 
-As you can see in the plot, there is some evidence for over-plotting. Especially for mean acceptance rates near 0 (and especially for low values of potential gains), we see several points clearly darker than the rest of the data points. However, the plot is still not very clear. For example, it is still difficult to judge how many points there are for the darker points.
+As you can see in the plot, there is some evidence for over-plotting. Especially for mean acceptance rates near 0 (and especially for low values of potential gains), we see several points clearly darker than the rest of the data points. This means that in this case several points are at exactly the same position (i.e., there is over-plotting). However, the plot is still not very clear. For example, it is still difficult to judge how many points there are for the points that appear clearly darker.
 
-One possibility to further improve on this figure is by introducing some random jitter for the plotted points using `geom_jitter()`. Given that the points are all on discrete x-axis positions (i.e., the even whole numbers that act as potentially gains) it makes sense to only add a small amount of jitter on the x-axis. This is done by specifying the `width` argument to `geom_jitter()`, which requires a number specifying the amount of (horizontal) jitter in units of the x-axis. Trial-and-error led me to conclude that `width = 0.4` produces an appealing result.[^tidyverse-intro-5] With jitter only on the x-axis the points retain their exact y-axis positions but are still shown around their original x-axis position.
+One possibility to further improve on this figure is by introducing some random jitter for the plotted points using `geom_jitter()`. Given that the points are all on discrete x-axis positions (i.e., the even whole numbers that act as potentially gains) it makes sense to only add a small amount of jitter on the x-axis. This is done by specifying the `width` argument to `geom_jitter()`, which requires a number specifying the amount of (horizontal) jitter in units of the x-axis. Trial-and-error led me to conclude that `width = 0.4` produces an appealing result.[^ggplot-intro-2] With jitter only on the x-axis the points retain their exact y-axis positions but are still shown around their original x-axis position.
 
-[^tidyverse-intro-5]: Note that the jitter width determines the horizontal amount of jitter in each direction,. That means that the total area reserved for jittered points is 2 \* `width` (or 0.8 in the present case). Given that the distance between adjacent x-axis positions is 2 (i.e., potential gain values are always at least 2 apart) a jitter width of 0.4 here means that the area occupied for points with the same potential gain is slightly smaller than the empty area between adjacent potential gain values (which occupies 1.2 units of the x-axis).
+[^ggplot-intro-2]: Note that the jitter width determines the horizontal amount of jitter in each direction. That means that the total area reserved for jittered points is 2 \* `width` (or 0.8 in the present case). Given that the distance between adjacent x-axis positions is 2 (i.e., potential gain values are always at least 2 apart) a jitter width of 0.4 here means that the area occupied for points with the same potential gain is slightly smaller than the empty area between adjacent potential gain values (which occupies 1.2 units of the x-axis).
 
 ```{r}
 ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
@@ -108,11 +115,11 @@ ggplot(lot_sum2, aes(x = gain, y = mean_acceptance)) +
 
 An important thing to know about using `geom_jitter()` is that due to the randomness that is used to add the jitter, this plot will look slightly different every time it is created (i.e., the code above executed). Try it out a few times to see what I mean. And while you are at it feel free to try out a few different values for the amount of jitter or what happens if you remove `width = 0.4` from the `geom_jitter()` call. You can also try and see what happens of you add some value for `height` (e.g., `height = 0.05`).
 
-The plot above that combines jitter and alpha blending makes it easier to see why we see such an effect of potential gain on mean acceptance rates when averaging over losses. There are many more data points with very low mean acceptance rates on the left side of the plot and many more data points with medium to high acceptance rates on the right side of the plot. If we imagine taking the mean of this points we can imagine a monotonically increasing mean acceptance rate.
+The plot above that combines jitter and alpha blending makes it easier to see why we see such an effect of potential gain on mean acceptance rates when averaging over losses. There are many more data points with very low mean acceptance rates on the left side of the plot and many more data points with medium to high acceptance rates on the right side of the plot. If we imagine taking the mean of these points we can imagine an essentially monotonically increasing mean acceptance rate (i.e., an essentially continuously increasing and not decreasing mean acceptance rate).
 
-One question that this plot leaves open is the question of why we see this qualitatively different pattern for mean acceptance rates of lotteries. Why are some so low and other larger? To elucidate this question we are going to create a new factor, `ev`, which separates the expected value of the lottery (i.e., loss plus gain) into three bins: expected value = 0 (i.e., symmetric lotteries), negative expected value (i.e., potential loss larger than potential gain), and positive expected value (potential loss smaller than potential gain).
+One question that this plot leaves open is the question of why we see this qualitatively different pattern for mean acceptance rates of lotteries. Why are some so low and others larger? To provide an answer to this question we are going to create a new factor, `ev` (for *expected value*), which separates the expected value of the lottery (i.e., loss plus gain) into three bins: expected value = 0 (i.e., symmetric lotteries), negative expected value (i.e., potential loss larger than potential gain), and positive expected value (potential loss smaller than potential gain).
 
-To create the `ev` variable, we use another `dplyr` function, `case_when()`. `case_when()` is a vectorised variant of multiple branching (i.e., if-else). This allows to create a new variable based on multiple logical conditions in a convenient way. Each argument to `case_when()` consists of a logical statement, the `~` operator (which I call the tilde-operator), and a return value that is returned in case the logical condition is true. Here we have three logical cases which are each mapped onto one label describing the sign of the expected value. We also convert the `ev` variable into a `Factor` using `factor()`.
+To create the `ev` variable, we use another `dplyr` function, `case_when()`. `case_when()` is a vectorised variant of multiple branching (i.e., if-else). This allows us to create a new variable based on multiple logical conditions in a convenient way. Each argument to `case_when()` consists of a logical statement, the `~` operator (which I call the tilde-operator), and a return value that is returned in case the logical condition is true. Here we have three logical cases which are each mapped onto one label describing the sign of the expected value. We also convert the `ev` variable into a `factor` using `factor()`. In the call to `factor()` we also specify the order of factor `levels`.
 
 ```{r}
 lot_sum2 <- lot_sum2 %>% 
@@ -120,7 +127,7 @@ lot_sum2 <- lot_sum2 %>%
     gain == loss ~ "EV = 0",
     gain < loss ~ "EV negative",
     gain > loss ~ "EV positive"
-  )))
+  ), levels = c("EV negative", "EV = 0", "EV positive")))
 lot_sum2
 ```
 
@@ -131,7 +138,7 @@ ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev)) +
   geom_jitter(width = 0.25, alpha = 0.5)
 ```
 
-And whereas this plot already looks very interesting, it uses both green and red colours which can be difficult to see for individuals with colour blindness (such as me, even if my colour blindness is very mild). Therefore, we can make this plot nicer in two regards: (1) by using a somewhat nicer theme than the default which removes the grey background (e.g., my favourite is `theme_bw()`) and (2) we can use a colour blind friendly colour palette. For this we use `ggthemes::scale_colour_colorblind()` (here `ggthemes::` just means we use a a function from the `ggthemes` package without loading it explicitly beforehand). This gives us a very appealing and interesting plot.
+Whereas this plot already looks very interesting, it uses both green and red colours which can be difficult to see for individuals with colour blindness (such as me, even if my colour blindness is rather mild). Therefore, we can make this plot nicer in two regards: (1) by using a somewhat nicer `ggolot2` theme which removes the grey background (e.g., my favourite is `theme_bw()`) and (2) we can use a colour blind friendly colour palette. For this we use `ggthemes::scale_colour_colorblind()` (here `ggthemes::` just means we use a function from the `ggthemes` package without loading it explicitly beforehand). This gives us a very appealing and interesting plot.
 
 ```{r}
 ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev)) +
@@ -140,24 +147,110 @@ ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev)) +
   theme_bw()
 ```
 
-This plot shows that if the expected value is negative, participants are highly unlikely to accept a lottery. If the expected value is 0 (i.e., for symmetric lotteries) the acceptance rates start out at around 0.5 for small potentials losses and gains and decrease a bit with increasing loss/gain (just as predicted by loss aversion, see Section \@ref(evidence-for-loss-aversion-lotteries)). Finally, for lotteries with positive expected value (i.e., where on average we should win money) acceptance rate are at or above 0.5. Just as one would expect.
+To be clear, this plot shows exactly the same data as the previous plot, but just uses a different theme and different colours. And at least to my eyes, this plot looks visually a lot more appealing and clearer than the previous plot. Before describing what a theme is in more detail, let us first discuss what we see in the plot.
 
-Are we done yet with this data? Not yet. There is one more trick we can use to make the plot even more informative. We can map the `loss` variable onto the size of the data points. For this, we just add `size = loss` to the `aes()` call. This allows us to further understand the pattern.
+The plot shows that if the expected value is negative, participants are rather unlikely to accept a lottery (i.e., mean acceptance rates below 0.2). If the expected value is 0 (i.e., for symmetric lotteries) the acceptance rates start out at around 0.5 for small potentials losses and gains and generally decrease a bit with increasing loss/gain (just as predicted by loss aversion, see Section \@ref(evidence-for-loss-aversion-lotteries)). Finally, for lotteries with positive expected value (i.e., where on average we should win money) acceptance rates are at or above 0.5. Overall, the plot shows results one would expect to see and which make a lot of sense (i.e., anyone should be more willing to accept a bet if they expect to win money compared to when they expect to lose money).
+
+The call above shows a first example of how powerful the `ggplot2` idea of mapping variables to aesthetics using the `aes()` function is. We wanted to improve the plot by distinguishing different types of data points. So we just need a variable in our data that represents this distinction -- here, we create the `ev` variable for that. We then can just map this variable to a fitting aesthetic. Here, we use the `colour` aesthetic which allows us to distinguish different data points by colour. However, we could also use a different aesthetic to distinguish different data points. Can you think of one? Take a few seconds to think about it before clicking on the solution below.
+
+`r hide("Another aesthetic to distinguish different points")`
+
+Another way to distinguish different points is through their shape. In all examples we have seen so far, we only used circles to show data points. However, we could also use other shapes to display data points such as squares or triangles.
+
+The `ggplot2` aesthetic to distinguish data points belonging to different categories using different shapes is called `shape`. Thus, we can easily can change the plot by changing the corresponding argument in the `aes()` call:
 
 ```{r}
-ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, colour = ev, size = loss)) +
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, shape = ev)) +
   geom_jitter(width = 0.25, alpha = 0.5) +
   ggthemes::scale_colour_colorblind() +
   theme_bw()
 ```
 
-We can now see something that should not be too surprising. If the potential loss is small, which is now indicated by a small data point, the average acceptance rate is high. And the higher the potential gain for one specific potential loss (i.e., point size) the larger the mean acceptance rate. For each x-axis position on which we have data, we can also nicely see a size based ordering: The small losses have the largest mean acceptance rates and the large losses the smallest. In sum, even though the plot reveals a few pattern that should not be too surprising, it provides a comprehensive overview of the data of @walasekHowMakeLoss2015 (at least the two symmetric conditions).
+`gglot2` even allows us to combine different aesthetics, such as shape and colour:
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, 
+                     shape = ev, colour = ev)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+  ggthemes::scale_colour_colorblind() +
+  theme_bw()
+```
+
+`r unhide()`
+
+Before moving to the next plot, let us quickly discuss what a "theme" is. In `ggplot2`, a theme is a setting (or function call) that determines all non-data display elements of a plot such as fonts, font size, background and foreground colours, and so forth. The default `ggplot2` theme uses a grey background, which I personally do not like too much, which is why I prefer `theme_bw()`. `ggplot2` comes with a few more themes which you can see in the [online documentation](https://ggplot2.tidyverse.org/reference/ggtheme.html) (scroll to [examples](https://ggplot2.tidyverse.org/reference/ggtheme.html#examples) to see them all).
+
+Are we done yet with this data? Not yet. There is one more trick we can use to make the plot even more informative. We can map the `loss` variable onto the size of the data points. That is, we again need to change the `aes()` part of the call. Specifically, we add `size = loss` to the `aes()` call. This allows us to further understand the pattern shown in the data.
+
+```{r}
+ggplot(lot_sum2, aes(x = gain, y = mean_acceptance, 
+                     colour = ev, size = loss)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+  ggthemes::scale_colour_colorblind() +
+  theme_bw()
+```
+
+We can now see something that in hindsight should not be too surprising. If the potential loss is small, which is now indicated by a small data point, the average acceptance rate is comparatively high.
+
+Furthermore, the larger the potential gain for one specific potential loss, the larger the mean acceptance rate (i.e., if we focus on one point size across different potential gains). For example, if you look at the very small data points beginning with the orange one on the very left around .5, we see that with increasing gain the average acceptance rate for this potential loss increases almost continuously.
+
+We can also see an interesting pattern if we only focus on one potential gain (i.e., one x-axis position) for which we have data. If we look at the data this way, we can nicely see a size based ordering: The small losses have the largest mean acceptance rates and the large losses the smallest.
+
+In sum, the plot above provides a very comprehensive summary of the data of @walasekHowMakeLoss2015 (at least for the two symmetric conditions that are displayed here). The plot now not only allows us to see what is happening in the data across different lotteries, it also shows a number of patterns we would expect to see in the data (such as participants' sensitivity to the size of gains and losses). This combination allows the plot to serve two functions:
+
+(1) It allows us to gain new and interesting insight from the data. For example, we can see that participants on average decrease their willingness to accept symmetric lotteries with increasing gain/loss, just as predicted by loss aversion. So this plot allows us to address our research question.
+(2) The fact that we see many pattern we *would expect to see* provides us some assurances that there are no obvious problems with the data. As we have discussed before, many things can go wrong during study design, data collection, or analysis. Therefore, the fact that the data shows several patterns that intuitively make a lot of sense (such as the difference in whether the expected values are negative, neutral, or positive) can be seen as an assurance that not too much went wrong.
+
+In other words, this plot not only shows us new insight about our research question, it also allows us to judge the quality of the evidence provided. We learn that in addition to the theoretically interesting pattern the data looks very reasonable. This means the evidence from this data is stronger than evidence from data where we would not be able to judge if it otherwise looks reasonable.
+
+## Faceting: Creating Sub-Plots Across a Variable
+
+The plots above focussed on the two symmetric conditions. However, we could be interested whether the pattern we saw above looks similar across the four different conditions (i.e., also the two asymmetric loss/gain range conditions). For this, it might make sense to create one plot for each condition. One naive way to create sub plots would be to split the data into different data sets and create one plot for each sub data set.
+
+A different way is provided through the `ggplot2` technique of faceting. This means letting `ggplot2` create sub-plots based on one variable. To show this for the present data, we again need to prepare a new `tibble` that is similar to the one above. However, now we aggregate the data such that we have one average mean acceptance value for each lottery (i.e., unique combination of loss and gain) in each condition. Then we also add the `ev` variable as above.
+
+```{r}
+lot_sum_all <- ws1 %>% 
+  group_by(condition, loss, gain) %>% 
+  summarise(mean_acceptance = mean(resp)) %>% 
+  mutate(ev = factor(case_when(
+    gain == loss ~ "EV = 0",
+    gain < loss ~ "EV negative",
+    gain > loss ~ "EV positive"
+  ), levels = c("EV negative", "EV = 0", "EV positive")))
+lot_sum_all
+```
+
+To create a faceted plot for this data, we need to use yet another `ggplot2` function, `facet_wrap()`, to which we pass the variable the plot should be faceted on. We specify the variables to facet on in the call to `facet_wrap()` using the `vars()` function (this is described in the documentation, see `?facet_wrap()`). So with our new `tibble` that has the data aggregated for each condition, `lot_sum_all`, the call is the same as above, we only need to add `facet_wrap(vars(condition))`:
+
+```{r, fig.asp = 0.8}
+ggplot(lot_sum_all, aes(x = gain, y = mean_acceptance, 
+                        colour = ev, size = loss)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+  ggthemes::scale_colour_colorblind() +
+  theme_bw() +
+  facet_wrap(vars(condition)) 
+```
+
+This plot is a bit busy and not all details are very clear. One problem is that the legend takes up a rather large space on the right side. We can change the position of the legend using a call to the `theme()` function specifying the `legend.position` argument to `"bottom"`.
+
+```{r, fig.asp = 0.9}
+ggplot(lot_sum_all, aes(x = gain, y = mean_acceptance, 
+                        colour = ev, size = loss)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+  ggthemes::scale_colour_colorblind() +
+  theme_bw() +
+  facet_wrap(vars(condition)) + 
+  theme(legend.position = "bottom")
+```
+
+This plot shows the data a bit clearer, even though now not the complete legend is visible. For now, this is as much effort as we invest.
+
+The plot also shows quite large differences across conditions. The largest differences can be seen for the two asymmetric conditions. As discussed before, we can now clearly see that when there are many lotteries with positive expected value (i.e., in the -\$20/+\$40 condition) participants dislike the symmetric lotteries with expected value of 0. In contrast, when there are many lotteries with negative expected value (i.e., in the -\$40/+\$20 condition) the symmetric lotteries are relatively attractive and participants tend to like them nearly as much as the few lotteries with positive expected value. These results are not compatible with a theory assuming that only the values of lotteries matter, but not the context in which they appear.
 
 ## Changing `ggplot2` Theme for `R` Session
 
-So far we have looked at two continuous variables and seen how by mapping different variables to different aesthetics and by changing the arguments to the aesthetics, we can create appealing figures. Below we are trying to do the same for a situation that is potentially more common for experimental data, a situation with one continuous dependent variable and one categorical independent variable.
-
-Before producing the data, we are going to do something we will continue to do throughout this book. We will change the default theme (i.e., the theme that will be automatically used by all plots in one `R` session unless a different theme is specifically requested) to a theme without the grey background. In this call, we also make a few more changes such as larger axes labels and remove unnecessary grid lines which I feel makes such plots generally nicer.
+In the last few plots we have always changed the plot theme from the default theme to `theme_bw()` by passing it to the plot. Whereas we can do that for each plot, we can also do this globally for the rest of the `R` session. For this we have to call the `theme_set()` function as shown next. In this call, we also make a few more changes -- larger axis labels, remove unnecessary grid lines, and change the default position of the legend -- which I feel makes such plots generally nicer.
 
 ```{r}
 theme_set(theme_bw(base_size = 15) + 
@@ -165,16 +258,20 @@ theme_set(theme_bw(base_size = 15) +
                   panel.grid.major.x = element_blank()))
 ```
 
-Note, this is a global options that will affect all plots created after executing this command within an `R` session (i.e., to reset to the default theme you would have to restart your `R` session).
+Note, this is a global option that will affect all plots created after executing this command within an `R` session (i.e., to reset to the default theme you would have to restart your `R` session).
 
 ## One Continuous and one Categorical Variable
 
-Before creating plots with one continuous dependent variable and one categorical independent variable, we need to create the corresponding data from. In the plots above we have aggregated the data of @walasekHowMakeLoss2015 on the level of the individual lotteries (i.e., unique combination of gains and losses). Whereas this made sense for the plots above, it ignored the different participants (i.e., we aggregated across participants), which are usually considered a major source of noise. In other words, the plots above focussed on differences across lotteries but ignored differences across participants. However, as we have have discussed before, different people can do what they do for a number of different reasons, so we know that people differ quite a bit; we expect *individual differences*. What this means that it usually is a good idea to show the distribution of responses over participants, which provides a visual impression of the level of noise in the data.
+So far we have looked at two continuous variables and seen how by mapping different variables to different aesthetics and by changing the arguments to the aesthetics, we can create appealing figures. Now we are trying to do the same for a situation that is potentially more common for experimental data, a situation with one continuous dependent variable and one categorical independent variable.
 
-Therefore, instead of aggregating across participants we will create a new data set for which first calculate one score per participant and condition. Then, we will plot the distribution across participants for each condition. We begin by creating this data for all lotteries. Whereas this might not be the most informative plot substantively (e.g., compared to only plotting the shared symmetric lotteries), it is more instructive in the present case as our main goal is to try out a few different plotting options. In a later section we will produce a plot of only the shared lotteries that will be more interesting for the research question of loss aversion.
+Before creating plots with one continuous dependent variable and one categorical independent variable, we need to create the corresponding data. In the plots above we have aggregated the data of @walasekHowMakeLoss2015 on the level of the individual lotteries (i.e., unique combination of potential losses and gains). Whereas this made sense for the plots above, it ignored the different participants (i.e., we aggregated across participants). In other words, the plots above focussed on differences across lotteries but ignored differences across participants.
+
+Remember, our general goal is to find the signal (i.e., the response to the independent variable) among the noise in the data. For experimental data, participants are usually considered a major source of noise. As we have discussed before, different people can do what they do for a number of different reasons that may be related or unrelated to our research question. What this means concretely for when we produce data visualisation is that it usually is a good idea to show the distribution of responses over participants. This provides a visual impression of the level of noise produced by one of the main sources of noise in the data.
+
+Therefore, instead of aggregating across participants we will create a new data set for which first calculate one score per participant and condition. Then, we will plot the distribution across participants for each condition. We begin by creating this data for all lotteries. Whereas this might not be the most informative plot substantively (e.g., compared to only plotting the shared symmetric lotteries), it is more instructive in the present case as our main goal right now is to try out a few different plotting options (and not necessarily solving the conundrum behind loss aversion). In a later section we will produce a plot of only the shared lotteries that will be more interesting for the research question of loss aversion.
 
 ```{r}
-part_sum <- tbl1a %>%
+part_sum <- ws1 %>%
   group_by(condition, subno) %>%   # aggregate for both, condition and subno
   summarise(mean_acc = mean(resp)) 
 part_sum
@@ -184,14 +281,14 @@ The output shows that the individual mean acceptance rates already for the first
 
 ### Displaying All Data Points
 
-As in the plot above and is a general convention, we plot the dependent variable, the average acceptance rate per participant, on the y-axis and the independent variable, experimental condition, on the x-axis. As above we begin by plotting the individual data point as points using the point geom (i.e., `geom_point()`).
+As in the plots above and following the general convention, we plot the dependent variable, the average acceptance rate per participant, on the y-axis and the independent variable, experimental condition, on the x-axis. As above we begin by plotting the individual data point as points using the point geom (i.e., `geom_point()`).
 
 ```{r}
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   geom_point()
 ```
 
-The resulting plot is a bit difficult to interpret. We can see that there seems to be some differences between conditions (e.g., less large mean acceptance rates in the two right-most conditions), but it is difficult to judge if points are on top of each other -- that is, whether there is over-plotting or not. Because of this, it is difficult to adequately perceive the distribution of points.
+The resulting plot is a bit difficult to interpret. We can see that there seems to be some differences between conditions (e.g., less large mean acceptance rates in the two rightmost conditions), but it is difficult to judge if points are on top of each other -- that is, whether there is over-plotting or not. Because of this, it is difficult to adequately perceive the distribution of points.
 
 We can begin as above and add jitter to the points using `geom_jitter()` and also use alpha blending (i.e., `alpha = 0.25`). In contrast to above, let us start without specifying any amount of horizontal (i.e., `width`) or vertical (i.e., `height`) jitter. In this case, `geom_jitter()` automatically adds both horizontal and vertical jitter.
 
@@ -200,7 +297,9 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   geom_jitter(alpha = 0.25)
 ```
 
-The resulting plot is not very visually appealing. The amount of horizontal jitter is too large making it difficult to see to which x-axis position (i.e., experimental condition) a point belongs to. To improve the visual impression it is better to choose the amount of jitter by hand. To do so, we need to choose the amount of jitter in x-axis units and pass it to the `width` argument. The problem for this is that the x-axis shows a categorical variable which does not have a easily identifiable unit. The solution to this problem is that for a categorical variable each x-axis position is shown at one whole number starting at 1 with a difference of 1 between levels of the categorical variable. That means, in the plot above the "actual" x-axis positions are 1, 2, 3, and 4, corresponding to the four factor levels. Thus, let us try to improve the plot by specifying an amount of horizontal jitter, such as `width = 0.2` (which again was found by trial-and-error) and no height (which implies `height = 0`).
+The resulting plot is not very visually appealing. The amount of horizontal jitter is too large making it difficult to see to which x-axis position (i.e., experimental condition) a point belongs to. To improve the visual impression, it is better to choose the amount of jitter by hand (as we have done above). To do so, we need to choose the amount of jitter in x-axis units and pass it to the `width` argument.
+
+The problem here is that the x-axis shows a categorical variable which does not have an easily identifiable unit. The solution to this problem is that for a categorical variable, each x-axis position is shown at one whole number, starting at 1, with a difference of 1 between levels of the categorical variable. That means, in the plot above the "actual" x-axis positions of the four factor levels are 1, 2, 3, and 4. Thus, let us try to improve the plot by specifying an amount of horizontal jitter, such as `width = 0.2` (which again was found by trial-and-error) and no `height` argument (which means `height = 0` as long as `width` is specified).
 
 ```{r}
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
@@ -209,19 +308,31 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
 
 This plot provides a better overview of the distribution. We can for example clearly see that only for the -\$40/+\$20 (i.e., right-most) condition the majority of data points is below 0.25.
 
-### Bee Swarm Plot
+### Bee Swarm Plot et al.
 
-An alternative to `geom_jitter()` in such a case that avoids overplotting is offered by the two geoms in the [`ggbeeswarm`](https://cran.r-project.org/package=ggbeeswarm) package, `geom_beeswarm()` and `geom_quasirandom()`. The choice between both geoms usually depends on the amount of data points and overlap of points. Here to me the structure provided by `geom_beeswarm()` seems slightly nicer, but please try `geom_quasirandom()` as well (which as the name suggests uses randomness as well). To use both geoms, we first need to load the `ggbeeswarm` package (and if it is not yet installed, do so first through `install.packages()`).
+Alternatives to `geom_jitter()` that provide more structure for how the points are displayed are offered by the two geoms in the [`ggbeeswarm`](https://cran.r-project.org/package=ggbeeswarm) package, `geom_beeswarm()` and `geom_quasirandom()`. To use both geoms, we first need to load the `ggbeeswarm` package (and if it is not yet installed, do so first through `install.packages()`).
 
 ```{r}
 library("ggbeeswarm")
-ggplot(part_sum, aes(x = condition, y = mean_acc)) +
-  geom_beeswarm()
 ```
 
-What `geom_beeswarm()` does is produce a bee swarm plot; that is, a plot in which over-plotted points are displaced so they are shown adjacent or next to each other (in this case on the x-axis). This allows some interesting conclusions for our data.
+We then can replace the call to `geom_jitter()` with a call to one of the two other geoms.
 
-For example, for the -\$20/+\$40 condition the distribution is very wide with some data points along the whole range and almost no part with a particular bump in the shape or cluster of the data. In contrast, the other condition have a more or less clearly identifiable centre with a cluster of data points (around 0.5 for the two symmetric distributions and near the bottom for the -\$40/+\$20 condition).
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_beeswarm(alpha = 0.25)
+```
+
+```{r}
+ggplot(part_sum, aes(x = condition, y = mean_acc)) +
+  geom_quasirandom()
+```
+
+As you can see, both geoms provide a lot more structure of how the overlapping data points are distributed. `geom_beeswarm()` produces a so-called bee swarm plot; that is, a plot in which over-plotted points are displaced so they are shown adjacent or next to each other (in this case on the x-axis). `geom_quasirandom()` uses a similar approach but adds some random noise between points to also provide a visual representation of the shape of the distribution.
+
+In general, the choice between both geoms usually depends on the amount of data and the degree of overlap among data points. To me the amount of data points is so large that I prefer the visual impression by `geom_quasirandom()`. In situations with fewer data points, `geom_beeswarm()` can be preferred.
+
+Both plots allow some interesting conclusions about the data. For example, for the -\$20/+\$40 condition the distribution is rather wide with data points along the whole range. That is, there is no clear visual peak in the shape or cluster of data. The most noticeable pattern is somewhat less data points with low average acceptance rates (i.e., below 0.25). In contrast, the other conditions have a more or less clearly identifiable centre with a cluster of data points (around 0.5 for the two symmetric distributions and near the bottom for the -\$40/+\$20 condition).
 
 ### Box Plot
 
@@ -234,15 +345,17 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   geom_boxplot()
 ```
 
-We can see that each box plot consists of a box, with a thicker line somewhere inside, as well as two whiskers. In some cases, we see additional data points outside the whiskers, these are the "outliers". The thick line inside the box is a measure of the central tendency of the data (i.e., a measure of the centre of the distribution). Here it shows the [median](https://en.wikipedia.org/wiki/Median), which is the most common choice for box plots (sometimes box plots also show the mean as the measure of central tendency). The median is the value that separates or cuts the distribution of points into a lower and upper half. Technically, this means the median is the 50% [quantile](https://en.wikipedia.org/wiki/Quantile), the data points for which 50% of data points are smaller and 50% of points are larger.[^tidyverse-intro-6]
+We can see that each box plot consists of a box, with a thicker line somewhere inside, as well as two whiskers. In some cases, we see additional data points outside the whiskers, these are the "outliers".
 
-[^tidyverse-intro-6]: One way to understand (and calculate) quantiles is to think about the data in an ordered manner, from smallest to largest value. If the data is ordered this way the 50% quantile (the median) is the data point right in the middle cutting the data into half (in case of an even number of data points, there is no single centre data point that cuts the data in half; in this case the 50% quantile is the average of the two data points in the centre). Any other quantile cuts the ordered data at another point. For example, the 25% quantile is the data points that cuts the data into the lower 25% and larger 75%.
+The thick line inside the box is a measure of the central tendency of the data (i.e., a measure of the centre of the distribution). Here it shows the [median](https://en.wikipedia.org/wiki/Median), which is the most common choice for box plots (sometimes box plots also show the mean as the measure of central tendency). The median is the value that separates or cuts the distribution of points into a lower and upper half. Technically, this means the median is the 50% [quantile](https://en.wikipedia.org/wiki/Quantile), the data points for which 50% of data points are smaller and 50% of points are larger.[^ggplot-intro-3]
 
-The upper and lower bound of the box, the two hinges, show the 25% and 75% quantiles of the data. That is the data point for which either 25% or 75% of data points are smaller. As a consequence the box encompasses 50% of all data points. This allows one to judge where most of the data is. For example, in line with the earlier visual impression that the -\$20/+\$40 spans the whole range of the scale, the box encompassing 50% of the data also spans roughly 50% of the scale. For the other conditions with a more clearly defined centre, the box is noticeable smaller.
+[^ggplot-intro-3]: One way to understand (and calculate) quantiles is to think about the data in an ordered manner (i.e., ordered from smallest to largest value). If the data is ordered this way the 50% quantile (the median) is the data point right in the middle cutting the data into half (in case of an even number of data points, there is no single centre data point that cuts the data in half; in this case the 50% quantile is the average of the two data points in the centre). Any other quantile cuts the ordered data at another point. For example, the 25% quantile is the data points that cuts the data into the lower 25% and larger 75%.
 
-The two whiskers on both ends of the box (or hinges) extend from the hinges to the largest value no further than 1.5 times the size of the box (i.e., 75% quantile - 25% quantile, which is known as the [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range)). The idea of the whiskers is that they represent, in some sense, the *typical range* of a distribution and data points that are outside this typical range can be considered un-typical. Such un-typical data points are often called "outliers", but it is unclear in what sense this terminology is appropriate. For example, in the present case we have quite a few data points per condition (between 80 and 90) so it does not seem unlikely to observe some cases that look somewhat different from the other cases (i.e., un-typical).
+The upper and lower bound of the box, the two hinges, show the 25% and 75% quantiles of the data. That is, the data point for which either 25% or 75% of data points are smaller. As a consequence, the box encompasses 50% of all data points. This allows one to judge where most of the data is. For example, in line with the earlier visual impression that the -\$20/+\$40 distribution is the widest, the box encompassing 50% of the data is also the largest. For the other conditions with a more clearly defined centre, the box is noticeably smaller.
 
-The issue of what to do with "outliers" such as those identified by a box plot is not trivial. If the "outlier" is a genuine response of a participant then simply removing it seems not appropriate. More specifically, omitting data because it does not fit with our idea of the data can be seen as an instance of data fabrication. On the other hand, if a single response has an extraordinary influence on the results (e.g., a single data point is so far away from all the others that is drives an observed effect) this also is problematic. We usually want that our results represent the data overall and not just a single observation. Thus, as with many situations in an analysis, how to deal with "outliers" depends on the specific context and situation. A generally reasonable strategy is to see if the qualitative pattern of results changes whether extreme data points are included or not. If not, this shows that they do not have an extraordinary influence on the results.
+The two whiskers on both ends of the box, or hinges, extend from the hinges to the largest value no further than 1.5 times the size of the box. The size of the box is given by the 75% quantile minus the 25% quantile, which is also known as the [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range). The idea of the whiskers is that they represent, in some sense, the *typical range* of a distribution. Therefore, data points that are outside this typical range can be considered untypical. Such untypical data points are often called "outliers'', but it is unclear in what sense this terminology is appropriate. For example, in the present case we have quite a few data points per condition (between 190 and 200) so it does not seem unlikely to observe some cases that look somewhat different from the other cases (i.e., are untypical).
+
+The issue of what to do with "outliers" such as those identified by a box plot is not trivial. If the "outlier" is a genuine response of a participant then simply removing it seems not appropriate. More specifically, omitting data because it does not fit with our idea of the data can be seen as an instance of data fabrication. On the other hand, if a single response has an extraordinary influence on the results (e.g., a single data point is so far away from all the others that it is solely responsible for an observed effect) this is also problematic. We usually want our results to represent the data overall and not just a single observation. Thus, as with many issues that can happen in a statistical analysis, how to deal with "outliers" depends on the specific context and situation. A generally reasonable strategy is to see if the qualitative pattern of results changes whether extreme or untypical data points are included or not. If not, this shows that our results are robust and the "outliers" do not have an extraordinary influence on the results.
 
 ### Violin Plots
 
@@ -253,7 +366,13 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   geom_violin()
 ```
 
-As is clear from the plot, a violin plot makes it easy to see whether a distribution is relatively flat, like for the -\$20/+\$40 condition, or has one or multiple "bumps", which we would call "modi" in statistical terminology (with the singular being "modus"). The distributions for the other three conditions could all be called unimodal. For these three conditions, the modi are located where we would expect them to be, given the previous plots, around 0.5 for the symmetric conditions and near the bottom for the -\$40/+\$20 condition (this is of course not surprising but has to be the case, the violin plot is just a different visualisation compared to the bee swarm plot above). If a distribution had two "bumps" we would call it bimodal, but this does not appear to be justified for the distributions shown here.
+As is clear from the plot, a violin plot makes it easy to see whether a distribution is relatively flat, like for the -\$20/+\$40 condition, or has one or multiple *peaks*, which we would call *mode* in statistical terminology.[^ggplot-intro-4] In the absence of a clear mode, we could call a distribution *uniform*. In the present case, we might say *relatively uniform*, because of the lower amount of data for lower values of mean acceptance (i.e., the distribution is not completely uniform).
+
+[^ggplot-intro-4]: In statistics the [*mode*](https://en.wikipedia.org/wiki/Mode_(statistics)) is generally defined as the most common value. However, when speaking about the shape of a distribution, any clearly visible peak is a mode. This is the meaning of *mode* we are using here.
+
+The distributions for the other three conditions, which all have a clear mode, could be called unimodal. For these conditions, the modes are located where we would expect them to be, given the previous plots. For the symmetric conditions the modes are around 0.5 and for the -\$40/+\$20 condition the mode is near the bottom. If a distribution had two clear modes or peaks, we would call it bimodal, but this does not appear to be justified for any of the distributions shown here.
+
+We can also see a commonality between the `geom_quasirandom()` plot and the violin plot. The shape in which the data points are distributed "quasi randomly" in `geom_quasirandom()`, is the shape of the violin plot.
 
 One way to increase the amount of information shown in a violin plot is by adding lines that correspond to different quantiles of the distribution. For example, to add the 25%, the 50% (i.e., median), and 75% quantile as in the box plot we could do as follows:
 
@@ -264,84 +383,205 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
 
 ### Plotting The Mean
 
-If you are already comfortable with the scientific literature you might know that plots of one one continuous dependent variable and one categorical independent variable are quite common. Given that this is the structure of a basic experiment, this is probably the most common type of data visualisation in the scientific literature. If you already know that, you might have also noticed that the plots we have created so far diverge quite considerably from the plots you find in the literature. In particular, many published plots do not show a visualisation of the complete distribution of the data, as we have done above, but focus on one particular summary statistic of the data, the condition means.
+The section above has discussed plots of one continuous dependent variable and one categorical independent variable. Given that this is the basic structure of an experiment, this is probably the most common type of data visualisation in the scientific literature. If you already have some experience with this literature, you might have also noticed that the plots we have created so far diverge quite considerably from the plots you find in the literature. In particular, many published plots do not show all data points or a visualisation of the whole distribution of the data, as we have done above. Instead, most published plots focus on one particular summary statistic of the data, the condition means.
 
 For example, one common plot type is the so-called [dynamite plot](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/) in which the means are shown in terms of a bar graph. In addition, an error bar is added to the mean as a measure of uncertainty for the mean (we will provide a more thorough explanation of error bars in later chapters). An example for the present data looks like the following.
 
 ```{r, echo=FALSE}
 ggplot(part_sum) +
   aes(x = condition, y = mean_acc) +
-  stat_summary(aes(width = .8), geom = "bar", fun.y = "mean") +
-  stat_summary(geom = "errorbar", fun.data = "mean_se", width = .2)
+  stat_summary(geom = "bar", fun = "mean", width = 0.8) +
+  stat_summary(geom = "errorbar", fun.data = "mean_se", width = 0.2)
 ```
 
-As can be seen, the bar graph together with the error bar looks like a [cartoon dynamite plunger](https://www.popularmechanics.com/technology/a27085/how-a-looney-tunes-style-tnt-detonator-works/), which is how the plot got its name. Even though this can be created in `R`, I am hiding the code here so you do not learn how to create it.
+As can be seen, the bar graph together with the error bar looks like a [cartoon dynamite plunger](https://www.popularmechanics.com/technology/a27085/how-a-looney-tunes-style-tnt-detonator-works/), which is how the plot got its name. Even though this plot can be created in `R`, I am hiding the code here so you do not learn how to create it. As you can probably read between the lines, I am not a big fan of this type of plot and so are many other people interested in statistics (e.g., [the Vanderbilt biostatistics department](https://biostat.app.vumc.org/wiki/Main/DynamitePlots)).
 
-As you can maybe read between the lines, I am not a big fan of this type of plot and so are many other people interested in statistics (e.g., [the Vanderbilt biostatistics department](https://biostat.app.vumc.org/wiki/Main/DynamitePlots)). So what is the problem with dynamite plots? Clearly the issue is not that the plot shows the means. If you remember the discussion of results of a particular study in the previous Chapter \@ref(role-of-statistics-in-the-research-process), the discussion of results always focussed on the conditions means (e.g., the mean acceptance rate of symmetric lotteries was 21% in the -\$20/+\$40 condition, but 71% in the -\$40/+\$20 condition). SO clearly the means are very important. As we will see in the coming chapters, there is a statistical reason for that so it makes sense to say the mean generally is the most important summary statistic of the data.
+So what is the problem with dynamite plots? Clearly the issue is not that the plot shows the means. If you remember the discussion of specific results (e.g., in Chapter \@ref(role-of-statistics-in-the-research-process)), it always focussed on the conditions means (e.g., the mean acceptance rate of symmetric lotteries was 21% in the -\$20/+\$40 condition, but 71% in the -\$40/+\$20 condition). What this shows is that clearly the means are very important. As we will see in the coming chapters, there is a statistical reason for that. We could even go so far and say that the mean is generally the most important summary statistic of the data.
 
-The problem with the dynamite plot is not that it shows the mean, but that it *only* shows the mean.[^tidyverse-intro-7] One and the same mean can come from many different data distributions. The best example of this problem is shown in the "datasaurus plot" below [@matejkaSameStatsDifferent2017]. Note that this plot shows two continuous variables and not a continuous plus categorical variable, but it nicely exemplifies the point made here. What the datasaurus plot shows is data that dramatically changes its shape, it cycles through 13 qualitatively different patterns one of which is a dinosaur, while maintaining its means plus other summary statistics (up to two decimal points) on both x-axis and y-axis.
+The problem with the dynamite plot is not that it shows the mean, but that it *only* shows the mean.[^ggplot-intro-5] The problem with this is that one and the same mean can result from many different underlying sets of data. Thus, the mean only tells us a partial story. To fully understand the data, we need to see the full distribution. Either all data points or a visualisation of the distribution as discussed above.
 
-[^tidyverse-intro-7]: Another problem that is particular to the dynamite plot is that it gives of the visual impression that there are data points below the mean (because this area is shaded), but not above the mean (because this area is unshaded). This is misleading as the mean is usually somewhere in the middle of the data (i.e., it is a measure of the central tendency of the data). Furthermore, the dynamite plot visually highlights the distance of the mean from 0, which is not always important (e.g., if 0 has no meaning, such as for a rating scale that goes from 1 to 5).
+[^ggplot-intro-5]: Another problem that is particular to the dynamite plot is that it gives off the visual impression that there are data points below the mean (because this area is shaded), but not above the mean (because this area is unshaded). This is misleading as the mean is usually somewhere in the middle of the data (i.e., it is a measure of the central tendency of the data). Furthermore, the dynamite plot visually highlights the distance of the mean from 0, which is not always important (e.g., if 0 has no meaning, such as for a rating scale that goes from 1 to 5).
 
-```{r datasaurus, fig.cap='The "datasaurus dozen". Two variables that maintain their summary statistics while dramatic changing the shape of the data points. From Justin Matejka and George Fitzmaurice: https://www.autodesk.com/research/publications/same-stats-different-graphs', echo=FALSE}
+The best example of the problem that means and other summary statistics can hide the real distribution of the data is shown in the "datasaurus plot" below [@matejkaSameStatsDifferent2017]. Note that this plot shows two continuous variables and not one continuous and one categorical variable, but it nicely exemplifies the point. What the datasaurus plot shows is data that dramatically changes its shape -- it cycles through 13 qualitatively different patterns one of which is a dinosaur -- while maintaining its means plus other summary statistics (up to two decimal points) on both x-axis and y-axis.
+
+```{r datasaurus, fig.cap='The "datasaurus dozen". Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: https://www.autodesk.com/research/publications/same-stats-different-graphs', echo=FALSE}
 knitr::include_graphics("figures/DinoSequentialSmaller.gif")
 ```
 
-What the datasaurus impressively shows is that if one just focuses on the means or other summary statistics, there is a high chance one can miss important features in the data. Consequently, a better approach for plotting ones data is by combining a visualisation of the full distribution of the data with the mean. This is the approach we will be using throughout this book. 
+What the datasaurus impressively shows is that if one just focuses on the means or other summary statistics, there is a high chance one can miss important features in the data. Consequently, a better approach for plotting one's data is by combining a visualisation of the full distribution of the data with the mean. This is the approach we will be using throughout this book.
 
-Another benefit of showing a visualisation of the full distribution of the data instead of just the means is that it provides a more realistic picture of the noise in the data. Remember that we said that one goal of statistics is to help us distinguishing what is signal and what is noise. If we only focus on the means, even if it includes a measure of the uncertainty of the means through the error bars, we can forget the actual level of noise in the data. By ignoring the actual level of noise, we may be inclined to draw overly optimistic conclusions from our data. The problem with such overly optimistic conclusions is that they are less likely to be correct or true than appropriate conclusions.    
+Another benefit of showing a visualisation of the full distribution of the data instead of just the means is that it provides a more realistic picture of the noise in the data. Remember that we said that one goal of statistics is to help us distinguish what is signal and what is noise. If we only focus on the means, even if it includes a measure of the uncertainty of the means through the error bars, we can forget the actual level of noise in the data. By ignoring the actual level of noise, we may be inclined to draw overly optimistic conclusions from our data. The problem with such overly optimistic conclusions is that they are less likely to be correct than appropriate conclusions that consider the actual level of noise in the data.
 
-Combining a visualisation of the distribution of the data with the mean in `ggplot2` can be achieved by adding a call to the `stat_summary()` function to the plot. This allows us to add a summary geom to the plot, which without additional arguments adds the mean of the data plus an error bar. Let us add this call to our bee swarm plot from above and see what happens.
+Combining a visualisation of the distribution of the data with the mean can be achieved by adding a call to the `stat_summary()` function to the plot. In general, this function allows us to add any summary function to the plot. But if it is called without additional arguments (i.e., its default behaviour) is to add the mean of the data plus an error bar. Let us add this call to our quasi-random data cloud plot from above and see what happens.
 
 ```{r}
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
-  geom_beeswarm() +
+  geom_quasirandom() +
   stat_summary()
 ```
 
-We can see that just doing this does not lead to a dramatically different plot. The most noticeable difference is the status message telling us that the default summary function, `mean_se()`, was used which is what we want (so we can ignore this message). The problem with this plot is that we add the black summary point on top of the black data points. One way to improve this plot is by plotting the data points in the background in a semi-transparent manner using `alpha = 0.2`. And alternative would be to not change the `geom_beeswarm()` plot, but the `stat_summary()` plot (e.g., by passing `colour = "red"`), but this is left as an exercise to the reader.
+We can see that just doing this does not lead to a dramatically different plot. The most noticeable difference is the status message telling us that the default summary function, `mean_se()`, was used. As we want to add the mean and are fine with the error bars, we can generally ignore this message. The problem with this plot is that we add the black summary point on top of the black data points. One way to improve this plot is by plotting the data points in the background in a semi-transparent manner using `alpha = 0.2`.
 
 ```{r}
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
-  geom_beeswarm(alpha = 0.2) +
+  geom_quasirandom(alpha = 0.2) +
   stat_summary()
 ```
 
 This plot now makes it easy to see both, the full distribution of the data as well as the mean (plus error bar). As said above, we ignore the technical meaning of the error bars until later and for now accept that they represent the uncertainty we have in the means.
 
-The plot allows us an interesting conclusion with regards to the distribution and the mean. For the three conditions that have a clearly visible mode (or "bump"; i.e., all but the -\$20/+\$40 condition), the mode differs noticeably from the mean. The reason for this is that the distributions are asymmetric around the mode with a long tail towards one end of the distribution. Such a long tail pushes the mean away from the mode towards the tail as can be seen here. What this means is that any statistical analysis that only focuses on the mean (which are all statistical analyses discussed in this book) provides in some sense an imperfect picture of the data. Whereas the mean of course represents the average of all values (because it is defined that way) it might not always represent the most *typical* value of a distribution (if we want to understand a typical value as one near the mode). 
+An alternative would be to not change the `geom_quasirandom()` plot, but the `stat_summary()` plot (e.g., by passing `colour = "red"`), but this is left as an exercise to the reader. Likewise, you might want to try out what happens if you change the order of the two calls (i.e., `stat_summary()` first and `geom_quasirandom()` second).
 
-The message from the previous paragraph is not that in a case with a rather asymmetric distribution focussing on the mean as a summary statistic is necessarily wrong, because it is not wrong. The message is something else: If we only focus the mean and do not show the actual data, we miss out on the nuances that real data usually have. Of course it is interesting to see what happens to the mean, it is the most important summary statistic (and in the absence of additional information the best prediction for a new observation from data is the mean, even if it is an asymmetric distribution). However, if the mean is not very typical for the distribution because of an asymmetric shape, this is an important result in addition to whatever happens to the mean. To fully understand the evidence provided by a data set, we have to understand the data fully, including it's level of noise, peculiarities, and nuances. Therefore, always plot the full distribution when plotting the mean.
+The plot above allows us an interesting conclusion with regards to the distribution and the mean. For the three conditions that have a clearly visible mode (or peak; i.e., all but the -\$20/+\$40 condition), the mode differs noticeably from the mean. The reason for this is that the distributions are asymmetric around the mode, with a long tail towards one end of the distribution. Such a long tail pushes the mean away from the mode towards the tail as can be seen here. What this means is that any statistical analysis that only focuses on the mean (which are all statistical analyses discussed in this book) provides in some sense an imperfect picture of the data. Whereas the mean of course represents the average of all values (because it is defined that way) it might not always represent the most *typical* value of a distribution (if we want to understand a typical value as one near the mode). This provides another reason why we want to show the distribution of the data in addition to the mean. It allows us to judge how well of a summary of the data the mean is.
 
+Let me be clear: The message from the previous paragraph is not that in a case with a rather asymmetric distribution focussing on the mean as a summary statistic is necessarily wrong, because it is not wrong. The message is something else: If we only focus on the mean, and do not show the actual data, we miss out on the nuances that real data usually have. Of course it is interesting to see what happens to the mean, it is the most important summary statistic (and in the absence of additional information the best prediction for a new observation from data is the mean, even if it is an asymmetric distribution). However, if the mean is not very typical for the distribution because of an asymmetric shape, this is an important result in addition to whatever happens to the mean. To fully understand the evidence provided by a data set, we have to understand the data fully, including it's level of noise, peculiarities, and nuances. Therefore, always plot the full distribution when plotting the mean.
 
-
-
-only the symmetric lotteries that are shared across conditions separately for each participant and condition.
-
-```{r}
-part_sum <- tbl1a %>%
-  filter(loss == gain, loss %in% c(12, 16, 20)) %>% 
-  group_by(condition, subno) %>% 
-  summarise(mean_acc = mean(resp)) %>% 
-  ungroup()
-part_sum
-```
-
-```{r}
+```{r, include=FALSE, eval=FALSE}
+## not included because probably too complicated here
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
-  geom_point()
+  geom_quasirandom(alpha = 0.2) +
+  stat_summary() +
+  stat_summary(aes(group = 1), geom = "line", fun = "mean")
 ```
+
+## One Continuous Variable: Histograms
+
+So far, we have always created plots involving two variables. However, sometimes we only want to display one variable. That is, we only want to see the distribution of one variable, but not conditional on another variable. The most important type of plot for this task is a histogram.
+
+For example, instead of considering the distribution of the mean acceptability ratings for each participant across conditions, as done before, we could also look at this distribution across all conditions. The call to do so in `ggplot2` is:
 
 ```{r}
-ggplot(part_sum, aes(x = condition, y = mean_acc)) +
-  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+ggplot(part_sum, aes(mean_acc)) +
+  geom_histogram()
 ```
+
+What this plot shows is a number of adjacent bars showing the frequency (or "count") with which an individual participants' mean acceptability value is within a specific range or *bin* in the data. The width of each bar indicates the range of the bin, and the height of the bar determines the count of values within this range. In other words, the larger the bar at a specific x-axis range, the more values are within the range.
+
+It is also helpful to clearly distinguish the histogram from a bar graph or dynamite plot used for displaying means. In the bar graph, the height of the bar corresponds to the frequency of a value so has a clear interpretation. That means we can use the shaded area as a visual cue that allows us to infer how much data there is for a given range of values. This is not the case for a bar graph showing the mean. Here, we have data both above and below the mean, so the shaded area does not provide a good visual representation of the data.
+
+So how can we interpret this plot? In the absence of a clear question as here, the usual way to interpret a histogram is to simply describe the visual impression one can derive from the plot. Here, we see that there is one clear mode (i.e., peak) around 0.6 as well as another mode somewhere around 0.15. Furthermore, the distribution is rather flat with overall not too much data above values of around 0.7. At the other end of the scale (i.e., between 0 and around 0.35), there is comparatively more data around the second largest mode. As we had seen before, the data is clearly not symmetric around the main peak.
+
+### Choosing the Number of Bins
+
+One question one should always consider when interpreting histograms is whether the visual impression is affected by the width of the bins used to create the histogram. As stated in the message that appears when evoking `geom_histogram()` without additional arguments, the default setting is to use 30 bins. The width of the bins is a function of the number of bins in this case.
+
+One way to change the width of the binds is to change the number of bins. This can be done using the `bins` argument. For example, if we change the number of bins to 50 we get the following plot.
 
 ```{r}
-ggplot(part_sum, aes(x = condition, y = mean_acc)) +
-  geom_jitter(width = 0.2, height = 0.1, alpha = 0.25)
+ggplot(part_sum, aes(mean_acc)) +
+  geom_histogram(bins = 50)
 ```
 
-### One Continuous Variables: Histograms
+In contrast to the first histogram, we now have a much stronger main mode that is also more "peaky" (i.e., with little data just around it). The second mode around 0.15 is much less clear, where it now appears as if there might be one around 0.4. However, we can still clearly see the asymmetric distribution with more data to the left than to the right of the main mode.
 
-## Cheat Sheets
+Again a different visual impression is achieved by using 20 bins. The plot below clearly shows the main mode but the distribution looks comparatively flat on both sides of it. It also maintains the asymmetric impression.
+
+```{r}
+ggplot(part_sum, aes(mean_acc)) +
+  geom_histogram(bins = 20)
+```
+
+Instead of letting the number of bins determine the width of the bins, we could also directly specify the width using the `binwidth` argument. When doing so it also generally makes sense to either specify the `center` or `boundary` argument to specify either the centre or boundary of the bins (only one can be specified). Here it makes sense to specify the `boundary` as 0 (i.e., bins should start at 0 and not before that as in the plots above). As `binwidth` we could use 0.333... (i.e., `0.1 / 3`) which will result in three bins per 0.1 interval. This produces a plot with 30 bins as shown below.
+
+```{r}
+ggplot(part_sum, aes(mean_acc)) +
+  geom_histogram(binwidth = 0.1 / 3, boundary = 0)
+```
+
+This plot complements the one above and clearly shows the main mode, the asymmetry, as well as relatively flat distributions on both sides of the main mode. We can also see a trough (i.e., the opposite of a mode) at 0.475.
+
+What this exploration of different bin numbers and bin widths shows is that it is generally not obvious which bin width to choose. The best approach is to do as we have done here: Trying out a few different values in a more or less systematic fashion and seeing how the visual impression changes. The goal is to figure out what the important and robust patterns in oour data are. Or as summarised in the `geom_histogram` documentation (see `?geom_histogram`) when discussing how to choose the bin width: "You may need to look at a few options to uncover the full story behind your data."
+
+### Probability Instead of Frequency Plots
+
+All histograms so far have shown the frequency with which a value falls within each bin. Whereas this makes it easy to interpret the results, it can be difficult for comparing histograms across different groups that markedly differ in their number of observations. The problem in this case is that the same frequency with which an observation appears in a specific bin can mean very different things depending on how many cases there are in the data. In other words, the problem with frequencies is that they are not normalised. Here, we will consider alternative variants of the histogram that do not have this problem.
+
+As an example, consider that we want to plot the frequency separately for the conditions. To lead to a situation with markedly different numbers of observations, let us pool the two conditions with symmetric ranges of gains and losses into one. Let us call this new variable `condition2`. Let us also transform this variable into a factor.
+
+```{r}
+part_sum <- part_sum %>% 
+  mutate(
+    condition2 = if_else(condition %in% c("-$20/+$20", "-$40/+$40"), 
+                         "symmetric", as.character(condition))
+  ) %>% 
+  mutate(condition2 = factor(
+    condition2, 
+    levels = c("-$20/+$40", "symmetric", "-$40/+$20"))
+  )
+```
+
+Let's see how the resulting histogram looks if we produce the same histogram as above (i.e., using `binwidth = 0.1 / 3, boundary = 0`), but now facet the plot into three panels using our new condition variable, `condition2`. Note, we explicitly use `aes(x = mean_acc)` here to make clear that `mean_acc` is mapped onto the x-axis (we had done so implicitly above).
+
+```{r}
+ggplot(part_sum, aes(x = mean_acc)) +
+  geom_histogram(binwidth = 0.1 / 3, boundary = 0) +
+  facet_wrap(vars(condition2))
+```
+
+This plot shows clear differences between conditions, but it is difficult to compare the symmetric condition with the other two. More specifically, for the symmetric condition most of the bars are larger than all individual bars for the -\$20/+\$40 condition. This is of course not really possible if both conditions have similar amounts of data. Thus, this plot is more misleading than informative.
+
+One alternative is to plot the *density* instead of the frequency. The density is a measure that is normalised within each panel. More specifically, density is defined such that the total area within each panel is equal to 1.[^ggplot-intro-6] To get this plot, we need to map the density (instead of the count) to the y-axis, this can be done with `y = after_stat(density)`. To be perfectly honest, you do not need to understand fully what `y = after_stat(density)` does. This is one of those a bit obscure `ggplot2` options that one just needs to remember (or know where to look up), but not necessarily understand fully how they work.
+
+[^ggplot-intro-6]: To calculate the area in a panel, you first need to calculate the area of each bin. That is given by the height of the bin times its width (in x-axis units). A density histogram is then scaled such that the total area of all bins is equal to 1.
+
+```{r}
+ggplot(part_sum, aes(x = mean_acc, y = after_stat(density))) +
+  geom_histogram(binwidth = 0.1 / 3, boundary = 0) +
+  facet_wrap(vars(condition2))
+```
+
+If we look at this plot, we can see that the pattern looks just as the previous one, but now the scale in the non-symmetric conditions is comparable to the symmetric ones. The reason is that each panel is normalised to a density of 1. This allows that the panel can be compared across conditions, even though the panels have markedly different numbers of observations.
+
+One problem with the density histogram is that density is not the most intuitive to interpret quantity. So what could be better than density? One alternative is to display the *probability* or *proportion* of the data in each bins. This can also be achieved quite easily, we just need to map the density times the width of the plot to the y-axis. Using the same approach as above this can be achieved via `y = after_stat(density * width)`:
+
+```{r}
+ggplot(part_sum, aes(x = mean_acc, y = after_stat(density * width))) +
+  geom_histogram(binwidth = 0.1 / 3, boundary = 0) +
+  facet_wrap(vars(condition2))
+```
+
+This plot shows the exact same data, only the scale of the y-axis has changed and now shows the probability of data being in each bin. To reflect this better in the plot, we can change the y-axis label by adding `label(y = "probability")` to the plot.
+
+```{r}
+ggplot(part_sum, aes(x = mean_acc, y = after_stat(density * width))) +
+  geom_histogram(binwidth = 0.1 / 3, boundary = 0) +
+  facet_wrap(vars(condition2)) +
+  labs(y = "probability")
+```
+
+Note that the trick of passing `y = after_stat(density * width)` works for any histogram for turning it from frequency to probability. As far as I know, this is not documented in the official documentation. But as discussed, whenever one wants to plot multiple histograms across conditions that differ in their number of observations, the count (i.e., frequency) is not very informative. Therefore, the trick shown here is something I like to use quite regularly.
+
+As the final paragraph in this section, let us quickly sum up what we can see in the histograms across conditions. For the symmetric conditions we can see one large peak (or one large and one slightly smaller) at around 0.5 with more data to the left than the right of the peak. For the -\$40/+\$20 condition, we have one large peak near the left end of the scale with not much data above 0.5. Finally, for the -\$20/+\$40 condition the data does not have a clear shape. It can be interpreted as multiple modes, but also as a rather uniform distribution above values of around 0.25.
+
+```{r, include=FALSE, eval=FALSE}
+## just to check
+part_sum %>% 
+  filter(condition == "-$20/+$40") %>% 
+  ggplot(aes(x = mean_acc, y = after_stat(count/sum(count)))) +
+  geom_histogram(binwidth = 0.1 / 3, boundary = 0)  +
+  coord_cartesian(ylim = c(0, 0.15))
+```
+
+## Summary
+
+In this chapter we have provided a brief introduction to data visualisation with `ggplot2`. Specifically, we have covered data visualisation for three common cases: solely one continuous variable, one continuous and one categorical variable (e.g., as in an experiment), and two continuous variables. For pedagogical reasons, the order in which the three cases were presented in this chapter was the other way round (i.e., beginning with two continuous variables).
+
+For plots with solely *one continuous variable* we have introduced different variants of histograms. A histogram shows the distribution of one variable by displaying the count across different bins of the variable. This provides an easy to interpret visual representation of the distribution of the variable. One problem when applying histograms to data is that the choice of the bin width is sometimes not obvious, so one usually needs to try out different values. We have also shown how to create histograms with a normalised variant of the count -- using either the density or the probability/proportion -- which can be used when comparing histograms across conditions with different numbers of observations.
+
+For plots with *one continuous and one categorical variable* -- the typical situation for experimental data -- we have considered two different levels of data that we can plot. All observations, that is the full distribution, or just the mean.
+
+Firstly, we have considered how to plot all observations conditional on the categorical variable. We have shown that when plotting all individual observations in this case a common problem is over-plotting (i.e., observations on top of each other). To address over-plotting we can display points semi-transparently (using `alpha` \< 1) or add random jitter using `geom_jitter()`. A more principled approach for avoiding over-plotting in this case are the two geoms provided by the `ggbeeswarm` package: `geom_beeswarm()`, which creates a bee swarm plot plotting overlapping points adjacent to each other and is preferable for situations with lower numbers of observations, and `geom_quasirandom()`, which plots the points in the shape of the distribution adding quasi-random white space between the points and is preferable for situations with more observations. Instead of plotting all observations, we can also plot graphical summaries of the distribution, either using a box plot, or through a violin plot which also shows the shape of the distribution (which is the same shape as used by `geom_quasirandom()`).
+
+Secondly, We have considered how to plot the mean from a distribution of observations across conditions and shown that this can be done using `stat_summary()`. We have also discussed that only plotting the mean and not also a visualisation of the full distribution of the data can hide important information and should be avoided. Thus, we should ideally always combine a plot of the full distribution, depending on the number of observations either all observations or through some graphical summaries, with the mean. Ideally, the mean is made visually more salient, for example by making it larger or in a different colour, compared to the visualisation of the distribution of all observations.
+
+For plots with *two continuous variables*, we have only shown how to plot all observations using `geom_point()`. In addition, we introduced a number of `ggplot2` basic functionalities. Specifically, we have shown how to map variables to aesthetics using the `aes()` function and how to use this to distinguish data points in different ways.
+
+In addition to the graphical options specific to certain combinations of variable, we have introduced a few more general \`ggplot2 functionalities: Themes as a means to change the overall look of a plot and faceting to create sub-plots or panels that split the plot along a categorical variable.
+
+To sum up, `ggplot2` is a powerful tool for creating visually appealing data visualisations. The basic functionality is to pass the data to the `ggplot()` function and then specify the mapping of variables to aesthetics using the `aes()` function (e.g., `aes(x = indepdenent_variable, y = dependent_variable)`). We then add elements to this plot using `+`.[^ggplot-intro-7] The most important element to add to a plot are geoms, geometric objects that produce some visualisation of the observations. We have mainly looked at `geom_point()`, `geom_jitter()`, `geom_beeswarm()`, `geom_quasirandom()` (last two are both from package `ggbeeswarm`), `geom_boxplot()`, `geom_violin()`, and `geom_histogram()`. We can also add a summary statistic of the data to our plot using `stat_summary()`.
+
+[^ggplot-intro-7]: As you will see in the following, using `+` makes `ggplot2` calls different from other types of chained calls that use the pipe (`%>%`). The reason for this is that `ggplot2` pre-dates the pipe by several years. `ggplot2` author Hadley Wickham now thinks that it would be more consistent to also chain `ggplot2` calls using the pipe, but given the already large popularity of `ggplot2` feels that it is too late for this change now.
+
+In addition to these basic graphical elements, we have seen we can also change the plot in other ways. For example, to create a faceted plots with panels we add a call to function `facet_wrap()`. To change the look of graphical elements we can use pre-specified themes, such as add a call to `theme_bw()` or change individual elements through the `theme()` function. To change the text of axis labels, we can add a call to the `labs()` function.
+
+As `ggplot2` is an extremely comprehensive tool, remembering all the details immediately is a bit much to ask. Therefore, like for the other `tidyverse` packages, `RStudio` provides a [`ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf). I highly encourage you to take a look at this cheat sheet before moving to the next page.

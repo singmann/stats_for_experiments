@@ -6,7 +6,7 @@ To get into the habit of doing it regularly when starting a new task or analysis
 library("tidyverse")
 ```
 
-## Extended `tidyverse` Example: Walasek & Stewart (2015) Exp. 1a & 1b
+## Extended `tidyverse` Example: Walasek & Stewart (2015) Exp. 1a & 1b {#extended-walasek-example}
 
 ### Reading Both Data Sets
 

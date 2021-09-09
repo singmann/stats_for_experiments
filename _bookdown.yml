@@ -6,7 +6,7 @@ rmd_files: [
   "research_designs.Rmd","quiz-research-designs.Rmd",
   
   "tidyverse-intro.Rmd", "tidyverse-examples-exercises.Rmd",
-  "ggplot-intro.Rmd",
+  "ggplot-intro.Rmd", "ggplot-exercises.Rmd",
   "02-standard_approach.Rmd", "case_study_mueller_oppenheimer.Rmd",
   "99-references.Rmd"]
 book_filename: "stats_for_experiments"

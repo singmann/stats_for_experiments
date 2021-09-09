@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>ggplot2 Exercises | Introduction to Statistics for Experimental Psychology with R</title>
+<meta name="author" content="Henrik Singmann">
+<meta name="description" content='4.8 ggplot2 Extended Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b library("tidyverse") ws1a &lt;- read_csv("data/ws2015_exp1a.csv") ws1b &lt;- read_csv("data/ws2015_exp1b.csv") ws1a &lt;- ws1a %&gt;% ...'>
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
+<meta property="og:title" content="ggplot2 Exercises | Introduction to Statistics for Experimental Psychology with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content='4.8 ggplot2 Extended Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b library("tidyverse") ws1a &lt;- read_csv("data/ws2015_exp1a.csv") ws1b &lt;- read_csv("data/ws2015_exp1b.csv") ws1a &lt;- ws1a %&gt;% ...'>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ggplot2 Exercises | Introduction to Statistics for Experimental Psychology with R">
+<meta name="twitter:description" content='4.8 ggplot2 Extended Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b library("tidyverse") ws1a &lt;- read_csv("data/ws2015_exp1a.csv") ws1b &lt;- read_csv("data/ws2015_exp1b.csv") ws1a &lt;- ws1a %&gt;% ...'>
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></li>
+<li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
+<li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
+<li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
+<li><a class="" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
+<li><a class="" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="active" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
+<li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
+<li><a class="" href="case-study-1-more-results-from-note-taking-studies.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/singmann/stats_for_experiments">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ggplot-exercises" class="section level1 unnumbered">
+<h1>
+<code>ggplot2</code> Exercises<a class="anchor" aria-label="anchor" href="#ggplot-exercises"><i class="fas fa-link"></i></a>
+</h1>
+<div id="ggplot-walasek-example" class="section level2" number="4.8">
+<h2>
+<span class="header-section-number">4.8</span> <code>ggplot2</code> Extended Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b<a class="anchor" aria-label="anchor" href="#ggplot-walasek-example"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+<span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span>
+<span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/ws2015_exp1b.csv"</span><span class="op">)</span>
+<span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="va">ws1a</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1a_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="va">ws1b</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1b_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ws1</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">ws1a</span>, <span class="va">ws1b</span><span class="op">)</span>
+<span class="va">ws1</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">response</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"reject"</span>, <span class="st">"accept"</span><span class="op">)</span><span class="op">)</span>,
+    condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+      <span class="va">condition</span>, 
+      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40.2</span>, <span class="fl">20.2</span>, <span class="fl">40.4</span>, <span class="fl">20.4</span><span class="op">)</span>, 
+      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-$20/+$40"</span>, <span class="st">"-$20/+$20"</span>, <span class="st">"-$40/+$40"</span>, <span class="st">"-$40/+$20"</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">)</span>
+<span class="fu">glimpse</span><span class="op">(</span><span class="va">ws1</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 49,984</span>
+<span class="co">#&gt; Columns: 6</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">subno    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> e1a_8, e1a_8, e1a_8, e1a_8, e1a_8, e1a_8~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">loss     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">gain     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 8, 10, 12, 14, 16, 18, 20, 6, 8, 10, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> accept, accept, accept, accept, accept, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> -$20/+$20, -$20/+$20, -$20/+$20, -$20/+$~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1~</span></code></pre></div>
+<p>only the symmetric lotteries that are shared across conditions separately for each participant and condition.</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">part_sum</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">loss</span> <span class="op">==</span> <span class="va">gain</span>, <span class="va">loss</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">condition</span>, <span class="va">subno</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can override using the `.groups` argument.</span>
+<span class="va">part_sum</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 781 x 3</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">subno</span>   <span style="font-weight: bold;">mean_acc</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40 e1a_109        0</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> -$20/+$40 e1a_113        0</span>
+<span class="co">#&gt; <span style="color: #555555;">3</span> -$20/+$40 e1a_125        0</span>
+<span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40 e1a_129        0</span>
+<span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40 e1a_13         0</span>
+<span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40 e1a_133        0</span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 775 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-3-1.png" width="100%"></div>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.2</span>, height <span class="op">=</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-4-1.png" width="100%"></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.2</span>, height <span class="op">=</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-5-1.png" width="100%"></div>
+</div>
+<div id="quiz-1" class="section level2" number="4.9">
+<h2>
+<span class="header-section-number">4.9</span> Quiz<a class="anchor" aria-label="anchor" href="#quiz-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Note: The pull-down menu for selecting an answer turns green after selecting the correct answer.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-39" class="exercise"><strong>Exercise 4.1  </strong></span>Which variable is typically plotted on the y-axis?</p>
+<ol style="list-style-type: decimal">
+<li>The independent variable</li>
+<li>The dependent variable</li>
+<li>The control variable</li>
+</ol>
+<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
+<option>1</option>
+<option>2</option>
+<option>3</option></select></p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-40" class="exercise"><strong>Exercise 4.2  </strong></span>Consider you have data from an experiment with dependent variable <code>score</code> and independent variable <code>condition</code>. What would be the <code>aes()</code> call to plot this data in the conventional way?</p>
+<ol style="list-style-type: decimal">
+<li><code>aes(condition = x, score = y)</code></li>
+<li><code>aes(condition = y, score = x)</code></li>
+<li><code>aes(x = condition, y = score)</code></li>
+<li><code>aes(y = condition, x = score)</code></li>
+</ol>
+<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option></select></p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-41" class="exercise"><strong>Exercise 4.3  </strong></span>What is the appropriate way to handle outliers that are identified by a box-plot?</p>
+<ol style="list-style-type: decimal">
+<li>Outliers should be removed from the analysis as they can influence the results to a large degree.</li>
+<li>Any real data point that is collected needs to be included in the analysis. Removing an outlier can be seen as an instance of data fabrication.</li>
+<li>We should repeat the analysis with and without outlier, to see if the results are robust to the presence or absence of the outlier.</li>
+</ol>
+<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
+<option>1</option>
+<option>2</option>
+<option>3</option></select></p>
+</div>
+
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  if (t = document.getElementById("webex-total_correct")) {
+    t.innerHTML =
+      document.getElementsByClassName("webex-correct").length + " of " +
+      document.getElementsByClassName("webex-solveme").length + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+  
+  if (my_answer !== "" & real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+  } else {
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);  
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }  
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }  
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+  
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off"); 
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+    
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+    
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
+<div class="prev"><a href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></div>
+<div class="next"><a href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ggplot-exercises">ggplot2 Exercises</a></li>
+<li><a class="nav-link" href="#ggplot-walasek-example"><span class="header-section-number">4.8</span> ggplot2 Extended Example: Walasek &amp; Stewart (2015) Exp. 1a &amp; 1b</a></li>
+<li><a class="nav-link" href="#quiz-1"><span class="header-section-number">4.9</span> Quiz</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/singmann/stats_for_experiments/blob/main/ggplot-exercises.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/singmann/stats_for_experiments/edit/main/ggplot-exercises.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
