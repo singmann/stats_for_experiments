@@ -135,8 +135,8 @@ quiz-1
 standard1
 ex:urry
 generalising-from-sample-to-population
-the-logic-of-inferential-statistics
-the-basic-statistical-model
+nhst-logic
+basic-stats-model
 model-predictions
 statistical-model-for-the-example-data
 understanding-the-statistical-model

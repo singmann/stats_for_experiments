@@ -1,37 +1,42 @@
 # The Standard Approach for One Independent Variable {#standard1}
 
-```{r setup, include=FALSE}
-library("tidyverse")
-library("afex")
-library("ggbeeswarm")
-theme_set(theme_bw(base_size = 15) + 
-            theme(legend.position="bottom", 
-                  panel.grid.major.x = element_blank()))
-```
 
 In this chapter we are introducing the standard statistical approach for analysing experimental data with one independent variable (i.e., one factor). The simple case for this is a study comparing two experimental conditions on one dependent variable. We will exemplify the standard approach for this design using a recent and straightforward experiment.
 
 ## Example Data: Note Taking Experiment {#ex:urry}
 
-```{r load-laptop, echo=FALSE}
-#load("data/laptop_urry.rda")
-data("laptop_urry", package = "afex")
-```
 
 Heather Urry and 87 of her undergraduate and graduate students [@urry2021] (yes, all 87 students are co-authors!) compared the effectiveness of taking notes on a laptop versus longhand (i.e., pen and paper) for learning from lectures. 142 participants (which differed from the 88 authors) first viewed one of several 15 minutes lectures (TED talks) during which they were asked to take notes either on a laptop or with pen and paper. As this was a proper experiment, participants were randomly assigned to either the laptop ($N = 68$) or longhand condition ($N = 74$). After a 30 minutes delay, participants were quizzed on the content of the lecture. The answers from each participant were then independently rated from several raters (which agreed very strongly with each other; i.e., showed high inter-rater reliability) using a standardised scoring key. This procedure produced one memory score per participant representing the percentage of information remembered ranging from 0 (= no memory) to 100 (= perfect memory).[^standard_approach-1] Figure \@ref(fig:laptop-dist) below shows the memory scores across both note taking conditions.
 
 [^standard_approach-1]: Urry et al. transformed the memory scores before their analysis based on an earlier paper doing the same. However, the memory scores from 0 to 100 are easier to understand than the transformed scores. As the results are qualitatively the same for both approaches, we use the untransformed memory scores here.
 
-```{r laptop-dist, echo=FALSE, fig.cap='Distribution of memory scores from Urry et al. (2021) across the two note taking conditions.', message=FALSE}
-set.seed(1234566)
+`r hide_code()`
+
+```{r laptop-dist-prep, echo=TRUE, fig.cap='Distribution of memory scores from Urry et al. (2021) across the two note taking conditions.', message=FALSE}
+library("tidyverse")
+library("afex")
+library("ggbeeswarm")  ## only needed later, but already loaded here
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+data("laptop_urry", package = "afex")
+set.seed(1234566) ## needed to ensure jittered points are at same position
 p1 <- ggplot(laptop_urry, aes(x = condition, y = overall)) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
   ggbeeswarm::geom_quasirandom() +
   stat_summary(colour = "red") +
   coord_cartesian(ylim = c(0, 100)) +
   labs(y = "memory score")
+# to show figure execute (without comment):
+# p1
+```
+
+`r unhide()`
+
+```{r laptop-dist, echo=FALSE, fig.cap='Distribution of memory scores from Urry et al. (2021) across the two note taking conditions.', message=FALSE}
 p1
 ```
+
 
 In Figure \@ref(fig:laptop-dist), each black point shows the memory score of one participant so the full distribution of the data is visible. The shape of the distribution is also shown via a violin plot (i.e., the black outline around the points) to which we have added three lines representing three summary statistics of the data. From top to bottom these lines are the 75% quantile, the 50% quantile (i.e., the median), and the 25% quantile. The red points show the mean and the associated error bars show the standard error of the mean[^standard_approach-2]. We see that the two means are quite similar, although the mean in the laptop condition is slightly larger, by `r formatC(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]) - mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]), 1, format = "f")` points (mean laptop = `r round(mean(laptop_urry[laptop_urry$condition == "laptop", "overall"]), 1)`, mean longhand = `r round(mean(laptop_urry[laptop_urry$condition == "longhand", "overall"]), 1)`).
 
@@ -93,12 +98,11 @@ Let us consider the the variables in Equation \@ref(eq:statmodel) in more detail
 
 [^standard_approach-5]: Equation \@ref(eq:statmodel) is displayed in simplified and not fully correct form. Mathematically correct would be that either each variable (i.e., $\text{DV}$, $\text{intercept}$, $\text{IV-effect}$, and $\text{residual}$) has an index, such as $i$, that goes from 1 to $N$ (where $N$ is the total number of observations) or that each variables is a vector (i.e., holds multiple values) of length $N$.
 
-```{r laptop-model, echo=FALSE, fig.cap='Data from Urry et al. (2021) showing the overall mean (intercept, blue dotted line), the condition specific effects (difference between dashed red lines for the condition means and the blue line), and the residuals (grey lines from condition means to data points).', message=FALSE}
+`r hide_code()`
 
-set.seed(1234566)
+```{r}
+set.seed(1234566)  ## needed to ensure jittered points are at same position
 p1_de <- ggplot_build(p1)
-# str(p1_de$data, 2)
-# p1$data
 
 lap2 <- laptop_urry %>% 
   mutate(xpoint = p1_de$data[[2]]$x)
@@ -124,7 +128,7 @@ lap6 <- p1_de$data[[2]] %>%
   select(-size, - fill, -alpha, - stroke)
 
 set.seed(1234566)
-ggplot(laptop_urry, aes(x = condition, y = overall)) +
+p2 <- ggplot(laptop_urry, aes(x = condition, y = overall)) +
   geom_violin() +
   geom_segment(data = lap6, 
                mapping = aes(x = x, xend = x, y = overall, yend = y),
@@ -135,9 +139,15 @@ ggplot(laptop_urry, aes(x = condition, y = overall)) +
                                           y = overall, yend = overall),
                colour = "red", linetype = 2) +
   stat_summary(colour = "red") +
-  #coord_cartesian(ylim = c(0, 100)) +
   labs(y = "memory score")
+# to show figure execute (without comment):
+# p2
+```
 
+`r unhide()`
+
+```{r laptop-model, echo=FALSE, fig.cap='Data from Urry et al. (2021) showing the overall mean (intercept, blue dotted line), the condition specific effects (difference between dashed red lines for the condition means and the blue line), and the residuals (grey lines from condition means to data points).', message=FALSE}
+p2
 ```
 
 -   $\text{DV}$: The dependent variable, DV, are the observed values, one for each observation/participant. For the example data this are all the `r nrow(laptop_urry)` black data points shown in Figure \@ref(fig:laptop-model). Thus, our statistical model tries to explain the individually observed values.
