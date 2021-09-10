@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Case Study 1: More Results from Note Taking Studies | Introduction to Statistics for Experimental Psychology with R</title>
+<meta name="author" content="Henrik Singmann">
+<meta name="description" content="In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a...">
+<meta name="generator" content="bookdown 0.24.1 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Case Study 1: More Results from Note Taking Studies | Introduction to Statistics for Experimental Psychology with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Case Study 1: More Results from Note Taking Studies | Introduction to Statistics for Experimental Psychology with R">
+<meta name="twitter:description" content="In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introduction to Statistics for Experimental Psychology with <code>R</code></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></li>
+<li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
+<li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
+<li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
+<li><a class="" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
+<li><a class="" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
+<li><a class="" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
+<li><a class="" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
+<li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
+<li><a class="active" href="case-study-laptop.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/singmann/stats_for_experiments">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="case-study-laptop" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies<a class="anchor" aria-label="anchor" href="#case-study-laptop"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a look at the data from <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span>. Additionally, we will analyse data from <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>. This study was the first published study investigating the question of note taking with a laptop or in longhand format and was the basis on which <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> planned their study. For the data of <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span> we will perform a full analysis starting with reading in the data. So in addition to performing the statistical hypothesis test, we will calculate some descriptive statistics.</p>
+<p>We start the analysis in this chapter in the same way as in the previous chapter, by loading the three packages we generally use, <code>afex</code>, <code>emmeans</code>, and <code>tidyverse</code>, and set a nicer <code>ggplot2</code> theme. Before doing so it is probably a good idea to restart <code>R</code> (unless, of course, you are just starting <code>R</code>). In <code>RStudio</code> this can be conveniently done through the menu by clicking on <code>Session</code> and then <code>Restart R</code>. In other <code>R</code> environments you might need to restart the program. The benefit of restarting <code>R</code> is that it should create a blank <code>R</code> session in which no packages are loaded and no objects exist in the workspace. Only such a blank sessions ensures that, once we have obtained a set of results, we can recreate them later using the same code. That is, a blank <code>R</code> session avoids any potential problems due to analyses performed in a previous session that are still lingering. Restarting <code>R</code> should generally be done when starting a new analysis or after one is completely done with an analysis. In the latter case, it makes sense to restart <code>R</code> and the rerun all code one has saved in ones script to ensure that all results replicate based on only the code in the script (and do not require some additional code not saved).</p>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://afex.singmann.science/">"afex"</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: lme4</span>
+<span class="co">#&gt; Loading required package: Matrix</span>
+<span class="co">#&gt; ************</span>
+<span class="co">#&gt; Welcome to afex. For support visit: http://afex.singmann.science/</span>
+<span class="co">#&gt; - Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()</span>
+<span class="co">#&gt; - Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'</span>
+<span class="co">#&gt; - 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests</span>
+<span class="co">#&gt; - NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.</span>
+<span class="co">#&gt; - Get and set global package options with: afex_options()</span>
+<span class="co">#&gt; - Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()</span>
+<span class="co">#&gt; - For example analyses see: browseVignettes("afex")</span>
+<span class="co">#&gt; ************</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'afex'</span>
+<span class="co">#&gt; The following object is masked from 'package:lme4':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     lmer</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rvlenth/emmeans">"emmeans"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+<span class="co">#&gt; -- <span style="font-weight: bold;">Attaching packages</span> ------------------- tidyverse 1.3.1 --</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">ggplot2</span> 3.3.5     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">purrr  </span> 0.3.4</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tibble </span> 3.1.4     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">dplyr  </span> 1.0.7</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tidyr  </span> 1.1.3     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">stringr</span> 1.4.0</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">readr  </span> 2.0.1     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">forcats</span> 0.5.1</span>
+<span class="co">#&gt; -- <span style="font-weight: bold;">Conflicts</span> ---------------------- tidyverse_conflicts() --</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">expand()</span> masks <span style="color: #0000BB;">Matrix</span>::expand()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">pack()</span>   masks <span style="color: #0000BB;">Matrix</span>::pack()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">unpack()</span> masks <span style="color: #0000BB;">Matrix</span>::unpack()</span>
+<span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span> 
+            <span class="fu">theme</span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span>, 
+                  panel.grid.major.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div id="conceptual-memory-data-from-urry-et-al.-2021" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Conceptual Memory Data from Urry et al. (2021)<a class="anchor" aria-label="anchor" href="#conceptual-memory-data-from-urry-et-al.-2021"><i class="fas fa-link"></i></a>
+</h2>
+<p>As a quick reminder, <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> showed their participants short lectures (TED talks) on video during which participants were allowed to take notes. One group of participants, the <code>laptop</code> condition, could take notes on a laptop, whereas the participants in the <code>longhand</code> condition could take notes with pen and paper. After the lecture participants were quizzed on two aspects of the content of the lecture, factual questions and conceptual questions. In the previous chapter we have analysed the overall memory score which was the average of the performance for the factual questions and the conceptual questions. Here, we are only concerned with the memory performance for conceptual questions. We begin our analysis by loading in the data (which is part of <code>afex</code> can be loaded with <code><a href="https://rdrr.io/r/utils/data.html">data()</a></code>) and getting an overview of the variables using <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>:</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"laptop_urry"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">laptop_urry</span><span class="op">)</span>
+<span class="co">#&gt; 'data.frame':    142 obs. of  6 variables:</span>
+<span class="co">#&gt;  $ pid       : Factor w/ 142 levels "1","2","4","5",..: 1 2 3 4 5 6 7 8 9 10 ...</span>
+<span class="co">#&gt;  $ condition : Factor w/ 2 levels "laptop","longhand": 1 2 2 1 2 2 1 2 2 1 ...</span>
+<span class="co">#&gt;  $ talk      : Factor w/ 5 levels "algorithms","ideas",..: 4 4 2 5 1 3 5 2 5 4 ...</span>
+<span class="co">#&gt;  $ overall   : num  65.8 75.8 50 89 75.6 ...</span>
+<span class="co">#&gt;  $ factual   : num  61.7 68.3 33.3 85.7 69.2 ...</span>
+<span class="co">#&gt;  $ conceptual: num  70 83.3 66.7 92.3 82.1 ...</span></code></pre></div>
+<p>As before, we have the participants identifier variable in <code>pid</code> and the note taking condition in variable <code>condition</code>. We can also guess that the conceptual memory scores are in the aptly name variable <code>conceptual</code> (if we were unsure about this, we could also check the documentation of the data at <code><a href="https://rdrr.io/pkg/afex/man/laptop_urry.html">?laptop_urry</a></code>).</p>
+<p>Usually, once the data is sufficiently prepared (i.e., we have performed some sanity checks and identified DV and IV), the first step in an analysis should be plotting the data. This could be done using <code>ggplot2</code> directly. However, in cases such as the present one where it is very clear which statistical model we are going to estimate it is often a bit less effort to plot the data with <code><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot()</a></code>. Thus, we start by estimating the statistical model for the conceptual memory performance of the data from <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> and save the estimated model object as <code>mc_urry</code>. For this, we again use <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car()</a></code> on the <code>laptopt_urry</code> data and specify the model using the formula interface. The DV we are considering here is <code>conceptual</code>, our IV is <code>condition</code>, and the participant identifier is <code>pid</code>. Consequently, the formula is <code>conceptual ~ condition + Error(pid)</code>. Then, before looking at the inferential statistical results, we use this model object to plot the data using <code>afex_plot</code>.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mc_urry</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car</a></span><span class="op">(</span><span class="va">conceptual</span> <span class="op">~</span> <span class="va">condition</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">pid</span><span class="op">)</span>, <span class="va">laptop_urry</span><span class="op">)</span>
+<span class="co">#&gt; Contrasts set to contr.sum for the following variables: condition</span>
+<span class="fu"><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot</a></span><span class="op">(</span><span class="va">mc_urry</span>, <span class="st">"condition"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:urry-conceptual"></span>
+<img src="case_study_mueller_oppenheimer_files/figure-html/urry-conceptual-1.png" alt="Conceptual memory scores from Urry et al. (2021) across note taking conditions" width="100%"><p class="caption">
+Figure 6.1: Conceptual memory scores from Urry et al. (2021) across note taking conditions
+</p>
+</div>
+<p>The goal behind beginning with plotting the data is that it allows to see whether the data “looks alright.” That is, we check whether there are any features that stand out such as clear outliers or an unusual pattern in the data. If this were the case, we would try to figure out if we can find a reason for this issue or how we deal with it. But, as the data looks alright, we continue and consider the results of the significance test:</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mc_urry</span>
+<span class="co">#&gt; Anova Table (Type 3 tests)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: conceptual</span>
+<span class="co">#&gt;      Effect     df    MSE    F  ges p.value</span>
+<span class="co">#&gt; 1 condition 1, 140 441.76 1.00 .007    .319</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</span></code></pre></div>
+<p>The ANOVA table reveals that the significance test for the effect of condition is not significant with <span class="math inline">\(p = .319\)</span>. Thus, in line with the finding that there is no evidence for a difference in overall memory performance, there also is no evidence for a difference in memory for conceptual information.</p>
+<p>We can also again use <code>emmeans</code> to see the condition means (or estimated marginal means). In line with Figure <a href="case-study-laptop.html#fig:urry-conceptual">6.1</a> (as <code>afex_plot</code> internally also uses <code>emmeans</code> it shows exactly the same means in graphical form), the memory score in the laptop condition is descriptively around 3.5 points higher than the score in the longhand condition.</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">mc_urry</span>, <span class="st">"condition"</span><span class="op">)</span>
+<span class="co">#&gt;  condition emmean   SE  df lower.CL upper.CL</span>
+<span class="co">#&gt;  laptop      73.5 2.55 140     68.5     78.6</span>
+<span class="co">#&gt;  longhand    70.0 2.44 140     65.2     74.8</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence level used: 0.95</span></code></pre></div>
+<p>Before moving to the next data set, let us consider how we could report this analysis in a research report. We could for example write:</p>
+<blockquote>
+<p>As shown in Figure <a href="case-study-laptop.html#fig:urry-conceptual">6.1</a>, participants’ conceptual memory scores (on a scale from 0 to 100) are descriptively slightly larger in the laptop condition compared to the longhand condition. We analysed these scores with an ANOVA with one factor, note taking condition, with two levels (laptop vs. longhand). The effect of note taking condition was not significant, <span class="math inline">\(F(1, 140) = 1.00\)</span>, <span class="math inline">\(p = .319\)</span>. This indicates that the data does not provide evidence for a difference in memory for conceptual information based on how notes are taken during lectures.</p>
+</blockquote>
+</div>
+<div id="why-are-experiments-replicated" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Why are Experiments Replicated?<a class="anchor" aria-label="anchor" href="#why-are-experiments-replicated"><i class="fas fa-link"></i></a>
+</h2>
+<p>The experiment by <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> was not the first experiment investigating the effect of note taking during lectures on memory. In contrast, their study was a <em>replication</em> of <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.</p>
+<p>As we have discussed before, inferences from NHST are never conclusive as they are probabilistic and require multiple inferential steps. Replications are one of the most important tools in science for overcoming at least the probabilistic uncertainties associated with the inferences we draw from experimental data. For example consider that several independent but otherwise as similar as possible experiments – that is, replications of the same experiment – all obtain a significant result (i.e., indicate that the data are incompatible with the null hypothesis). Such a pattern would dramatically increase our confidence that the null hypothesis is likely false.</p>
+<p>In addition to the gain in confidence for specific results, there are good practical reasons for replicating an existing experiment. For example, when beginning to work on a new topic it is generally a good idea to replicate the experiment on which one wants to build on. If one already has problems replicating what exists that shows that the topic is maybe not as simple as portrayed in the literature.</p>
+<p>Another excellent reason for performing a replication is if one simply does not believe an existing result. Remember, one of the key components of the scientific method is <em>scepticism</em> (at least <a href="https://en.wikipedia.org/wiki/Scientific_method">according to Wikipedia</a>). And if a results is difficult to believe, the reasonable sceptical position to take is to require more evidence. A replication is one way (if not the best way) to produce such evidence. Not believing existing experiments also does not imply that one questions the integrity of the researchers who did the experiment. There are many completely harmless reasons why a study might not replicate. For example, researchers might have just obtained a significant results by chance (which happens in 5% of cases, as discussed in the next chapters).</p>
+<p>Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many fields are currently considered to be in a <a href="https://en.wikipedia.org/wiki/Replication_crisis"><em>replication crisis</em></a>. For example, a large scale effort to replicate 100 studies in psychology <span class="citation">(<a href="references.html#ref-opensciencecollaborationEstimatingReproducibilityPsychological2015" role="doc-biblioref">Open Science Collaboration 2015</a>)</span> showed that less than 50% could be replicated successfully. Similarly sobering results have since been observed across the social sciences <span class="citation">(<a href="references.html#ref-camererEvaluatingReplicabilitySocial2018" role="doc-biblioref">Camerer et al. 2018</a>, <a href="references.html#ref-camererEvaluatingReplicabilityLaboratory2016" role="doc-biblioref">2016</a>; <a href="references.html#ref-kleinManyLabsInvestigating2018" role="doc-biblioref">Klein et al. 2018</a>)</span>. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers <span class="citation">(<a href="references.html#ref-chambersSevenDeadlySins2017" role="doc-biblioref">Chambers 2017</a>)</span>. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research has to be somewhat low. This questions the foundations of any new work that builds up on this non-replicated research. To move forward we researchers need to replicate work that is important for our research, value replications done by others (especially if it is of our work), and let findings that do not replicate fade into obscurity.</p>
+</div>
+<div id="conceptual-memory-data-from-mueller-and-oppenheimer-2014" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Conceptual Memory Data from Mueller and Oppenheimer (2014)<a class="anchor" aria-label="anchor" href="#conceptual-memory-data-from-mueller-and-oppenheimer-2014"><i class="fas fa-link"></i></a>
+</h2>
+<p>As <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> is a direct replication of <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>, the design is the same and uses the same materials (i.e., the same TED talks and same questions). Participants watched short lecture videos (projected onto a screen) and could take notes either on a laptop or with longhand format. 30 minutes after the lecture they were asked factual and conceptual questions about the lectures. Their answers were coded by the first author. As in the previous analysis, we will transform the answers to a memory index from 0 (= no memory) to 100 (= perfect memory). In line with the analysis of <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> above, we are only interested in the conceptual memory here.</p>
+<p>The experiment by <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span> was a direct replication of Experiment 1 of <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>. Here we focus on Experiment 2 by <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>, which is also a direct replication of their Experiment 1 and only included an additional experimental manipulation which we will ignore here. The reason for focussing on their Experiment 2 instead of Experiment 1 is that the data of Experiment 2 come out a bit more interesting (feel free to rerun the analysis reported here for their Experiment 1 to see what I mean). However, to not provide an incomplete picture for the research question of whether the mode of taking note during lectures affects memory, we will consider the overall evidence (i.e., all 3 experiments of Mueller and Oppenheimer, the experiment of Urry et al., and further data) at the end of this chapter.</p>
+<p>Luckily for us, the data from <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>, including the data from their Experiment 2, is available online on the <a href="https://osf.io/">Open Science Framework (OSF)</a>. The OSF is one of the most visible developments resulting from the replication crisis. It is a free website that allows researchers to share their data and other materials associated with their research. Before the replication crisis and the OSF it was very rare to get access to the data underlying published studies. Nowadays many researchers depose their (anonymised) data for published studies on the OSF and include the links to the data in their papers. This allows other researcher, such as us, to reanalyse existing data and ensure that the reported results can be <em>reproduced</em>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In this book we distinguish reproducing a result from replicating a result. Reproducing means being able to obtain the (quantitatively) same results from the same data. That is, when given the data and the analysis script or a description of the analysis, we can run the analysis to end up with the same result. In contrast, replication means repeating the study with new participants and being able to obtain the (qualitatively) same result.&lt;/p&gt;"><sup>50</sup></a></p>
+<div id="preparing-the-data" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>To get into the habit of downloading data from OSF and reanalysing them, this is what we are going to do now. The file we need is called <code>Study 2 abbreviated data.csv</code> and can be found at the following OSF link: <a href="https://osf.io/t43ua/" class="uri">https://osf.io/t43ua/</a> Please go ahead and download it now and put it in a folder so you can access it. I have already done so and copied it into folder <code>data</code>. We then use the <a href="https://r4ds.had.co.nz/data-import.html"><code>tidyverse</code> function <code>read_csv()</code>,</a> which always returns a <code>tibble</code> (the <code>tidyverse</code> version of a <code>data.frame</code>), to read in the data, as object <code>mo2014</code>. Then we use the <code>glimpse()</code> function (also a <code>tiydverse</code> function) to get an overview of the data (it is very similar to <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> but less verbose for <code>tibbles</code>).</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/Study 2 abbreviated data.csv"</span><span class="op">)</span>
+<span class="fu">glimpse</span><span class="op">(</span><span class="va">mo2014</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 153</span>
+<span class="co">#&gt; Columns: 22</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">participantid           </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 103, 122, 142, 152, 172, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">notetype                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">whichtalk               </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">Wcount                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 148, 273, 124, 149, 182, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">threeG                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.08219178, 0.05535055, 0~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">factualindex            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 2.499, 2.833, 2.333, 4.49~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">conceptualindex         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 2.0, 1.5, 2.0, 2.0, 2.0, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">factualraw              </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 7, 5, 11, 12, 4, 7, 11~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">conceptualraw           </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 4, 3, 4, 4, 4, 3, 4, 3, 4~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectfactindexscore   </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 7, 7, 7, 7, 7, 7, 7, 7, 7~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectconceptindexscore</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 3, 3, 3, 3, 3, 3, 3, 3, 3~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectfactscore        </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 14, 14, 14, 14, 14, 14, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectconceptscore     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 6~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">`filter_$`              </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFindexA                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> -0.17488644, 0.07568357, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCindexA                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.52136737, 0.03238307, 0~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFrawA                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.32848714, 0.68152314, -~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCrawA                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.9199338, 0.2942131, 0.9~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFindexW                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> -0.76333431, -0.47725123,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCindexW                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.79471336, 0.06811829, 0~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFrawW                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> -0.6437995, -0.2476152, -~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCrawW                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.9647838, 0.1731663, 0.9~</span></code></pre></div>
+<p>We can see data from 153 participants on 22 columns. Many of the columns have names that are not immediately clear. This is not uncommon. An important task when getting any new data set is trying to figure out what the variables mean. One usually also has to do this for the data for the own experiments. For example, software for running experiments often collects more variables than needed for analysis. Consequently, the first analysis step is usually to figure out what is needed and what not.</p>
+<p>Before doing so however, we note that 153 participants is not the final number of participants reported by <span class="citation"><a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">Mueller and Oppenheimer</a> (<a href="references.html#ref-muellerPenMightierKeyboard2014" role="doc-biblioref">2014</a>)</span>. Instead, they removed two participants before the analysis resulting. Studying their OSF repository in detail (in particular the published <code>SPPS</code> script with output <a href="https://osf.io/5f3z4/"><code>Output and Syntax - Study 2.doc</code></a>) shows that participants with number 194 and 237 needs to be removed (the same information can be found in variable <code>filter_$</code> in the current data set). This file also shows that the two relevant <code>notetype</code> conditions are 1 = <code>longhand</code> and 2 = <code>laptop</code> and we will remove <code>notetype == 3</code> before analysis. Before moving on, we filter our data and remove these observations. For this we use <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> from the <code>tidyverse</code> in combination with the pipe operator <code>%&gt;%</code> (i.e., we pipe our <code>tibble</code> to <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and only retain those rows that we want). Importantly, we overwrite <code>mo2014</code> with the filtered <code>tibble</code> as we do not need the filtered out observations any more (to use them, we woul dhave to read the data in again). We then see how many participants remain using <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> (which returns the number of rows in the data).</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014</span> <span class="op">&lt;-</span> <span class="va">mo2014</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">notetype</span> <span class="op">!=</span> <span class="fl">3</span>, <span class="va">participantid</span> <span class="op">!=</span> <span class="fl">194</span>, <span class="va">participantid</span> <span class="op">!=</span> <span class="fl">237</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">mo2014</span><span class="op">)</span>
+<span class="co">#&gt; [1] 99</span></code></pre></div>
+<p>The reported 99 participants matches the 99 participants <a href="https://osf.io/5f3z4/">reported on OSF</a> for the two conditions, <code>laptop</code> versus <code>longhand</code>.</p>
+<p>Sadly, the OSF does not include a codebook describing all variables for this particular data set (only for an earlier version of the data set with variables that only overlaps to some degree with the present one). However, from looking at data and the information on OSF a few things are clear: <code>participantid</code> is the participant identifier variable, <code>notetype</code> is the condition identifier coding the experimental condition, and <code>whichtalk</code> identifies the TED talk participants saw (the mapping of talks to numbers is also given in the <a href="https://osf.io/5f3z4/"><code>SPPS</code> output</a>).</p>
+<p>In a first step, we can transform the relevant indicator variables, <code>participant</code> and experimental condition variable, into factors for further analysis. Transforming a variable into a <code>factor</code> guarantees that none of the analyses incorrectly treats one of the factors (i.e., categorical variables) as a numerical variable (e.g., taking the mean of the numbers in the participant identifier column is not a reasonable statistical operation). However, instead of overwriting the existing variables, we create new variable with the same name as in our analysis of <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span>, <code>pid</code> and <code>condition</code>. We also assign human understandable labels instead of using 1 and 2 for the condition codes. This will make it easier to understand the pattern of results. To do so we use <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> inside <code>mutate()</code> from the <code>tidyverse</code> in combination with the pipe operator <code>%&gt;%</code>.</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014</span> <span class="op">&lt;-</span> <span class="va">mo2014</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">notetype</span> <span class="op">!=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    pid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">participantid</span><span class="op">)</span>,
+    condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">notetype</span>, 
+                       levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,
+                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"laptop"</span>, <span class="st">"longhand"</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="fu">glimpse</span><span class="op">(</span><span class="va">mo2014</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 99</span>
+<span class="co">#&gt; Columns: 24</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">participantid           </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 103, 122, 142, 152, 172, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">notetype                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">whichtalk               </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">Wcount                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 148, 273, 124, 149, 182, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">threeG                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.08219178, 0.05535055, 0~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">factualindex            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 2.499, 2.833, 2.333, 4.49~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">conceptualindex         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 2.0, 1.5, 2.0, 2.0, 2.0, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">factualraw              </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 7, 5, 11, 12, 4, 7, 11~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">conceptualraw           </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 4, 3, 4, 4, 4, 3, 4, 3, 4~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectfactindexscore   </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 7, 7, 7, 7, 7, 7, 7, 7, 7~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectconceptindexscore</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 3, 3, 3, 3, 3, 3, 3, 3, 3~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectfactscore        </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 14, 14, 14, 14, 14, 14, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">perfectconceptscore     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 6~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">`filter_$`              </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFindexA                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> -0.17488644, 0.07568357, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCindexA                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.52136737, 0.03238307, 0~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFrawA                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.32848714, 0.68152314, -~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCrawA                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.9199338, 0.2942131, 0.9~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFindexW                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> -0.76333431, -0.47725123,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCindexW                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.79471336, 0.06811829, 0~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZFrawW                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> -0.6437995, -0.2476152, -~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">ZCrawW                  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.9647838, 0.1731663, 0.9~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">pid                     </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> 103, 122, 142, 152, 172, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">condition               </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> longhand, longhand, longh~</span></code></pre></div>
+<p>Looking at the data again reveals that the newly created variables are added to the end of the <code>tibble</code>.</p>
+<p>The next step is to calculate our dependent variable, the memory scores from 0 to 100 as used in the analysis of <span class="citation"><a href="references.html#ref-urry2021" role="doc-biblioref">Urry et al.</a> (<a href="references.html#ref-urry2021" role="doc-biblioref">2021</a>)</span>. We can see that for the two question types, factual and conceptual, there are multiple measures. Each has an <code>index</code> score and a <code>raw</code> score as well as <code>perfect</code> variants for both types of scores. <code>perfect</code> here presumably means the maximal possible value that could be obtained for this score for this observation (i.e., row). The data also contains a number of <span class="math inline">\(z\)</span>-transformed variants of the scores (variables <code>Z…</code>), but we will ignore them here (the original paper used the z-scores, but as these are more difficult to interpret and the results are qualitatively the same, we ignore them here). We focus on the <code>index</code> score which gives participant a maximal of 1 point per question (this information is given in the paper/on OSF). Let us take a look at the first six observations for the relevant variables.</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014</span> <span class="op">%&gt;%</span> 
+  <span class="fu">select</span><span class="op">(</span><span class="va">pid</span>, <span class="va">condition</span>, <span class="va">factualindex</span>, <span class="va">conceptualindex</span>, 
+         <span class="va">perfectfactindexscore</span>, <span class="va">perfectconceptindexscore</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 6 x 6</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">pid</span>   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">factualindex</span> <span style="font-weight: bold;">conceptualindex</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> 103   longhand          2.50             2  </span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> 122   longhand          2.83             1.5</span>
+<span class="co">#&gt; <span style="color: #555555;">3</span> 142   longhand          2.33             2  </span>
+<span class="co">#&gt; <span style="color: #555555;">4</span> 152   longhand          4.50             2  </span>
+<span class="co">#&gt; <span style="color: #555555;">5</span> 172   longhand          5.00             2  </span>
+<span class="co">#&gt; <span style="color: #555555;">6</span> 183   longhand          1.83             1.5</span>
+<span class="co">#&gt; <span style="color: #555555;"># ... with 2 more variables: </span><span style="color: #555555; font-weight: bold;">perfectfactindexscore</span><span style="color: #555555;"> &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">perfectconceptindexscore</span><span style="color: #555555;"> &lt;dbl&gt;</span></span></code></pre></div>
+<p>We can see that the number of questions per question type and talk differs (as indicated by the difference in <code>perfect</code> <code>indexscore</code> values across rows), but the total number of items appears to always be ten (<code>perfectfactindexscore</code> + <code>perfectconceptindexscore</code> = 10 in each row). This also aligns with the <a href="https://osf.io/jph7c/">list of items found on OSF</a> which show that there are ten questions per talk with the number of factual and conceptual questions differing across talks. From this information we could calculate our memory scores. However, before moving on it makes sense to run a quick sanity check to see that indeed the number of questions per row is ten. To do this, we create a new variable with the sum of the two perfect index scores, using <code>mutate()</code> (which adds a variable to the existing data), and then see whether this sum is always equal to 10, using <code>summarise()</code> (which in this case reduces the data to one row). If the number of question per observation/row sums to ten, this should return <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>sum_p_index <span class="op">=</span> <span class="va">perfectfactindexscore</span> <span class="op">+</span> <span class="va">perfectconceptindexscore</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">sum_p_index</span> <span class="op">==</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 1</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">check</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;lgl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> TRUE</span></code></pre></div>
+<p>Fortunately, the check passes so we feel that our assumption about the meaning of the variables are supported so we could go ahead and calculate our memory score.</p>
+<p>When preparing data for analysis, or running an analysis, it is important to regularly include such sanity checks in ones analysis. Any analysis involves assumptions about the underlying data – for example, what a variable means, which values a variable can possibly take on, which observations are included in the data. Based on this assumption we calculate other variables from our data and perform our analysis. However, humans are fallible and data analysis experience shows that the assumptions are sometimes (regularly) false. Sometimes one has misunderstood (or misremembers) the meaning of a variable, there might have been some data entry error, or the data still includes some observations that should have been excluded (e.g., test runs from the researchers instead of participants). For example, in a study by <span class="citation"><a href="references.html#ref-lewandowskyRoleConspiracistIdeation2013" role="doc-biblioref">Lewandowsky, Gignac, and Oberauer</a> (<a href="references.html#ref-lewandowskyRoleConspiracistIdeation2013" role="doc-biblioref">2013</a>)</span> the age of one participants was recorded as 32,757 years and this error was only uncovered after the publication of the manuscript. Luckily for them the error did not affect the conclusion drawn from the data, but they had to publish a correction <span class="citation">(<a href="references.html#ref-lewandowskyCorrectionRoleConspiracist2015" role="doc-biblioref">Lewandowsky, Gignac, and Oberauer 2015</a>)</span>. Publishing a correction is nothing dramatic (I have a few paper with published corrections because of errors discovered only after publication), but of course we would prefer not having to do so. And if the errors affect the conclusion substantially, sometimes a correction is not enough and a paper has to be retracted. Regular sanity or assumptions checks in ones analysis are on way to minimise the chance of errors in the final analysis.</p>
+<p>Based on the positive outcome of the sanity check we are now convinced we have understood the variables in the data and can now calculate our memory score from 0 to 100. For this, we divide each <code>index</code> score by the <code>perfect…indexscore</code> and then multiply the results by 100. To simplify the coming analysis, we create a new <code>tibble</code>, <code>mo2014a</code>, that only retains the variables we really need for our analysis using <code>select()</code>. We then take another look at the first six rows of the data using <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>. This shows that the data is now ready for our reanalysis.</p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014a</span> <span class="op">&lt;-</span> <span class="va">mo2014</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    factual <span class="op">=</span> <span class="va">factualindex</span> <span class="op">/</span> <span class="va">perfectfactindexscore</span> <span class="op">*</span> <span class="fl">100</span>,
+    conceptual <span class="op">=</span> <span class="va">conceptualindex</span> <span class="op">/</span> <span class="va">perfectconceptindexscore</span> <span class="op">*</span> <span class="fl">100</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">select</span><span class="op">(</span><span class="va">pid</span>, <span class="va">condition</span>, <span class="va">factual</span>, <span class="va">conceptual</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mo2014a</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 6 x 4</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">pid</span>   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">factual</span> <span style="font-weight: bold;">conceptual</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> 103   longhand     35.7       66.7</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> 122   longhand     40.5       50  </span>
+<span class="co">#&gt; <span style="color: #555555;">3</span> 142   longhand     33.3       66.7</span>
+<span class="co">#&gt; <span style="color: #555555;">4</span> 152   longhand     64.3       66.7</span>
+<span class="co">#&gt; <span style="color: #555555;">5</span> 172   longhand     71.4       66.7</span>
+<span class="co">#&gt; <span style="color: #555555;">6</span> 183   longhand     26.2       50</span></code></pre></div>
+</div>
+<div id="descriptive-statistics" class="section level3" number="6.3.2">
+<h3>
+<span class="header-section-number">6.3.2</span> Descriptive Statistics<a class="anchor" aria-label="anchor" href="#descriptive-statistics"><i class="fas fa-link"></i></a>
+</h3>
+<p>Before performing an inferential statistical analysis of the data, we obtain some descriptive statistics. This will provide us with an overview over the data. In addition, the descriptive analysis is another way to check our data and minimise the chances of errors or problems.</p>
+<p>As a first thing, we want to calculate the number of participants per condition. For this, we again use some <code>tidyverse</code> functions and will explain the steps in more detail. We generally start our <code>tidyverse</code> analyses with the data, here our <code>tibble</code> <code>mo2014a</code>, followed by the pipe <code>%&gt;%</code>. The pipe “pipes” the <code>tibble</code> to the next function. When obtaining descriptives statistics we often want to get them conditional on a factor/categorical variable in our data. For example, now we want to calculate the number of observations per <code>condition</code>. This can be done by piping the <code>tibble</code> to the <code>group_by()</code> function and condition on the variable of interest, <code>condition</code>. The results of this is a “grouped” <code>tibble</code> which ensures that all following operations on this <code>tibble</code> are performed grouped (i.e., conditioned on) this grouping variable. We can now pipe this grouped <code>tibble</code> to the <code>count()</code> function to get the number of observations per note taking condition.</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014a</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">count</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 2</span></span>
+<span class="co">#&gt; <span style="color: #555555;"># Groups:   condition [2]</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">condition</span>     <span style="font-weight: bold;">n</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> laptop       51</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> longhand     48</span></code></pre></div>
+<p>As another sanity check, we can compare this number to the values reported <a href="https://osf.io/jph7c/">on the OSF</a> for this data (the <span class="math inline">\(N\)</span> by condition is not reported in the original paper). As the numbers match, this further increases our confidence in our data preparation.</p>
+<p>As the next descriptive statistic, we calculate the condition means for our DV of interest, <code>conceptual</code> memory scores. We also calculate the standard deviation to get an idea of the spread of the data. We again use piping and the <code>tidyverse</code> to get the result. But this time the final function in our pipe is <code>summarise()</code> which allows to calculate summary statistics.</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014a</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>
+    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">conceptual</span><span class="op">)</span>,
+    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">conceptual</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 3</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">mean</span>    <span style="font-weight: bold;">sd</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> laptop     35    23.5</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> longhand   46.5  28.9</span></code></pre></div>
+<p>This shows that the conceptual memory is more than 10 points larger in the <code>longhand</code> compared to the <code>laptop</code> condition. We also see a difference in around 5 points in the SD.</p>
+<p>As a side note, we could have added another calculation into the <code>summarise()</code> call. For example, <code>n = n()</code> would have also calculated the number of participants per condition, as the previous code did.</p>
+<p>One important part of a descriptive analysis should always be a plot of the data. A plot of all data points is usually the best way to see if there is something wrong with the data. Above, we have used <code><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot()</a></code> after having estimated a model with <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car()</a></code>, but we can also invoke <code>ggplot2</code> directly. For this, we also pipe the data to <code>ggplot()</code> and then build the figure layer by layer. The important part is the mapping of variables in the data to aesthetics in the <code>aes()</code> function. We call this directly in the <code>ggplot()</code> call and mimic the other figures we have seen so far, mapping <code>condition</code> on the <span class="math inline">\(x\)</span>-axis and the DV, <code>conceptual</code> memory, to the <span class="math inline">\(y\)</span>-axis. As Figure <a href="standard1.html#fig:laptop-dist">5.1</a>, we begin with a violin plot (<code>geom_violin()</code>) with different quantiles. The violin plot shows the shape of the distribution. We combine this with the individual data points, whcih we show using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code> from the <code>ggbeeswarm</code> package (here we call the function without loading the package beforehand by using <code>package::function()</code>). We then add the mean (with standard error, which will be explained later) using <code>stat_summary()</code> in red. In this plot we see that the data already spans the full range in the <span class="math inline">\(y\)</span>-axis, so we do not need to use <code>coord_cartesian(ylim = c(0, 100))</code>.</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mo2014a</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">conceptual</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span>draw_quantiles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggbeeswarm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>  
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:desc-mo2014"></span>
+<img src="case_study_mueller_oppenheimer_files/figure-html/desc-mo2014-1.png" alt="Conceptual memory scores from Mueller and Oppenheimer (2014). This plot combines individual data points in black with means in red." width="100%"><p class="caption">
+Figure 6.2: Conceptual memory scores from Mueller and Oppenheimer (2014). This plot combines individual data points in black with means in red.
+</p>
+</div>
+<p>Before looking at the figure, we see that we got a status message in the console, “No summary function supplied, defaulting to `mean_se()`.” This message is always shown when using <code>stat_summary()</code> without additional argument and can be safely ignored (i.e., it just indicates that the red point shows the mean and the red error bars show the standard error). The plot itself does not show anything unusual. The plot just reinforces the previous descriptive results: The mean memory score, but also the three displayed quantiles, are larger in the <code>longhand</code> than in the <code>laptop</code> condition. Taken together, the descriptive analysis suggests that there is nothing preventing us from running the inferential analysis.</p>
+</div>
+<div id="inferential-analysis" class="section level3" number="6.3.3">
+<h3>
+<span class="header-section-number">6.3.3</span> Inferential Analysis<a class="anchor" aria-label="anchor" href="#inferential-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<p>The inferential analysis of the conceptual scores uses exactly the same call as our previous analysis, only with a new data set, <code>mo2014a</code>.</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mc_mo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car</a></span><span class="op">(</span><span class="va">conceptual</span> <span class="op">~</span> <span class="va">condition</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">pid</span><span class="op">)</span>, <span class="va">mo2014a</span><span class="op">)</span>
+<span class="co">#&gt; Contrasts set to contr.sum for the following variables: condition</span>
+<span class="va">mc_mo</span>
+<span class="co">#&gt; Anova Table (Type 3 tests)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: conceptual</span>
+<span class="co">#&gt;      Effect    df    MSE      F  ges p.value</span>
+<span class="co">#&gt; 1 condition 1, 97 688.89 4.77 * .047    .031</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</span></code></pre></div>
+<p>Looking at the ANOVA table of the results shows that the <span class="math inline">\(p\)</span>-value is smaller than .05; the analysis reveals a significant effect of condition. This indicates that this data provides evidence against the null hypothesis of no difference between the note taking conditions. Consequently, we would be justified in saying that the data provides evidence for a difference. To make it easy to detect a significant result, <code>afex</code>, like most statistical software tools, indicates a significant effect with <span class="math inline">\(p &lt; .05\)</span> with one <code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code> next to the <span class="math inline">\(F\)</span>-value (in case of <span class="math inline">\(p &lt; .01\)</span> the indication is <code>**</code>, in case of <span class="math inline">\(p &lt; .001\)</span> it is <code>***</code>, and in case the effect is not significant, but <span class="math inline">\(p &lt; .1\)</span>, it is <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>).</p>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot</a></span><span class="op">(</span><span class="va">mc_mo</span>, <span class="st">"condition"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:afex-mo2014"></span>
+<img src="case_study_mueller_oppenheimer_files/figure-html/afex-mo2014-1.png" alt="afex_plot() figure for the conceptual memory scores from Mueller and Oppenheimer (2014, Experiment 2) that show a significant difference between the two note taking conditions." width="100%"><p class="caption">
+Figure 6.3: afex_plot() figure for the conceptual memory scores from Mueller and Oppenheimer (2014, Experiment 2) that show a significant difference between the two note taking conditions.
+</p>
+</div>
+</div>
+</div>
+<div id="summary-5" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>One reality of research is that a significant results is generally what researchers are looking for. If a results is significant we are happy, our experiment “has worked” and we can publish it. If it is not significant, we generally have problems publishing our results.</p>
+
+</div>
+</div>
+
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  if (t = document.getElementById("webex-total_correct")) {
+    t.innerHTML =
+      document.getElementsByClassName("webex-correct").length + " of " +
+      document.getElementsByClassName("webex-solveme").length + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+  
+  if (my_answer !== "" & real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+  } else {
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);  
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }  
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }  
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+  
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off"); 
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+    
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+    
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
+<div class="prev"><a href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#case-study-laptop"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
+<li><a class="nav-link" href="#conceptual-memory-data-from-urry-et-al.-2021"><span class="header-section-number">6.1</span> Conceptual Memory Data from Urry et al. (2021)</a></li>
+<li><a class="nav-link" href="#why-are-experiments-replicated"><span class="header-section-number">6.2</span> Why are Experiments Replicated?</a></li>
+<li>
+<a class="nav-link" href="#conceptual-memory-data-from-mueller-and-oppenheimer-2014"><span class="header-section-number">6.3</span> Conceptual Memory Data from Mueller and Oppenheimer (2014)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preparing-the-data"><span class="header-section-number">6.3.1</span> Preparing the Data</a></li>
+<li><a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">6.3.2</span> Descriptive Statistics</a></li>
+<li><a class="nav-link" href="#inferential-analysis"><span class="header-section-number">6.3.3</span> Inferential Analysis</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-5"><span class="header-section-number">6.4</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/singmann/stats_for_experiments/blob/main/case_study_mueller_oppenheimer.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/singmann/stats_for_experiments/edit/main/case_study_mueller_oppenheimer.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

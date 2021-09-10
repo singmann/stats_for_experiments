@@ -1,4 +1,4 @@
-# Case Study 1: More Results from Note Taking Studies
+# Case Study 1: More Results from Note Taking Studies {#case-study-laptop}
 
 In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a look at the data from @urry2021. Additionally, we will analyse data from @muellerPenMightierKeyboard2014. This study was the first published study investigating the question of note taking with a laptop or in longhand format and was the basis on which @urry2021 planned their study. For the data of @muellerPenMightierKeyboard2014 we will perform a full analysis starting with reading in the data. So in addition to performing the statistical hypothesis test, we will calculate some descriptive statistics.
 

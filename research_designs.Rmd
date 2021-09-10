@@ -278,7 +278,7 @@ As a consequence of the problem with observational data, the current book primar
 
 For researchers interested in analysing observational data, some good introductory literature that attempts to approach the problem of confounders in a principled manner are @rohrerThinkingClearlyCorrelations2018, @gelmanRegressionOtherStories2021, @mcelreathStatisticalRethinkingBayesian2020, @hernanCausalInference2021, and @shadishExperimentalQuasiexperimentalDesigns2002. Note that, given the additional epistemic gap that needs to be bridged, these methods are more advanced than the methods introduced here, and so require more advanced technical and mathematical knowledge than what we use). After all, drawing causal inferences from observational data is literally the most difficult problem in the empirical sciences.
 
-### Internal versus External Validity
+### Internal versus External Validity {#internal-external-validity}
 
 Above we have talked about validity in the context of measurement. In that context, the question of validity is whether  a measure measures what it is supposed to measure (e.g., when a risk attitudes questionnaire *really* measures risk attitudes it has a high validity). However, the term "validity" is also used in the context of experimental versus observational studies. In this context, the two relevant types of validity are *internal validity* and *external validity*. These terms do not refer to a specific measure, but are used to describe complete studies or research designs. We provide a brief introduction to these two terms here, for more see @shadishExperimentalQuasiexperimentalDesigns2002.[^research_designs-14]
 

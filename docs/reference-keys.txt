@@ -83,7 +83,7 @@ independent-and-dependent-variables
 experimental-versus-observational-variables
 epistemic-gap-3-causal-inference-and-confounding-variables
 is-causal-inference-from-observational-data-possible-at-all
-internal-versus-external-validity
+internal-external-validity
 summary-1
 tidyverse-intro
 what-is-r
@@ -134,6 +134,7 @@ ggplot-walasek-example
 quiz-1
 standard1
 ex:urry
+generalising-from-sample-to-population
 the-logic-of-inferential-statistics
 the-basic-statistical-model
 model-predictions
@@ -146,7 +147,7 @@ interpreting-the-results
 data-visualisation
 follow-up-analysis
 summary-4
-case-study-1-more-results-from-note-taking-studies
+case-study-laptop
 conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
 conceptual-memory-data-from-mueller-and-oppenheimer-2014
