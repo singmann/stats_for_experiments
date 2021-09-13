@@ -26,14 +26,14 @@ ws1a <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/d
 ws1b <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv")
 ```
 
-We know have two data sets that have the same structure (i.e., same columns and data types) as we can see by just printing them both:
+We now have two data sets that have the same structure (i.e., same columns and data types) as we can see by just printing them both:
 
 ```{r}
 ws1a
 ws1b
 ```
 
-What this output shows is that not only do the two data sets have the same columns in the same order, they also appear to have the same condition names. To ensure this is the case, let us check this by printing the unique values for each `condition` column in a sort manner:
+What this output shows is that not only do the two data sets have the same columns in the same order, but they also appear to have the same condition names. To ensure this is the case, let us check this by printing the unique values for each `condition` column in a sort manner:
 
 ```{r}
 ws1a$condition %>% 
@@ -50,7 +50,7 @@ This confirms that indeed, the condition names are the same in both data sets.
 
 To analyse these two data sets together, as we have done in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking), we now have to combine these two `tibble`s into one. Specifically, we need to add the *rows* of one of the data sets to the other data sets (in contrast to adding additional *columns* to one of the data sets). The `tidyverse` function to combine multiple `tibble`s by rows is `bind_rows()`. So the code for combining the two data sets is simply `bind_rows(ws1a, ws1b)` (which will only work in a case as this where, not only do we have the same columns, but they are also in the same order) .
 
-However, before combining the data we have to consider one further complication. We can see that in both data sets the participant identifier column, `subno`, appears to consistent of whole numbers. This means, that the same number may be used for different participants across both experiments. If we do not check and control for this before combining the data, this could lead to the problem that data from different participants are treated as coming from the same participant. For example, the output above shows that there is a participant with `subno` 8 in Experiment 1a. If there is also a participants with `subno` 8 in Experiment 1b, the data from these two different participants (i.e., 8 in Experiment 1a and 8 in Experiment 1b, who are different individuals) would be treated as being from the same participant. To see whether this is indeed a potential problem, we print all individual `subno` values for both experiments.
+However, before combining the data we have to consider one further complication. We can see that in both data sets the participant identifier column, `subno`, appears to consistent of whole numbers. This means, that the same number may be used for different participants across both experiments. If we do not check and control for this before combining the data, this could lead to the problem that data from different participants are treated as coming from the same participant. For example, the output above shows that there is a participant with `subno` 8 in Experiment 1a. If there is also a participant with `subno` 8 in Experiment 1b, the data from these two different participants (i.e., 8 in Experiment 1a and 8 in Experiment 1b, who are different individuals) would be treated as being from the same participant. To see whether this is indeed a potential problem, we print all individual `subno` values for both experiments.
 
 ```{r}
 ws1a$subno %>% 
@@ -63,7 +63,7 @@ ws1b$subno %>%
 
 The output confirms our suspicion. `subno` values are not unique across experiments. Therefore, we need to make them unique before combining the data. We do so by appending a string to each `subno`, either `e1a_` or `e1b_`, that indicates to which data set each participant belongs to. For this we use the `paste0()` function which allows to paste strings together into one (`paste0()` does so without adding any separation character to the combined strings).
 
-In the same call we also convert the `subno` variable to a factor (as it is a categorical variable). We can the combine both data sets into one called `ws1` using the `bind_rows()` call discussed above. We then get an overview of the combined data using the `glimpse()` function which is the `tidyverse` equivalent of `str()` (`glimpse()` often produces less verbose output for tibbles than `str()`, try it out yourself to see).
+In the same call we also convert the `subno` variable to a factor (as it is a categorical variable). We can then combine both data sets into one called `ws1` using the `bind_rows()` call discussed above. We then get an overview of the combined data using the `glimpse()` function which is the `tidyverse` equivalent of `str()` (`glimpse()` often produces less verbose output for tibbles than `str()`, try it out yourself to see).
 
 ```{r}
 ws1a <- ws1a %>%
@@ -76,14 +76,14 @@ glimpse(ws1)
 
 The output shows that the `subno` for first participant in Experiment 1 is now `e1a_8` and not any more `8`. This indicates that `subno`'s are now unique within each experiment and we could combine the data.
 
-To verify this logic, we can count the number of unique values of `subno` for each data set. For this we can use the `length()` function on the `unique()` elements of the `subno` vectors. `length()` is a function that returns a number, the number of elements in a vector, so can be directly used in calculations. The calculation here shows that indeed, the combined data has the same number of participants, 781, as Experiments 1a and 1b together.
+To verify this logic, we can count the number of unique values of `subno` for each data set. For this we can use the `length()` function on the `unique()` elements of the `subno` vectors. `length()` is a function that returns the number of elements in a vector, so can be directly used in calculations. The calculation here shows that indeed, the combined data has the same number of participants, 781, as Experiments 1a and 1b together.
 
 ```{r}
 length(unique(ws1a$subno)) + length(unique(ws1b$subno))
 length(unique(ws1$subno))
 ```
 
-Before continuing with the analysis of the combined data it makes sense to take a step back and consider briefly why we discussed the question of how to combine these two data sets rather extensively. One the one hand, the code above uses a few new functions that we have not yet introduced such as `bind_rows()` or `length()`. As before, we want to introduce new functions explicitly by discussing their functionality explicitly.
+Before continuing with the analysis of the combined data it makes sense to take a step back and consider briefly why we discussed the question of how to combine these two data sets rather extensively. One the one hand, the code above uses a few new functions that we have not yet introduced such as `bind_rows()` or `length()`. As before, we want to introduce new functions by explicitly discussing their functionality.
 
 On the other hand, the discussion above shows us one way of handling and checking the assumptions in our code, an issue we had already mentioned before. The issue here is that when combining two data sets using `bind_rows()`, the code assumes that the participant identifiers are unique. This is not necessarily an obvious assumption we have when writing the code, but it is a consequence of the fact that we simply concatenate both data sets (i.e., add one to the end of the other). Because this is not an assumption that is obvious, we may overlook it which may lead to downstream problems (i.e., problems that happen later on in our code). Specifically, treating data from different participants that coincidentally share the same `subno` as coming from the same participant is probably no appropriate in our statistical analysis. By checking whether the number of participants (i.e., unique `subno` values) in the combined data is equal to the sum of the number of participants in the separate data sets, we make sure combining the two data sets did what we hoped it did.
 
@@ -159,7 +159,7 @@ What are "bugs" in programming languages?
 
 1. variables that are not of interest for a specific analysis
 2. the same code is used multiple times for different datasets
-3. error in the code that lead to unexpected/wrong results
+3. error in the code that leads to unexpected/wrong results
 
 Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 :::
@@ -246,7 +246,9 @@ Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 
 Applying all the `tidyverse` tools yourself can be a bit overwhelming at the beginning. There are quite a few functions and one has to remember for each what it does and what its syntax is. Furthermore, so far we have introduced the most important functions, but there are more in `dplyr` and other `tidyverse` packages that we did not have the space to introduce (for more see ["`R` for data science"](https://r4ds.had.co.nz/)).
 
-One way for you to keep an overview of which functions does what is with the help of **cheat sheets** (*or* cheatsheets). Cheat sheets are short (usually 1 or 2 pages) documents that provide an overview of a package or tool and are a common resource across programming languages. Their benefit compared to other learning resources such as books or the documentation is that they provide a concise overview and can point you to the right tool. In the case of `R`, once you know which function to use (e.g., thanks to the cheat sheet) it might then make sense to follow up by looking at the documentation. The documentation can be obtained for each function by entering `?functionname` (e.g., `?summarise`) at the `R` prompt. It usually does not only contain an explanation of what the function does plus of all of its arguments, it also usually contains helpful examples.
+One way for you to keep an overview of which functions does what is with the help of **cheat sheets** (*or* cheatsheets). Cheat sheets are short (usually 1 or 2 pages) documents that provide an overview of a package or tool and are a common resource across programming languages. Their benefit compared to other learning resources such as books or the documentation is that they provide a concise overview and can point you to the right tool. 
+
+In the case of `R`, once you know which function to use (e.g., thanks to the cheat sheet) it might then make sense to follow up by looking at the documentation. The documentation can be obtained for each function by entering `?functionname` (e.g., `?summarise`) at the `R` prompt. It usually does not only contain an explanation of what the function does plus all of its arguments, it also usually contains helpful examples.
 
 For the `tiydverse` packages, `RStudio` provides an almost complete list of [cheat sheets](https://www.rstudio.com/resources/cheatsheets/). The most relevant for us at the moment is the [`dplyr` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf). Furthermore, there are also cheat sheets for [the `RStudio` IDE iteself](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf), [reading in data](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf), and even [base `R`](http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf). Before diving into the examples below, it might make sense to download (or even print) the cheat sheets and have them by your side while trying to solve the problems.
 
@@ -254,13 +256,13 @@ For the `tiydverse` packages, `RStudio` provides an almost complete list of [che
 
 For this exercise we will work with a data set from @scullinBedtimeMusicInvoluntary2021 investigating a research question about the relationship between listening to music and sleep: "Many people listen to music for hours every day, often near bedtime. We investigated whether music listening affects sleep, focusing on a rarely explored mechanism: involuntary musical imagery (earworms)."
 
-Here, we are looking at the data from @scullinBedtimeMusicInvoluntary2021's Study 2, which was a sleep-lab experiment. Participants came to the sleep-lab and stayed for one night in a controlled environment in which a number of objective sleep parameters could be measured via [polysomnography](https://en.wikipedia.org/wiki/Polysomnography) (i.e., throughout the night several body parameters such as electroencephalography (EEG) and breathing measures  were recorded continuously). Participants were assigned to one of two conditions determining the music they heard just before going to bed: Either a condition in which original versions of three pop songs, which included the lyrics, or an instrumental version of the three pop-songs (i.e., songs without the lyrics). The three songs (["Don’t Stop Believin’" by Journey](https://youtu.be/1k8craCGpgs), ["Call Me Maybe" by Carly Rae Jepsen](https://youtu.be/fWNaR-rxAic), and ["Shake It Off" by Taylor Swift](https://youtu.be/nfWlot6h_JM)) were chosen because of previous research had shown that they induce earworms. After participants woke up in the morning they were asked whether they experienced any earworms at different points in the night or in the morning.
+Here, we are looking at the data from @scullinBedtimeMusicInvoluntary2021's Study 2, which was a sleep-lab experiment. Participants came to the sleep-lab and stayed for one night in a controlled environment in which a number of objective sleep parameters could be measured via [polysomnography](https://en.wikipedia.org/wiki/Polysomnography) (i.e., throughout the night several body parameters such as electroencephalography (EEG) and breathing measures were recorded continuously). Participants were assigned to one of two conditions determining the music they heard just before going to bed: Either a condition in which original versions of three pop songs, which included the lyrics, or an instrumental version of the three pop-songs (i.e., songs without the lyrics). The three songs (["Don’t Stop Believin’" by Journey](https://youtu.be/1k8craCGpgs), ["Call Me Maybe" by Carly Rae Jepsen](https://youtu.be/fWNaR-rxAic), and ["Shake It Off" by Taylor Swift](https://youtu.be/nfWlot6h_JM)) were chosen because of previous research had shown that they induce earworms. After participants woke up in the morning they were asked whether they experienced any earworms at different points in the night or in the morning.
 
-The researcher were interested in two research questions: 
+The researchers were interested in two research questions: 
 
-(1) Does listening to lyrical (i.e., original) or instrumental version of a  pop song affect whether or not participants developed earworms? This research question was based on previous results and the authors expected that the instrumental version induces more earworms than the lyrical versions? 
+(1) Does listening to lyrical (i.e., original) or instrumental version of a  pop song affect whether or not participants developed earworms? This research question was based on previous results and the authors expected that the instrumental version induces more earworms than the lyrical versions. 
 
-(2) Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expteced to have more earworms)?
+(2) Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?
 
 Before looking at the data, take a guess yourself. Do you believe you sleep better after listening to music that makes it likely that you develop and earworm?
 
@@ -283,7 +285,7 @@ Let us take a first look at the data:
 glimpse(earworm)
 ```
 
-In addition to the variables relevant to our research questions, the data also contains a number of control variables also included here (the original data made available even control more variables). We can see a total of 19 variables that we describe here:
+In addition to the variables relevant to our research questions, the data contains a number of control variables also included here (the original data file included even more control variables). We can see a total of 19 variables that we describe here:
 
 - `id`: Participant identifier
 - `group`: experimental condition with two values: "Lyrics" versus "Instrumental"
@@ -304,6 +306,8 @@ For research questions 1 and 2 described above, which variables are the independ
 
 `r hide("Hint")`
 The answer to this question does not require coding. Instead you should come to a solution by just thinking about the description of the experiment and the variables. 
+
+Also, remember that in an experiment we test the effect of the independent variable on the dependent variable. 
 `r unhide()`
 
 `r hide("Solution")`
@@ -373,9 +377,9 @@ earworm %>%
   summarise(all_1 = all(n == 1))
 ```
 
-Yes, everyone has only one row. So the data can be understood as being in the *wide format*, with one row per participant. Which should not be an issue here.
+Yes, everyone has only one row. As discussed before, if there is only one observation per participants there is no distinction between wide and long format, so we can use the data in this format.
 
-Because the data is in the wide format, we can directly count the number of participants per condition by counting the number of rows per condition.
+Because there is only one observation per participant, we can directly count the number of participants per condition by counting the number of rows per condition.
 
 ```{r}
 earworm %>% 
@@ -398,7 +402,7 @@ Before looking at the results, it is good idea to get an overview of the demogra
 When calculating the distribution of a categorical variable, not only calculate the frequencies, but also the proportions (i.e., relative frequencies). 
 
 `r hide("Hint")`
-For getting a summary on `age`, `summnarise()` seems like a good idea. 
+For getting a summary on `age`, `summarise()` seems like a good idea. 
 
 For the other questions, we could also use `summarise()` conditional on the categorical variables or alternatively `count()`. We can then calculate the proportions from the frequencies using the formula proportion = frequency / total sum.
 `r unhide()`
@@ -467,7 +471,7 @@ earworm %>%
             sd = sd(age))
 ```
 
-Participants in the instrumental condition are around 1 year older on average, which seems not too small given that the SD is not much larger. However, this difference could be mostly due to a larger maximum value, which would also explain the difference in SDs. To check this, we can split the data into two `tibble`s, one for each condition, and take a look at the sorted ages.
+Participants in the instrumental condition are on average around 1 year older than participants in the lyrics condition, which seems not too small given that the SD is not much larger. However, this difference could be mostly due to a larger maximum value, which would also explain the difference in SDs. To check this, we can split the data into two `tibble`s, one for each condition, and take a look at the sorted ages.
 
 ```{r}
 earworm_lyrics <- earworm %>% 
@@ -532,14 +536,14 @@ earworm %>%
             sd_sleep = sd(sleepy))
 ```
 
-The differences in the relaxed and sleepyness question after listening to the music seem minor given the variability (i.e., SD) in the data.
+The differences in the relaxed and sleepiness question after listening to the music seem minor given the variability (i.e., SD) in the data.
 
 `r unhide()`
 
 :::
 
 ::: {.exercise}
-After carefully checking and exploring the data, it is time to take a look at research question 1: Does listening to lyrical (i.e., original) or instrumental version of a  pop song affect whether or not participants developed earworms?
+After carefully checking and exploring the data, it is time to take a look at research question 1: Does listening to lyrical (i.e., original) or instrumental version of a pop song affect whether or not participants developed earworms?
 
 Let us look at this research question in multiple steps:
 
@@ -550,7 +554,7 @@ Does the analysis support the prediction that instrumental music leads to more e
 
 
 `r hide("Hint")`
-You already know the drill: Calculating conditional means and standard deviations is done through `group_by()` and `summarise()`. To calulate new variables (analysis 2) you need to use `mutate()`
+You already know the drill: Calculating conditional means and standard deviations is done through `group_by()` and `summarise()`. To calculate new variables (analysis 2), you need to use `mutate()`.
 `r unhide()`
 
 `r hide("Solution")`
@@ -594,9 +598,9 @@ We first calculate the new variables using `mutate()`. To do so, we realise that
 
 We can then calculate the `any_earworm` variable from the `prop_variable`. Note that we do so in a new `mutate()` call. The reason is that we need to refer to the `prop_variable` variable and it can lead to problems to use variables that are created in the same `mutate()` call. It might work, but is not guaranteed to work, so it is better to avoid this.
 
-To calculate the `any_earworm` variable, we need to check when the `prop_earworm` variable is 0 and assign 0 to the `any` variable then and 1 otherwise. We use the `if_else()` function for this which allows to apply an if-else logic, as we have here, to a vector (i.e., if called with a vector, `if_else()` also returns a vector). Here, the if-part checks if `prop_earworm == 0`, if it is, we rtuen `0` and `1` otherwise.
+To calculate the `any_earworm` variable, we need to check when the `prop_earworm` variable is 0 and assign 0 to the `any` variable then and 1 otherwise. We use the `if_else()` function for this which allows to apply an if-else logic, as we have here, to a vector (i.e., if called with a vector, `if_else()` also returns a vector). Here, the if-part checks if `prop_earworm == 0`, if it is, we return `0` and `1` otherwise.
 
-We then save the new variable back in the `earworm` data so we can use them again. Because this is a non-trivial calculation, we then print the new `tibble` with the first few lines to see if the calculated variable show what they should. We do this to make sure we did not make any error. 
+We then save the new variable back in the `earworm` data so we can use them again. Because this is a non-trivial calculation, we then print the new `tibble` with the first few lines to see if the calculated variables show what they should. We do this to make sure we did not make any error. 
 
 *Step 2: Calculate conditional means and SDs*
 
@@ -665,7 +669,7 @@ summary_sleep$m_efficiency[1] - summary_sleep$m_efficiency[2]
 summary_sleep$m_time[1] - summary_sleep$m_time[2]
 ```
 
-Overall, the results show that there is a difference in sleep quality that is around 50% of the observed SD in both measures. As for research question 1, a statsitical analysis is necessary to better understand the pattern. 
+Overall, the results show that there is a difference in sleep quality that is around 50% of the observed SD in both measures. As for research question 1, a statistical analysis is necessary to better understand the pattern. 
 
 However, we can already say that the differences are not large in absolute terms. For example, the difference in time slept is around 10 minutes with an average sleep time that correspond to more than 8 hours:
 
@@ -683,7 +687,7 @@ The analysis so far supports the prediction for both research questions: Partici
 As the last bit of the analysis, let us take a look at this question: Do participants that report having an earworm than participants that do not do so, ignoring the experimental condition. For this:
 
 1. Please create a new `factor`, `has_earworm`, that is `yes`, whenever participants report at least once that they had an earworm for one of the three `earworm` dependent variables (i.e., within the experimental time frame, ignoring the control time).
-2. Calculate the conditional N (number of participants) as well as conditional means and SD of the two sleep variables,  `sleep_efficiency` and `sleep_time`, as a function of `has_earworm`.
+2. Calculate the conditional N (number of participants) as well as conditional means and SD of the two sleep variables, `sleep_efficiency` and `sleep_time`, as a function of `has_earworm`.
 
 
 What can we learn from this analysis?
@@ -726,7 +730,7 @@ summary_earworms %>%
             diff_time = m_time[2] - m_time[1])
 ```
 
-What we can learn from the analysis is that it looks like as if having an earworm leads to reduced sleep efficiency. The oattern for sleep length is more difficult to interpret. However, in this analysis we lose the benefit of randomisation. We do not really know if it is the earworm or something related to the earworm that drives the effect. Nevertheless, because we do not really have another way of introducing an earworm other than playing different types of music, it is still an important result.
+What we can learn from the analysis is that it looks like as if having an earworm leads to reduced sleep efficiency. The pattern for sleep length is more difficult to interpret. However, in this analysis we lose the benefit of randomisation. We do not really know if it is the earworm or something related to the earworm that drives the effect. Nevertheless, because we do not really have another way of introducing an earworm other than playing different types of music, it is still an important result.
 
 `r unhide()`
 
