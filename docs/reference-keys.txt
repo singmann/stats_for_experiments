@@ -44,6 +44,8 @@ exr:unlabeled-div-35
 exr:unlabeled-div-36
 exr:unlabeled-div-37
 exr:unlabeled-div-38
+fig:annotated-boxplot
+fig:dynamite-plot
 fig:datasaurus
 exr:unlabeled-div-39
 exr:unlabeled-div-40

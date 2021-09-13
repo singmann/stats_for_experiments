@@ -34,3 +34,6 @@ update_file(file = rel_file)
 
 # Chapter 3: Tidyverse Exercises
 # https://docs.google.com/document/d/1ujTfFehV1DCxVNNKJUu9gsFuEUHdV99RWJYi5IIsAqY/edit?usp=sharing
+
+# Chapter 4: ggplot introduction
+# https://docs.google.com/document/d/1xM9XnX4R9iwBFAnhwinpMsATu-bREPPkxqZObDl1ICo/edit?usp=sharing
