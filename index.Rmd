@@ -11,7 +11,7 @@ description: "Statistics for Experimental Psychology with R using the afex packa
 ---
 
 
-# Overview {-}
+# Preface {-}
 
 This is an online textbook that is *currently under development*. It is written by Henrik Singmann, lecturer at UCL.
 
@@ -21,11 +21,11 @@ Our focus on logic and real research applications also provides a further benefi
 
 To sum up, the present approach has several benefits: It focuses on the skills researchers need to analyse their data; it is accessible to readers without particular background in mathematics; it allows to discuss the role of statistics in the research process; it allows discussing what interpretations are justifiable given certain results; and it provides an opportunity to highlight the problems associated with a mindless application of statistics.   
 
-## Intended Audience
+## Intended Audience {.unnumbered}
 
 This book is intended for a postgraduate (i.e., MSc level and above) audience. Besides a basic understanding of summary statistics such as the average (i.e., the mean) and that probabilities are used to express uncertainty, no further background knowledge is required. The most important skill for understanding this book, is an interest in using data to answer interesting research questions. As we will see later, in this situation statistics is an important tool that can potentially assist in providing an answer.
 
-## Chapter Overview
+## Chapter Overview {.unnumbered}
 
 At this point in time, the book is being written so only a limited set of chapters is already available.
 
@@ -35,11 +35,11 @@ At this point in time, the book is being written so only a limited set of chapte
 - Chapter \@ref(ggplot2-intro) provides an introduction to data visualisation with `R` using the `ggplot2` package.
 -   Chapter \@ref(standard1) introduces the basic statistical approach using a simple experiment with two conditions.
 
-## Acknowledgments
-
+## Acknowledgments {.unnumbered}
+ 
 This project would not exist without the help and feedback provided by Stuart Rosen, Anna Krason, David Kellen, and Lukasz Walasek. 
 
-## License and Attribution
+## License and Attribution {.unnumbered}
 
 This book is licensed under the [Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/) license. This license allows you to share and adapt the work as long as you give appropriate attribution and do not use the materials for commercial purposes.
 

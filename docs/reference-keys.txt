@@ -58,8 +58,6 @@ fig:fig1
 fig:urry-conceptual
 fig:desc-mo2014
 fig:afex-mo2014
-acknowledgments
-license-and-attribution
 role-of-statistics-in-the-research-process
 the-research-process
 example-the-psychology-of-loss-aversion
@@ -157,5 +155,3 @@ preparing-the-data
 descriptive-statistics
 inferential-analysis
 summary-5
-intended-audience
-chapter-overview
