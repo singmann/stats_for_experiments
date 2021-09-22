@@ -39,20 +39,7 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html">Overview</a></li>
-<li><a class="" href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></li>
-<li><a class="" href="chapter-1-quiz.html">Chapter 1: Quiz</a></li>
-<li><a class="" href="research-designs.html"><span class="header-section-number">2</span> Data and Research Designs</a></li>
-<li><a class="" href="chapter-2-quiz.html">Chapter 2: Quiz</a></li>
-<li><a class="" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
-<li><a class="" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
-<li><a class="" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
-<li><a class="" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
-<li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
-<li><a class="" href="case-study-laptop.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
-<li><a class="" href="references.html">References</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="active" href="index.html">Overview</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/singmann/stats_for_experiments">View book source <i class="fab fa-github"></i></a></p>
@@ -62,24 +49,42 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="overview" class="section level1 unnumbered">
 <h1>Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
 </h1>
-<p>At this point in time, the book is being written so only few chapters are already available.</p>
+<p>This is an online textbook that is <em>currently under development</em>. It is written by Henrik Singmann, lecturer at UCL.</p>
+<p>This book provides an introduction to research methods and statistics mostly for experimental research in psychology and related discipline. In contrast to other introductory texts, it tries to stay light on the mathematics and instead focus on the logic and practical application of statistical methods to actual research data using the statistical programming language <code>R</code>. The reason for doing so, is that generally the computer will perform the calculations for us, so being able to do the calculations by hand does not seem necessary nowadays. Furthermore, by focussing on only the most important bits of mathematics, it allows us to spend more time on these bits and explain everything in detail without assuming much prior knowledge.</p>
+<p>Our focus on logic and real research applications also provides a further benefit compared to other textbooks. Recent years have shown that one of the largest issues in the field is not the fact that statistics is used wrongly. In many cases researchers use appropriate statistical methods. The problem often is that researchers tend to draw conclusions that are not fully justified. In other words, the issue is how people interpret the results from their statistical analysis, and not necessarily how the analysis is performed. Using real data sets allows us to discuss how to interpret results in detail as well. We will show that what matters for understanding a statistical result is the context in which it is generated, and also demonstrate which conclusions are permitted for actual published data sets.</p>
+<p>To sum up, the present approach has several benefits: It focuses on the skills researchers need to analyse their data; it is accessible to readers without particular background in mathematics; it allows to discuss the role of statistics in the research process; it allows discussing what interpretations are justifiable given certain results; and it provides an opportunity to highlight the problems associated with a mindless application of statistics.</p>
+<div id="intended-audience" class="section level2" number="0.1">
+<h2>
+<span class="header-section-number">0.1</span> Intended Audience<a class="anchor" aria-label="anchor" href="#intended-audience"><i class="fas fa-link"></i></a>
+</h2>
+<p>This book is intended for a postgraduate (i.e., MSc level and above) audience. Besides a basic understanding of summary statistics such as the average (i.e., the mean) and that probabilities are used to express uncertainty, no further background knowledge is required. The most important skill for understanding this book, is an interest in using data to answer interesting research questions. As we will see later, in this situation statistics is an important tool that can potentially assist in providing an answer.</p>
+</div>
+<div id="chapter-overview" class="section level2" number="0.2">
+<h2>
+<span class="header-section-number">0.2</span> Chapter Overview<a class="anchor" aria-label="anchor" href="#chapter-overview"><i class="fas fa-link"></i></a>
+</h2>
+<p>At this point in time, the book is being written so only a limited set of chapters is already available.</p>
 <ul>
 <li>Chapter <a href="role-of-statistics-in-the-research-process.html#role-of-statistics-in-the-research-process">1</a> provides an introduction to the role of statistics in the research process. It also answers the important question: Why do we need statistics?</li>
 <li>Chapter <a href="research-designs.html#research-designs">2</a> provides an overview over important concepts and correct terminology we need to describe research designs (e.g., what is a variable? what is the difference between dependent and independent variables?). It also introduces the distinction between experimental and observational studies.</li>
-<li>Chapter <a href="standard1.html#standard1">5</a> introduces the basic statistical approach.</li>
+<li>Chapter <a href="tidyverse-intro.html#tidyverse-intro">3</a> provides an introduction to <code>R</code> and the `tidyverse.</li>
+<li>Chapter <a href="ggplot2-intro.html#ggplot2-intro">4</a> provides an introduction to data visualisation with <code>R</code> using the <code>ggplot2</code> package.</li>
+<li>Chapter <a href="standard1.html#standard1">5</a> introduces the basic statistical approach using a simple experiment with two conditions.</li>
 </ul>
-<div id="acknowledgments" class="section level2" number="0.1">
-<h2>
-<span class="header-section-number">0.1</span> Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"><i class="fas fa-link"></i></a>
-</h2>
-<p>This project would not exist without the help and feedback provided by others: David Kellen, Lukasz Walasek, Stuart Rosen, Anna Krason</p>
 </div>
-<div id="license-and-attribution" class="section level2" number="0.2">
+<div id="acknowledgments" class="section level2" number="0.3">
 <h2>
-<span class="header-section-number">0.2</span> License and Attribution<a class="anchor" aria-label="anchor" href="#license-and-attribution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.3</span> Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"><i class="fas fa-link"></i></a>
+</h2>
+<p>This project would not exist without the help and feedback provided by Stuart Rosen, Anna Krason, David Kellen, and Lukasz Walasek.</p>
+</div>
+<div id="license-and-attribution" class="section level2" number="0.4">
+<h2>
+<span class="header-section-number">0.4</span> License and Attribution<a class="anchor" aria-label="anchor" href="#license-and-attribution"><i class="fas fa-link"></i></a>
 </h2>
 <p>This book is licensed under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a> license. This license allows you to share and adapt the work as long as you give appropriate attribution and do not use the materials for commercial purposes.</p>
 <p>Parts of this book uses other materials released under a compatible CC license. Where it does so, the source is clearly indicated. Please ensure to attribute the original source in case you re-use such materials.</p>
+<p>This book has adopted some ideas and code in the back-end (specifically for the quizzes) from the <a href="https://psyteachr.github.io/">PsyTeachR project</a> at the University of Glasgow.</p>
 
 </div>
 </div>
@@ -186,19 +191,20 @@ window.onload = function() {
 
 </script><div class="chapter-nav">
 <div class="empty"></div>
-<div class="next"><a href="role-of-statistics-in-the-research-process.html"><span class="header-section-number">1</span> Role of Statistics in the Research Process</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#overview">Overview</a></li>
-<li><a class="nav-link" href="#acknowledgments"><span class="header-section-number">0.1</span> Acknowledgments</a></li>
-<li><a class="nav-link" href="#license-and-attribution"><span class="header-section-number">0.2</span> License and Attribution</a></li>
+<li><a class="nav-link" href="#intended-audience"><span class="header-section-number">0.1</span> Intended Audience</a></li>
+<li><a class="nav-link" href="#chapter-overview"><span class="header-section-number">0.2</span> Chapter Overview</a></li>
+<li><a class="nav-link" href="#acknowledgments"><span class="header-section-number">0.3</span> Acknowledgments</a></li>
+<li><a class="nav-link" href="#license-and-attribution"><span class="header-section-number">0.4</span> License and Attribution</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/singmann/stats_for_experiments/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/singmann/stats_for_experiments/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -210,7 +216,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-13.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -218,34 +224,6 @@ window.onload = function() {
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>

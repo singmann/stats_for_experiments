@@ -13,15 +13,31 @@ description: "Statistics for Experimental Psychology with R using the afex packa
 
 # Overview {-}
 
-At this point in time, the book is being written so only few chapters are already available.
+This is an online textbook that is *currently under development*. It is written by Henrik Singmann, lecturer at UCL.
+
+This book provides an introduction to research methods and statistics mostly for experimental research in psychology and related discipline. In contrast to other introductory texts, it tries to stay light on the mathematics and instead focus on the logic and practical application of statistical methods to actual research data using the statistical programming language `R`. The reason for doing so, is that generally the computer will perform the calculations for us, so being able to do the calculations by hand does not seem necessary nowadays. Furthermore, by focussing on only the most important bits of mathematics, it allows us to spend more time on these bits and explain everything in detail without assuming much prior knowledge.
+
+Our focus on logic and real research applications also provides a further benefit compared to other textbooks. Recent years have shown that one of the largest issues in the field is not the fact that statistics is used wrongly. In many cases researchers use appropriate statistical methods. The problem often is that researchers tend to draw conclusions that are not fully justified. In other words, the issue is how people interpret the results from their statistical analysis, and not necessarily how the analysis is performed. Using real data sets allows us to discuss how to interpret results in detail as well. We will show that what matters for understanding a statistical result is the context in which it is generated, and also demonstrate which conclusions are permitted for actual published data sets. 
+
+To sum up, the present approach has several benefits: It focuses on the skills researchers need to analyse their data; it is accessible to readers without particular background in mathematics; it allows to discuss the role of statistics in the research process; it allows discussing what interpretations are justifiable given certain results; and it provides an opportunity to highlight the problems associated with a mindless application of statistics.   
+
+## Intended Audience
+
+This book is intended for a postgraduate (i.e., MSc level and above) audience. Besides a basic understanding of summary statistics such as the average (i.e., the mean) and that probabilities are used to express uncertainty, no further background knowledge is required. The most important skill for understanding this book, is an interest in using data to answer interesting research questions. As we will see later, in this situation statistics is an important tool that can potentially assist in providing an answer.
+
+## Chapter Overview
+
+At this point in time, the book is being written so only a limited set of chapters is already available.
 
 -   Chapter \@ref(role-of-statistics-in-the-research-process) provides an introduction to the role of statistics in the research process. It also answers the important question: Why do we need statistics? 
 -   Chapter \@ref(research-designs) provides an overview over important concepts and correct terminology we need to describe research designs (e.g., what is a variable? what is the difference between dependent and independent variables?). It also introduces the distinction between experimental and observational studies.
--   Chapter \@ref(standard1) introduces the basic statistical approach.
+- Chapter \@ref(tidyverse-intro) provides an introduction to `R` and the `tidyverse.
+- Chapter \@ref(ggplot2-intro) provides an introduction to data visualisation with `R` using the `ggplot2` package.
+-   Chapter \@ref(standard1) introduces the basic statistical approach using a simple experiment with two conditions.
 
 ## Acknowledgments
 
-This project would not exist without the help and feedback provided by others: David Kellen, Lukasz Walasek, Stuart Rosen, Anna Krason
+This project would not exist without the help and feedback provided by Stuart Rosen, Anna Krason, David Kellen, and Lukasz Walasek. 
 
 ## License and Attribution
 
@@ -29,6 +45,7 @@ This book is licensed under the [Attribution-NonCommercial 4.0 International (CC
 
 Parts of this book uses other materials released under a compatible CC license. Where it does so, the source is clearly indicated. Please ensure to attribute the original source in case you re-use such materials. 
 
+This book has adopted some ideas and code in the back-end (specifically for the quizzes) from the [PsyTeachR project](https://psyteachr.github.io/)  at the University of Glasgow.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

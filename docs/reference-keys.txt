@@ -157,3 +157,5 @@ preparing-the-data
 descriptive-statistics
 inferential-analysis
 summary-5
+intended-audience
+chapter-overview
