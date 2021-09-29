@@ -111,7 +111,7 @@ summary-2
 extended-walasek-example
 reading-both-data-sets
 combining-both-data-sets
-preparing-and-descriptive-analysis
+preparing-the-data-set-and-descriptive-analysis
 quiz
 practical-helpers-cheatsheets
 tiydverse-exercise-earworms-and-sleep
