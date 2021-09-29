@@ -1,6 +1,6 @@
 /* styles for webex-solveme */
 .webex-solveme { border: 2px dotted red; }
-.webex-solveme.webex-correct { border: 2px solid green; background-color: green}
+.webex-solveme.webex-correct { border: 2px solid green; background-color: LimeGreen}
 /* styles for hidden solutions */
 .webex-solution {
     height: 2.5em;
