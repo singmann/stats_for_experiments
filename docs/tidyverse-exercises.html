@@ -48,7 +48,7 @@
 <li><a class="" href="tidyverse-intro.html"><span class="header-section-number">3</span> Short Introduction to R and the tidyverse</a></li>
 <li><a class="active" href="tidyverse-exercises.html">tidyverse: Example, Quiz, and Exercises</a></li>
 <li><a class="" href="ggplot2-intro.html"><span class="header-section-number">4</span> Data Visualisation with ggplot2</a></li>
-<li><a class="" href="ggplot-exercises.html">ggplot2 Exercises</a></li>
+<li><a class="" href="ggplot-exercises.html">ggplot2: Example, Quiz, and Exercises</a></li>
 <li><a class="" href="standard1.html"><span class="header-section-number">5</span> The Standard Approach for One Independent Variable</a></li>
 <li><a class="" href="case-study-laptop.html"><span class="header-section-number">6</span> Case Study 1: More Results from Note Taking Studies</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -445,9 +445,9 @@
 <p>In the case of <code>R</code>, once you know which function to use (e.g., thanks to the cheat sheet) it might then make sense to follow up by looking at the documentation. The documentation can be obtained for each function by entering <code>?functionname</code> (e.g., <code>?summarise</code>) at the <code>R</code> prompt. This provides not only an explanation of what the function does plus all of its arguments, but will also usually have helpful examples.</p>
 <p>For the <code>tiydverse</code> packages, <code>RStudio</code> provides an almost complete list of <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheets</a>. The most relevant for us at the moment is the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"><code>dplyr</code> cheat sheet</a>. Furthermore, there are also cheat sheets for <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf">the <code>RStudio</code> IDE iteself</a>, <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">reading in data</a>, and even <a href="http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf">base <code>R</code></a>. Before diving into the examples below, it might make sense to download (or even print) the cheat sheets and have them by your side while trying to solve the problems.</p>
 </div>
-<div id="tiydverse-exercise-earworms-and-sleep" class="section level2" number="3.10">
+<div id="earworms-task1" class="section level2" number="3.10">
 <h2>
-<span class="header-section-number">3.10</span> <code>tiydverse</code> Exercise: Earworms and Sleep<a class="anchor" aria-label="anchor" href="#tiydverse-exercise-earworms-and-sleep"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.10</span> <code>tiydverse</code> Exercise: Earworms and Sleep<a class="anchor" aria-label="anchor" href="#earworms-task1"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this exercise we will work with a data set from <span class="citation"><a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">Scullin, Gao, and Fillmore</a> (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> investigating a research question about the relationship between listening to music and sleep: “Many people listen to music for hours every day, often near bedtime. We investigated whether music listening affects sleep, focusing on a rarely explored mechanism: involuntary musical imagery (earworms).” I’m sure most of you will have had the experience of an earworm – hearing some particular piece of music in your head, and not being able to ‘stop it playing.’ If this seems alien to you, <a href="https://en.wikipedia.org/wiki/Earworm">Wikipedia provides a longer introduction</a>.</p>
 <p>Here, we are looking at the data from <span class="citation"><a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">Scullin, Gao, and Fillmore</a> (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span>’s Study 2, which was a sleep-lab experiment. Participants came to the sleep-lab and stayed for one night in a controlled environment in which a number of objective sleep parameters could be measured via <a href="https://en.wikipedia.org/wiki/Polysomnography">polysomnography</a>. Throughout the night several physiological parameters such as electroencephalography (EEG) and breathing were recorded continuously. Participants were assigned to one of two conditions determining the music they heard just before going to bed: either a condition in which original versions of three pop songs, which included the lyrics, or an instrumental version of the same three pop-songs (without the lyrics). The three songs (<a href="https://youtu.be/1k8craCGpgs">“Don’t Stop Believin’” by Journey</a>, <a href="https://youtu.be/fWNaR-rxAic">“Call Me Maybe” by Carly Rae Jepsen</a>, and <a href="https://youtu.be/nfWlot6h_JM">“Shake It Off” by Taylor Swift</a>) were chosen because previous research had shown that they induce earworms. After participants woke up in the morning, they were asked whether they experienced any earworms at different points in the night or in the morning.</p>
@@ -522,7 +522,7 @@ The next 5 variables concerned whether or not the participants reported having a
 <li>
 <code>sleep_time</code>: total sleep time in minutes</li>
 </ul>
-<p>The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for <code>clasrank</code>. This uses US nomenclature for what year of 4 the student participant is in (i.e., freshman = year 1, sophomore = year 2, junior = year 3, and senior = year 4) plus some additional values.</p>
+<p>The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for <code>classrank</code>. This uses US nomenclature for what year of 4 the student participant is in (i.e., freshman = year 1, sophomore = year 2, junior = year 3, and senior = year 4) plus some additional values.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-29" class="exercise"><strong>Exercise 3.11  </strong></span>For research questions 1 and 2 described above, which variables are the independent and which are the dependent variables?</p>
 <div class="webex-solution">
@@ -874,29 +874,21 @@ Solution
 <span class="va">earworm</span> <span class="op">%&gt;%</span> 
   <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">prop_earworm</span>, <span class="va">any_earworm</span>, <span class="fu">starts_with</span><span class="op">(</span><span class="st">"earworm"</span><span class="op">)</span><span class="op">)</span>  <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt;     id prop_earworm any_earworm earworm_falling_asleep</span>
-<span class="co">#&gt; 1  102    0.0000000           0                      0</span>
-<span class="co">#&gt; 2  103    0.0000000           0                      0</span>
-<span class="co">#&gt; 3  104    0.0000000           0                      0</span>
-<span class="co">#&gt; 4  105    0.0000000           0                      0</span>
-<span class="co">#&gt; 5  106    0.0000000           0                      0</span>
-<span class="co">#&gt; 6  107    0.0000000           0                      0</span>
-<span class="co">#&gt; 7  108    0.3333333           1                      0</span>
-<span class="co">#&gt; 8  109    0.0000000           0                      0</span>
-<span class="co">#&gt; 9  110    0.0000000           0                      0</span>
-<span class="co">#&gt; 10 111    0.0000000           0                      0</span>
-<span class="co">#&gt;    earworm_night earworm_morning earworm_control</span>
-<span class="co">#&gt; 1              0               0               1</span>
-<span class="co">#&gt; 2              0               0               1</span>
-<span class="co">#&gt; 3              0               0               0</span>
-<span class="co">#&gt; 4              0               0               0</span>
-<span class="co">#&gt; 5              0               0               0</span>
-<span class="co">#&gt; 6              0               0               0</span>
-<span class="co">#&gt; 7              0               1               1</span>
-<span class="co">#&gt; 8              0               0               0</span>
-<span class="co">#&gt; 9              0               0               0</span>
-<span class="co">#&gt; 10             0               0               1</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;    id prop_earworm any_earworm earworm_falling_asleep</span>
+<span class="co">#&gt; 1 102            0           0                      0</span>
+<span class="co">#&gt; 2 103            0           0                      0</span>
+<span class="co">#&gt; 3 104            0           0                      0</span>
+<span class="co">#&gt; 4 105            0           0                      0</span>
+<span class="co">#&gt; 5 106            0           0                      0</span>
+<span class="co">#&gt; 6 107            0           0                      0</span>
+<span class="co">#&gt;   earworm_night earworm_morning earworm_control</span>
+<span class="co">#&gt; 1             0               0               1</span>
+<span class="co">#&gt; 2             0               0               1</span>
+<span class="co">#&gt; 3             0               0               0</span>
+<span class="co">#&gt; 4             0               0               0</span>
+<span class="co">#&gt; 5             0               0               0</span>
+<span class="co">#&gt; 6             0               0               0</span></code></pre></div>
 <p>We first calculate the new variables using <code>mutate()</code>. To do so, we realise that the <code>any_earworm</code> variable is a function of the <code>prop_earworm</code> (= proportion of earworm) variable, so we calculate the latter first. To calculate the proportion variable we just add each of the three variables up and then divide by 3, being mindful that we need to put parentheses around the <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> operations.</p>
 <p>We can then calculate the <code>any_earworm</code> variable from the <code>prop_variable</code>. Note that we do so in a new <code>mutate()</code> call. The reason is that we need to refer to the <code>prop_variable</code> variable and it can lead to problems using variables that are created in the same <code>mutate()</code> call. It might work, but is not guaranteed, so better to avoid it.</p>
 <p>To calculate the <code>any_earworm</code> variable, we need to check when the <code>prop_earworm</code> variable is 0 and then assign 0 to the <code>any</code> variable and 1 otherwise. We use the <code>if_else()</code> function for this which allows us to apply an if-else logic, as we have here, to a vector (i.e., if called with a vector, <code>if_else()</code> also returns a vector). Here, the if-part checks if <code>prop_earworm == 0</code>; if it is, we return <code>0</code>, and <code>1</code> otherwise.</p>
@@ -1177,7 +1169,7 @@ window.onload = function() {
 </li>
 <li><a class="nav-link" href="#quiz"><span class="header-section-number">3.8</span> Quiz</a></li>
 <li><a class="nav-link" href="#practical-helpers-cheatsheets"><span class="header-section-number">3.9</span> Practical Helpers: Cheatsheets</a></li>
-<li><a class="nav-link" href="#tiydverse-exercise-earworms-and-sleep"><span class="header-section-number">3.10</span> tiydverse Exercise: Earworms and Sleep</a></li>
+<li><a class="nav-link" href="#earworms-task1"><span class="header-section-number">3.10</span> tiydverse Exercise: Earworms and Sleep</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1195,7 +1187,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-09-29.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-10-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

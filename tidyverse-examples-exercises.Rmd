@@ -249,7 +249,7 @@ In the case of `R`, once you know which function to use (e.g., thanks to the che
 
 For the `tiydverse` packages, `RStudio` provides an almost complete list of [cheat sheets](https://www.rstudio.com/resources/cheatsheets/). The most relevant for us at the moment is the [`dplyr` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf). Furthermore, there are also cheat sheets for [the `RStudio` IDE iteself](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf), [reading in data](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf), and even [base `R`](http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf). Before diving into the examples below, it might make sense to download (or even print) the cheat sheets and have them by your side while trying to solve the problems.
 
-## `tiydverse` Exercise: Earworms and Sleep
+## `tiydverse` Exercise: Earworms and Sleep {#earworms-task1}
 
 For this exercise we will work with a data set from @scullinBedtimeMusicInvoluntary2021 investigating a research question about the relationship between listening to music and sleep: "Many people listen to music for hours every day, often near bedtime. We investigated whether music listening affects sleep, focusing on a rarely explored mechanism: involuntary musical imagery (earworms)." I'm sure most of you will have had the experience of an earworm -- hearing some particular piece of music in your head, and not being able to 'stop it playing'. If this seems alien to you, [Wikipedia provides a longer introduction](https://en.wikipedia.org/wiki/Earworm).
 
@@ -297,7 +297,7 @@ The next 5 variables concerned whether or not the participants reported having a
 - `sleep_efficiency`: sleep efficiency percentage score obtained from the polysomnography (0 = very low sleep efficiency and 100 = very high sleep efficiency)
 - `sleep_time`: total sleep time in minutes
 
-The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for `clasrank`. This uses US nomenclature for what year of 4 the student participant is in  (i.e., freshman = year 1, sophomore = year 2, junior = year 3, and senior = year 4) plus some additional values.
+The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for `classrank`. This uses US nomenclature for what year of 4 the student participant is in  (i.e., freshman = year 1, sophomore = year 2, junior = year 3, and senior = year 4) plus some additional values.
 
 ::: {.exercise}
 For research questions 1 and 2 described above, which variables are the independent and which are the dependent variables? 
@@ -603,7 +603,7 @@ earworm <- earworm %>%
 earworm %>% 
   select(id, prop_earworm, any_earworm, starts_with("earworm"))  %>% 
   as.data.frame() %>% 
-  head(10)
+  head()
 
 ```
 
