@@ -527,7 +527,7 @@ pe3_3 <- ggplot(earworm, aes(x = control_combined, y = sleep_efficiency)) +
 plot_grid(pe3_1, pe3_2, pe3_3)
 ```
 
-It is difficult to make a clear judgement here. For both the relaxed and the sleepiness, there appear to be more data points in the top right of the plot than elsewehre. However, in both plots there is also one data point with large sleep efficiency value that at the same time has the smallest value on the control variable. 
+It is difficult to make a clear judgement here. For both the relaxed and the sleepiness, there appear to be more data points in the top right of the plot than elsewhere. However, in both plots there is also one data point with large sleep efficiency value that at the same time has the smallest value on the control variable. 
 
 For sleepy however, there is also one data point with both small sleep efficiency and low sleepiness. For relaxed such a point is missing. If this difference is enough to say there is a relationship in one, but not the other case is difficult to say.
 
@@ -595,6 +595,54 @@ ggplot(earworm, aes(x = group, y = any_earworm)) +
 ```
 
 This provides a very similar picture as the any earworm variable. For lyrics condition, the vast majority reports no earworms, whereas in the instrumental condition the split is roughly 50-50. Of course, this similarity should not  be too surprising, both variables use the exact same information, only in slightly different ways.
+
+In sum, the data supports the prediction that listening to instrumental music leads to more earworms than listening to lyrical music.   
+
+`r unhide()`
+:::
+
+::: {.exercise}
+Now that we have learned something about the relationship between different versions of pop songs and earworms, let's link this to the main point of interest of the study, sleep quality. More specifically, research question (2) is: Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?
+
+Make one plot for each of the two dependent variables for this research question, one for sleep efficiency and one for sleep time. As before in each plot make sure that you show both, the distribution of the variable across participants as well as the mean, separately for each of the two experimental conditions.
+
+Does the plot support the hypothesis that the type of musing heard before sleeping affects the sleep quality?
+
+`r hide("Hint")`
+We have to make a very similar plot as for the previous exercise. However, this time we probably want to show the individual data points somewhat differently.
+`r unhide()`
+
+`r hide("Solution")`
+
+For this exercise, we do not need to further prepare the data as each participant has only one observation for both dependent variables. The most important question here is how to display the data in the background. Let's begin by using `geom_beeswarm()`. Let's also immediately make two plots, one for each dependent variable and combine them into one figure. 
+
+```{r}
+pr2_1a <- ggplot(earworm, aes(x = group, y = sleep_efficiency)) +
+  geom_beeswarm(alpha = 0.2) +
+  stat_summary() 
+pr2_2a <- ggplot(earworm, aes(x = group, y = sleep_time)) +
+  geom_beeswarm(alpha = 0.2) +
+  stat_summary() 
+plot_grid(pr2_1a, pr2_2a)
+```
+
+This figure shows that for each of the two dependent variables the sleep quality is on average lower in the instrumental music group compared to the lyrical music group. When looking at the individual data points in the background, it looks like not many have the same value of the dependent variable, so the distribution of points is not veyr clear. Therefore, let's also try out using `geom_quasirandom()`:
+
+```{r}
+pr2_1b <- ggplot(earworm, aes(x = group, y = sleep_efficiency)) +
+  geom_quasirandom(alpha = 0.2) +
+  stat_summary() 
+pr2_2b <- ggplot(earworm, aes(x = group, y = sleep_time)) +
+  geom_quasirandom(alpha = 0.2) +
+  stat_summary() 
+plot_grid(pr2_1b, pr2_2b)
+```
+
+This plot shows more easily that for sleep efficiency, there is a difference in the means that is also reflected in the distribution of individual points. For the instrumental condition, the distribution of points seems longer as well as shifted downwards compared to the lyrics condition. This suggests that there might be an actual effect of type of music listened to before sleep on sleep efficiency.
+
+The pattern of results is not so clear for sleep time. Whereas there is also a mean difference, the distributions look quite similar. Furthermore, for each of the two groups there is one data point far away from the rest of the distribution (a potential "outlier") in opposite direction to the mean difference (i.e., particular low for the lyrics group for which the mean is larger). Hence, whether the observed difference shows a genuine difference is a lot less clear.
+
+Taken together, for this data `geom_quasirandom` seems to provide the more interesting and easy to interpret data visualisation. It shows that there seems to be an effect of experimental condition on sleep efficiency, but the effect is a lot less clear for sleep time.  
 
 `r unhide()`
 :::
