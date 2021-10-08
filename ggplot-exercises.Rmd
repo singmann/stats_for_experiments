@@ -646,3 +646,63 @@ Taken together, for this data `geom_quasirandom` seems to provide the more inter
 
 `r unhide()`
 :::
+
+::: {.exercise}
+
+As the last exercise, make a plot that shows the distribution and means of sleep efficiency and sleep time conditional on whether or not participants did have earworms during the night (i.e., at any time, excluding the control time point). Thus, in this analysis we ignore the experimental condition.
+
+To perform the analysis, you need to begin with the same step as the corresponding analysis in the `tidyverse` exercises and then create one more sets of plots:
+
+1. Create a new `factor`, `has_earworm`, that is `yes`, whenever participants report at least once that they had an earworm for one of the three `earworm` dependent variables (i.e., within the experimental time frame, ignoring the control time).
+2. Make a plot of `sleep_efficiency` and `sleep_time` as a function of `has_earworm`.
+3. To ensure you do not forget to look into this, also calculate how many participants there are that do have versus do not have earworms.
+
+What can you see? Do participants that report having an earworm sleep better than participants that do not do so, ignoring the experimental condition?
+
+
+`r hide("Hint")`
+Take a look at the last `tidyverse` exercise to get going.
+`r unhide()`
+
+`r hide("Solution")`
+To create the new factor, `has_earworm`, we can transform `any_earworm` into a factor: 
+
+```{r}
+earworm <- earworm %>% 
+  mutate(has_earworm = factor(
+    any_earworm,
+    levels = c(1, 0),
+    labels = c("yes", "no")
+  ))
+```
+
+We can then make the same plot as for the last analysis, but with a new *independent variable*.
+
+```{r}
+pr3_1b <- ggplot(earworm, aes(x = has_earworm, y = sleep_efficiency)) +
+  geom_quasirandom(alpha = 0.2) +
+  stat_summary() 
+pr3_2b <- ggplot(earworm, aes(x = has_earworm, y = sleep_time)) +
+  geom_quasirandom(alpha = 0.2) +
+  stat_summary() 
+plot_grid(pr3_1b, pr3_2b)
+```
+
+This plot suggests that sleep efficiency is lower if one reports at least one earworm during the night compared to when not. Interestingly, participants that report no earworms show a unimodal distribution with a mode that is larger than all but one sleep efficiency score for participants that do report earworms. However, as both distribution have a relatively long tail towards lower scores, the difference in means is not huge.
+
+For sleep time, the difference is in the opposite direction and noticeably smaller.
+
+The plot also shows that there are less participants that report an earworm than those that do not. Let's take a look again how large both groups are:
+
+```{r}
+earworm %>% 
+  group_by(has_earworm) %>% 
+  summarise(n = n()) %>% ## calculate N
+  mutate(prop = n/sum(n)) ## transform N into %
+```
+
+This shows that around 40% of participants report an earworm indicating that the imbalance is not very large.
+
+`r unhide()`
+
+:::

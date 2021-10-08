@@ -656,7 +656,7 @@ Solution
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> 
 <span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">pe3_1</span>, <span class="va">pe3_2</span>, <span class="va">pe3_3</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-19-1.png" width="100%"></div>
-<p>It is difficult to make a clear judgement here. For both the relaxed and the sleepiness, there appear to be more data points in the top right of the plot than elsewehre. However, in both plots there is also one data point with large sleep efficiency value that at the same time has the smallest value on the control variable.</p>
+<p>It is difficult to make a clear judgement here. For both the relaxed and the sleepiness, there appear to be more data points in the top right of the plot than elsewhere. However, in both plots there is also one data point with large sleep efficiency value that at the same time has the smallest value on the control variable.</p>
 <p>For sleepy however, there is also one data point with both small sleep efficiency and low sleepiness. For relaxed such a point is missing. If this difference is enough to say there is a relationship in one, but not the other case is difficult to say.</p>
 <p>For the combined score, the pattern seems similar and also does not suggest a clear relationship.</p>
 </div>
@@ -711,6 +711,105 @@ Solution
 <span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-23-1.png" width="100%"></div>
 <p>This provides a very similar picture as the any earworm variable. For lyrics condition, the vast majority reports no earworms, whereas in the instrumental condition the split is roughly 50-50. Of course, this similarity should not be too surprising, both variables use the exact same information, only in slightly different ways.</p>
+<p>In sum, the data supports the prediction that listening to instrumental music leads to more earworms than listening to lyrical music.</p>
+</div>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-59" class="exercise"><strong>Exercise 4.21  </strong></span>Now that we have learned something about the relationship between different versions of pop songs and earworms, let’s link this to the main point of interest of the study, sleep quality. More specifically, research question (2) is: Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?</p>
+<p>Make one plot for each of the two dependent variables for this research question, one for sleep efficiency and one for sleep time. As before in each plot make sure that you show both, the distribution of the variable across participants as well as the mean, separately for each of the two experimental conditions.</p>
+<p>Does the plot support the hypothesis that the type of musing heard before sleeping affects the sleep quality?</p>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<p>We have to make a very similar plot as for the previous exercise. However, this time we probably want to show the individual data points somewhat differently.</p>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>For this exercise, we do not need to further prepare the data as each participant has only one observation for both dependent variables. The most important question here is how to display the data in the background. Let’s begin by using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code>. Let’s also immediately make two plots, one for each dependent variable and combine them into one figure.</p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pr2_1a</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">earworm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span> 
+<span class="va">pr2_2a</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">earworm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">sleep_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span> 
+<span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">pr2_1a</span>, <span class="va">pr2_2a</span><span class="op">)</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-24-1.png" width="100%"></div>
+<p>This figure shows that for each of the two dependent variables the sleep quality is on average lower in the instrumental music group compared to the lyrical music group. When looking at the individual data points in the background, it looks like not many have the same value of the dependent variable, so the distribution of points is not veyr clear. Therefore, let’s also try out using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>:</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pr2_1b</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">earworm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span> 
+<span class="va">pr2_2b</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">earworm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">sleep_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span> 
+<span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">pr2_1b</span>, <span class="va">pr2_2b</span><span class="op">)</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-25-1.png" width="100%"></div>
+<p>This plot shows more easily that for sleep efficiency, there is a difference in the means that is also reflected in the distribution of individual points. For the instrumental condition, the distribution of points seems longer as well as shifted downwards compared to the lyrics condition. This suggests that there might be an actual effect of type of music listened to before sleep on sleep efficiency.</p>
+<p>The pattern of results is not so clear for sleep time. Whereas there is also a mean difference, the distributions look quite similar. Furthermore, for each of the two groups there is one data point far away from the rest of the distribution (a potential “outlier”) in opposite direction to the mean difference (i.e., particular low for the lyrics group for which the mean is larger). Hence, whether the observed difference shows a genuine difference is a lot less clear.</p>
+<p>Taken together, for this data <code>geom_quasirandom</code> seems to provide the more interesting and easy to interpret data visualisation. It shows that there seems to be an effect of experimental condition on sleep efficiency, but the effect is a lot less clear for sleep time.</p>
+</div>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-60" class="exercise"><strong>Exercise 4.22  </strong></span>As the last exercise, make a plot that shows the distribution and means of sleep efficiency and sleep time conditional on whether or not participants did have earworms during the night (i.e., at any time, excluding the control time point). Thus, in this analysis we ignore the experimental condition.</p>
+<p>To perform the analysis, you need to begin with the same step as the corresponding analysis in the <code>tidyverse</code> exercises and then create one more sets of plots:</p>
+<ol style="list-style-type: decimal">
+<li>Create a new <code>factor</code>, <code>has_earworm</code>, that is <code>yes</code>, whenever participants report at least once that they had an earworm for one of the three <code>earworm</code> dependent variables (i.e., within the experimental time frame, ignoring the control time).</li>
+<li>Make a plot of <code>sleep_efficiency</code> and <code>sleep_time</code> as a function of <code>has_earworm</code>.</li>
+<li>To ensure you do not forget to look into this, also calculate how many participants there are that do have versus do not have earworms.</li>
+</ol>
+<p>What can you see? Do participants that report having an earworm sleep better than participants that do not do so, ignoring the experimental condition?</p>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<p>Take a look at the last <code>tidyverse</code> exercise to get going.</p>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>To create the new factor, <code>has_earworm</code>, we can transform <code>any_earworm</code> into a factor:</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="va">earworm</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>has_earworm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+    <span class="va">any_earworm</span>,
+    levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,
+    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span>
+  <span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>We can then make the same plot as for the last analysis, but with a new <em>independent variable</em>.</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pr3_1b</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">earworm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">has_earworm</span>, y <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span> 
+<span class="va">pr3_2b</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">earworm</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">has_earworm</span>, y <span class="op">=</span> <span class="va">sleep_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_summary</span><span class="op">(</span><span class="op">)</span> 
+<span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">pr3_1b</span>, <span class="va">pr3_2b</span><span class="op">)</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span>
+<span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></code></pre></div>
+<div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-27-1.png" width="100%"></div>
+<p>This plot suggests that sleep efficiency is lower if one reports at least one earworm during the night compared to when not. Interestingly, participants that report no earworms show a unimodal distribution with a mode that is larger than all but one sleep efficiency score for participants that do report earworms. However, as both distribution have a relatively long tail towards lower scores, the difference in means is not huge.</p>
+<p>For sleep time, the difference is in the opposite direction and noticeably smaller.</p>
+<p>The plot also shows that there are less participants that report an earworm than those that do not. Let’s take a look again how large both groups are:</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">earworm</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">has_earworm</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">summarise</span><span class="op">(</span>n <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">## calculate N</span>
+  <span class="fu">mutate</span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="co">## transform N into %</span>
+<span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 3</span></span>
+<span class="co">#&gt;   <span style="font-weight: bold;">has_earworm</span>     <span style="font-weight: bold;">n</span>  <span style="font-weight: bold;">prop</span></span>
+<span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #555555;">1</span> yes            19 0.396</span>
+<span class="co">#&gt; <span style="color: #555555;">2</span> no             29 0.604</span></code></pre></div>
+<p>This shows that around 40% of participants report an earworm indicating that the imbalance is not very large.</p>
 </div>
 </div>
 
@@ -851,7 +950,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-10-01.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2021-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
