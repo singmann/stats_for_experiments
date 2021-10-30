@@ -6,6 +6,7 @@ rel_file <- "research_designs.Rmd"
 rel_file <- "tidyverse-intro.Rmd"
 rel_file <- "tidyverse-examples-exercises.Rmd"
 rel_file <- "ggplot-intro.Rmd"
+rel_file <- "ggplot-exercises.Rmd"
 rel_file <- "02-standard_approach.Rmd"
 
 ## step 1: upload file the first time you want to use it:
@@ -37,3 +38,6 @@ update_file(file = rel_file)
 
 # Chapter 4: ggplot introduction
 # https://docs.google.com/document/d/1xM9XnX4R9iwBFAnhwinpMsATu-bREPPkxqZObDl1ICo/edit?usp=sharing
+
+# Chapter 4: ggplot2 exercises
+# https://docs.google.com/document/d/1q11La7Caz-ewwTMtqZ_WKdhhWP7QGAV1sOCMYdvk3f4/edit?usp=sharing
