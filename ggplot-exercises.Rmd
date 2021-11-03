@@ -1,6 +1,6 @@
 # `ggplot2`: Example, Quiz, and Exercises {#ggplot-exercises .unnumbered}
 
-As before, let's get into the habit to restart the `R` session before starting a new analysis. As a reminder, do so through the `RStudio` menu with `Session` - `Restart R`. After this, we begin by loading the `tidyverse`.[^ggplot-exercises-1] As we will create plots, we also set a global theme without the grey background and some other tweaks.
+As before, let's get into the habit of restarting the `R` session before starting a new analysis. As a reminder, do so through the `RStudio` menu with `Session` - `Restart R`. After this, we begin by loading the `tidyverse`.[^ggplot-exercises-1] As we will create plots, we also set a global theme without the grey background and some other tweaks.
 
 [^ggplot-exercises-1]: Note that the `library()` function supports both regular and non-standard evaluation. That means, `library(tidyverse)` also works for loading `tidyverse`. However, as `tidyverse` is the name of a package and not an `R` object, I like to make this explicit by using `library("tidyverse")`. It is difficult enough to remember when a name should be quoted and when not.
 
@@ -15,7 +15,7 @@ theme_set(theme_bw(base_size = 15) +
 
 ### Reading and Combining Both Data Sets
 
-Let's for the last time get back to the data of @walasekHowMakeLoss2015. Here, we load the data in the same way as in the `tidyverse` extended example session (Section \@ref(extended-walasek-example)) and then combine them into one data set, `ws1`. As before, it assumes the two data files, for [Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv), are in the `data` sub-folder of your working directory. We then convert the categorical variables into factors.
+Let's for the last time get back to the data of @walasekHowMakeLoss2015. Here, we load the data sets in the same way as in the previous `tidyverse` extended example (Section \@ref(extended-walasek-example)) and then combine them into one data set, `ws1`. As before, this assumes the two data files, for [Experiment 1a](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv) and [Experiment 1b](https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv), are in the `data` sub-folder of your working directory. We then convert the categorical variables into factors.
 
 ```{r, message=FALSE}
 ws1a <- read_csv("data/ws2015_exp1a.csv")
@@ -38,11 +38,11 @@ ws1 <- ws1 %>%
 glimpse(ws1)
 ```
 
-As we have discussed in the sections before, there are two ways to plot this data. Once aggregated on a by-lottery -- that is, a by-item -- level or on a by-participant level. Here, we will do both, beginning with the by-lottery level.
+As we have discussed before, there are two ways to plot this data. One way is to aggregate on a by-lottery -- that is, a by-item -- level. The other is to aggregate on a by-participant level. Here, we will do both, beginning with the by-lottery level.
 
 ### By-Lottery Plot
 
-For the by-lottery plot, we use the exact same strategy as before. That is, we will plot the average acceptance rate per lottery and condition. We also split lotteries into three bins -- negative expected value, expected value of 0, and positive expected value. The only difference to earlier is slightly different factor level names for the plot later.
+For the by-lottery plot, we use the exact same strategy as before. That is, we will plot the average acceptance rate per lottery and condition. We also split lotteries into three bins -- negative expected value, expected value of 0, and positive expected value. The only difference to our earlier analysis are slightly different factor level names for the plot.
 
 ```{r}
 lot_sum_all <- ws1 %>% 
@@ -59,7 +59,7 @@ lot_sum_all <- ws1 %>%
 lot_sum_all
 ```
 
-With this data in hand, we then produce the same plot as before (Section  \@ref(faceting-intro)). As we have already set a global theme, we do not need to pass the themes calls to this plot this time. However, we try to create an appealing legend. For this, we add a call to the `guides()` function. We also set a better y-axis label using the `labs()` function. We also make sure the y-axis stretches the full range of the data, from 0 to 1. For this we use the `coord_cartesian()`  function which allows to specify both y-axis (`ylim`) and x-axis (`xlim`) limits.
+With this data in hand, we can then produce the same plot as before in Section  \@ref(faceting-intro). As we have already set a global theme, we do not need to pass the `themes` calls to this plot. However, we still want to create an appealing legend, by adding a call to the `guides()` function. We also specify a better y-axis label using the `labs()` function, and ensure the y-axis stretches the full range of the data, from 0 to 1 using the `coord_cartesian()`  function. This function allows us to specify both y-axis (`ylim`) and x-axis (`xlim`) limits.
 
 ```{r, fig.asp = 1.15}
 ggplot(lot_sum_all, aes(x = gain, y = mean_acceptance, 
@@ -73,9 +73,9 @@ ggplot(lot_sum_all, aes(x = gain, y = mean_acceptance,
   coord_cartesian(ylim = c(0, 1))
 ```
 
-This call contains a few parts that one often only needs in the polished plot one wants to include in the communication of ones research, such as nicer axes labels and better organised legends. The particular way to set these elements is therefore something that one can easily forget. One way to remember is by taking a look at the [`ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf). Another way is by simply googling this. For example, I googled "ggplot2 legend two rows" to remember I needed to use `guides()` and the exact syntax. So, don't forget that google is your friend when it comes to `R` programming, especially for the `tidyverse`.
+This call contains a few detailed specifications (e.g., nicer axes labels and better organised legends) typically only needed in a polished plot for a publication or presentation at a conference. The way to set these elements is therefore something that one can easily forget. One way to remember is by taking a look at the [`ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf). Another way is by simply googling what you want to do. For example, I googled "ggplot2 legend two rows" to remember I needed to use `guides()` and the exact syntax. So, don't forget that google is your friend when it comes to `R` programming, especially for the `tidyverse`.
 
-The plot shows the pattern across lotteries we have seen before that highly questions the original idea of loss aversion. It is clear that the relative attractiveness of symmetric lotteries differs quite across condition so people do not evaluate the same magnitudes of losses and wins similarly across conditions.
+The plot shows the pattern across lotteries that we have seen before, and one that highly questions the original idea of loss aversion. It is clear that the relative attractiveness of symmetric lotteries differs considerably across conditions, so people do not evaluate the same magnitudes of losses and wins similarly across them.
 
 ### By-Participant Plot
 
@@ -92,21 +92,21 @@ part_sum <- ws1 %>%
 part_sum
 ```
 
-One problem we have, when plotting this data is that we only have four distinct values for the mean acceptability scores. The reason for this is that there are only three shared symmetric lotteries. Thus, participant can accept between 0 to 3 lotteries. Calculating the mean acceptability by dividing 0 to 3 by 3 gives three possible values: 
+One problem we have when plotting this data is that there are only three shared symmetric lotteries, so we only have four distinct values for the mean acceptability scores.. Any individual participant can accept only 0, 1, 2 or 3 lotteries. Calculating the mean acceptability by dividing 0 to 3 by 3 gives four possible values: 
 
 ```{r}
 0:3 / 3
 
-## these are exactly the values in the data:
+## these are exactly the only values that occur in this data set:
 sort(unique(part_sum$mean_acc))
 
 ```
 
-In the code above we use the `:` operator to create a sequence of integer numbers (i.e., whole numbers) from 0 to 3. The same result would have been obtained by explicitly creating this vector; for example, using `c(0, 1, 2, 3)`.
+In the code above, we used the `:` operator to create a sequence of integers (i.e., whole numbers) from 0 to 3. The same result would have been obtained by explicitly creating this vector, for example, using `c(0, 1, 2, 3)`.
 
-Plotting data like this with many unique value is a bit tricky. Our usual approaches -- alpha blending, jitter, bee swarm plots or the like -- do not produce satisfactory results. The following code will produce all these plots and show the problem. 
+Plotting data like this with few unique values is a bit tricky. Our usual approaches -- alpha blending, jitter, bee swarm plots, or the like -- do not produce satisfactory results. The following code will produce all these plots and show the problem. 
 
-In this code, we also introduce another `ggplot2` functionality. A plot created by `ggplot2` is an `R` object itself. So far, we have print the object  which produces the plot in the plot pane. However, if we save it in an `R` object using `<-`, the plot is not shown in the plot pane. Instead, we can then use another function, such as `plot_grid()` from the [`cowplot`](https://cran.r-project.org/package=cowplot) package, to create one plot that consists of multiple individual plots. Note that you will have to install `cowplot` before running the code below. 
+In this code, we also introduce another `ggplot2` functionality. A plot created by `ggplot2` is an `R` object itself. So far, we have printed the object  which produces the plot in the plot pane. However, if we save the plot in an `R` object using `<-`, the plot is *not* shown in the plot pane. Instead, we can then use another function, such as `plot_grid()` from the [`cowplot`](https://cran.r-project.org/package=cowplot) package, to create one plot that consists of multiple individual plots. Note that you will have to install `cowplot` before running the code below (e.g., via `install.packages("cowplot")`). 
 
 ```{r, fig.asp=1.25, fig.width=8.5}
 ## load packages required here:
@@ -135,9 +135,9 @@ p6 <- ggplot(part_sum, aes(x = condition, y = mean_acc)) +
 plot_grid(p1, p2, p3, p4, p5, p6, ncol = 2)
 ```
 
-In my opinion, these six plots are all somewhat unsatisfactory. The relatively best plot is the one using jitter. However, even then the pattern in the data is not really clear.
+In my opinion, these six plots are all somewhat unsatisfactory. Perhaps the best one is the plot using jitter, but even here, the pattern in the data is not very clear.
 
-An alternative for this particular situation is to not show all the individual data points, but the count of the data points that share one position. This can be achieved using `geom_count`. In the resulting plot, the size of the point will show how many points there are at one position.
+An alternative for this particular situation is to not show all the individual data points, but the count of the data points that share one position. This can be achieved using `geom_count`. In the resulting plot, the size of the points will show how many points there are at each position.
 
 ```{r}
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
@@ -145,7 +145,7 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   stat_summary()
 ```
 
-Instead of showing the count directly, we can also show the proportion of responses within each condition. As above, we can make this plot nicer by changing some labels. We can also adapt the grid lines in the background to be exactly at the possible position of the mean acceptabilities.
+Instead of showing the count directly, we can also show the *proportion* of responses within each condition. As above, we can make this plot nicer by changing some labels. We can also adapt the grid lines in the background to be exactly at the 4 possible positions of the mean acceptabilities.
 
 ```{r}
 ggplot(part_sum, aes(x = condition, y = mean_acc)) +
@@ -156,17 +156,17 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   labs(y = "mean acceptance")
 ```
 
-This plot shows that the distribution of individual mean acceptability scores is mostly bimodal. In all but the -\$20/+\$40 condition, the vast majority of participants either accepts all symmetric lotteries or rejects all of them. In the -\$20/+\$40 condition we only see one mode when participants reject all symmetric lotteries. Taken together this indicates that overall participants are quite consistent in their behaviour across different symmetric lotteries. If I reject or accept one symmetric lottery I am likely to do make the same choice for another symmetric lottery. In other words, the amount of noise within participants is comparatively low.
+This plot shows that the distribution of individual mean acceptability scores is mostly bimodal. In all but the -\$20/+\$40 condition, the vast majority of participants either accepts all symmetric lotteries or rejects all of them. In the -\$20/+\$40 condition we only see one mode, which is when participants reject all symmetric lotteries. Taken together, this indicates that, overall, participants are quite consistent in their behaviour across different symmetric lotteries. If I reject or accept one symmetric lottery I am likely to make the same choice for another symmetric lottery. In other words, the amount of noise *within* participants is comparatively low whereas there is considerable noise *across* participants.
 
-In addition, the plot clearly shows the main pattern of results. The original notion of loss aversion is that what matters for the acceptance rates of symmetric lotteries is the magnitude of the potential losses and gains. The present results clearly disagree with this notion. In the -\$20/+\$40 condition, in which symmetric lotteries are unattractive, most participants reject them. In contrast, in the -\$40/+\$20 condition, in which symmetric lotteries are attractive, most participants accept them. In the two conditions in which the symmetric lotteries are neither particular attractive nor unattractive, around half of the participants accept the symmetric lotteries and around half reject them.
+In addition, the plot clearly shows the main pattern of results. The original notion of loss aversion is that what matters for the acceptance rates of symmetric lotteries is the magnitude of the potential losses and gains. The present results clearly contradict this notion. In the -\$20/+\$40 condition, in which symmetric lotteries are unattractive, most participants reject them. In contrast, in the -\$40/+\$20 condition, in which symmetric lotteries are attractive, most participants accept them. In the two conditions in which the symmetric lotteries are neither particularly attractive nor unattractive, around half of the participants accept the symmetric lotteries and around half reject them.
 
-Let's discuss a bit what I meant with "clearly shows" above. The plot shows both the main results pattern as well as the variability in the data in such a way, that this plot in some sense makes further statistical analysis not really necessary. Given the relatively large number of participants per condition (i.e., around 200 participants per condition), the fact that in one condition the vast majority never accepts a symmetric lottery, but in another condition the vast majority always accept a symmetric gamble, means that there is a clear difference between conditions. Any reasonable statistical test must come to the same conclusion, otherwise we would begin to question the validity of the statistical test or look for some other problems with the data.
+Let's discuss a bit what I meant by"clearly shows" in the start of the paragraph above. The plot shows both the main results pattern as well as the variability in the data in such a way that this plot, in some sense, makes further statistical analysis not really necessary. Given the relatively large number of participants per condition (around 200), the fact that in one condition the vast majority never accepts a symmetric lottery, but in another condition the vast majority always accepts a symmetric lottery, means that there is a clear difference between conditions. Any reasonable statistical test must come to the same conclusion, otherwise we would begin to question the validity of the statistical test or look for some other problems with the data.
 
-This means that a visual representation of the results can provide empirical evidence in addition to the statistical results. In fact, these two types of evidence -- results figures and statistical results -- are complementary and should always be part of any results communication. Without a figure, we cannot properly judge how much evidence the statistical result actually provide.
+This means that a visual representation of the results can provide empirical evidence in addition to the statistical results. In fact, these two types of evidence -- *figures* derived from the results and *statistical analyses* derived from the results -- are complementary and should always be part of any communication of what you have found in an experiment. Without a figure, we cannot properly judge how much evidence the statistical result actually provides.
 
-In the present case, in which the visual impression suggests a clear effect, some statisticians say the data pass the *inter-ocular trauma test*: The results hit you right between the eyes. If this is the case, our confidence that the data support the empirical hypothesis grows compared to a situation that only shows the statistical results. If the statistical tests suggest an effect but the results figure does not so much, this is also an important outcome as it suggests the epistemic status of the empirical hypothesis is less clear. In any case, statistical results should always be accompanied with a results figure.
+In the present case, in which the visual impression suggests a clear effect, some statisticians say the data pass the *inter-ocular trauma test*: The results hit you right between the eyes. If this is the case, our confidence that the data support an empirical hypothesis grows compared to a situation that only shows the outcome of a statistical analysis. If the statistical tests suggest an effect but the figures  not so much, this is also an important outcome as it suggests the epistemic status of the empirical hypothesis is less clear. In any case, statistical analyses should always be accompanied by figures.
 
-With this, we leave loss aversion and the study by @walasekHowMakeLoss2015 behind us. This example has shown rather extensively that finding evidence that appears to support our theoretical idea does not mean our theory is actually supported. Put more bluntly, it does not really look as if the original notion of loss aversion is tenable. Does this mean the rank-based account preferred by @walasekHowMakeLoss2015 is true? Not necessarily. What the data shows is that participants change the behaviour in a context-dependent manner. This is consistent with a rank-based account, but I am sure other accounts are possible for this as well. The larger point is that making strong inferences about large theoretical ideas is generally difficult.
+With this, we leave loss aversion and the study by @walasekHowMakeLoss2015 behind us. This example has shown rather extensively that finding evidence that appears to support our theoretical idea does not mean our theory is actually supported. Put more bluntly, it does not really look as if the original notion of loss aversion is tenable. Does this mean the rank-based account preferred by @walasekHowMakeLoss2015 is true? Not necessarily. What the data shows is that participants change their behaviour in a context-dependent manner. This is consistent with a rank-based account, but I am sure other accounts are possible as well. The larger point is that making strong inferences about great theoretical ideas is generally difficult.
 
 ## Quiz
 
@@ -202,7 +202,6 @@ Which variable is typically plotted on the y-axis?
 Answer: `r webex::mcq(c("1", answer = "2", "3"))`
 :::
 
-
 ::: {.exercise}
 What does "over-plotting" refer to? 
 
@@ -220,15 +219,15 @@ What is "alpha blending"?
 2. A technique that creates the visual impression of semi-transparency
 3. An argument to `ggplot()` indicating that we want to plot all points of the data
 
-Answer: `r webex::mcq(c("1", "3", answer = "2"))`
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
 What does `geom_jitter()` do? 
 
 1. It introduces some random jitter for the plotted points
-2. It allows to change colour for some data points (i.e., colour is jittered)
-3. It allows to combine several plots into one in a jittered manner
+2. It allows a change of colour for some data points (i.e., colour is jittered)
+3. It allows the combination of several plots into one bigger plot in a jittered manner
 
 Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
 :::
@@ -238,7 +237,7 @@ What is a "theme" in ggplot2?
 
 1. It refers to a colour palette used for the plot
 2. It is the title of a plot
-3. The theme determines the overall look: e.g., font, font size, and background
+3. The theme determines the overall look of a plot: e.g., font, font size, and background
 
 Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 :::
@@ -246,15 +245,15 @@ Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 ::: {.exercise}
 What is a "faceted plot"?
 
-1. It is a plot in which more than two variables are displayed
-2. It refers to a plot in which data was originally over-plotted, but is not any more
-3. It is plot consisting of several sub-plots/panels
+1. A plot in which more than two variables are displayed
+2. A plot in which data was originally over-plotted, but is not any more
+3. A plot consisting of several sub-plots/panels
 
 Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
-Which of the following does NOT show all individual data points?
+Which of the following does NOT show all the individual data points?
 
 1. `geom_boxplot()`
 2. `geom_beeswarm()`
@@ -276,8 +275,8 @@ Answer: `r webex::mcq(c("1", answer = "2", "3"))`
 ::: {.exercise}
 Why are dynamite plots NOT useful? 
 
-1. They show the mean
-2. They do not show data distribution or data points
+1. They show only the mean
+2. They do not show the distribution of the data or any data points
 3. They do not contain legends and plot labels
 
 Answer: `r webex::mcq(c("1",  answer = "2", "3"))`
@@ -313,9 +312,8 @@ What does a *uniform* distribution look like?
 Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 :::
 
-
 ::: {.exercise}
-Consider you have data from an experiment with dependent variable `score` and independent variable `condition`. What would be the `aes()` call to plot this data in the conventional way?
+Consider you have data from an experiment with a dependent variable `score` and independent variable `condition`. What would be the `aes()` call to plot this data in the conventional way?
 
 1.  `aes(condition = x, score = y)`
 2.  `aes(condition = y, score = x)`
@@ -335,24 +333,23 @@ What is the appropriate way to handle outliers that are identified by a box-plot
 Answer: `r webex::mcq(c("1", "2", answer = "3"))`
 :::
 
-
 ## `ggplot2` Exercise: Earworms and Sleep
 
-For this exercise, let's return to the study by @scullinBedtimeMusicInvoluntary2021 investigating the relationship between earworms and sleep quality. Let's quickly recap the study design and research question here, for more details see Section \@ref(earworms-task1).
+For this exercise, let's return to the study by @scullinBedtimeMusicInvoluntary2021 investigating the relationship between earworms and sleep quality. Let's quickly recap the study design and research question here. For more details see Section \@ref(earworms-task1).
 
-The study was a sleep lab experiment in which participants heard some music before going to sleep. In the *lyircs* condition this were original versions of popsongs with lyrics and in the *instrumental* condition these were instrumental versions of the pop songs. 
+The study was a sleep lab experiment in which participants heard some music before going to sleep. In the *lyrics* condition, the songs were the original versions of pop songs with lyrics. In the *instrumental* condition, these were instrumental versions of the pop songs. 
 
 The researchers were interested in two research questions: 
 
 (1) Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms? This research question was based on previous results and the authors expected the instrumental version to induce more earworms than the lyrical versions. 
 
-To investigate this research question the researchers asked the participants whether they experienced earworms at different time points (i.e., while falling asleep, during the night, in the morning, or after getting ready to leave the sleep lab)
+To investigate this question, the researchers asked the participants whether they experienced earworms at various times during the experiment (i.e., while falling asleep, during the night, in the morning, or after getting ready to leave the sleep lab)
 
-(2) Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?
+(2) Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?
 
-To investigate this research question, the researchers used [polysomnography](https://en.wikipedia.org/wiki/Polysomnography) and measured objective sleep parameters. Here, we are specifically looking at sleep efficiency and sleep time.
+To investigate this question, the researchers used [polysomnography](https://en.wikipedia.org/wiki/Polysomnography) and measured various objective sleep parameters. Here, we are specifically looking at sleep efficiency and sleep time.
 
-A version of the original data file made available by @scullinBedtimeMusicInvoluntary2021 can be downloaded from [here](https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv). As before, I recommend you download it to the `data` folder in the working directory and then you can read in the data via the following code. It makes sense to restart `R` before doing that, so we also reload the `tidyverse`. Let's prepare the data as discussed in the previous exercise and then take a look at it.
+A version of the original data file made available by @scullinBedtimeMusicInvoluntary2021 can be downloaded from [here](https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv). As before, I recommend you download it to the `data` folder in your working directory and then you can read in the data with the following code. It makes sense to restart `R` before doing that, so we also reload the `tidyverse`. Let's prepare the data set as discussed in the previous exercise and then take a look at it.
 
 ```{r}
 library("tidyverse")
@@ -370,7 +367,6 @@ earworm <- earworm %>%
 glimpse(earworm)
 ```
 
-
 In addition to the variables relevant to our research questions, the data contains a number of control variables (the original data file included even more). We can see a total of 19 variables:
 
 - `id`: Participant identifier
@@ -378,18 +374,17 @@ In addition to the variables relevant to our research questions, the data contai
 - `relaxed`: question asking participants how relaxed they felt on a scale from 0 (= not relaxed) to 100 (= very relaxed) after listening to the music.
 - `sleepy`: question asking participants how sleepy they felt on a scale from 0 (= not sleepy) to 100 (= very sleepy) after listening to the music.
 The next 5 variables concerned whether or not the participants reported having an earworm at different times:
-- `earworm_falling_asleep`: Had earworm when trying to fall asleep last night? 0 = No; 1 = Yes
-- `earworm_night`: Had earworm when woke up during the night? 0 = No; 1 = Yes
-- `earworm_falling_asleep`: Had earworm when woke up during the night? 0 = No; 1 = Yes
-- `earworm_morning`: Had earworm when woke up this morning? 0 = No; 1 = Yes
-- `earworm_control`: Had earworm at the control time point (i.e., after getting ready to leave the lab)? 0 = No; 1 = Yes
-- `sleep_efficiency`: sleep efficiency percentage score obtained from the polysomnography (0 = very low sleep efficiency and 100 = very high sleep efficiency)
+- `earworm_falling_asleep`: Had earworm while trying to fall asleep last night? 0 = No; 1 = Yes
+- `earworm_night`: Had earworm while waking up during the night? 0 = No; 1 = Yes
+- `earworm_morning`: Had earworm while  waking up this morning? 0 = No; 1 = Yes
+- `earworm_control`: Had earworm at the control time point (after getting ready to leave the lab)? 0 = No; 1 = Yes
+- `sleep_efficiency`: a percentage score obtained from the polysomnography (0 = very low sleep efficiency and 100 = very high sleep efficiency)
 - `sleep_time`: total sleep time in minutes
 
-The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for `classrank`. This uses US nomenclature for what year of 4 the student participant is in  (i.e., freshman = year 1, sophomore = year 2, junior = year 3, and senior = year 4) plus some additional values.
+The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for `classrank`. This uses US nomenclature for what year of four the student participant is in (Freshman = year 1, Sophomore = year 2, Junior = year 3, and Senior = year 4) plus some additional values for staff, post-graduate students and (presumably) one missing value ('-').
 
 ::: {.exercise}
-Let's begin by taking a look at the distribution of sleep quality and sleep time, the two dependent variables for the second research question, using a histogram. Ideally combine the two histograms in one plot as shown above (i.e., using `plot_grid()`). Remember that one important part of making histograms is picking the appropriate bin width.  How do the distributions looks like?
+Let's begin by taking a look at the distribution of sleep quality and sleep time, the two dependent variables for the second research question, using histograms. Ideally, combine the two histograms into one plot as shown previously using `plot_grid()`. Remember that one important part of making histograms is picking the appropriate bin width.  What do the distributions look like?
 
 `r hide("Hint")`
 Histograms are produced with `geom_histogram()`. To pick the correct bin width, just try out a few.
@@ -407,9 +402,9 @@ p2 <- ggplot(earworm, aes(x = sleep_time)) +
 plot_grid(p1, p2)
 ```
 
-Both plots are a bit difficult to interpret as they are rather noisy (i.e., no clear visual impression). One possibility is that there are too many bins.  Remember that we only have a total of 48 data points, so 30 bins means that there are only few observations per bin. 
+Both plots are a bit difficult to interpret as they are rather noisy, giving no clear visual impression. One possibility is that there are too many bins.  Remember that we only have a total of 48 data points, so 30 bins means that there are few observations per bin. 
 
-Therefore, let's try to get a more informative visual impression by reducing the number of bins. Given the scale of the data we see here, let's start with a bin width of 2 for the sleep efficiency and 10 for sleep time. Let's also set the boundary at 0 so the bins always begin at whole numbers.
+Therefore, let's try to get a more informative visual impression by reducing the number of bins. Given the scale of the data we see here, let's start with a bin width of 2 for sleep efficiency and 10 for sleep time. Let's also set the boundary at 0 so the bins always begin at whole numbers.
 
 ```{r}
 p1 <- ggplot(earworm, aes(x = sleep_efficiency)) +
@@ -419,10 +414,9 @@ p2 <- ggplot(earworm, aes(x = sleep_time)) +
 plot_grid(p1, p2)
 ```
 
-The resulting plot is clearer to interpret. The distribution of sleep efficiency scores is unimodal and asymmetric with a long tail on the left side (so-called *left-skewed*). The distribution of sleep times looks bi-modal but symmetric around the midpoint between the two modes.
+The resulting plots are much easier to interpret. The distribution of sleep efficiency scores is unimodal and asymmetric with a long tail on the left side (so-called *left-skewed*). The distribution of sleep times looks bi-modal but symmetric around the midpoint between the two modes.
 
-To make sure this impression is not a fluke, let's make two more variants of each plot. Once in which we half the bin width and one in which we increase it by 50%.
-
+To make sure this impression is not a fluke, let's make two more variants of each plot. In one, we halve the bin width, and in the other, we increase it by 50%.
 
 ```{r}
 ## half bin width
@@ -442,11 +436,11 @@ p2 <- ggplot(earworm, aes(x = sleep_time)) +
 plot_grid(p1, p2)
 ```
 
-For the sleep efficiency, the pattern is relatively stable. If we half the bin width, the mode is less well defined. However, with 1.5 times the bin width trhe pattern is very similar. 
+For sleep efficiency, the pattern is relatively stable. If we halve the bin width, the mode is less well defined. However, with 1.5 times the bin width, the pattern is very similar. 
 
-For the sleep time, the pattern is essentially unchanged.
+For sleep time, the pattern is essentially unchanged.
 
-Let's make a final plot using the initial bin width, but let's make it a bit nicer. In particular, we harmonise the y-axis limits and use nices x-axis labels.
+Let's make a final plot using the initial bin width, only a bit nicer. In particular, we harmonise the y-axis limits and use better x-axis labels.
 
 ```{r}
 p1 <- ggplot(earworm, aes(x = sleep_efficiency)) +
@@ -464,23 +458,23 @@ plot_grid(p1, p2)
 :::
 
 ::: {.exercise}
-The data contains two control variables, `relaxed` and `sleepy`, which are subjective judgements that were collected after participants listened to the music. As these variables are answers to relatively similar question, we might suspect that participants provided similar responses. Make a plot of both control variables to see whether they are related. 
+The data contains two control variables, `relaxed` and `sleepy`, which are subjective judgements collected after participants listened to the music. As these variables are answers to relatively similar questions, we might suspect that participants provided similar responses. Make a plot of both control variables to see whether they are related. 
 
 `r hide("Hint")`
-Both xcontrol variables ar econtinuous variables. Hence, you have to make a plot of two continuous variables. See Section \@ref(ggplot-2-continuous) for details.
+Both control variables are continuous variables. Hence, you have to make a plot of two continuous variables. See Section \@ref(ggplot-2-continuous) for details.
 `r unhide()`
 
 `r hide("Solution")`
-We can create this plot directly by passing the `earworm` data to `ggplot()` and mapping one of the variables on the x-axis and the other on the y-axis. Then we need to use `geom_point()` to see the data. 
+We can create this plot directly by passing the `earworm` data to `ggplot()` and mapping one of the variables to the x-axis and the other to the y-axis. Then we need to use `geom_point()` to see the data. 
 
 ```{r}
 ggplot(earworm, aes(x = relaxed, y = sleepy)) +
   geom_point() 
 ```
 
-This plot suggests that there seems to be a relationship. If the response to relaxed is large, the response to sleepy also appears to be large.
+This plot suggests that there seems to be a relationship, although it is certainly not strong. If the response to `relaxed` is large, the response to `sleepy` also appears to be large.
 
-We can further improve this plot to make this pattern somewhat clearer. Note that the data is on exactly the same scale for both variables, a response scale from 0 to 100. Thus, it makes sense to plot the data in a way that reflects this. In particular, we can make sure both axes show the full range of the scale, and visual distances mean the same for both axes. For this we can use `coord_fixed()` with `asp = `1:
+We can improve this plot to make this pattern somewhat clearer. Note that the data is on exactly the same scale for both variables, from 0 to 100. Thus, it makes sense to plot the data in a way that reflects this. In particular, we can make sure both axes show the full range of the scale, so that visually-judged distances mean the same for both axes. For this we can use `coord_fixed()` with `ratio = `1. Here. `ratio` refers to the *aspect ratio* of the plot, meaning its width divided by its height. A value of 1 therefore results in a plot that is square:
 
 ```{r}
 ggplot(earworm, aes(x = relaxed, y = sleepy)) +
@@ -488,19 +482,19 @@ ggplot(earworm, aes(x = relaxed, y = sleepy)) +
   coord_fixed(ratio = 1, xlim = c(0, 100), ylim = c(0, 100))
 ```
 
-This plot makes it clearer that there seems to be a relationship, but there are also two clear data points violating this relationship. In one case, sleepiness is large and relaxed is small, in the other relaxed is large, but sleepiness is small.
+This plot makes it clearer that there seems to be a relationship, but that there are also two data points violating the general trend. In one case, `sleepiness` is large and `relaxed` is small. In the other, `relaxed` is large, but `sleepiness` is small.
 
 `r unhide()`
 :::
 
 ::: {.exercise}
 
-We might also be interested if the two control variables, `relaxed` and `sleepy`, show a relationship with the main dependent variable, sleep efficiency.  As we have seen, these two variable also appear to be at least somewhat related. Therefore, we might also be interested in the relationship between a combined control variable measures (i.e., the average of `relaxed` and `sleepy`) with sleep efficiency.
+We might also be interested in whether the two control variables, `relaxed` and `sleepy`, show a relationship with the main dependent variable, sleep efficiency.  As we have seen, these two variables also appear to be at least somewhat related. Therefore, we might also be interested in the relationship between a combined measure of these two control variables (the average of `relaxed` and `sleepy`) with sleep efficiency.
 
-To check this, make three plots, one for each control variable plus one for the average of the two control variables. In each of these plots, one of the now three control variables is shown together with sleep efficiency. Are there obvious relationships of the control variables with sleep efficiency.
+To check this, make three plots, one for each control variable plus one for the average of the two control variables. In each of these plots, one of the now three control variables is shown together with sleep efficiency. Are there obvious relationships of the control variables with sleep efficiency?
 
 `r hide("Hint")`
-The control variables and sleep efficiency are continuous variables. So we have to plot two continuous variables in each plot. For more see Section \@ref(ggplot-2-continuous).
+The control variables and sleep efficiency are continuous variables. So we have to plot two continuous variables in each plot. For more, see Section \@ref(ggplot-2-continuous).
 
 It also makes sense to first create the combined control variable, say `control_combined` before plotting it. For this, we can use `mutate()`.
 `r unhide()`
@@ -527,11 +521,11 @@ pe3_3 <- ggplot(earworm, aes(x = control_combined, y = sleep_efficiency)) +
 plot_grid(pe3_1, pe3_2, pe3_3)
 ```
 
-It is difficult to make a clear judgement here. For both the relaxed and the sleepiness, there appear to be more data points in the top right of the plot than elsewhere. However, in both plots there is also one data point with large sleep efficiency value that at the same time has the smallest value on the control variable. 
+It is difficult to make a clear judgement here. For both `relaxed` and `sleepy`, there appear to be more data points in the top right of the plot than elsewhere. However, in both plots there is also one data point with a large sleep efficiency value that at the same time has the smallest value on the control variable. Note that these two unusual points are from different participants.
 
-For sleepy however, there is also one data point with both small sleep efficiency and low sleepiness. For relaxed such a point is missing. If this difference is enough to say there is a relationship in one, but not the other case is difficult to say.
+For `sleepy` however, there is also one data point with both small sleep efficiency and low sleepiness. For `relaxed` such a point is missing. 
 
-For the combined score, the pattern seems similar and also does not suggest a clear relationship.
+For the combined score, we also do not see a clear relationship. Whereas it looks like most data points are above the main diagonal (i.e., no data points in the lower right corner) there is not much more to say.
 
 `r unhide()`
 :::
@@ -539,9 +533,9 @@ For the combined score, the pattern seems similar and also does not suggest a cl
 ::: {.exercise}
 Let's now take a look at research question (1): Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms?
 
-To do so, let's look at two different dependent variables we have created in the `tidyverse` exercise, any earworm at all (which should be 0 if participant did not report any earworm and 1 otherwise) and proportion of earworms (which should be the sum of the three earworm dependent variables divided by 3). Then calculate whether `group` affects these two new dependent variables.
+To do so, let's look at two different dependent variables we have created in the `tidyverse` exercise: any earworm at all (which should be 0 if the participant did not report any earworm and 1 otherwise) and proportion of earworms (which should be the sum of the three earworm dependent variables divided by 3). Then calculate whether `group` affects these two new dependent variables.
 
-Note that we follow @scullinBedtimeMusicInvoluntary2021 and calculate this variables with only three of the earworm variables (i.e., `earworm_...` variables with the exception of `earworm_control`).
+Note that we follow @scullinBedtimeMusicInvoluntary2021 and calculate these variables with only three of the earworm variables (i.e., all the `earworm_...` variables with the exception of `earworm_control`).
 
 Make one plot for each of the two dependent variables in which the distribution of the variable across participants as well as the mean is shown, separately for each of the two experimental conditions.
 
@@ -564,7 +558,7 @@ earworm <- earworm %>%
   mutate(any_earworm = if_else(prop_earworm == 0, 0, 1)) 
 ```
 
-With this, we can start by making our plots beginning with `prop_earworm`. Note that `prop_earworm` has the same structure as the mean acceptance rate to the symmetric lotteries discussed in the example above. That means, there are only few possible values. 
+With this, we can start by making our plots beginning with `prop_earworm`. Note that `prop_earworm` has the same structure as the mean acceptance rate to the symmetric lotteries discussed in the example above. That means, there are only a few possible values, here four. 
 
 ```{r}
 sort(unique(earworm$prop_earworm))
@@ -581,9 +575,9 @@ ggplot(earworm, aes(x = group, y = prop_earworm)) +
   labs(y = "prop. earworms")
 ```
 
-This plot provides some evidence for the hypothesis that instrumental songs induce earworms. In the lyrics condition, the vast majority of participants report no proportion of earworms and only few report some. In contrast, in the instrumental condition participants are more likely to report earworms. Some even report having had earworms at each of the measured time points. Consequently, we also see a mean difference in the proportion earworms here.
+This plot provides some evidence for the hypothesis that instrumental songs induce earworms. In the 'lyrics' condition, the vast majority of participants report no earworms and only few report some. In contrast, in the 'instrumental' condition, participants are more likely to report earworms. Some even report having had earworms at each of the measured time points. Consequently, we also see a mean difference in the proportion of earworms here.
 
-Let's now take a look at the second dependent variable, `any_earworm`. This variable can take on only two values, 0 or 1, per participant. Hence, we can use a very similar code.
+Let's now take a look at the second dependent variable, `any_earworm`. This variable can take on only two values, 0 or 1, per participant. Hence, we can use a very similar piece of code.
 
 ```{r}
 ggplot(earworm, aes(x = group, y = any_earworm)) +
@@ -594,7 +588,7 @@ ggplot(earworm, aes(x = group, y = any_earworm)) +
   labs(y = "any earworm")
 ```
 
-This provides a very similar picture as the any earworm variable. For lyrics condition, the vast majority reports no earworms, whereas in the instrumental condition the split is roughly 50-50. Of course, this similarity should not  be too surprising, both variables use the exact same information, only in slightly different ways.
+This provides a very similar picture as the 'any earworm' variable. For the 'lyrics' condition, the vast majority reports no earworms, whereas in the 'instrumental condition' the split is roughly 50-50. Of course, this similarity should not  be too surprising. Both variables use the exact same information, only in slightly different ways.
 
 In sum, the data supports the prediction that listening to instrumental music leads to more earworms than listening to lyrical music.   
 
@@ -602,11 +596,11 @@ In sum, the data supports the prediction that listening to instrumental music le
 :::
 
 ::: {.exercise}
-Now that we have learned something about the relationship between different versions of pop songs and earworms, let's link this to the main point of interest of the study, sleep quality. More specifically, research question (2) is: Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?
+Now that we have learned something about the relationship between different versions of pop songs and earworms, let's link this to the main point of interest of the study, sleep quality. More specifically, research question (2) is: Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition, in which participants are expected to have more earworms?
 
-Make one plot for each of the two dependent variables for this research question, one for sleep efficiency and one for sleep time. As before in each plot make sure that you show both, the distribution of the variable across participants as well as the mean, separately for each of the two experimental conditions.
+Make one plot for each of the two dependent variables relevant to this research question, one for sleep efficiency and one for sleep time. As before, in each plot make sure that you show both the distribution of the variable across participants as well as the mean, separately for each of the two experimental conditions.
 
-Does the plot support the hypothesis that the type of musing heard before sleeping affects the sleep quality?
+Does the plot support the hypothesis that the type of music heard before sleeping affects sleep quality?
 
 `r hide("Hint")`
 We have to make a very similar plot as for the previous exercise. However, this time we probably want to show the individual data points somewhat differently.
@@ -614,7 +608,7 @@ We have to make a very similar plot as for the previous exercise. However, this 
 
 `r hide("Solution")`
 
-For this exercise, we do not need to further prepare the data as each participant has only one observation for both dependent variables. The most important question here is how to display the data in the background. Let's begin by using `geom_beeswarm()`. Let's also immediately make two plots, one for each dependent variable and combine them into one figure. 
+For this exercise, we do not need to further manipulate the data as each participant has only one observation for both dependent variables. The most important question here is how to display the data in the background. Let's begin by using `geom_beeswarm()`,and make two plots, one for each dependent variable, and combine them into one figure. 
 
 ```{r}
 pr2_1a <- ggplot(earworm, aes(x = group, y = sleep_efficiency)) +
@@ -626,7 +620,7 @@ pr2_2a <- ggplot(earworm, aes(x = group, y = sleep_time)) +
 plot_grid(pr2_1a, pr2_2a)
 ```
 
-This figure shows that for each of the two dependent variables the sleep quality is on average lower in the instrumental music group compared to the lyrical music group. When looking at the individual data points in the background, it looks like not many have the same value of the dependent variable, so the distribution of points is not veyr clear. Therefore, let's also try out using `geom_quasirandom()`:
+This figure shows that for each of the two dependent variables, sleep quality is on average lower in the instrumental music group compared to the lyrical music group. When looking at the individual data points in the background, it looks like not many have the same value of the dependent variable, so the distribution of points is not very clear. Therefore, let's also try out using `geom_quasirandom()`:
 
 ```{r}
 pr2_1b <- ggplot(earworm, aes(x = group, y = sleep_efficiency)) +
@@ -638,27 +632,26 @@ pr2_2b <- ggplot(earworm, aes(x = group, y = sleep_time)) +
 plot_grid(pr2_1b, pr2_2b)
 ```
 
-This plot shows more easily that for sleep efficiency, there is a difference in the means that is also reflected in the distribution of individual points. For the instrumental condition, the distribution of points seems longer as well as shifted downwards compared to the lyrics condition. This suggests that there might be an actual effect of type of music listened to before sleep on sleep efficiency.
+This plot shows more clearly that for sleep efficiency, there is a difference in the means that is also reflected in the distribution of individual points. For the instrumental condition, the distribution of points seems to have a bigger range,  as well as being shifted downwards compared to the lyrical condition. This suggests that there might be an actual effect of the type of music listened to before sleep on sleep efficiency.
 
-The pattern of results is not so clear for sleep time. Whereas there is also a mean difference, the distributions look quite similar. Furthermore, for each of the two groups there is one data point far away from the rest of the distribution (a potential "outlier") in opposite direction to the mean difference (i.e., particular low for the lyrics group for which the mean is larger). Hence, whether the observed difference shows a genuine difference is a lot less clear.
+The pattern of results is not so clear for sleep time. Whereas there is also a difference in the means, the distributions look fairly similar. Furthermore, for each of the two groups there is one data point far away from the rest of the distribution (a potential "outlier") in opposite direction to the mean difference (i.e., a particularly low value for the lyrics group for which the mean is larger). Hence, whether the observed difference reflects a genuine difference is a lot less clear.
 
-Taken together, for this data `geom_quasirandom` seems to provide the more interesting and easy to interpret data visualisation. It shows that there seems to be an effect of experimental condition on sleep efficiency, but the effect is a lot less clear for sleep time.  
+Speaking more generally, `geom_quasirandom` seems to provide the more interesting and easy to interpret data visualisation for this data set. It shows that there seems to be an effect of experimental condition on sleep efficiency, but the effect is less clear for sleep time.  
 
 `r unhide()`
 :::
 
 ::: {.exercise}
 
-As the last exercise, make a plot that shows the distribution and means of sleep efficiency and sleep time conditional on whether or not participants did have earworms during the night (i.e., at any time, excluding the control time point). Thus, in this analysis we ignore the experimental condition.
+As a last exercise, make a plot that shows the distribution and means of sleep efficiency and sleep time conditional on whether or not participants had earworms during the night (i.e., at any time, excluding the control time point). Thus, in this analysis we ignore the experimental condition.
 
-To perform the analysis, you need to begin with the same step as the corresponding analysis in the `tidyverse` exercises and then create one more sets of plots:
+To perform the analysis, you need to begin with the same step as the corresponding analysis in the `tidyverse` exercises and then create one more set of plots:
 
 1. Create a new `factor`, `has_earworm`, that is `yes`, whenever participants report at least once that they had an earworm for one of the three `earworm` dependent variables (i.e., within the experimental time frame, ignoring the control time).
 2. Make a plot of `sleep_efficiency` and `sleep_time` as a function of `has_earworm`.
 3. To ensure you do not forget to look into this, also calculate how many participants there are that do have versus do not have earworms.
 
 What can you see? Do participants that report having an earworm sleep better than participants that do not do so, ignoring the experimental condition?
-
 
 `r hide("Hint")`
 Take a look at the last `tidyverse` exercise to get going.
@@ -688,11 +681,11 @@ pr3_2b <- ggplot(earworm, aes(x = has_earworm, y = sleep_time)) +
 plot_grid(pr3_1b, pr3_2b)
 ```
 
-This plot suggests that sleep efficiency is lower if one reports at least one earworm during the night compared to when not. Interestingly, participants that report no earworms show a unimodal distribution with a mode that is larger than all but one sleep efficiency score for participants that do report earworms. However, as both distribution have a relatively long tail towards lower scores, the difference in means is not huge.
+This plot suggests that sleep efficiency is lower if one reports at least one earworm during the night compared to when not. Interestingly, participants that report no earworms show a unimodal distribution with a mode that is larger than all but one sleep efficiency score for participants that do report earworms. However, as both distributions have a relatively long tail towards lower scores, the difference in means is not huge.
 
 For sleep time, the difference is in the opposite direction and noticeably smaller.
 
-The plot also shows that there are less participants that report an earworm than those that do not. Let's take a look again how large both groups are:
+The plot also shows that there are fewer participants that report an earworm than those that do not. Let's take a look again how large both groups are:
 
 ```{r}
 earworm %>% 
@@ -701,7 +694,7 @@ earworm %>%
   mutate(prop = n/sum(n)) ## transform N into %
 ```
 
-This shows that around 40% of participants report an earworm indicating that the imbalance is not very large.
+This shows that around 40% of participants report an earworm, indicating that the imbalance is not very large.
 
 `r unhide()`
 
