@@ -41,3 +41,6 @@ update_file(file = rel_file)
 
 # Chapter 4: ggplot2 exercises
 # https://docs.google.com/document/d/1q11La7Caz-ewwTMtqZ_WKdhhWP7QGAV1sOCMYdvk3f4/edit?usp=sharing
+
+# Chapter 5: Standard approach
+# https://docs.google.com/document/d/1z9zDpbqX_6-A8P35GgVDCQiPwLTswKoEelZ9vLpaIuM/edit?usp=sharing
