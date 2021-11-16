@@ -1,4 +1,4 @@
-# Case Study 1: More Results from Note Taking Studies {#case-study-laptop}
+# Case Study: More Results from Note Taking Studies {#case-study-laptop}
 
 In this chapter we will apply what we have learned in the previous chapter - how to analyse experimental data with one experimental manipulation and two conditions. For this, we will again take a look at the data from @urry2021. Additionally, we will analyse data from @muellerPenMightierKeyboard2014. This study was the first published study investigating the question of note taking with a laptop or in longhand format and was the basis on which @urry2021 planned their study. For the data of @muellerPenMightierKeyboard2014 we will perform a full analysis starting with reading in the data. So in addition to performing the statistical hypothesis test, we will calculate some descriptive statistics.
 
@@ -15,7 +15,13 @@ theme_set(theme_bw(base_size = 15) +
 
 ## Conceptual Memory Data from Urry et al. (2021)
 
-As a quick reminder, @urry2021 showed their participants short lectures (TED talks) on video during which participants were allowed to take notes. One group of participants, the `laptop` condition, could take notes on a laptop, whereas the participants in the `longhand` condition could take notes with pen and paper. After the lecture participants were quizzed on two aspects of the content of the lecture, factual questions and conceptual questions. In the previous chapter we have analysed the overall memory score which was the average of the performance for the factual questions and the conceptual questions. Here, we are only concerned with the memory performance for conceptual questions. We begin our analysis by loading in the data (which is part of `afex` can be loaded with `data()`) and getting an overview of the variables using `str()`:
+As a quick reminder, @urry2021 showed their participants short lectures (TED talks) on video during which participants were allowed to take notes. One group of participants, the `laptop` condition, could take notes on a laptop, whereas the participants in the `longhand` condition could take notes with pen and paper. After the lecture, participants were quizzed on two aspects of the content of the lecture, factual questions and conceptual questions.
+
+For example one of the videos is by [Kevin Slavin on "How Algorithms Shape Our World"](https://www.ted.com/talks/kevin_slavin_how_algorithms_shape_our_world). A factual question for this video was: "In New York City, where is the Internet distributed from?" A conceptual question for this video was: "How are algorithms useful for successful stock trading?"
+
+In the previous chapter (\@ref{\#standard1}), we have analysed the overall memory score. The overall memory score was the average of the memory scores for the factual questions and the conceptual questions. In the present analysis, we are only concerned with the memory performance for conceptual questions.
+
+We begin the analysis by reading-in the data. As it is part of `afex`, it can be read-in by calling the `data()` command (this only works after `afex` is attached with `library()`). We then get an overview of the variables using `str()`.
 
 ```{r}
 data("laptop_urry")
@@ -24,80 +30,86 @@ str(laptop_urry)
 
 As before, we have the participants identifier variable in `pid` and the note taking condition in variable `condition`. We can also guess that the conceptual memory scores are in the aptly name variable `conceptual` (if we were unsure about this, we could also check the documentation of the data at `?laptop_urry`).
 
-Usually, once the data is sufficiently prepared (i.e., we have performed some sanity checks and identified DV and IV), the first step in an analysis should be plotting the data. This could be done using `ggplot2` directly. However, in cases such as the present one where it is very clear which statistical model we are going to estimate it is often a bit less effort to plot the data with `afex_plot()`. Thus, we start by estimating the statistical model for the conceptual memory performance of the data from @urry2021 and save the estimated model object as `mc_urry`. For this, we again use `aov_car()` on the `laptopt_urry` data and specify the model using the formula interface. The DV we are considering here is `conceptual`, our IV is `condition`, and the participant identifier is `pid`. Consequently, the formula is `conceptual ~ condition + Error(pid)`. Then, before looking at the inferential statistical results, we use this model object to plot the data using `afex_plot`.
+Usually, once the data is sufficiently prepared (i.e., we have performed some coherence checks and identified DV and IV), the first step in an analysis should be plotting the data. This could be done using `ggplot2` directly. However, in the present case it is very clear which statistical model we are going to estimate. In such a case, using `afex_plot()` involves a bit less typing. Thus, we start by estimating the statistical model for the conceptual memory performance of the data from @urry2021 and save the estimated model object as `mc_urry` (mc = model conceptual scores) . For this, we again use `aov_car()` on the `laptopt_urry` data and specify the statistical model using the formula interface. The DV we are considering here is `conceptual`, our IV is `condition`, and the participant identifier is `pid`. Consequently, the formula is `conceptual ~ condition + Error(pid)`. Then, before looking at the inferential statistical results, we use this model object to plot the data using `afex_plot`.
 
 ```{r urry-conceptual,  fig.cap='Conceptual memory scores from Urry et al. (2021) across note taking conditions'}
 mc_urry <- aov_car(conceptual ~ condition + Error(pid), laptop_urry)
 afex_plot(mc_urry, "condition")
 ```
 
-The goal behind beginning with plotting the data is that it allows to see whether the data "looks alright". That is, we check whether there are any features that stand out such as clear outliers or an unusual pattern in the data. If this were the case, we would try to figure out if we can find a reason for this issue or how we deal with it. But, as the data looks alright, we continue and consider the results of the significance test:
+The reason for beginning with plotting the data is that it allows to see whether the data *looks alright*. That is, we check whether there are any features that stand out, such as single observations with extreme values ("outliers") or other unusual patterns. If this were the case, we would try to figure out if we can find a reason for the issues and how we want to deal with them. But, as the data looks alright, we continue and consider the results of the significance test:
 
 ```{r}
 mc_urry
 ```
 
-The ANOVA table reveals that the significance test for the effect of condition is not significant with $p = .319$. Thus, in line with the finding that there is no evidence for a difference in overall memory performance, there also is no evidence for a difference in memory for conceptual information.
+The ANOVA table reveals that the significance test for the effect of condition is not significant, with $p = .319$. Thus, in line with the finding that there is no evidence for a difference in overall memory performance, there also is no evidence for a difference in memory for conceptual information.
 
-We can also again use `emmeans` to see the condition means (or estimated marginal means). In line with Figure \@ref(fig:urry-conceptual) (as `afex_plot` internally also uses `emmeans` it shows exactly the same means in graphical form), the memory score in the laptop condition is descriptively around 3.5 points higher than the score in the longhand condition.
+We then also employ `emmeans`, for investigating the condition means (or estimated marginal means). In line with Figure \@ref(fig:urry-conceptual), the memory score in the laptop condition is descriptively around 3.5 points higher than the score in the longhand condition. This is not too surprising, `afex_plot` uses `emmeans` internally. Therefore, the means shown in the figure above are exactly the same values as the means shown below.
 
 ```{r}
 emmeans(mc_urry, "condition")
 ```
 
-Before moving to the next data set, let us consider how we could report this analysis in a research report. We could for example write:
+Before moving to the next data set, let's consider how we could report this analysis in a research report. For example, we could write:
 
-> As shown in Figure \@ref(fig:urry-conceptual), participants' conceptual memory scores (on a scale from 0 to 100) are descriptively slightly larger in the laptop condition compared to the longhand condition. We analysed these scores with an ANOVA with one factor, note taking condition, with two levels (laptop vs. longhand). The effect of note taking condition was not significant, $F(1, 140) = 1.00$, $p = .319$. This indicates that the data does not provide evidence for a difference in memory for conceptual information based on how notes are taken during lectures.
+> As shown in Figure \@ref(fig:urry-conceptual), participants' conceptual memory scores (on a scale from 0 to 100) are descriptively slightly larger in the laptop condition compared to the longhand condition. We analysed these scores with an ANOVA with one factor, note taking condition, with two levels (laptop vs. longhand). The effect of note taking condition was not significant, $F(1, 140) = 1.00$, $p = .319$. This indicates that the data does not provide evidence for a difference in memory for conceptual information based on how notes are taken during video lectures.
 
 ## Why are Experiments Replicated?
 
-The experiment by @urry2021 was not the first experiment investigating the effect of note taking during lectures on memory. In contrast, their study was a *replication* of @muellerPenMightierKeyboard2014. A replication is the act of rerunning an existing study to see if one can obtain (or replicate) the results of the previous study.
+The experiment by @urry2021 was not the first experiment investigating the effect of the type of note taking during lectures on memory. In contrast, their study was a *replication* of @muellerPenMightierKeyboard2014. A replication is the act of repeating a previous study that has the goal of checking if one can obtain (or *replicate*) similar results as the previous study.
 
-As we have discussed before, inferences from NHST are never conclusive as they are probabilistic and require multiple inferential steps. Replications are one of the most important tools in science for overcoming at least the probabilistic uncertainties associated with the inferences we draw from experimental data. For example consider that several independent but otherwise as similar as possible experiments -- that is, replications of the same experiment -- all obtain a significant result (i.e., indicate that the data are incompatible with the null hypothesis). Such a pattern would dramatically increase our confidence that the null hypothesis is likely false.
+As we have discussed before, inferences from NHST are never conclusive as they are probabilistic and require multiple inferential steps. Replications are one of the most important tools in science for overcoming at least the probabilistic uncertainties associated with the inferences we draw from experimental data. For example consider that several independent but otherwise as similar as possible experiments -- that is, replications of the same experiment -- all obtain a significant result (i.e., indicate that the data are incompatible with the null hypothesis). Such a pattern would dramatically increase our confidence that the null hypothesis is likely false. In other words, replication studies are the main tool for overcoming the second inferential gap identified in Section \@ref{\#epistemic-gap-2}.
 
-In addition to the gain in confidence for specific results, there are good practical reasons for replicating an existing experiment. For example, when beginning to work on a new topic it is generally a good idea to replicate the experiment on which one wants to build on. If one already has problems replicating what exists that shows that the topic is maybe not as simple as portrayed in the literature.
+In addition to the gain in confidence for specific results, there are good practical reasons for replicating an existing experiment. For example, when beginning to work on a new topic it is generally a good idea to replicate the experiment on which one wants to build on. If one already encounters problems replicating the results reported in the literature, this suggests that the topic may be less well-understood as portrayed in the literature.
 
-Another excellent reason for performing a replication is if one simply does not believe an existing result. Remember, one of the key components of the scientific method is *scepticism* (at least [according to Wikipedia](https://en.wikipedia.org/wiki/Scientific_method)). And if a results is difficult to believe, the reasonable sceptical position to take is to require more evidence. A replication is one way (if not the best way) to produce such evidence. Not believing existing experiments also does not imply that one questions the integrity of the researchers who did the experiment. There are many completely harmless reasons why a study might not replicate. For example, researchers might have just obtained a significant results by chance (which happens in 5% of cases, as discussed in the next chapters).
+Another excellent reason for performing a replication is not believing an existing result. Remember, one of the key components of the scientific method is *scepticism* (at least [according to Wikipedia](https://en.wikipedia.org/wiki/Scientific_method){target="_blank"}). And if a result is difficult to believe, the reasonable sceptical position is to require more evidence. A replication is one way -- if not the best way -- to produce additional evidence for a particular empirical finding. Not believing existing experiments also does not imply that one questions the integrity of the researchers who did the experiment. There are many completely harmless reasons why a study might not replicate. For example, researchers might have just obtained a significant results by chance (which happens in 5% of cases, as discussed in the next chapters).
 
-Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many fields are currently considered to be in a [*replication crisis*](https://en.wikipedia.org/wiki/Replication_crisis). For example, a large scale effort to replicate 100 studies in psychology [@opensciencecollaborationEstimatingReproducibilityPsychological2015] showed that less than 50% could be replicated successfully. Similarly sobering results have since been observed across the social sciences [@camererEvaluatingReplicabilitySocial2018; @kleinManyLabsInvestigating2018; @camererEvaluatingReplicabilityLaboratory2016]. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers [@chambersSevenDeadlySins2017]. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research has to be somewhat low. This questions the foundations of any new work that builds up on this non-replicated research. To move forward we researchers need to replicate work that is important for our research, value replications done by others (especially if it is of our work), and let findings that do not replicate fade into obscurity.
+Sadly, replicating existing experiments and publishing the results, is still not the norm in psychology and related disciplines. Quite to the contrary, the situation is so dire that many fields are currently considered to be in a [*replication crisis*](https://en.wikipedia.org/wiki/Replication_crisis){target="_blank"}. For example, a large scale effort to replicate 100 studies in psychology [@opensciencecollaborationEstimatingReproducibilityPsychological2015] showed that less than 50% of studies could be successfully replicated. Similarly sobering results have since been observed across the social sciences [@camererEvaluatingReplicabilitySocial2018; @kleinManyLabsInvestigating2018; @camererEvaluatingReplicabilityLaboratory2016]. Much has been written about this problem and this is not the right place to rehash all arguments. The best summary of the situation is the book by Chris Chambers [@chambersSevenDeadlySins2017]. The important thing is to realise that science is a cumulative endeavour. Every new experiment builds on existing research. If the existing research has never been replicated, our confidence in this research has to be low. This questions the foundations of any new work that builds on this non-replicated research. To move forward we researchers need to replicate work that is important for our research, value replications done by others (especially if it is of our own work), and let findings that do not replicate fade into obscurity.
 
-## Conceptual Memory Data from Mueller and Oppenheimer (2014)
+## Conceptual Memory Scores from Mueller and Oppenheimer (2014) Experiment 2
 
-As @urry2021 is a direct replication of @muellerPenMightierKeyboard2014, the design is the same and uses the same materials (i.e., the same TED talks and same questions). Participants watched short lecture videos (projected onto a screen) and could take notes either on a laptop or with longhand format. 30 minutes after the lecture they were asked factual and conceptual questions about the lectures. Their answers were coded by the first author. As in the previous analysis, we will transform the answers to a memory index from 0 (= no memory) to 100 (= perfect memory). In line with the analysis of @urry2021 above, we are only interested in the conceptual memory here.
+As @urry2021 is a *direct replication* of @muellerPenMightierKeyboard2014, the design is the same and uses the same materials (i.e., the same TED talks and same questions). Participants watched short lecture videos (projected onto a screen) and could take notes either on a laptop or with longhand format. 30 minutes after the lecture they were asked factual and conceptual questions about the lectures. Their answers were coded by the first author. As in the previous analysis, we will transform the answers to a memory score from 0 (= no memory) to 100 (= perfect memory). In line with the analysis of @urry2021 above, we are only interested in the conceptual memory scores here.
 
-The experiment by @urry2021 was a direct replication of Experiment 1 of @muellerPenMightierKeyboard2014. Here we focus on Experiment 2 by @muellerPenMightierKeyboard2014, which is also a direct replication of their Experiment 1 and only included an additional experimental manipulation which we will ignore here. The reason for focussing on their Experiment 2 instead of Experiment 1 is that the data of Experiment 2 come out a bit more interesting (feel free to rerun the analysis reported here for their Experiment 1 to see what I mean). However, to not provide an incomplete picture for the research question of whether the mode of taking note during lectures affects memory, we will consider the overall evidence (i.e., all 3 experiments of Mueller and Oppenheimer, the experiment of Urry et al., and further data) at the end of this chapter.
+The experiment by @urry2021 was a direct replication of Experiment 1 of @muellerPenMightierKeyboard2014. Here, we first focus on Experiment 2 of @muellerPenMightierKeyboard2014, which is also a direct replication of their Experiment 1 that only included an additional experimental manipulation which we will ignore. The reason for focussing on their Experiment 2 first is that the data is a bit more straightforward to interpret. We will get back to their Experiment 2 below, before providing a complete overview of the results of all data sets investigating the research question of whether the mode of taking note during lectures affects memory that employ the experimental design introduced by Mueller and Oppenheimer.
 
-Luckily for us, the data from @muellerPenMightierKeyboard2014, including the data from their Experiment 2, is available online on the [Open Science Framework (OSF)](https://osf.io/). The OSF is one of the most visible developments resulting from the replication crisis. It is a free website that allows researchers to share their data and other materials associated with their research. Before the replication crisis and the OSF it was very rare to get access to the data underlying published studies. Nowadays many researchers depose their (anonymised) data for published studies on the OSF and include the links to the data in their papers. This allows other researcher, such as us, to reanalyse existing data and ensure that the reported results can be *reproduced*.[^case_study_mueller_oppenheimer-1]
+Luckily for us, the data from @muellerPenMightierKeyboard2014, including the data from their Experiment 2, is available online on the [Open Science Framework (OSF)](https://osf.io/){target="_blank"}. The OSF is one of the most visible developments resulting from the replication crisis. It is a free website that allows researchers to share their data and other materials associated with their research. Before the replication crisis and the OSF, it was very rare to get access to the data underlying published studies. Nowadays, many researchers depose their (anonymised) data for published studies on the OSF and include the links to the data in their papers. This allows other researcher, such as us, to reanalyse existing data and ensure that the reported results can be *reproduced*.
 
-[^case_study_mueller_oppenheimer-1]: In this book we distinguish reproducing a result from replicating a result. Reproducing means being able to obtain the (quantitatively) same results from the same data. That is, when given the data and the analysis script or a description of the analysis, we can run the analysis to end up with the same result. In contrast, replication means repeating the study with new participants and being able to obtain the (qualitatively) same result.
+Note that in this book we distinguish *reproducing* a result from *replicating* a result. Reproducing means being able to obtain the exact same results using the exact same data. That is, when given the data and the analysis script or a description of the analysis, we can perform the statistical analysis and end up with the same result. In contrast, replication means repeating the study with new participants and being able to obtain the qualitatively same result. In other words, replicating necessarily entails collecting new data whereas reproducing is based on the same data.
 
 ### Preparing the Data
 
-To get into the habit of downloading data from OSF and reanalysing them, this is what we are going to do now. The file we need is called `Study 2 abbreviated data.csv` and can be found at the following OSF link: <https://osf.io/t43ua/> Please go ahead and download it now and put it in a folder so you can access it. I have already done so and copied it into folder `data`. We then use the [`tidyverse` function `read_csv()`,](https://r4ds.had.co.nz/data-import.html) which always returns a `tibble` (the `tidyverse` version of a `data.frame`), to read in the data, as object `mo2014`. Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for `tibbles`).
+To get into the habit of downloading data from the OSF and reanalysing them, this is what we are going to do now. The file we need is called `Study 2 abbreviated data.csv` and can be found at the following OSF link: <https://osf.io/t43ua/> Please go ahead and download it now and put it into your `data` folder so you can access it.
+
+Because we use the original data available on the OSF, preparing the data for analysis involves more steps than our previous analyses. For example, we first need to figure out which variables and observations are relevant. We also perform a few simple coherence checks to make sure that our assumptions about the variables and data hold. Such a more involved data preparation phase, which also requires knowledge about the experiment, paints a more realistic picture of a data preparation. When doing so for ones own data, one also should spend some time on checking that there are no problems with the data.
+
+The data preparation heavily draws on the `tidyverse` knowledge introduced in Chapter \@{\#tidyverse-intro}. We use function `read_csv()` to read-in the data and assign it to object `mo2014_e2`. As a reminder, `read_csv()` always returns a `tibble` (the `tidyverse` version of a `data.frame`). Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for some `tibbles`).
 
 ```{r, message=FALSE}
-mo2014 <- read_csv("data/Study 2 abbreviated data.csv")
-glimpse(mo2014)
+mo2014_e2 <- read_csv("data/Study 2 abbreviated data.csv")
+glimpse(mo2014_e2)
 ```
 
-We can see data from 153 participants on 22 columns. Many of the columns have names that are not immediately clear. This is not uncommon. An important task when getting any new data set is trying to figure out what the variables mean. One usually also has to do this for the data for the own experiments. For example, software for running experiments often collects more variables than needed for analysis. Consequently, the first analysis step is usually to figure out what is needed and what not.
+We can see data from 153 participants in 22 columns. Many of the columns have names that are not immediately clear. This is not uncommon. An important task when getting a new data set is trying to figure out what the variables mean. It is not uncommon that one also also has to do this for the data from the own experiments. For example, software for running experiments often collect more variables than needed for analysis. Consequently, one of the first step before actually doing anything with the data is usually figuring out what the variables mean and which one are needed and which not.
 
-Before doing so however, we note that 153 participants is not the final number of participants reported by @muellerPenMightierKeyboard2014. Instead, they removed two participants before the analysis resulting. Studying their OSF repository in detail (in particular the published `SPPS` script with output [`Output and Syntax - Study 2.doc`](https://osf.io/5f3z4/)) shows that participants with number 194 and 237 needs to be removed (the same information can be found in variable `filter_$` in the current data set). This file also shows that the two relevant `notetype` conditions are 1 = `longhand` and 2 = `laptop` and we will remove `notetype == 3` before analysis. Before moving on, we filter our data and remove these observations. For this we use `filter()` from the `tidyverse` in combination with the pipe operator `%>%` (i.e., we pipe our `tibble` to `filter()` and only retain those rows that we want). Importantly, we overwrite `mo2014` with the filtered `tibble` as we do not need the filtered out observations any more (to use them, we woul dhave to read the data in again). We then see how many participants remain using `nrow()` (which returns the number of rows in the data).
+Before doing so, we can already see that 153 participants is not the final number of participants reported by @muellerPenMightierKeyboard2014. Instead, they removed two participants before the analysis resulting in 151 participants. Studying their OSF repository in detail -- in particular the published `SPPS` script with output, [`Output and Syntax - Study 2.doc`](https://osf.io/5f3z4/){target="_blank"}) -- shows that participants with number 194 and 237 need to be removed (the same information can be found in variable `filter_$` in the current data set). This file also shows that the two relevant `notetype` conditions are 1 = `longhand` and 2 = `laptop`, and that we should remove observations for which `notetype == 3` before analysis (`notetype == 3` is an additional condition we ignore here). Before moving on, we filter the data and remove these observations.
+
+For filtering this observations we the `tidyverse` skills introduced in Chapter \@ref{\#tidyverse-intro}: We pipe (`%>%`) the data `mo2014_e2` to `filter()`. Importantly, we overwrite `mo2014_e2` with the filtered `tibble` as we do not need the filtered out observations any more (to use them, we would have to read-in the data again). We then see how many participants remain using `nrow()`. `nrow()` is a function that returns the number of rows in the data. As every participant here spans only one row, we can use it to get the overall number of participants.
 
 ```{r}
-mo2014 <- mo2014 %>% 
+mo2014_e2 <- mo2014_e2 %>% 
   filter(notetype != 3, participantid != 194, participantid != 237)
-nrow(mo2014)
+nrow(mo2014_e2)
 ```
 
-The reported 99 participants matches the 99 participants [reported on OSF](https://osf.io/5f3z4/) for the two conditions, `laptop` versus `longhand`. 
+The reported 99 participants matches the 99 participants [reported on the OSF](https://osf.io/5f3z4/){target="_blank"} for the two conditions, `laptop` versus `longhand`.
 
-Sadly, the OSF does not include a codebook describing all variables for this particular data set (only for an earlier version of the data set with variables that only overlaps to some degree with the present one). However, from looking at data and the information on OSF a few things are clear: `participantid` is the participant identifier variable, `notetype` is the condition identifier coding the experimental condition, and `whichtalk` identifies the TED talk participants saw (the mapping of talks to numbers is also given in the [`SPPS` output](https://osf.io/5f3z4/)).
+Sadly, the OSF does not include a codebook describing all variables for this particular data set (only for an earlier version of the data set with variables that only overlaps to some degree with the present one). However, from looking at data and the information on OSF, a few things are clear: `participantid` is the participant identifier variable, `notetype` is the condition identifier coding the experimental condition, and `whichtalk` identifies the TED talk participants saw (the mapping of talks to numbers is also given in the [`SPPS` output](https://osf.io/5f3z4/)){target="\_blank"}.
 
-In a first step, we can transform the relevant indicator variables, `participant` and experimental condition variable, into factors for further analysis. Transforming a variable into a `factor` guarantees that none of the analyses incorrectly treats one of the factors (i.e., categorical variables) as a numerical variable (e.g., taking the mean of the numbers in the participant identifier column is not a reasonable statistical operation). However, instead of overwriting the existing variables, we create new variable with the same name as in our analysis of @urry2021, `pid` and `condition`. We also assign human understandable labels instead of using 1 and 2 for the condition codes. This will make it easier to understand the pattern of results. To do so we use `factor()` inside `mutate()` from the `tidyverse` in combination with the pipe operator `%>%`. 
+In a first step, we can transform the relevant indicator variables, `participant` and experimental condition variable, into factors. As discussed before, transforming a variable into a `factor` guarantees that none of the analyses incorrectly treats one of the factors (i.e., categorical variables) as a numerical variable. For example, taking the mean of the numbers in the participant identifier column is not a reasonable statistical operation. Instead of overwriting the existing variables, we create new variable with the same name as in our analysis of @urry2021, `pid` and `condition`. We also assign human understandable labels instead of using 1 and 2 for the condition codes. This will make it easier to understand the pattern of results. To do so we use `factor()` inside `mutate()` from the `tidyverse` in combination with the pipe operator `%>%`.
 
 ```{r}
-mo2014 <- mo2014 %>% 
+mo2014_e2 <- mo2014_e2 %>% 
   filter(notetype != 3) %>% 
   mutate(
     pid = factor(participantid),
@@ -105,62 +117,67 @@ mo2014 <- mo2014 %>%
                        levels = c(2, 1),
                        labels = c("laptop", "longhand"))
   )
-glimpse(mo2014)
+glimpse(mo2014_e2)
 ```
 
 Looking at the data again reveals that the newly created variables are added to the end of the `tibble`.
 
-The next step is to calculate our dependent variable, the memory scores from 0 to 100 as used in the analysis of @urry2021. We can see that for the two question types, factual and conceptual, there are multiple measures. Each has an `index` score and a `raw` score as well as `perfect` variants for both types of scores. `perfect` here presumably means the maximal possible value that could be obtained for this score for this observation (i.e., row). The data also contains a number of $z$-transformed variants of the scores (variables `Z…`), but we will ignore them here (the original paper used the z-scores, but as these are more difficult to interpret and the results are qualitatively the same, we ignore them here). We focus on the `index` score which gives participant a maximal of 1 point per question (this information is given in the paper/on OSF). Let us take a look at the first six observations for the relevant variables.
+The next step is to calculate our dependent variable, the memory scores from 0 to 100 as used in the analysis of @urry2021. We can see that for the two question types, factual and conceptual, there are multiple measures. Each has an `index` score and a `raw` score as well as `perfect` variants for both types of scores. `perfect` here presumably means the maximal possible value that could be obtained for this score for this observation (i.e., row). The data also contains a number of $z$-transformed variants of the scores (variables `Z...`), but we will ignore them here (the original paper used the z-scores for their main analysis, but as these are more difficult to interpret and the results are qualitatively the same, we ignore them). We focus on the `index` score which gives participant a maximal of 1 point per question (this information is given in the paper/on OSF). Let us take a look at the first six observations for the relevant variables.
 
 ```{r}
-mo2014 %>% 
+mo2014_e2 %>% 
   select(pid, condition, factualindex, conceptualindex, 
          perfectfactindexscore, perfectconceptindexscore) %>% 
+  as.data.frame() %>% 
   head()
 ```
 
-We can see that the number of questions per question type and talk differs (as indicated by the difference in `perfect` `indexscore` values across rows), but the total number of items appears to always be ten (`perfectfactindexscore` + `perfectconceptindexscore` = 10 in each row). This also aligns with the [list of items found on OSF](https://osf.io/jph7c/) which show that there are ten questions per talk with the number of factual and conceptual questions differing across talks. From this information we could calculate our memory scores. However, before moving on it makes sense to run a quick sanity check to see that indeed the number of questions per row is ten. To do this, we create a new variable with the sum of the two perfect index scores, using `mutate()` (which adds a variable to the existing data), and then see whether this sum is always equal to 10, using `summarise()` (which in this case reduces the data to one row). If the number of question per observation/row sums to ten, this should return `TRUE`.
+We can see that the number of questions per question type and talk differs (as indicated by the difference in `perfect`-`indexscore` values across rows), but the total number of items appears to always be ten (`perfectfactindexscore` + `perfectconceptindexscore` = 10 in each row). This also aligns with the [list of items found on OSF](https://osf.io/jph7c/){target="_blank"}, which shows that there are ten questions per talk with the number of factual and conceptual questions differing across talks. From this information we could calculate our memory scores. However, before moving on it makes sense to run a quick coherence check to verify that the number of questions per row is indeed ten for all rows. To do this, we create a new variable with the sum of the two perfect index scores, using `mutate()` (which adds a variable to the existing data), and then see whether this sum is always equal to 10, using `summarise()` (which reduces the data to one row). If the number of question per observation/row sums to ten for all observations, this should return `TRUE`.
 
 ```{r}
-mo2014 %>% 
+mo2014_e2 %>% 
   mutate(sum_p_index = perfectfactindexscore + perfectconceptindexscore) %>% 
   summarise(check = all(sum_p_index == 10))
 ```
 
-Fortunately, the check passes so we feel that our assumption about the meaning of the variables are supported so we could go ahead and calculate our memory score.
+Fortunately, the check passes. We therefore feel that our assumptions about the meaning of the variables are supported. Consequently, we can go ahead and calculate the memory score.
 
-When preparing data for analysis, or running an analysis, it is important to regularly include such sanity checks in ones analysis. Any analysis involves assumptions about the underlying data -- for example, what a variable means, which values a variable can possibly take on, which observations are included in the data. Based on this assumption we calculate other variables from our data and perform our analysis. However, humans are fallible and data analysis experience shows that the assumptions are sometimes (regularly) false. Sometimes one has misunderstood (or misremembers) the meaning of a variable, there might have been some data entry error, or the data still includes some observations that should have been excluded (e.g., test runs from the researchers instead of participants). For example, in a study by @lewandowskyRoleConspiracistIdeation2013 the age of one participants was recorded as 32,757 years and this error was only uncovered after the publication of the manuscript. Luckily for them the error did not affect the conclusion drawn from the data, but they had to publish a correction [@lewandowskyCorrectionRoleConspiracist2015]. Publishing a correction is nothing dramatic (I have a few paper with published corrections because of errors discovered only after publication), but of course we would prefer not having to do so. And if the errors affect the conclusion substantially, sometimes a correction is not enough and a paper has to be retracted. Regular sanity or assumptions checks in ones analysis are on way to minimise the chance of errors in the final analysis.
+When preparing data for analysis, or running an analysis, it is important to regularly include coherence checks in ones analysis. Any analysis involves assumptions about the underlying data -- for example, what a variable means, which values a variable can possibly take on, which observations are included in the data. Based on this assumption we calculate other variables from our data and perform our analysis. However, humans are fallible and data analysis experience shows that the assumptions are sometimes (regularly) false. Sometimes one has misunderstood (or misremembers) the meaning of a variable, there might have been some data entry error, or the data still includes some observations that should have been excluded (e.g., test runs from the researchers instead of participants).
 
-Based on the positive outcome of the sanity check we are now convinced we have understood the variables in the data and can now calculate our memory score from 0 to 100. For this, we divide each `index` score by the `perfect…indexscore` and then multiply the results by 100. To simplify the coming analysis, we create a new `tibble`, `mo2014a`, that only retains the variables we really need for our analysis using `select()`. We then take another look at the first six rows of the data using `head()`. This shows that the data is now ready for our reanalysis.
+For example, in a study by @lewandowskyRoleConspiracistIdeation2013 the age of one participants was recorded as 32,757 years and this error was only uncovered after the publication of the manuscript. Fortunately for @lewandowskyRoleConspiracistIdeation2013, the error did not affect the substantive conclusion drawn from the data but had only minor effects on the reported statistical results. To correct the error they published a *correction* [@lewandowskyCorrectionRoleConspiracist2015]. A correction is a short note in a scientific journal describing the error and its consequences as well as the corrected result without the error.
+
+Publishing a correction is nothing dramatic (I also have a few papers with published corrections because of errors discovered after publication), but of course we would prefer not having to do so. And if the errors affect the conclusion substantially, sometimes a correction is not enough and a paper has to be *retracted*. A retraction means that the scientific article is removed from the journal. Regular coherence and assumptions checks in ones analysis are on way to minimise the chance of errors in the final analysis.
+
+Based on the positive outcomes of the checks, we are somewhat confident that we have understood the variables in the data and can calculate the memory score from 0 to 100. For this, we divide each `index` score by the `perfect...indexscore` and then multiply the results by 100. To simplify the coming analysis, we create a new `tibble`, `mo2014_e2a`, that only retains the variables we really need for the analysis. This is done using the `tidyverse` function `select()`. We then take another look at the first six rows of the data using `head()`. This shows that the data is now ready for a reanalysis.
 
 ```{r}
-mo2014a <- mo2014 %>% 
+mo2014_e2a <- mo2014_e2 %>% 
   mutate(
     factual = factualindex / perfectfactindexscore * 100,
     conceptual = conceptualindex / perfectconceptindexscore * 100
   ) %>% 
   select(pid, condition, factual, conceptual)
-head(mo2014a)
+head(mo2014_e2a)
 ```
 
 ### Descriptive Statistics
 
-Before performing an inferential statistical analysis of the data, we obtain some descriptive statistics. This will provide us with an overview over the data. In addition, the descriptive analysis is another way to check our data and minimise the chances of errors or problems.
+Before performing an inferential statistical analysis of the data, we obtain some descriptive statistics. This provides an overview of the data. In addition, the descriptive analysis is another way of checking the data and minimising the chances of errors or problems.
 
-As a first thing, we want to calculate the number of participants per condition. For this, we again use some `tidyverse` functions and will explain the steps in more detail. We generally start our `tidyverse` analyses with the data, here our `tibble` `mo2014a`, followed by the pipe `%>%`. The pipe "pipes" the `tibble` to the next function. When obtaining descriptives statistics we often want to get them conditional on a factor/categorical variable in our data. For example, now we want to calculate the number of observations per `condition`. This can be done by piping the `tibble` to the `group_by()` function and condition on the variable of interest, `condition`. The results of this is a "grouped" `tibble` which ensures that all following operations on this `tibble` are performed grouped (i.e., conditioned on) this grouping variable. We can now pipe this grouped `tibble` to the `count()` function to get the number of observations per note taking condition.
+At first, we want to calculate the number of participants per condition. For this we can use the `tidyverse` pipeline of `group_by()` and `count()`:
 
 ```{r}
-mo2014a %>% 
+mo2014_e2a %>% 
   group_by(condition) %>% 
   count()
 ```
 
-As another sanity check, we can compare this number to the values reported [on the OSF](https://osf.io/jph7c/) for this data (the $N$ by condition is not reported in the original paper). As the numbers match, this further increases our confidence in our data preparation.
+As another data check, we can compare these numbers to the values reported [on the OSF](https://osf.io/jph7c/){target="_blank"} for this data (the number of participants by condition is not reported in the original paper). As the numbers match, this further increases our confidence in the data preparation.
 
-As the next descriptive statistic, we calculate the condition means for our DV of interest, `conceptual` memory scores. We also calculate the standard deviation to get an idea of the spread of the data. We again use piping and the `tidyverse` to get the result. But this time the final function in our pipe is `summarise()` which allows to calculate summary statistics.
+As the next descriptive statistic, we calculate the condition means for the DV of interest, the `conceptual` memory scores. We also calculate the standard deviation to get an idea of the spread of the data. We again use piping and the `tidyverse` to get the result. But this time the final function in our pipe is `summarise()` which allows to calculate summary statistics.
 
 ```{r}
-mo2014a %>% 
+mo2014_e2a %>% 
   group_by(condition) %>% 
   summarise(
     mean = mean(conceptual),
@@ -168,40 +185,155 @@ mo2014a %>%
   )
 ```
 
-This shows that the conceptual memory is more than 10 points larger in the `longhand` compared to the `laptop` condition. We also see a difference in around 5 points in the SD. 
+This shows that the conceptual memory is more than 10 points higher in the `longhand` compared to the `laptop` condition. We also see a difference in around 5 points in the SD.
 
 As a side note, we could have added another calculation into the `summarise()` call. For example, `n = n()` would have also calculated the number of participants per condition, as the previous code did.
 
-One important part of a descriptive analysis should always be a plot of the data. A plot of all data points is usually the best way to see if there is something wrong with the data. Above, we have used `afex_plot()` after having estimated a model with `aov_car()`, but we can also invoke `ggplot2` directly. For this, we also pipe the data to `ggplot()` and then build the figure layer by layer. The important part is the mapping of variables in the data to aesthetics in the `aes()` function. We call this directly in the `ggplot()` call and mimic the other figures we have seen so far, mapping `condition` on the $x$-axis and the DV, `conceptual` memory, to the $y$-axis. As Figure \@ref(fig:laptop-dist), we begin with a violin plot (`geom_violin()`) with different quantiles. The violin plot shows the shape of the distribution. We combine this with the individual data points, whcih we show using `geom_beeswarm()` from the `ggbeeswarm` package (here we call the function without loading the package beforehand by using `package::function()`). We then add the mean (with standard error, which will be explained later) using `stat_summary()` in red. In this plot we see that the data already spans the full range in the $y$-axis, so we do not need to use `coord_cartesian(ylim = c(0, 100))`.
+One important part of a descriptive analysis should always be a graphical data exploration. A plot of all data points is usually the best way to see if there is something wrong with the data. Above, we have used `afex_plot()` after having estimated a model with `aov_car()`, but we can also invoke `ggplot2` directly.
+
+To build a plot with `ggplot2`, we pipe the data to `ggplot()` and then build the figure layer by layer. The important part is the mapping of variables in the data to aesthetics in the `aes()` function. We call this directly in the `ggplot()` call and mimic the other figures we have seen so far, mapping `condition` on the $x$-axis and the DV, `conceptual` memory scores, to the $y$-axis. As Figure \@ref(fig:laptop-dist), we begin with a violin plot (`geom_violin()`) with different quantiles. The violin plot shows the shape of the distribution. We combine this with the individual data points, which we show using `geom_beeswarm()` from the `ggbeeswarm` package (here we call the function without loading the package beforehand by using `package::function()`). We then add the mean (with standard error, which will be explained later) using `stat_summary()` in red. In this plot we see that the data already spans the full range in the $y$-axis, so we do not need to use `coord_cartesian(ylim = c(0, 100))`.
 
 ```{r desc-mo2014, fig.cap='Conceptual memory scores from Mueller and Oppenheimer (2014). This plot combines individual data points in black with means in red.'}
-mo2014a %>% 
+mo2014_e2a %>% 
   ggplot(aes(x = condition, y = conceptual)) +
   geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
   ggbeeswarm::geom_beeswarm() +
   stat_summary(colour = "red")  
 ```
 
-Before looking at the figure, we see that we got a status message in the console, "No summary function supplied, defaulting to \`mean_se()\`". This message is always shown when using `stat_summary()` without additional argument and can be safely ignored (i.e., it just indicates that the red point shows the mean and the red error bars show the standard error). The plot itself does not show anything unusual. The plot just reinforces the previous descriptive results: The mean memory score, but also the three displayed quantiles, are larger in the `longhand` than in the `laptop` condition. Taken together, the descriptive analysis suggests that there is nothing preventing us from running the inferential analysis.
+Before looking at the figure, we see that we got a status message in the console, "No summary function supplied, defaulting to \`mean_se()\`". This message is always shown when using `stat_summary()` without additional argument and can be safely ignored (i.e., it just indicates that the red point shows the mean and the red error bars show the standard error).
+
+The plot itself does not show anything unusual. The plot just reinforces the previous descriptive results: The mean memory score, but also the three displayed quantiles, are larger in the `longhand` than in the `laptop` condition. Taken together, the descriptive analysis suggests that there is nothing preventing us from running the inferential analysis and that there might be a difference such that conceptual memory scores might be larger in the longhand condition.
 
 ### Inferential Analysis
 
-The inferential analysis of the conceptual scores uses exactly the same call as our previous analysis, only with a new data set, `mo2014a`.
+The inferential analysis of the conceptual scores uses exactly the same call as our previous analysis, only with a new data set, `mo2014_e2a`.
 
 ```{r}
-mc_mo <- aov_car(conceptual ~ condition + Error(pid), mo2014a)
+mc_mo <- aov_car(conceptual ~ condition + Error(pid), mo2014_e2a)
 mc_mo
 ```
 
-Looking at the ANOVA table of the results shows that the $p$-value is smaller than .05; the analysis reveals a significant effect of condition. This indicates that this data provides evidence against the null hypothesis of no difference between the note taking conditions. Consequently, we would be justified in saying that the data provides evidence for a difference. To make it easy to detect a significant result, `afex`, like most statistical software tools, indicates a significant effect with $p < .05$ with one `*` next to the $F$-value (in case of $p < .01$ the indication is `**`, in case of $p < .001$ it is `***`, and in case the effect is not significant, but $p < .1$, it is `+`).
+Looking at the ANOVA table of the results shows that the $p$-value is smaller than .05; the analysis reveals a significant effect of condition. This indicates that this data provides evidence against the null hypothesis of no difference between the note taking conditions. Consequently, we would be justified in saying that the data provides evidence for a difference.
 
+To make it easy to detect a significant result, `afex` -- like most statistical software tools -- indicates a significant effect with $p < .05$ with one `*` next to the $F$-value. In case of a significant result with $p < .01$, this is indicted by two `**`. In case of a significant results with $p < .001$, this is indicated with three `***`. In case the effect is not significant, but $p < .1$, a `+` is shown at that position (however, this does not indicate that the data is almost significant).
+
+We can use `afex_plot()` in the same way as above to produce a results figure based on the estimated model, with the individual data points shown in grey in the background.
 
 ```{r afex-mo2014, fig.cap='afex_plot() figure for the conceptual memory scores from Mueller and Oppenheimer (2014, Experiment 2) that show a significant difference between the two note taking conditions.'}
 afex_plot(mc_mo, "condition")
 ```
 
+We can also use `emmeans()` to obtain the estimated marginal means:
+
+```{r}
+emmeans(mc_mo, "condition")
+```
+
+Likewise, we can use `emmeans()` in combination with \`pairs() to obtain the estimated difference between the two conditions:
+
+```{r}
+emmeans(mc_mo, "condition") %>% 
+  pairs()
+```
+
+If we were to report this study in a research paper, we could do so in the following way:
+
+> Figure \@ref{afex-mo2014} shows the conceptual memory scores from @muellerPenMightierKeyboard2014 and suggests that conceptual memory is somewhat better in the longhand compared to the laptop note taking condition. In line with this visual impression, an ANOVA on the conceptual memory scores indicated a significant effect of note taking condition, $F(1, 97) = 4.77$, $p = .031$. The mean scores in the longhand condition (mean = 46.5, SD = 28.9) were significantly larger than the mean scores in the longhand condition (mean = 35.0, SD = 23.5), with a difference of 11.5 (SE = 5.3). This suggests that the type of note taking during lectures, either with a laptop or in loghand format, might have an effect on the conceptual memory for the content of the lectures.
+
+## Conceptual Memory Scores from Mueller and Oppenheimer (2014) Experiment 1
+
+As discussed above, the two data sets looked at so far are both direct replications of @muellerPenMightierKeyboard2014's Experiment 1, a data set which we have not yet discussed. Consequently, we are now re-analysing this data set, @muellerPenMightierKeyboard2014's Experiment 1. This data is [also available from the OSF](https://osf.io/23yad/).
+
+The following code snippet prepares the data using the same strategy as for Experiment 2 shown above. As party of this preparation, the code excludes the one participant also excluded by @muellerPenMightierKeyboard2014. The code ends up with the same number of participants as reported by @muellerPenMightierKeyboard2014 (see [here](https://osf.io/bm7pa/)).
+
+```{r}
+mo2014_e1 <- read_csv("data/Study 1 abbreviated data.csv")
+mo2014_e1 <- mo2014_e1 %>% 
+  filter(participant != 63) %>% 
+  mutate(
+    pid = factor(participant),
+    condition = factor(LapLong, 
+                       levels = c(0, 1),
+                       labels = c("laptop", "longhand"))
+  ) %>% 
+    mutate(
+    factual = factualindex / perfectfactindexscore * 100,
+    conceptual = conceptualindex / perfectconceptindexscore * 100
+  ) %>% 
+  select(pid, condition, factual, conceptual)
+glimpse(mo2014_e1)
+mo2014_e1 %>% 
+  count(condition)
+```
+
+We can then run the same analysis as for the other data sets:
+
+```{r}
+mc_mo1 <- aov_car(conceptual ~ condition + Error(pid), mo2014_e1)
+mc_mo1
+```
+
+The results *do not* show a significant effect of note taking condition, $F(1, 63) = 2.46$, $p = .122$. This is a somewhat surprising result, because @muellerPenMightierKeyboard2014 did report a significant effect with $p = .046$. The reason for this difference is that they used a different statistical analysis than the ANOVA reported here, a *mixed-effects model* [for an introduction, see @singmannIntroductionMixedModels2019].
+
+Whether their analysis is more appropriate than the ANOVA analysis performed here, is not something that we can discuss here in detail. Mixed models are a more advanced statistical procedure for which the appropriate specification is not always straight forward. In any case, the fact that our *very sensible* analysis shows a clearly non-significant difference suggests that the results of their Experiment 1 are not as clear cut. In other words, we have a situation where two seemingly sensible analysis strategies lead to different qualitative results. This indicates that the evidence for a difference *in the population* is not very strong.
+
+If we plot the data using `afex_plot()` the visual impression is in line with the statistical one. Even though the observed difference is in the same direction as for Experiment 1, the difference appears smaller. We can also see that three participants in the longhand conditions have the overall lowest conceptual memory scores, even though the mean of the longhand condition is larger than the mean in the laptop condition.
+
+```{r afex-mo2014e1, fig.cap='afex_plot() figure for the conceptual memory scores from Mueller and Oppenheimer (2014, Experiment 1). The ANOVA shows no significant difference between the two note taking conditions.'}
+afex_plot(mc_mo1, "condition")
+```
+
+We can also use the combination of `emmeans()` and `pairs()` introduced before to get the estimated difference. This shows that the memory benefit for longhand note taking in this experiment is a bit less than 9 points, rounded to 9.0 points.
+
+```{r}
+emmeans(mc_mo1, "condition") %>% 
+  pairs()
+```
+
+Overall, the results from @muellerPenMightierKeyboard2014's Experiment 1 look similar but also different to the results from their Experiment 2. The results are similar because the observed conceptual memory benefit for the longhand condition is 9.0 points for Experiment 1 and was 11.5 points Experiment 2. The results are different because the effect was only significant for Experiment 2, but not for Experiment 1.
+
+One possible reason for this difference in inferential outcome (i.e., significant versus not significant) could be the difference in sample size. Each condition in Experiment 1 consisted of around 30 participants, whereas each condition in Experiment 2 consisted of around 50 participants. One general rule for NHST is that for a fixed observed effect, the study with the larger sample size will have a lower $p$-value. The reason for this behaviour of NHST is something that makes intuitive sense, the larger the sample size the more representative the observed effect becomes for the effect in the population. In the limit when we have observed all participants in the population (i.e., sample = population), the effect of the sample is identical to the effect in the population.
+
+## Overview of Experiments Investigating Longhand versus Laptop Notetaking During Lectures
+
+Let's try to sum up what we have learned about different types of note taking for memory performance. In the previous chapter (Chapter \@ref{standard1}), we have seen that the overall memory performance in the study of @urry2021 is slightly and non-significantly higher after taking notes with a laptop compared to longhand format.
+
+In this chapter, we have been concerned with the conceptual memory scores only, which are one part of the overall memory scores. The reason for focussing on the conceptual memory scores was doing so was based on @muellerPenMightierKeyboard2014. They argued that "[l]aptop use facilitates verbatim transcription of lecture content because most students can type significantly faster than they can write" (p. 1160). Furthermore, "[p]revious studies have shown that detriments due to verbatim note taking are more prominent for conceptual than for factual items" (p. 1160). Consequently, they expected that note taking with a laptop will lead to reduced conceptual memory compared to note taking in longhand format.
+
+When looking at only conceptual memory scores and only considering the experimental design introduced above, we have data from three basically identical studies: Experiments 1 and 2 of @muellerPenMightierKeyboard2014 and the experiment of @urry2021.
+
+As we have shown above, the data of @urry2021 showed a slight and non-significant memory advantage in the laptop compared to the longhand condition (difference of 3.5 points). Experiment 1 and 2 of @muellerPenMightierKeyboard2014 show the opposite results pattern, a benefit for longhand compared to laptop note taking of around 10 points (Experiment 1 = 9.0 points, Experiment 2 = 11.5 points). In our reanalysis the observed effects are quite similar across these two experiments of @muellerPenMightierKeyboard2014, but it is only significant for Experiment 2 and not for Experiment 1.
+
+If we consider the results from the three experiments together, there is limited evidence for an overall effect of the type of note taking on conceptual memory. Whereas @muellerPenMightierKeyboard2014 clearly suggest that note taking in longhand format is better, @urry2021 descriptively observe the opposite pattern with roughly the same number of participants (total N = 142) as Experiments 1 and 2 of @muellerPenMightierKeyboard2014 combined (total N = 164).
+
+What does this mean for the research question that the type of note taking matters for conceptual memory? There are three different situations that could be responsible for the inconsistent results. Each of these different situations has a different consequence for the research.
+
+The first possibility is that there is an effect of the type of note taking on conceptual memory in the population. In this situation, the study of @urry2021 produced a *false negative* result; a non-significant effect in the sample when in reality there is an effect in the population -- that is, in reality the null hypothesis is false. As NHST results are always probabilistic, such a false negative result can always happen due to random chance (i.e., researchers can just get unlucky). Other possible reasons for this possibility could be (a) an error during data collection or data handling (e.g., condition codes are incorrectly assigned to participants) or (b) some sort of *experimenter demand effect*. An experimenter demand effect can happen if the person performing the data collection knows about the hypothesis and in which condition a participant is and influences the participant subtly in a specific direction. This influence can happen unknown to both the experimenter and the participant. For example, if most of the students performing the data collection did not believe in the hypothesis that the type of note taking had an effect they could have acted in a way that made the task more difficult for participants in the longhand condition.
+
+The second possibility is that there is that there is *no* effect of the type of note taking on conceptual memory in the population. In this situation, the study of @muellerPenMightierKeyboard2014 produced *false positive* results; a significant effect in the sample when in reality there is no effect in the population -- that is, in reality the null hypothesis is true. Again, such an outcome can occur purely due to chance. However, the more studies in a row show a significant effect, the less likely such a chance outcome is at least in theory (because in our reanalysis the results from Experiment 1 changed from significant to non-significant, this is not a very strong argument here). Other possible reasons for this possibility are the same as above, an error in the studies or experimenter demand effects. For example, it is quite likely that the researchers performing the data collection for @muellerPenMightierKeyboard2014 believed in the hypothesis that note taking with a laptop leads to worse memory than note taking in longhand format. Therefore, they might have acted in a way that made the task more difficult for participants in the laptop condition.
+
+The third possibility is that neither of the results is a false positive or false negative, but both correctly reflect the underlying population. In this situation, there are two different populations from which the two different papers have sampled their participants. For example, the data collection of @muellerPenMightierKeyboard2014 must have taken place in 2013 or earlier. It is conceivable that the participants at that time were still used to taking most of their lecture notes in longhand format and thus might have performed better in the format they are more used to. In contrast, the data collection of @urry2021 took place in spring 2017 and students at that time might have been more used to note taking with a laptop thus removing a potential benefit of note taking in a longhand format. In other words, whereas there might have been a difference in population earlier this difference might have disappeared by now where most people use their laptops everyday now.[^case_study_mueller_oppenheimer-1]
+
+[^case_study_mueller_oppenheimer-1]: It seems also conceivable to make an argument that there is a difference in populations due to the place of data collection. Most of the participants in @muellerPenMightierKeyboard2014 were students at UCLA (University of California, Los Angeles) whereas the participants of @urry2021 were students at Tufts University near Boston. I leave it to the creativity of the reader to come up with such an explanation.
+
+In the absence of any additional data or studies, it is very difficult to decide between these three possibilities. Many researchers seem to put more weight on the first study that published a study using a specific experimental task than the following replication studies. In this mindset, we would still believe that the effect of @muellerPenMightierKeyboard2014 "is real" whereas the results of @urry2021 must be a fluke. However, it is difficult to see a logical argument for such a position. On the other extreme is a position held by some researchers that if there is a failed replication of a study, this means that there must have been something wrong with the original study. Again, this position does not seem logically justifiable. Whereas a failed replication clearly weakens the claims made in the original study, it does not mean anything is necessarily wrong with it.
+
+Before deciding what we should believe, let's consider in detail the consequences if the first possibility described above is actually true. As a reminder, this possibility is that @urry2021's results are a false negative result and in reality there is a difference in the population between the two note taking conditions on the conceptual memory scores. But what does this outcome mean for our research question? For this, we need to circle back to the two epistemic gaps discussed in Section \@ref{#epistemic-gaps}. If we knew for sure that there is an effect of note taking on the population than the second epistemic gap would not apply any more. However, the first epistemic gap would still apply. 
+
+Only because we knew that there were a benefit of note taking in longhand compared to laptop format in the experimental task developed by @muellerPenMightierKeyboard2014, this does not mean that such a benefit always occurs. For example, the experiment only used a rather short video lectures of around 15 minutes in length. Would such a benefit also occur for longer lectures? Likewise, does this effect only appear for the relatively well educated participants of the original study or really apply to the whole population of students? Another potential issue is how long the memory benefit holds. In the experiments considered here, the memory task followed around thirty minutes after the lecture. @muellerPenMightierKeyboard2014 addressed this question in their Experiment 3, where testing took place roughly one week after the virtual and still found a longhand memory benefit. However, this result has as of yet not been replicated. 
+
+What this list of open questions shows is that even in the best case scenario in which we knew that the failed replication were not a problem, the implications from the statistical result for our research question would still be limited. As discussed in detail in Section \@ref{#epistemic-gap-1}, the largest problem for a strong inference from any statistical result is the underdetermination of theory by data. Only because we find a specific pattern in one task, this does pattern generalises to all instances for which we hope our research question applies. The most important -- and perhaps most difficult -- task for us as researchers, is to not fall into the trap and interpret a significant $p$-value such that it means that our research question is answered. It only is one piece of evidence in the research process.
+
+In sum, the results suggests that if there is a benefit of a particular type of note taking on conceptual memory, it is not easy to detect. In any case, the available data does not suggest that everyone should ditch their laptop for paper and pencil. If researchers feel that this is an important research question, they need to provide stronger evidence. 
 
 ## Summary
 
-One reality of research is that a significant results is generally what researchers are looking for. If a results is significant we are happy, our experiment "has worked" and we can publish it. If it is not significant, we generally have problems publishing our results. 
+In this chapter, we have discussed three things. Firstly, we have used the `tidyverse` and prepared the data from two Experiments of @muellerPenMightierKeyboard2014 for analysis. We have seen that such a data preparation often not only requires the necessary `tidyverse` skills, but also knowledge of the data set. As part of this data preparation, we have discussed the importance of performing coherence checks to ensure the data matches our assumptions. Only when we have assured ourselves that the data is okay should we go ahead with the statistical analysis.
+
+Secondly, we have used `afex::aov_car()` and re-analysed three data sets using NHST. These three data sets shared the same structure, one continuous dependent variable and one categorical independent variable with two levels, and we could therefore use ANOVA for the analysis. As part of this analysis we have also created results figures using `afex_plot()` and performed follow-up analyses using `emmeans()`. As part of this analysis we have seen that once the data set is in the correct format, estimating the statistical model and obtaining the $p$-value is relatively easy and straight forward. 
+
+Thirdly, we have discussed what we learn from the three different experiments for the research question on how different types of note taking during lectures affect the conceptual memory for the lecture content. We have seen that despite the results from @muellerPenMightierKeyboard2014 that suggests that note taking in longhand format provides a memory benefit compared to note taking with a laptop, the conclusion is not that clear. One problem is that the replication of @urry2021 questions whether the original pattern is a genuine effect that holds in the population. The other problem is that even if the results of @muellerPenMightierKeyboard2014 would reliable replicate, that would not provide a conclusive answer to the general research question. Only because we find something in one particular task, this does not mean it holds for the underlying research question. In the reality of research, the epistemic problems discussed in Chapter \@ref{role-of-statistics-in-the-research-process} cannot be ignored.
+
+The overarching goal of this chapter was to paint a realistic picture of what we can learn from a significant result. One reality of research practice is that a significant results is generally what researchers are looking for. If a results is significant we are happy -- our experiment "has worked" and we can publish it. If the result is not significant we are unhappy, because we generally have problems publishing our results. Whereas this might be the reality of research practice, the significant $p$-value is not actually the end goal. Even if we find a significant $p$-value what we can learn from a particular study is always limited. And if we use an established task or study an established phenomenon and find a non-significant result, that can also be of interest. In many domains the published literature paints a picture that it is easy to obtain a particular result, but the reality often is that it is not because researcher do not publish the failed attempts. In sum, please do not confuse the $p$-value with the answer to your research question.
 

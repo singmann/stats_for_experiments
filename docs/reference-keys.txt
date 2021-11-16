@@ -78,6 +78,7 @@ fig:fig2
 fig:urry-conceptual
 fig:desc-mo2014
 fig:afex-mo2014
+fig:afex-mo2014e1
 role-of-statistics-in-the-research-process
 the-research-process
 example-the-psychology-of-loss-aversion
@@ -85,9 +86,8 @@ evidence-for-loss-aversion-lotteries
 alternative-explanation-loss-aversion-or-loss-seeking
 full-details-of-walasek-and-stewart-2015
 what-do-the-results-mean-for-loss-aversion
-epistemic-gaps-the-difference-between-what-we-want-to-know-and-what-we-can-know
-epistemic-gap-1-underdetermination-of-theory-by-data
-epistemic-gap-2-signal-versus-noise
+epistemic-gaps
+epistemic-gap-1
 summary
 some-further-examples-and-passing-thoughts
 conclusion
@@ -177,8 +177,10 @@ summary-4
 case-study-laptop
 conceptual-memory-data-from-urry-et-al.-2021
 why-are-experiments-replicated
-conceptual-memory-data-from-mueller-and-oppenheimer-2014
+conceptual-memory-scores-from-mueller-and-oppenheimer-2014-experiment-2
 preparing-the-data
 descriptive-statistics
 inferential-analysis
+conceptual-memory-scores-from-mueller-and-oppenheimer-2014-experiment-1
+overview-of-experiments-investigating-longhand-versus-laptop-notetaking-during-lectures
 summary-5
