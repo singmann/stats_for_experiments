@@ -4,7 +4,7 @@ In this chapter we will apply what we have learned in the previous chapter - how
 
 We start the analysis in this chapter in the same way as in the previous chapter, by loading the three packages we generally use, `afex`, `emmeans`, and `tidyverse`, and set a nicer `ggplot2` theme. Before doing so it is probably a good idea to restart `R` (unless, of course, you are just starting `R`). In `RStudio` this can be conveniently done through the menu by clicking on `Session` and then `Restart R`. In other `R` environments you might need to restart the program. The benefit of restarting `R` is that it should create a blank `R` session in which no packages are loaded and no objects exist in the workspace. Only such a blank sessions ensures that, once we have obtained a set of results, we can recreate them later using the same code. That is, a blank `R` session avoids any potential problems due to analyses performed in a previous session that are still lingering. Restarting `R` should generally be done when starting a new analysis or after one is completely done with an analysis. In the latter case, it makes sense to restart `R` and the rerun all code one has saved in ones script to ensure that all results replicate based on only the code in the script (and do not require some additional code not saved).
 
-```{r}
+```{r, message=FALSE}
 library("afex")
 library("emmeans")
 library("tidyverse")
