@@ -83,7 +83,7 @@ To get into the habit of downloading data from the OSF and reanalysing them, thi
 
 Because we use the original data available on the OSF, preparing the data for analysis involves more steps than our previous analyses. For example, we first need to figure out which variables and observations are relevant. We also perform a few simple coherence checks to make sure that our assumptions about the variables and data hold. Such a more involved data preparation phase, which also requires knowledge about the experiment, paints a more realistic picture of a data preparation. When doing so for ones own data, one also should spend some time on checking that there are no problems with the data.
 
-The data preparation heavily draws on the `tidyverse` knowledge introduced in Chapter \@{\#tidyverse-intro}. We use function `read_csv()` to read-in the data and assign it to object `mo2014_e2`. As a reminder, `read_csv()` always returns a `tibble` (the `tidyverse` version of a `data.frame`). Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for some `tibbles`).
+The data preparation heavily draws on the `tidyverse` knowledge introduced in Chapter \@ref(tidyverse-intro). We use function `read_csv()` to read-in the data and assign it to object `mo2014_e2`. As a reminder, `read_csv()` always returns a `tibble` (the `tidyverse` version of a `data.frame`). Then we use the `glimpse()` function (also a `tiydverse` function) to get an overview of the data (it is very similar to `str()` but less verbose for some `tibbles`).
 
 ```{r, message=FALSE}
 mo2014_e2 <- read_csv("data/Study 2 abbreviated data.csv")
