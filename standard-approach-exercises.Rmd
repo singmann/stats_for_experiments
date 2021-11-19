@@ -1,0 +1,182 @@
+# Standard Approach for One IV: Quiz and Exercises {#standard-approach-exercises .unnumbered}
+
+## Quiz
+
+
+Note: The pull-down menu for selecting an answer turns green after selecting the correct answer. 
+
+
+::: {.exercise}
+What is NOT true about the sample?
+
+1. The sample are a subset of the population
+2. The sample encompasses all individual that could in principle take part in the study
+3. The sample are the actual participants of a study
+
+Answer: `r webex::mcq(c("1", answer = "2","3"))`
+
+:::
+
+::: {.exercise}
+In a typical experiment with the participants being mostly undergraduate students, what is the population?
+
+1. All undergraduate students (including past and future undergraduate students)
+2. All humans (i.e., the human population in general)
+3. Undergraduate students from the university where the experiment was done
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+
+:::
+
+
+::: {.exercise}
+What is the goal of "descriptive statistics"?
+
+1. Description of data patterns in the population 
+2. Description of data patterns in the sample
+3. Generalising from sample to population
+
+Answer: `r webex::mcq(c("1", answer = "2","3"))`
+
+:::
+
+::: {.exercise}
+What is the goal of "inferential statistics"?
+
+1. Description of data patterns in the population 
+2. Description of data patterns in the sample
+3. Generalising from sample to population
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+:::
+
+
+::: {.exercise}
+What does "NHST" stand for?
+
+1. Non-hypothesis significance table
+2. New hypothesis significant theory
+3. Null hypothesis significance testing
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+
+:::
+
+::: {.exercise}
+What is a principle of the NHST approach of inferential statistics?
+
+1. In the population, there either is no difference in the condition means or there is a difference in the condition means
+2. If there is no difference in condition means in the sample, there is also no difference in the condition means in the population
+3. The approach is valid only when the condition means in the population are significantly different
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+
+:::
+
+::: {.exercise}
+What is NOT true about the NHST?
+
+1. NHST allows to prove if there is a mean difference in population
+2. NHST checks the compatibility of the data with the null hypothesis
+3. All inferences based on the NHST are probabilistic
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+
+:::
+
+::: {.exercise}
+What is NOT a part of the basic statistical model?
+
+1. DV
+2. IV
+3. Intercept
+4. Median
+5. Residuals
+
+Answer: `r webex::mcq(c("1", "2", "3", answer = "4", "5"))`
+
+:::
+
+::: {.exercise}
+What are residuals?
+
+1. Conditions means
+2. Differences between observed predicted values
+3. The sum of the IV-effect and intercept
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+
+:::
+
+::: {.exercise}
+What is NOT an ANOVA?
+
+1. A statistical model that solely includes factors as IVs
+2. Analysis of variance
+3. A mandatory part of the basic statistical model
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+
+:::
+
+::: {.exercise}
+What is the $p$-value?
+
+1. The probability that the null hypothesis is true (and therefore also the probability that our research question is false)
+2. The probability of observing an effect at least as extreme as observed, assuming that the null hypothesis is true
+3. The probability that the null hypothesis is false
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+
+:::
+
+
+::: {.exercise}
+What does it mean if $p < .05$?
+
+1. The result is significant and we reject the null hypothesis
+2. The result is not significant and we do not reject the null hypothesis
+3. The null hypothesis is extremely unlikely and therefore probably false
+
+Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+
+:::
+
+::: {.exercise}
+How can you interpret the following statistical results: $F(1, 38) = 0.54$, $p = .002$?
+
+1. Because $p < .05$, the result is significant and we reject the null hypothesis
+2. Because $p < .05$, our research question is supported by the data
+3. Because $p < .05$ and $F < 1$, something must be wrong with the results
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+
+:::
+
+::: {.exercise}
+Imagine you run a direct replication of a previous study that found a particular significant result. What does it mean if the replication study is successful (i.e., also finds a significant results that is very similar to the previous result)? 
+
+1. A successful replication indicates that the theory of the researchers is probably true 
+2. A successful replication indicates that the original researchers did not make an error in their study
+3. A successful replication indicates that the original result was probably not only due to chance
+
+Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+
+:::
+
+::: {.exercise}
+Imagine you run a direct replication of a previous study that found a particular significant result. What does it mean if the replication study fails (i.e., does not find a significant results that is very similar to the previous result)? 
+
+1. The original results must have been a false positive result  
+2. It reduces the evidence provided by original result
+3. The replication results must be a false negative result
+
+Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+
+:::
+
+
+## Exercise: Earworms and Sleep
+
+STILL MISSING
+

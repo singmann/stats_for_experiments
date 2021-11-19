@@ -7,7 +7,8 @@ rmd_files: [
   
   "tidyverse-intro.Rmd", "tidyverse-examples-exercises.Rmd",
   "ggplot-intro.Rmd", "ggplot-exercises.Rmd",
-  "02-standard_approach.Rmd", "case_study_mueller_oppenheimer.Rmd",
+  "02-standard_approach.Rmd", "case_study_mueller_oppenheimer.Rmd", 
+  "standard-approach-exercises.Rmd",
   "99-references.Rmd"]
 book_filename: "stats_for_experiments"
 delete_merged_file: true

@@ -8,6 +8,7 @@ rel_file <- "tidyverse-examples-exercises.Rmd"
 rel_file <- "ggplot-intro.Rmd"
 rel_file <- "ggplot-exercises.Rmd"
 rel_file <- "02-standard_approach.Rmd"
+rel_file <- "case_study_mueller_oppenheimer.Rmd"
 
 ## step 1: upload file the first time you want to use it:
 upload_file(rel_file)
@@ -44,3 +45,6 @@ update_file(file = rel_file)
 
 # Chapter 5: Standard approach
 # https://docs.google.com/document/d/1z9zDpbqX_6-A8P35GgVDCQiPwLTswKoEelZ9vLpaIuM/edit?usp=sharing
+
+## Chapter 6: Case Study
+# https://docs.google.com/document/d/1jHGJHkI6A71JArYeUZVqYMFbXXAs7msga-2BRhczLcs/edit?usp=sharing

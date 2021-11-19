@@ -79,6 +79,21 @@ fig:urry-conceptual
 fig:desc-mo2014
 fig:afex-mo2014
 fig:afex-mo2014e1
+exr:unlabeled-div-61
+exr:unlabeled-div-62
+exr:unlabeled-div-63
+exr:unlabeled-div-64
+exr:unlabeled-div-65
+exr:unlabeled-div-66
+exr:unlabeled-div-67
+exr:unlabeled-div-68
+exr:unlabeled-div-69
+exr:unlabeled-div-70
+exr:unlabeled-div-71
+exr:unlabeled-div-72
+exr:unlabeled-div-73
+exr:unlabeled-div-74
+exr:unlabeled-div-75
 role-of-statistics-in-the-research-process
 the-research-process
 example-the-psychology-of-loss-aversion
@@ -185,3 +200,5 @@ inferential-analysis
 conceptual-memory-scores-from-mueller-and-oppenheimer-2014-experiment-1
 overview-of-experiments-investigating-longhand-versus-laptop-notetaking-during-lectures
 summary-5
+quiz-2
+exercise-earworms-and-sleep
