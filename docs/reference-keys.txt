@@ -94,6 +94,8 @@ exr:unlabeled-div-72
 exr:unlabeled-div-73
 exr:unlabeled-div-74
 exr:unlabeled-div-75
+exr:unlabeled-div-76
+exr:unlabeled-div-77
 role-of-statistics-in-the-research-process
 the-research-process
 example-the-psychology-of-loss-aversion

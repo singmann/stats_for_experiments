@@ -178,5 +178,158 @@ Answer: `r webex::mcq(c("1", answer = "2", "3"))`
 
 ## Exercise: Earworms and Sleep
 
-STILL MISSING
+For this exercise, let's once again return to the study by @scullinBedtimeMusicInvoluntary2021 investigating the relationship between earworms and sleep quality. Let's quickly recap the study design and research question here. For more details see Section \@ref(earworms-task1).
+
+The study was a sleep lab experiment in which participants heard some music before going to sleep. In the *lyrics* condition, the songs were the original versions of pop songs with lyrics. In the *instrumental* condition, these were instrumental versions of the pop songs. 
+
+The researchers were interested in two research questions: 
+
+(1) Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms? This research question was based on previous results and the authors expected the instrumental version to induce more earworms than the lyrical versions. 
+
+To investigate this question, the researchers asked the participants whether they experienced earworms at various times during the experiment (i.e., while falling asleep, during the night, in the morning, or after getting ready to leave the sleep lab).
+
+(2) Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?
+
+To investigate this question, the researchers used [polysomnography](https://en.wikipedia.org/wiki/Polysomnography) and measured various objective sleep parameters. Here, we are specifically looking at sleep efficiency and sleep time.
+
+A version of the original data file made available by @scullinBedtimeMusicInvoluntary2021 can be downloaded from [here](https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv). As before, I recommend you download it to the `data` folder in your working directory and then you can read in the data with the following code. It makes sense to restart `R` before doing that. 
+
+We then load the packages we need for this exercise, the `tidyverse`, `afex`, and `emmeans`. Let's prepare the data set as discussed in the previous exercise and then take a look at it.
+
+```{r}
+library("afex")
+library("emmeans")
+library("tidyverse")
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom", 
+                  panel.grid.major.x = element_blank()))
+earworm <- read_csv("data/earworm_study.csv")
+earworm <- earworm %>% 
+  mutate(
+    id = factor(id),
+    group = factor(group, levels = c("Lyrics", "Instrumental"))
+  )
+glimpse(earworm)
+```
+
+In addition to the variables relevant to our research questions, the data contains a number of control variables (the original data file included even more). We can see a total of 19 variables:
+
+- `id`: Participant identifier
+- `group`: experimental condition with two values: "Lyrics" versus "Instrumental"
+- `relaxed`: question asking participants how relaxed they felt on a scale from 0 (= not relaxed) to 100 (= very relaxed) after listening to the music.
+- `sleepy`: question asking participants how sleepy they felt on a scale from 0 (= not sleepy) to 100 (= very sleepy) after listening to the music.
+The next 5 variables concerned whether or not the participants reported having an earworm at different times:
+- `earworm_falling_asleep`: Had earworm while trying to fall asleep last night? 0 = No; 1 = Yes
+- `earworm_night`: Had earworm while waking up during the night? 0 = No; 1 = Yes
+- `earworm_morning`: Had earworm while  waking up this morning? 0 = No; 1 = Yes
+- `earworm_control`: Had earworm at the control time point (after getting ready to leave the lab)? 0 = No; 1 = Yes
+- `sleep_efficiency`: a percentage score obtained from the polysomnography (0 = very low sleep efficiency and 100 = very high sleep efficiency)
+- `sleep_time`: total sleep time in minutes
+
+The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for `classrank`. This uses US nomenclature for what year of four the student participant is in (Freshman = year 1, Sophomore = year 2, Junior = year 3, and Senior = year 4) plus some additional values for staff, post-graduate students and (presumably) one missing value ('-').
+
+::: {.exercise}
+In the previous exercises, we we have already investigated the data rather comprehensively. Consequently, let's immediately jump in and analyse research question 1 using inferential statistics (i.e., an ANOVA). 
+
+Does the provide support for the hypothesis that the type of music listened to before going to bed affects the development of earworms?
+
+To answer this question it is important to make a decision on what "development of earworms" means. In the previous exercises we look at least at two different interpretations: the proportion of time points for which participants reported having an earworm or did participants get any earworm during the night. 
+
+What do the result mean for the research question?
+
+`r hide("Hint")`
+To analyse this research question, we first need to create a new dependent variable (DV) which tells us whether or not participants developed earworms during the night. We can then analyse this DV using `aov_car()`.
+`r unhide()`
+
+`r hide("Solution")`
+
+To analyse this research question, we first need to create new dependent variables (DV) which tells us whether or not participants developed earworms during the night. For this, we can copy and paste a solution from a previous exercise that creates two variants of this DV, the proportion of time points for which participants reported having an earworm, `prop_earworm`, and a binary variable indicating whether participants got any earworm during the night, `any_earworm`.
+
+```{r}
+earworm <- earworm %>% 
+  mutate(
+    prop_earworm = (earworm_falling_asleep + earworm_night + 
+                      earworm_morning) / 3
+  ) %>% 
+  mutate(any_earworm = if_else(prop_earworm == 0, 0, 1)) 
+```
+
+With this new DVs we can use `aov_car` to see whether the type of music has a significant effect on the creation of earworms. Let's begin with `prop_earworm`. The formula has this as the DV and the experimental condition, `group`, as IV. We also need to pass the participant identifier column `id` in the `Error()` term. 
+
+```{r}
+res_1a <- aov_car(prop_earworm ~ group + Error(id), earworm)
+res_1a
+```
+
+The ANOVA table shows a non-significant effect of music type on the proportion of time points during which an earworm is reported. 
+
+We then also look at the second DV, `any_earworm`.
+
+```{r}
+res_1b <- aov_car(any_earworm ~ group + Error(id), earworm)
+res_1b
+```
+
+The ANOVA table, also reveals a non-significant result.
+
+Before summarising the result, let's take a look at the estimated marginal means whether they are in line with the expectations:
+
+```{r}
+emmeans(res_1a, "group")
+emmeans(res_1b, "group")
+```
+
+This shows that in the instrumental condition, participants apear to be more likely to develop earworms.
+
+*Overall answer:* Descriptively the results suggest that participants that listen to instrumental compared to lyrical music are more likely to report any earworm during the night (0.52 compared to 0.28). At the same time, participants in the instrumental condition report earworms at more time points during the nights than participants in the lyrical condition (0.23 compred to 0.11). However, these difference do not reach significance with an ANOVA with experimental condition as factor, neither for any earworm, *F*(1, 46) = 2.99, *p* = 0.091, nor for the proportion of time points for which earworms are reported, *F*(1, 46) = 3.49, *p* = .068.
+
+`r unhide()`
+:::
+
+
+::: {.exercise}
+
+Analyse the second research question using NHST and an ANOVA: Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition? 
+
+As the measure of sleep quality focus on sleep efficiency. But also check if the same pattern is observed for total time slept. Also make a result plot for each of the two measures of sleep quality and combine them into into one figure.
+
+Then write a brief summary of the results.
+
+`r hide("Hint")`
+For the analysis we can again use `aov_car()`. For plotting we can use `afex_plot()` and combine the plots with `cowplot::plot_grid()`.
+`r unhide()`
+
+`r hide("Solution")`
+
+The data is already in the correct format for this task. Thus, we can immediately start with the analysis of the sleep efficiency:
+
+```{r}
+res_2a <- aov_car(sleep_efficiency ~ group + Error(id), earworm)
+res_2a
+```
+
+The ANOVA table shows a significant effect of music condition. Let's take a look at sleep time as well:
+
+
+```{r}
+res_2b <- aov_car(sleep_time ~ group + Error(id), earworm)
+res_2b
+```
+
+For sleep time we do not see a significant effect. 
+
+Let's create two results plot using `afex_plot` and combine them into one:
+
+```{r}
+p1 <- afex_plot(res_2a, "group")
+p2 <- afex_plot(res_2b, "group")
+cowplot::plot_grid(p1, p2)
+```
+
+This shows that in the instrumental condition, participants apear to be more likely to develop earworms.
+
+*Summary:* As shown in the figure, both sleep efficiency and sleep time is higher in the lyrics compared to the instrumental condition. Separate ANOVA analysis of these two dependent variables with experimental condition as factor (with levels lyrics vs. instrumental) reveals that this difference is significant for sleep efficiency, *F*(1, 46) = 4.58, *p* = .038, but nor for sleep time, *F*(1, 46) = 1.77, *p* = .190.
+`r unhide()`
+:::
+
 

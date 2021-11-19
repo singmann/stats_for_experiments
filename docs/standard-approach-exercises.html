@@ -258,7 +258,235 @@
 <h2>
 <span class="header-section-number">6.8</span> Exercise: Earworms and Sleep<a class="anchor" aria-label="anchor" href="#exercise-earworms-and-sleep"><i class="fas fa-link"></i></a>
 </h2>
-<p>STILL MISSING</p>
+<p>For this exercise, let’s once again return to the study by <span class="citation"><a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">Scullin, Gao, and Fillmore</a> (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> investigating the relationship between earworms and sleep quality. Let’s quickly recap the study design and research question here. For more details see Section <a href="tidyverse-exercises.html#earworms-task1">3.10</a>.</p>
+<p>The study was a sleep lab experiment in which participants heard some music before going to sleep. In the <em>lyrics</em> condition, the songs were the original versions of pop songs with lyrics. In the <em>instrumental</em> condition, these were instrumental versions of the pop songs.</p>
+<p>The researchers were interested in two research questions:</p>
+<ol style="list-style-type: decimal">
+<li>Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms? This research question was based on previous results and the authors expected the instrumental version to induce more earworms than the lyrical versions.</li>
+</ol>
+<p>To investigate this question, the researchers asked the participants whether they experienced earworms at various times during the experiment (i.e., while falling asleep, during the night, in the morning, or after getting ready to leave the sleep lab).</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?</li>
+</ol>
+<p>To investigate this question, the researchers used <a href="https://en.wikipedia.org/wiki/Polysomnography">polysomnography</a> and measured various objective sleep parameters. Here, we are specifically looking at sleep efficiency and sleep time.</p>
+<p>A version of the original data file made available by <span class="citation"><a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">Scullin, Gao, and Fillmore</a> (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> can be downloaded from <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv">here</a>. As before, I recommend you download it to the <code>data</code> folder in your working directory and then you can read in the data with the following code. It makes sense to restart <code>R</code> before doing that.</p>
+<p>We then load the packages we need for this exercise, the <code>tidyverse</code>, <code>afex</code>, and <code>emmeans</code>. Let’s prepare the data set as discussed in the previous exercise and then take a look at it.</p>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://afex.singmann.science/">"afex"</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: lme4</span>
+<span class="co">#&gt; Loading required package: Matrix</span>
+<span class="co">#&gt; ************</span>
+<span class="co">#&gt; Welcome to afex. For support visit: http://afex.singmann.science/</span>
+<span class="co">#&gt; - Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()</span>
+<span class="co">#&gt; - Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'</span>
+<span class="co">#&gt; - 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests</span>
+<span class="co">#&gt; - NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.</span>
+<span class="co">#&gt; - Get and set global package options with: afex_options()</span>
+<span class="co">#&gt; - Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()</span>
+<span class="co">#&gt; - For example analyses see: browseVignettes("afex")</span>
+<span class="co">#&gt; ************</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'afex'</span>
+<span class="co">#&gt; The following object is masked from 'package:lme4':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     lmer</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rvlenth/emmeans">"emmeans"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span>
+<span class="co">#&gt; -- <span style="font-weight: bold;">Attaching packages</span> ------------------- tidyverse 1.3.1 --</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">ggplot2</span> 3.3.5     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">purrr  </span> 0.3.4</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tibble </span> 3.1.4     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">dplyr  </span> 1.0.7</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tidyr  </span> 1.1.3     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">stringr</span> 1.4.0</span>
+<span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">readr  </span> 2.0.1     <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">forcats</span> 0.5.1</span>
+<span class="co">#&gt; -- <span style="font-weight: bold;">Conflicts</span> ---------------------- tidyverse_conflicts() --</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">expand()</span> masks <span style="color: #0000BB;">Matrix</span>::expand()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">pack()</span>   masks <span style="color: #0000BB;">Matrix</span>::pack()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">unpack()</span> masks <span style="color: #0000BB;">Matrix</span>::unpack()</span>
+<span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span> 
+            <span class="fu">theme</span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span>, 
+                  panel.grid.major.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">earworm</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/earworm_study.csv"</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">48</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">19</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">------------------------------------</span></span>
+<span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (7): group, gender, raceethnicity, nativeenglishspe...</span>
+<span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (12): id, relaxed, sleepy, earworm_falling_asleep, e...</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use <span style="color: #000000; background-color: #BBBBBB;">`spec()`</span> to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set <span style="color: #000000; background-color: #BBBBBB;">`show_col_types = FALSE`</span> to quiet this message.</span>
+<span class="va">earworm</span> <span class="op">&lt;-</span> <span class="va">earworm</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>,
+    group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">group</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Lyrics"</span>, <span class="st">"Instrumental"</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="fu">glimpse</span><span class="op">(</span><span class="va">earworm</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 48</span>
+<span class="co">#&gt; Columns: 19</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">id                    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> 102, 103, 104, 105, 106, 10~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">group                 </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> Lyrics, Lyrics, Instrumenta~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">relaxed               </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 37, 96, 62, 83, 68, 78, 60,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">sleepy                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 49, 10, 44, 97, 42, 52, 41,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">earworm_falling_asleep</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">earworm_night         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">earworm_morning       </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, 0, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">earworm_control       </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 0, 0, 0, 0, 1, 0, 0, ~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">sleep_efficiency      </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 90.0, 95.7, 89.8, 94.1, 98.~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">sleep_time            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 487.6, 519.4, 472.1, 494.8,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">age                   </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 19, 21, 19, 20, 27, 18, 22,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">gender                </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Female", "Female", "Female~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">raceethnicity         </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Caucasian", "Caucasian", "~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">nativeenglishspeaker  </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">bilingual             </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "No", "No", "No", "No", "No~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">height_inches         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 66, 68, 64, 69, 53, 62, 76,~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">weight_lbs            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 145, 183, 135, 155, 89, 120~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">handedness            </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "R", "L", "R", "R", "R", "R~</span>
+<span class="co">#&gt; $ <span style="font-weight: bold;">classrank             </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Sophomore", "Junior", "Fre~</span></code></pre></div>
+<p>In addition to the variables relevant to our research questions, the data contains a number of control variables (the original data file included even more). We can see a total of 19 variables:</p>
+<ul>
+<li>
+<code>id</code>: Participant identifier</li>
+<li>
+<code>group</code>: experimental condition with two values: “Lyrics” versus “Instrumental”</li>
+<li>
+<code>relaxed</code>: question asking participants how relaxed they felt on a scale from 0 (= not relaxed) to 100 (= very relaxed) after listening to the music.</li>
+<li>
+<code>sleepy</code>: question asking participants how sleepy they felt on a scale from 0 (= not sleepy) to 100 (= very sleepy) after listening to the music.
+The next 5 variables concerned whether or not the participants reported having an earworm at different times:</li>
+<li>
+<code>earworm_falling_asleep</code>: Had earworm while trying to fall asleep last night? 0 = No; 1 = Yes</li>
+<li>
+<code>earworm_night</code>: Had earworm while waking up during the night? 0 = No; 1 = Yes</li>
+<li>
+<code>earworm_morning</code>: Had earworm while waking up this morning? 0 = No; 1 = Yes</li>
+<li>
+<code>earworm_control</code>: Had earworm at the control time point (after getting ready to leave the lab)? 0 = No; 1 = Yes</li>
+<li>
+<code>sleep_efficiency</code>: a percentage score obtained from the polysomnography (0 = very low sleep efficiency and 100 = very high sleep efficiency)</li>
+<li>
+<code>sleep_time</code>: total sleep time in minutes</li>
+</ul>
+<p>The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for <code>classrank</code>. This uses US nomenclature for what year of four the student participant is in (Freshman = year 1, Sophomore = year 2, Junior = year 3, and Senior = year 4) plus some additional values for staff, post-graduate students and (presumably) one missing value (‘-’).</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-76" class="exercise"><strong>Exercise 6.16  </strong></span>In the previous exercises, we we have already investigated the data rather comprehensively. Consequently, let’s immediately jump in and analyse research question 1 using inferential statistics (i.e., an ANOVA).</p>
+<p>Does the provide support for the hypothesis that the type of music listened to before going to bed affects the development of earworms?</p>
+<p>To answer this question it is important to make a decision on what “development of earworms” means. In the previous exercises we look at least at two different interpretations: the proportion of time points for which participants reported having an earworm or did participants get any earworm during the night.</p>
+<p>What do the result mean for the research question?</p>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<p>To analyse this research question, we first need to create a new dependent variable (DV) which tells us whether or not participants developed earworms during the night. We can then analyse this DV using <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car()</a></code>.</p>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>To analyse this research question, we first need to create new dependent variables (DV) which tells us whether or not participants developed earworms during the night. For this, we can copy and paste a solution from a previous exercise that creates two variants of this DV, the proportion of time points for which participants reported having an earworm, <code>prop_earworm</code>, and a binary variable indicating whether participants got any earworm during the night, <code>any_earworm</code>.</p>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="va">earworm</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>
+    prop_earworm <span class="op">=</span> <span class="op">(</span><span class="va">earworm_falling_asleep</span> <span class="op">+</span> <span class="va">earworm_night</span> <span class="op">+</span> 
+                      <span class="va">earworm_morning</span><span class="op">)</span> <span class="op">/</span> <span class="fl">3</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>any_earworm <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">prop_earworm</span> <span class="op">==</span> <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
+<p>With this new DVs we can use <code>aov_car</code> to see whether the type of music has a significant effect on the creation of earworms. Let’s begin with <code>prop_earworm</code>. The formula has this as the DV and the experimental condition, <code>group</code>, as IV. We also need to pass the participant identifier column <code>id</code> in the <code><a href="https://rdrr.io/r/stats/aov.html">Error()</a></code> term.</p>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res_1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car</a></span><span class="op">(</span><span class="va">prop_earworm</span> <span class="op">~</span> <span class="va">group</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, <span class="va">earworm</span><span class="op">)</span>
+<span class="co">#&gt; Contrasts set to contr.sum for the following variables: group</span>
+<span class="va">res_1a</span>
+<span class="co">#&gt; Anova Table (Type 3 tests)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: prop_earworm</span>
+<span class="co">#&gt;   Effect    df  MSE      F  ges p.value</span>
+<span class="co">#&gt; 1  group 1, 46 0.05 3.49 + .070    .068</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</span></code></pre></div>
+<p>The ANOVA table shows a non-significant effect of music type on the proportion of time points during which an earworm is reported.</p>
+<p>We then also look at the second DV, <code>any_earworm</code>.</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res_1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car</a></span><span class="op">(</span><span class="va">any_earworm</span> <span class="op">~</span> <span class="va">group</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, <span class="va">earworm</span><span class="op">)</span>
+<span class="co">#&gt; Contrasts set to contr.sum for the following variables: group</span>
+<span class="va">res_1b</span>
+<span class="co">#&gt; Anova Table (Type 3 tests)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: any_earworm</span>
+<span class="co">#&gt;   Effect    df  MSE      F  ges p.value</span>
+<span class="co">#&gt; 1  group 1, 46 0.23 2.99 + .061    .091</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</span></code></pre></div>
+<p>The ANOVA table, also reveals a non-significant result.</p>
+<p>Before summarising the result, let’s take a look at the estimated marginal means whether they are in line with the expectations:</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">res_1a</span>, <span class="st">"group"</span><span class="op">)</span>
+<span class="co">#&gt;  group        emmean     SE df lower.CL upper.CL</span>
+<span class="co">#&gt;  Lyrics        0.107 0.0464 46   0.0132    0.200</span>
+<span class="co">#&gt;  Instrumental  0.232 0.0484 46   0.1345    0.329</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence level used: 0.95</span>
+<span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">res_1b</span>, <span class="st">"group"</span><span class="op">)</span>
+<span class="co">#&gt;  group        emmean     SE df lower.CL upper.CL</span>
+<span class="co">#&gt;  Lyrics        0.280 0.0968 46   0.0851    0.475</span>
+<span class="co">#&gt;  Instrumental  0.522 0.1009 46   0.3186    0.725</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence level used: 0.95</span></code></pre></div>
+<p>This shows that in the instrumental condition, participants apear to be more likely to develop earworms.</p>
+<p><em>Overall answer:</em> Descriptively the results suggest that participants that listen to instrumental compared to lyrical music are more likely to report any earworm during the night (0.52 compared to 0.28). At the same time, participants in the instrumental condition report earworms at more time points during the nights than participants in the lyrical condition (0.23 compred to 0.11). However, these difference do not reach significance with an ANOVA with experimental condition as factor, neither for any earworm, <em>F</em>(1, 46) = 2.99, <em>p</em> = 0.091, nor for the proportion of time points for which earworms are reported, <em>F</em>(1, 46) = 3.49, <em>p</em> = .068.</p>
+</div>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-77" class="exercise"><strong>Exercise 6.17  </strong></span>Analyse the second research question using NHST and an ANOVA: Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition?</p>
+<p>As the measure of sleep quality focus on sleep efficiency. But also check if the same pattern is observed for total time slept. Also make a result plot for each of the two measures of sleep quality and combine them into into one figure.</p>
+<p>Then write a brief summary of the results.</p>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<p>For the analysis we can again use <code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car()</a></code>. For plotting we can use <code><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot()</a></code> and combine the plots with <code><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">cowplot::plot_grid()</a></code>.</p>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>The data is already in the correct format for this task. Thus, we can immediately start with the analysis of the sleep efficiency:</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res_2a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car</a></span><span class="op">(</span><span class="va">sleep_efficiency</span> <span class="op">~</span> <span class="va">group</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, <span class="va">earworm</span><span class="op">)</span>
+<span class="co">#&gt; Contrasts set to contr.sum for the following variables: group</span>
+<span class="va">res_2a</span>
+<span class="co">#&gt; Anova Table (Type 3 tests)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: sleep_efficiency</span>
+<span class="co">#&gt;   Effect    df   MSE      F  ges p.value</span>
+<span class="co">#&gt; 1  group 1, 46 15.38 4.58 * .091    .038</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</span></code></pre></div>
+<p>The ANOVA table shows a significant effect of music condition. Let’s take a look at sleep time as well:</p>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res_2b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_car</a></span><span class="op">(</span><span class="va">sleep_time</span> <span class="op">~</span> <span class="va">group</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">Error</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, <span class="va">earworm</span><span class="op">)</span>
+<span class="co">#&gt; Contrasts set to contr.sum for the following variables: group</span>
+<span class="va">res_2b</span>
+<span class="co">#&gt; Anova Table (Type 3 tests)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Response: sleep_time</span>
+<span class="co">#&gt;   Effect    df    MSE    F  ges p.value</span>
+<span class="co">#&gt; 1  group 1, 46 634.72 1.77 .037    .190</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</span></code></pre></div>
+<p>For sleep time we do not see a significant effect.</p>
+<p>Let’s create two results plot using <code>afex_plot</code> and combine them into one:</p>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot</a></span><span class="op">(</span><span class="va">res_2a</span>, <span class="st">"group"</span><span class="op">)</span>
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/afex/man/afex_plot.html">afex_plot</a></span><span class="op">(</span><span class="va">res_2b</span>, <span class="st">"group"</span><span class="op">)</span>
+<span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="standard-approach-exercises_files/figure-html/unnamed-chunk-8-1.png" width="100%"></div>
+<p>This shows that in the instrumental condition, participants apear to be more likely to develop earworms.</p>
+<p><em>Summary:</em> As shown in the figure, both sleep efficiency and sleep time is higher in the lyrics compared to the instrumental condition. Separate ANOVA analysis of these two dependent variables with experimental condition as factor (with levels lyrics vs. instrumental) reveals that this difference is significant for sleep efficiency, <em>F</em>(1, 46) = 4.58, <em>p</em> = .038, but nor for sleep time, <em>F</em>(1, 46) = 1.77, <em>p</em> = .190.</p>
+</div>
+</div>
 
 </div>
 </div>
