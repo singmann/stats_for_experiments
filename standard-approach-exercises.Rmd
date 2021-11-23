@@ -196,7 +196,7 @@ A version of the original data file made available by @scullinBedtimeMusicInvolu
 
 We then load the packages we need for this exercise, the `tidyverse`, `afex`, and `emmeans`. Let's prepare the data set as discussed in the previous exercise and then take a look at it.
 
-```{r}
+```{r, message=FALSE}
 library("afex")
 library("emmeans")
 library("tidyverse")
