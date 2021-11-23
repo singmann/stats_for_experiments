@@ -281,7 +281,7 @@ emmeans(res_1b, "group")
 
 This shows that in the instrumental condition, participants apear to be more likely to develop earworms.
 
-*Overall answer:* Descriptively the results suggest that participants that listen to instrumental compared to lyrical music are more likely to report any earworm during the night (0.52 compared to 0.28). At the same time, participants in the instrumental condition report earworms at more time points during the nights than participants in the lyrical condition (0.23 compred to 0.11). However, these difference do not reach significance with an ANOVA with experimental condition as factor, neither for any earworm, *F*(1, 46) = 2.99, *p* = 0.091, nor for the proportion of time points for which earworms are reported, *F*(1, 46) = 3.49, *p* = .068.
+*Overall answer:* Descriptively the results suggest that participants that listen to instrumental compared to lyrical music are more likely to report any earworm during the night (0.52 compared to 0.28). At the same time, participants in the instrumental condition report earworms at more time points during the nights than participants in the lyrical condition (0.23 compred to 0.11). However, these difference do not reach significance with an ANOVA with experimental condition as factor, neither for any earworm, *F*(1, 46) = 2.99, *p* = .091, nor for the proportion of time points for which earworms are reported, *F*(1, 46) = 3.49, *p* = .068.
 
 `r unhide()`
 :::
@@ -326,10 +326,68 @@ p2 <- afex_plot(res_2b, "group")
 cowplot::plot_grid(p1, p2)
 ```
 
-This shows that in the instrumental condition, participants apear to be more likely to develop earworms.
+This shows that in the instrumental condition, participants appear to be more likely to develop earworms.
 
 *Summary:* As shown in the figure, both sleep efficiency and sleep time is higher in the lyrics compared to the instrumental condition. Separate ANOVA analysis of these two dependent variables with experimental condition as factor (with levels lyrics vs. instrumental) reveals that this difference is significant for sleep efficiency, *F*(1, 46) = 4.58, *p* = .038, but nor for sleep time, *F*(1, 46) = 1.77, *p* = .190.
 `r unhide()`
 :::
 
+
+
+::: {.exercise}
+
+The actual research question of the researchers is whether earworms reduce sleep quality or not. However, because it is unclear how earworms emerge, the researchers use the manipulation of the type of music listened to before going to bed to induce more earworms in the instrumental condition compared to the lyrical condition. In some sense, this is an indirect test of the actual research question.
+
+A more direct test of the actual research question is to compare the sleep quality of participants that report earworms at any point during the night with the sleep quality of participants that do not report any earworms. Your task is to perform this more direct test statistically. What do the results show? How can we interpret them?  
+
+`r hide("Hint")`
+The `R` syntax is very similar to the answer of the previous two exercises and can reuse some of the variable created there. The question how to interpret the results requires you to think about what kind of variable the independent variable of the analysis is.
+`r unhide()`
+
+`r hide("Solution")`
+
+To test the research question if the sleep quality differs between participants that report or do not report earworms, we need to have a factor in our data that indicates whether a participant reported an earworm. The `any_earworm` variable crwated in a previous exercise contains this information, but is not a factor. Therefore, we transform it into a factor, `has_earworm`:
+
+
+```{r}
+earworm <- earworm %>% 
+  mutate(has_earworm = factor(any_earworm, 
+                              levels = c(1, 0), 
+                              labels = c("yes", "no")))
+```
+
+Then we can calculate the two ANOVAs for the two sleep quality measures. First for sleep efficiency:
+
+```{r}
+res_3a <- aov_car(sleep_efficiency ~ has_earworm + Error(id), earworm)
+res_3a
+```
+
+As above, the ANOVA shows a significant effect. Let's run the same analysis for sleep time.
+
+
+```{r}
+res_3b <- aov_car(sleep_time ~ has_earworm + Error(id), earworm)
+res_3b
+```
+
+As above, the ANOVA does not show a significant effect.
+
+Let's also plot the two results:
+
+```{r}
+p1 <- afex_plot(res_3a, "has_earworm")
+p2 <- afex_plot(res_3b, "has_earworm")
+cowplot::plot_grid(p1, p2)
+```
+
+The plot reveals an interesting pattern. For sleep efficiency the results are in line with the results for the experimental manipulation. Having an earworm appears to reduce the sleep quality, *F*(1, 46) = 6.33, *p* = .015  (as does listening to instrumental music). However, for sleep time the results are not only not significant, *F*(1, 46) = 1.11, *p* = .298, the results are also descriptively not in line with the results from the experimental manipulation. Whereas for the type of music, participants in the instrumental condition appeared to sleep slightly less, participants that report an earworm appear to sleep slightly longer. Taken together this shows that time slept does not to be affected by either the experimental manipulation nor whether participants report an earworm.
+
+Overall, we have now three different pieces of evidence: The instrumental compared to the lyrical conditions leads to somewhat more earworms (although this effect is not statistically significant) and also to worse sleep quality. Furthermore, participants that report earworms have a worse sleep quality than participants that report no earworms. Does this indicate that earworms are necessarily causally responsible for the worse sleep quality? Unfortunately we cannot conclude that. The problem is that we did not directly manipulate the presence of earworms, we only measured (or observed) whether participants have an earworm. Thus, we cannot rule out that there is another variable at play that is causally responsible for worse sleep quality and also related to the presence of earworms. 
+
+For example, we could imagine that the absence of language when listening to instrumental compared to lyrical music puts participants in a more *creative mindset*. Then, being in a creative mindset could both lead to worse sleep quality (because the mind is "creative" and therefore active) and also more earworms. Furthermore, more creative people would also report more earworms and sleep worse which would also explain the last result. This explanation is not particularly likely, because it is made up on the spot (i.e., I have no idea if there is a such thing as a "creative mindeset"). Nevertheless, it is able to explain all pieces of evidence discussed here without the necessity that earworms are causally resonsible for anything, they are just an [epiphenomenon](https://en.wikipedia.org/wiki/Epiphenomenon). Whenever a variable is not manipulated directly, such as earworms in the present study, we cannot easily make causal inferences as we can always come up with at least somewhat plausible alternative explanations.
+
+
+`r unhide()`
+:::
 
