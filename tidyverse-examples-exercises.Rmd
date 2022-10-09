@@ -120,7 +120,7 @@ ws1 %>%
     )
 ```
 
-Finally, it is time to perform a descriptive analysis of the data. The main result we have reported for this data was the mean acceptance rates for the symmetric lotteries that appear in all conditions. The code for this is the same as given in Section \@ref(group_by), but now we use the combined data. This code reproduces the results reported in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking).
+Finally, it is time to perform a descriptive analysis of the data. The main result we have reported for this data was the mean acceptance rates for the symmetric lotteries that appear in all conditions. The code for this is the same as given in Section \@ref(group-by), but now we use the combined data. This code reproduces the results reported in Section \@ref(alternative-explanation-loss-aversion-or-loss-seeking).
 
 ```{r}
 ws1 %>%

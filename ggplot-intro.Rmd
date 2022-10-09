@@ -486,7 +486,7 @@ ggplot(part_sum, aes(x = condition, y = mean_acc)) +
   stat_summary(aes(group = 1), geom = "line", fun = "mean")
 ```
 
-## One Continuous Variable: Histograms
+## One Continuous Variable: Histograms {#intro-histograms}
 
 So far, we have always created plots involving two variables. However, sometimes we only want to see the distribution of *one* variable, and not one that is conditional on another variable, as discussed above. The most important type of plot for this task is a *histogram*.
 

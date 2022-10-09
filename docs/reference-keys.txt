@@ -108,7 +108,7 @@ epistemic-gaps
 epistemic-gap-1
 epistemic-gap-2
 summary
-some-further-examples-and-passing-thoughts
+passing-thoughts
 conclusion
 research-designs
 empirical-evidence-and-data
@@ -168,7 +168,7 @@ the-bee-swarm-and-related-plots
 box-plot
 violin-plots
 plotting-the-mean
-one-continuous-variable-histograms
+intro-histograms
 choosing-the-number-of-bins
 proportion-instead-of-frequency-plots
 summary-3

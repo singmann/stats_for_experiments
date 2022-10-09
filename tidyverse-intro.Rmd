@@ -62,7 +62,7 @@ After you are comfortable with `R`, let us take a quick look at `RStudio` togeth
 knitr::include_graphics("figures/rstudio-window.png")
 ```
 
-This screenshot shows the four panes in their default location. The `R` script in the top left, the `R` console in the bottom left, the environment and history pane in the top right, and the files and plot pane in the bottom left.
+This screenshot shows the four panes in their default location. The `R` script in the top left, the `R` console in the bottom left, the environment and history pane in the top right, and the files and plot pane in the bottom right.
 
 An alternative to the default location is possible by switching the position of the console and environment pane. For this, click on the small button to the left of `Addins` just below the menu bar. The button looks a bit like a version of the windows logo. When clicking this button you can choose between the default "console on the left" and an alternative "console on the right". Especially if you work a lot with `R` scripts, which we will do, it makes sense to put the console on the right, as shown in the Figure \@ref(fig:rstudio2).
 
@@ -529,7 +529,7 @@ If you have not yet done so, maybe now is a good time to check out the internal 
 
 After the short recap of base `R`, we provided a brief introduction to a few `tidyverse` packages, `tibble`, `readr`, and `dplyr`, and introduced the `tidyverse` pipe, `%>%`. We  that the backbone of the `tidyverse` is the `tibble`, a modern variant of the base `R` `data.frame`. A `tibble` is also what is returned when using the `readr` functions for reading in data, such as `read_csv()`.
 
-For the pipe, we saw that it changes the order in which we can write commands. Whereas for base `R` the order is from inside to outside (innermost function first), with the pipe we can write or pipe functions from left to write. The pipe makes it easy to chain different operations together, which is otherwise difficult in base `R` and would lead to unreadable code. Pipingoften avoids the need to create intermediate variables and generally leads to more readable code.
+For the pipe, we saw that it changes the order in which we can write commands. Whereas for base `R` the order is from inside to outside (innermost function first), with the pipe we can write or pipe functions from left to write. The pipe makes it easy to chain different operations together, which is otherwise difficult in base `R` and would lead to unreadable code. Piping often avoids the need to create intermediate variables and generally leads to more readable code.
 
 Finally, we have introduced the functionality of `dplyr`. For `dplyr,` the most important functions are the three "verbs", `mutate()`, `summarise()`, and `filter()`, each of which each solves one specific data manipulation problem. `mutate()` creates/changes variables within the current data, `summarise()` creates new variables by summarising the current data, and `filter()` selects observations (i.e., reduces the number of rows). One of the most powerful features of `dplyr` is that these verbs can be combined with `group_by()`, which performs these operations conditional on one or multiple categorical variables.
 

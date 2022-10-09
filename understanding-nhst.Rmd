@@ -1,0 +1,662 @@
+# Understanding Null-Hypothesis Significance Testing {#understanding-nhst}
+
+In Chapters \@ref(standard1) and \@ref(case-study-laptop) we have discussed how to perform and interpret null hypothesis significance tests (NHST) in `R`. In the present chapter we will provide further background on how NHST works. How do we actually test the null hypothesis?
+
+To understand the statistical logic behind NHST, we first need to introduce a few concepts: The normal distribution, probability, and the sampling distribution of the null hypothesis. Once we have introduced these, we can show how NHST is actually performed. However, as in the previous chapters, this will not be a mathematically rigorous introduction, but rather a conceptual introduction that should equip you with the correct intuitions on how NHST works. For readers interested in a more traditional introduction in psychology I recommend @baguleySeriousStatsGuide2012 or @howellStatisticalMethodsPsychology2013. For a fully rigorous treatment see @coxPrinciplesStatisticalInference2006 or @pawitanAllLikelihoodStatistical2014.
+
+```{r, message=FALSE}
+library("tidyverse")
+library("afex")
+library("emmeans")
+library("ggbeeswarm")  
+theme_set(theme_bw(base_size = 15) + 
+            theme(legend.position="bottom"))
+```
+
+## The Normal Distribution
+
+In Section \@ref(intro-histograms), we have introduced the histogram as the preferred data visualisation technique for investigating the *distribution* of one variable. We have also discussed how to describe and interpret such a histogram. However, the distribution of a variable is not only important for exploratory data analysis, but plays a fundamental role in inferential statistics.
+
+To understand the role of the distribution of a variable, let's first define it. In statistics, a distribution is a mathematical function that tells us how probable different possible outcomes of a variable are. For example, if we knew the distribution of a variable of a continuous variable, we could calculate the probability of values within a certain range of the variable. In practice, we generally do not know the distribution of variable. Then, we can use a histogram which provides us with the corresponding descriptive statistics; the proportion of values that fall within a certain range of a variable.
+
+To exemplify the concept of a distribution, let's take a look at a few examples of empirical distributions shown via their histograms. Figure \@ref(fig:sel-dist) shows the distributions of six selected variables. Panels (a) and (b) show variables we have already discussed, the overall memory scores from @urry2021 in (a) and the sleep times from @scullinBedtimeMusicInvoluntary2021 in (b). Panels (c) and (d) show two different measures of risk preferences from the study of @pedroniRiskElicitationPuzzle2017 briefly discussed in Section \@ref(passing-thoughts). The data in panel (c) shows risk preferences based on a lottery task [i.e., a task similar to the task of @walasekHowMakeLoss2015] and panel (d) shows data from a risk preference questionnaire in which participants had to indicate for a number of different scenarios how likely they were to perform a more or less risky option [@hockeyEffectsNegativeMood2000]. Panels (e) and (f) shows data set that come with the `openintro` `R` package [@openintro2021]. Panel (e) shows the birthweight of randomly sampled newborns in the US in 2014 (excluding babies with a weight below 1.5 kg; data set `births14`). Panel (f) shows the height of female US college students from the University of California, Los Angeles (UCLA, data set `speed_gender_height`).
+
+```{r sel-dist, message=FALSE, fig.asp=1.2, echo=FALSE, warning=FALSE}
+#| fig.cap = "Distributions of six selected variables: (a) overall memory scores of 142 participants from @urry2021; (b) sleep times (in minutes) of the 48 participants in Experiment 2 of the earworm study of @scullinBedtimeMusicInvoluntary2021; (c) and (d) data from 1507 participants reported in @pedroniRiskElicitationPuzzle2017 investigating different risk preference measures, (c) results from an adaptive lottery task, (d) propensity for risk inventory questionnaire; (e) weights of a random sample of 1000 newborns in 2014 in the US in kg (children with a low birth weight below 1.5 kg are excluded); (f) heights of 878 female UCLA students (in cm)."
+data("laptop_urry")
+p1 <- laptop_urry %>% 
+  ggplot(aes(x = overall, y = after_stat(density))) +
+  geom_histogram(binwidth = 10/3) + 
+  labs(x = "Memory scores")
+
+earworm <- read_csv("data/earworm_study.csv")
+earworm <- earworm %>% 
+  mutate(
+    id = factor(id),
+    group = factor(group, levels = c("Lyrics", "Instrumental"))
+  )
+p2 <- earworm %>% 
+  ggplot(aes(sleep_time, y = after_stat(density))) +
+  geom_histogram(bins = 15) + 
+  labs(x = "Sleep time (minutes)")
+
+load("data/pedroni-frey.rda")
+p3 <- pedroni_frey %>% 
+  ggplot(aes(LOT, y = after_stat(density))) +
+  geom_histogram(binwidth = 0.02, boundary = 0) + 
+  labs(x = "Lotteries (risk task)")
+
+p4 <- pedroni_frey %>% 
+  ggplot(aes(PRI, y = after_stat(density))) +
+  geom_histogram(binwidth = 1, boundary = 0.5) +
+  labs(x = "Risk questionnaire")
+
+#psych::describe(pedroni_frey)
+
+data("births14", package = "openintro")
+births14 <- births14 %>% 
+  filter(weight > 3.306937) %>%
+  mutate(weight_kg = weight * 0.453592)
+p5 <-  births14 %>% 
+  ggplot(aes(x = weight_kg, y = after_stat(density))) +
+  geom_histogram() +
+  labs(x = "Birth weight (kg, > 1.5)")
+data("speed_gender_height", package = "openintro")
+height_f <- speed_gender_height %>% 
+  filter(gender == "female") %>% 
+  mutate(height_cm = height * 2.54) %>% 
+  filter(!is.na(height))
+
+p6 <- height_f %>% 
+  ggplot(aes(x = height_cm, y = after_stat(density))) +
+  geom_histogram(binwidth = 2.5) +
+  labs(x = "Student height (f, cm)")
+
+cowplot::plot_grid(p1, p2, p3, p4, p5, p6, 
+                   nrow = 3, labels = "auto", align = "hv")
+```
+
+Even though these six variables in Figure \@ref(fig:sel-dist) represent very different data -- cognitive tasks, questionnaires, behavioural measures, and physiological variables -- the shapes of the distributions are all relatively similar to each other. Each distributions exhibits roughly a bell shape[^understanding-nhst-1]: data distributed symmetrically around a central mode, with most data near the mode and less data the further away we get from the mode (i.e., few "outliers").
+
+[^understanding-nhst-1]: For panels (a) and (b) the pattern is more noisy compared to the other panels, because they contain considerably less data than the other panels.
+
+The most important theoretical distribution that has the same shape is the *normal distribution*. Because it is based on the work of German mathematician Carl Friedrich Gauss, it is also known as the *Gaussian distribution*. For all statistical methods discussed in this book, the normal distribution will play an important role as we will see below.
+
+The normal distribution is defined via its mean (*m*) and standard deviation (*sd*).[^understanding-nhst-2] That is, once we know the mean and standard deviation of a normally distributed variable, we know how probably each value (or more correctly, interval of values) is. Figure \@ref(fig:norm-dist) shows a plot of the normal distribution with *m* = 0 and *sd* = 1.[^understanding-nhst-3]
+
+[^understanding-nhst-2]: More mathematically correct would be to say a normal distribution is defined through the mean and the variance. But because the standard deviation is (a) easier to interpret than the variance and (b) the square root of the variance, we will generally define it through mean and standard deviation.
+
+[^understanding-nhst-3]: The normal distribution with *m* = 0 and *sd* = 1 is also known as the *standard normal distribution*.
+
+```{r norm-dist, echo=FALSE}
+#| fig.cap = "Probability density function (PDF) of the normal distribution with mean = 0 and standard deviation = 1."
+df <- data.frame(x = c(-4, 4))
+ggplot(df, aes(x = x)) +
+  geom_function(fun = dnorm, 
+                args = list(mean = 0, sd = 1)) +
+  labs(x = "Value of variable", y = "Density")
+```
+
+What Figure \@ref(fig:norm-dist) shows is called the *probability density function* or *PDF* of the normal distribution. This function (i.e., the black lines shown in the figure) can be calculated given a formula that we do not need to know.[^understanding-nhst-4] The height of the black line at a specific value of the variable -- that is the density of that value -- gives the *relative likelihood* of that value compared to the other values of the variable. In the next section below we will provide some further explanation of how to interpret the density function.
+
+[^understanding-nhst-4]: In `R`, the corresponding function is `dnorm()`, which gives the *density* of the *normal distribution*. If you want to take a look at the formula for it, you can find it on [Wikipedia](https://en.wikipedia.org/wiki/Normal_distribution). In general, Wikipedia provides very good formal information about most probability distributions.
+
+For now, the important take away message is that because we have the formula for the PDF of the normal distribution, if we knew that a variable follows the normal distribution, we could calculate the relative likelihood of any value of the variable. In other words, knowing the distribution of a variable allows us to express the *uncertainty* we have about the values of a variable. For example, for a variable that follows the normal distribution shown in Figure \@ref(fig:norm-dist), a value of around 1 is around 4 to 5 times more likely than a value around 2, because the density at 1 is around 4 to 5 times higher than the density at 2.
+
+More generally, a *probability distribution* -- of which the normal distribution is one example -- provides a formal (i.e., mathematical) way to talk about variables for which the outcomes are not certain, but only known to an uncertain degree. We generally use the concept of *probability* to express this uncertainty numerically. Probability provides us with a way to handle the *randomness* inherent in the outcomes of the variable. In the next section we will provide a definition and examples of what exactly we mean with probability. Let's first get back to the examples.
+
+Visually, the shape of the normal distribution in Figure \@ref(fig:norm-dist) looks similar to the observed distribution shapes shown in Figure \@ref(fig:sel-dist). The question is how well the empirical shapes agree with the theoretical shape of the normal distribution. As discussed above, the normal distribution is defined solely through the mean and the standard deviation. We can therefore add the theoretical PDF of the corresponding normal distribution to the empirical distribution. For this, we only need to calculate the mean and the standard deviation of the variables and can then calculate the corresponding normal distribution function. This is done in Figure \@ref(fig:sel-dist-pdf) below.
+
+```{r sel-dist-pdf, message=FALSE, fig.asp=1.2, echo=FALSE, warning=FALSE}
+#| fig.cap = "Same data as Figure \\@ref(fig:sel-dist), but with corresponding normal distribution overlaid as a black line. The mean, *m*, and standard deviation, *sd*, for every variable is given in each panel."
+vjust1 <- 1.05
+vjust2 <- 2.2
+
+p1_dist <- laptop_urry %>% 
+  summarise(m = mean(overall), sd = sd(overall))
+
+p1d <- laptop_urry %>% 
+  ggplot() +
+  geom_histogram(aes(x = overall, y = after_stat(density)), 
+                 binwidth = 10/3) + 
+  geom_function(fun = dnorm, 
+                args = list(mean = p1_dist$m, sd = p1_dist$sd)) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p1_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p1_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Memory scores")
+
+p2_dist <- earworm %>% 
+  summarise(m = mean(sleep_time), sd = sd(sleep_time))
+p2d <- earworm %>% 
+  ggplot(aes(sleep_time, y = after_stat(density))) +
+  geom_histogram(bins = 15) + 
+  geom_function(fun = dnorm, 
+                args = list(mean = p2_dist$m, sd = p2_dist$sd), 
+                inherit.aes = FALSE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p2_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p2_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Sleep time (minutes)")
+
+p3_dist <- pedroni_frey %>% 
+  summarise(m = mean(LOT), sd = sd(LOT))
+p3d <- pedroni_frey %>% 
+  ggplot(aes(LOT, y = after_stat(density))) +
+  geom_histogram(binwidth = 0.02, boundary = 0) + 
+    geom_function(fun = dnorm, 
+                args = list(mean = p3_dist$m, sd = p3_dist$sd), 
+                inherit.aes = FALSE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p3_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p3_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Lotteries (risk task)") +
+  coord_cartesian(xlim = c(0.15, 0.8))
+
+p4_dist <- pedroni_frey %>% 
+  summarise(m = mean(PRI), sd = sd(PRI))
+p4d <- pedroni_frey %>% 
+  ggplot(aes(PRI, y = after_stat(density))) +
+  geom_histogram(binwidth = 1, boundary = 0.5) +
+  geom_function(fun = dnorm, 
+                args = list(mean = p4_dist$m, sd = p4_dist$sd), 
+                inherit.aes = FALSE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p4_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p4_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Risk questionnaire")
+
+#psych::describe(pedroni_frey)
+
+p5_dist <- births14 %>% 
+  summarise(m = mean(weight_kg), sd = sd(weight_kg))
+p5d <-  births14 %>% 
+  ggplot(aes(x = weight_kg, y = after_stat(density))) +
+  geom_histogram() +
+  geom_function(fun = dnorm, 
+                args = list(mean = p5_dist$m, sd = p5_dist$sd), 
+                inherit.aes = FALSE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p5_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p5_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Birth weight (kg, > 1.5)")
+
+p6_dist <- height_f %>% 
+  summarise(m = mean(height_cm), sd = sd(height_cm))
+p6d <- height_f %>% 
+  ggplot(aes(x = height_cm, y = after_stat(density))) +
+  geom_histogram(binwidth = 2.5) +
+  geom_function(fun = dnorm, 
+                args = list(mean = p6_dist$m, sd = p6_dist$sd), 
+                inherit.aes = FALSE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p6_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p6_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Student height (f, cm)") +
+  coord_cartesian(xlim = c(120, 200))
+
+cowplot::plot_grid(p1d, p2d, p3d, p4d, p5d, p6d, 
+                   nrow = 3, labels = "auto", align = "hv")
+```
+
+On average, there is quite a large degree of agreement between the empirical distributions shown in the histograms and the normal distributions obtained shown as a line in Figure \@ref(fig:sel-dist-pdf). However, there are also some aspects of the empirical distributions for which the account of the normal distribution is lacking. For example, the empirical distribution in panels (a) and (b) are based on limited data compared to the other panels which each show distributions consisting of at least around 1000 observations. As a consequence, the empirical distributions in panels (a) and (b) are less smooth and more random than the other panels. One would hope that with more data for each of these panels the empirical distribution become smoother and the agreement with and normal distribution becomes better, but in the absence of more data this has to stay a hope (in statistics, we often call such hopes *assumptions*).
+
+A more subtle disagreement can be seen in panels (c) and (e). In both cases, the empirical distribution is slightly asymmetric with a tail to one of the sides. Panel (c) is slightly right-skewed -- that is, has a right tail -- and panel (e) is slightly left-skewed and has a left tail. An alternative way to describe these patterns would be to say that there are some large outliers for panel (c) whereas there are some small outliers for panel (e). In any case, we see that as a consequence the symmetric normal distribution provides a misfit predicting more data than there is on the side of the skew/tail and predicting too little data on the opposite side.
+
+Despite these patterns of misfit, the overall account of the normal distribution is at least satisfactory for the variables shown in Figure \@ref(fig:sel-dist-pdf). It seems appropriate to say these variables appear to be at least *approximately normally distributed*. This means the normal distribution is able to describe which values of the variables will appear with which likelihood. Consequently, we could use the normal distribution to predict how likely different values of the variable are in the future. Likewise, if we had observed a specific value from one individual, we could use the normal distribution and see how small are large this value is, relative to the full distribution.
+
+```{r sim_multi, echo = FALSE, fig.asp=1.2}
+#| fig.cap = "Simulated data sets from a normal distribution with mean = 0 and SD = 1 with different sample sizes (from N = 25 to N = 10,000). The black line shows the theoretical (i.e., true) probability density function."
+set.seed(345678901)
+ns <- c(25, 50, 100, 500, 1000, 10000)
+sim_dat <- map_dfr(ns, ~tibble(
+  n = paste0("N = ", .),
+  x = rnorm(.)
+)) 
+sim_dat$n <- fct_inorder(factor(sim_dat$n))
+ggplot(sim_dat, aes(x = x, y = after_stat(density))) +
+  geom_histogram(bins = 40) +
+  geom_function(fun = dnorm, 
+                args = list(mean = 0, sd = 1), 
+                inherit.aes = FALSE) +
+  labs(x = "Simulated data") +
+  facet_wrap("n", as.table = TRUE, ncol = 2)
+```
+
+```{r sim1}
+#| fig.cap = "One simulated data set from a normal distribution with mean = 0, SD = 1, and N = 100."
+df_sim <- tibble(
+  simulated = rnorm(100, mean = 0, sd = 1)
+)
+ggplot(df_sim) +
+  geom_histogram(aes(x = simulated, y = after_stat(density)), bins = 40) +
+  geom_function(fun = dnorm, args = list(mean = 0, sd = 1)) +
+  labs(x = "Simulated data") 
+```
+
+Learning or assuming that a variable is (at least approximately) normally distributed not only permits predictions of future values of the variables, it also provides an extremely parsimonious description of the distribution of the variable. We only need to know the mean and the standard deviation of the variable and this is enough to fully specify the corresponding normal distribution function. More specifically, the mean and the standard deviation are the so-called *sufficient statistics* of the normal distribution. If we know these two values, we can perfectly describe the corresponding normal distribution. This means that in theory, additional information does not permit us to learn anything more about the distribution of the variable. Of course, in reality we do not really know if a variable is truly normally distributed, so we can practically always learn more if we get more data.
+
+At this point, you might wonder why a number of rather different variables all appear to approximately follow the normal distribution. There is an interesting mathematical explanation for that, the *central limit theorem*. The central limit theorem is a mathematical proof showing that a variable will be normally distributed if it arises as a sum of many independent variables. For example, it seems sensible to assume that the physiological variables height and weight results as a sum of a number of independent variables, namely genetic and environmental influences. Some of these influences will have a positive and some will have a negative effect on weight and height. As a result, weight and height itself are normally distributed. Maybe more psychological variables, such as memory performance or risk preferences, are also the sum of different psychological or biological variables. This would explain why their distribution is also approximately normal.
+
+Taken together, the importance of the normal distribution has both empirical and theoretical reasons. It is empirically successful and can adequately describe the observed distribution of many different variables. Theoretically it is appealing because it is the distribution that emerges if a variable results as the sum of many other variables, a property that is likely to hold for many biological and related variables.
+
+However, not all variables can be described by the normal distribution. In contrast, the six variables in Figure \@ref(fig:sel-dist-pdf) were selected to show a particularly strong agreement with the normal distribution. In reality, the distribution can look a lot less normal. And for some variables, the
+
+-   normal followes from sum of random bits Figure \@ref(fig:sel-dist-pdf) demonstrates that for some variables it can make sense to assume they are normally distributed. Even though we of course don't really know
+
+-   not all normally distributed of course
+
+The variables shown @freemanItemEffectsRecognition2010
+
+```{r, echo=FALSE}
+#| fig.cap = "Two variables (histograms) for which the corresponding normal distribution (black line) does not provide a good account. (a) Response time data from @freemanItemEffectsRecognition2010. (b) Number of days absent from school from 146 randomly sampled students in rural New South Wales, Australia, in a particular school year."
+vjust1 <- 1.05
+vjust2 <- 2.2
+data("fhch2010")
+pnon0_dist <- fhch2010 %>% 
+  summarise(m = mean(rt), sd = sd(rt))
+pnon0 <- fhch2010 %>% 
+  ggplot(aes(rt, y = after_stat(density))) +
+  geom_histogram(binwidth = 0.1, boundary = 0) +
+  geom_function(fun = dnorm, 
+                args = list(mean = pnon0_dist$m, sd = pnon0_dist$sd), 
+                inherit.aes = FALSE) +
+  labs(x = "Response time (seconds)") +
+    geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(pnon0_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = 1.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(pnon0_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = 1.05, vjust = vjust2, parse = TRUE)
+data("absenteeism", package = "openintro")
+pnon1_dist <- absenteeism %>%
+  summarise(m = mean(days), sd = sd(days))
+pnon1 <- absenteeism %>%
+  ggplot(aes(days, y = after_stat(density))) +
+  geom_histogram(binwidth = 2.5, boundary = 0) +
+  labs(x = "Days not in school") +
+      geom_function(fun = dnorm, 
+                args = list(mean = pnon1_dist$m, sd = pnon1_dist$sd), 
+                inherit.aes = FALSE) +
+    geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(pnon1_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = 1.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(pnon1_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = 1.05, vjust = vjust2, parse = TRUE)
+# data("Wage", package = "ISLR")
+# pnon2_dist <- Wage %>% 
+#   summarise(m = mean(wage), sd = sd(wage))
+# pnon2 <- Wage %>% 
+#   ggplot(aes(wage, y = after_stat(density))) +
+#   geom_histogram(binwidth = 10, boundary = 100) +
+#   labs(x = "Yearly income ($1000)") +
+#     geom_function(fun = dnorm, 
+#                 args = list(mean = pnon2_dist$m, sd = pnon2_dist$sd), 
+#                 inherit.aes = FALSE) +
+#     geom_label(data=data.frame(), 
+#             aes(label = paste0("italic(m) == ", 
+#                                formatC(pnon2_dist$m, digits = 2, 
+#                                        format = "f")), 
+#                 x = Inf, y = Inf), 
+#             inherit.aes = FALSE,
+#             hjust = 1.05, vjust = vjust1, parse = TRUE) +
+#   geom_label(data=data.frame(), 
+#             aes(label = paste0("italic(sd) == ", 
+#                                formatC(pnon2_dist$sd, digits = 2, 
+#                                        format = "f")), 
+#                 x = Inf, y = Inf), 
+#             inherit.aes = FALSE,
+#             hjust = 1.05, vjust = vjust2, parse = TRUE)
+cowplot::plot_grid(pnon0, pnon1, labels = "auto", align = "hv")
+```
+
+## What is Probability?
+
+```{r prob1, echo=FALSE}
+#| fig.cap = "some note"
+p6_dist <- height_f %>% 
+  summarise(m = mean(height_cm), sd = sd(height_cm))
+pprob1 <- height_f %>% 
+  mutate(half = factor(ifelse(height_cm > p6_dist$m, "upper", "lower"))) %>% 
+  ggplot(aes(x = height_cm, y = after_stat(density))) +
+  geom_histogram(binwidth = 2.5, 
+                 mapping = aes(fill = half, 
+                               x = height_cm, y = after_stat(density / 2))) +
+  geom_function(fun = dnorm, 
+                args = list(mean = p6_dist$m, sd = p6_dist$sd), 
+                inherit.aes = FALSE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(m) == ", 
+                               formatC(p6_dist$m, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust1, parse = TRUE) +
+  geom_label(data=data.frame(), 
+            aes(label = paste0("italic(sd) == ", 
+                               formatC(p6_dist$sd, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = Inf), 
+            inherit.aes = FALSE,
+            hjust = -0.05, vjust = vjust2, parse = TRUE) +
+  labs(x = "Student height (f, cm)") +
+  coord_cartesian(xlim = c(120, 200)) +
+  ggthemes::scale_fill_tableau(palette = "Color Blind") +
+  theme(legend.position = "none")
+
+
+tmp_cols <- ggthemes::tableau_color_pal(palette = "Color Blind")(2)
+
+pprob2 <- height_f %>% 
+  ggplot(aes(x = height_cm)) +
+  geom_function(fun = dnorm, 
+                args = list(mean = p6_dist$m, sd = p6_dist$sd), 
+                inherit.aes = FALSE) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                args = list(mean = p6_dist$m, sd = p6_dist$sd),
+                xlim = c(min(height_f$height_cm), p6_dist$m), 
+                fill = tmp_cols[1]) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                args = list(mean = p6_dist$m, sd = p6_dist$sd),
+                xlim = c(p6_dist$m, max(height_f$height_cm)),
+                fill = tmp_cols[2]) +
+  coord_cartesian(xlim = c(120, 200))
+cowplot::plot_grid(pprob1, pprob2, labels = "auto", align = "hv")
+```
+
+```{r prob2, echo=FALSE}
+height_f %>% 
+  ggplot(aes(x = height_cm)) +
+  geom_function(fun = dnorm, 
+                args = list(mean = p6_dist$m, sd = p6_dist$sd), 
+                inherit.aes = FALSE) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                args = list(mean = p6_dist$m, sd = p6_dist$sd),
+                xlim = c(160, 175), 
+                fill = tmp_cols[1]) +
+  coord_cartesian(xlim = c(120, 200))
+```
+
+
+```{r}
+data("speed_gender_height", package = "openintro")
+height_f <- speed_gender_height %>% 
+  filter(gender == "female") %>% 
+  mutate(height_cm = height * 2.54) %>% 
+  filter(!is.na(height))
+height_stat <- height_f %>% 
+  summarise(m = mean(height_cm), sd = sd(height_cm))
+pnorm(175, mean = height_stat$m, sd = height_stat$sd) - 
+  pnorm(160, mean = height_stat$m, sd = height_stat$sd)
+
+```
+
+
+## The Full Statistical Model
+
+```{r}
+data("laptop_urry")
+res1 <- aov_car(overall ~ condition + Error(pid), laptop_urry)
+res1
+```
+
+```{r}
+emmeans(res1, "condition") %>% 
+  pairs()
+```
+
+
+```{r}
+afex_plot(res1, "condition", data_geom = ggbeeswarm::geom_quasirandom)
+```
+
+
+```{r}
+laptop_urry$residuals <- resid(res1)
+head(laptop_urry)
+```
+
+```{r}
+laptop_urry %>% 
+  ggplot(aes(residuals)) +
+  geom_histogram()
+```
+
+```{r, eval=FALSE}
+library("gganimate")
+library("emmeans")
+theme_set(theme_bw(base_size = 25) + 
+            theme(legend.position="bottom"))
+
+nsim <- 50
+res_sim <- vector("list", nsim)
+em_sim <- vector("list", nsim)
+for (i in seq_len(nsim)) {
+  laptop_urry[[paste0("sim", i)]] <- extraDistr::rlst(
+    n = nrow(laptop_urry), df = nrow(laptop_urry) - 2, 
+    mu = coef(res1$lm)[1], 
+    sigma = sigma(res1$lm)
+  )
+  res_sim[[i]] <- aov_ez(id = "pid", dv = paste0("sim", i),
+                         data = laptop_urry, between = "condition")
+  em_sim[[i]] <-  as.data.frame(emmeans(res_sim[[i]], "condition"))
+  em_sim[[i]]$simulation <- paste0("sim", i)
+}
+
+sim_long <- laptop_urry %>% 
+  select(-c(overall, factual, conceptual, residuals)) %>% 
+  pivot_longer(cols = starts_with("sim"), 
+               names_to = "simulation", values_to = "overall")
+em_sim <- bind_rows(em_sim) %>% 
+  rename(overall = emmean)
+em_diff <- em_sim %>% 
+  group_by(simulation) %>% 
+  summarise(diff = overall[1] - overall[2])
+
+psim1 <- ggplot(data = sim_long, aes(x = condition, y = overall)) +
+  ggbeeswarm::geom_quasirandom(alpha = 0.3, size = 3) +
+  geom_pointrange(data = em_sim, mapping = aes(
+    ymax = upper.CL, ymin = lower.CL
+  ), size = 1.5) + 
+  geom_label(data = em_diff, 
+             aes(label = paste0("italic(d) == ", 
+                               formatC(diff, digits = 2, 
+                                       format = "f")), 
+                x = -Inf, y = -Inf), 
+            inherit.aes = FALSE, size = 8,
+            #label.padding = unit(0.5, "lines"),
+            label.size = 0.5,
+            hjust = -0.05, vjust = -0.1, parse = TRUE) +
+  transition_manual(frames = simulation) +
+  ggtitle('Simulation {frame} of {nframes}')
+#anim_save(filename = "out1.gif", animation = psim1)
+df_ani <- em_diff %>% 
+  split(.$simulation) %>% 
+  accumulate(~ bind_rows(.x, .y)) %>% 
+  bind_rows(.id = "simulation") 
+psim2 <- ggplot(df_ani, aes(x = diff)) +
+  geom_histogram(binwidth = 1, boundary = 0.5) + 
+  geom_vline(xintercept = coef(res1$lm)[2] * 2) +
+  transition_manual(simulation) +
+  ease_aes("linear") +
+  enter_fade() +
+  exit_fade() +
+  ggtitle('Distribution of differences')
+#psim2
+```
+
+```{r, eval=FALSE}
+library(magick)
+a_gif <- animate(psim1, 
+                 fps = 10, 
+                 duration = nsim,
+        renderer = gifski_renderer("output/animation1.gif"))
+b_gif <- animate(psim2, 
+                 fps = 10, 
+                 duration = nsim,
+        renderer = gifski_renderer("output/animation2.gif"))
+
+a_mgif <- image_read(a_gif)
+b_mgif <- image_read(b_gif)
+new_gif <- image_append(c(a_mgif[1], b_mgif[1]), stack = FALSE)
+for(i in 2:nsim){
+  combined <- image_append(c(a_mgif[i], b_mgif[i]), stack = FALSE)
+  new_gif <- c(new_gif, combined)
+}
+image_write_gif(new_gif, path = "output/sim1.gif", delay = 1/2)
+```
+
+
+```{r, eval=FALSE}
+desc_urry <- laptop_urry %>% 
+  group_by(condition) %>% 
+  summarise(m = mean(overall),
+            sd = sd(overall), 
+            n = n())
+
+get_null_dist_t <- function(nsim, mean, sd, ns) {
+  y <- extraDistr::rlst(n = nsim * sum(ns), df = sum(ns) - 2, 
+                        mu = mean, sigma = sd)
+  group <- letters[rep(c(1,2), ns)]
+  sim <- factor(rep(seq_len(nsim), sum(ns)))
+  #browser()
+  ysplit <- split(x = y, f = sim)
+  vapply(ysplit, function(x) diff(tapply(x, INDEX = group, mean)), 
+         FUN.VALUE = 0)
+}
+nulldist_diff_t <- get_null_dist_t(
+  nsim = 100000, 
+  mean = coef(res1$lm)[1], 
+  sd = sigma(res1$lm), 
+  ns = desc_urry$n
+)
+#str(nulldist_diff_t)
+full_sim_urry <- tibble(
+  diff = nulldist_diff_t
+)
+full_sim_urry$frame <- rep(1:100, each = length(nulldist_diff_t)/100)
+df_full_ani <- full_sim_urry %>% 
+  split(.$frame) %>% 
+  accumulate(~ bind_rows(.x, .y)) %>% 
+  bind_rows(.id = "frame") %>% 
+  mutate(frame = as.integer(frame))
+
+hist_full <- ggplot(df_full_ani, aes(x = diff)) +
+  geom_histogram(binwidth = 0.2, boundary = 0.5) + 
+  geom_vline(xintercept = coef(res1$lm)[2] * 2) +
+  transition_manual(frame) +
+  ease_aes("linear") +
+  enter_fade() +
+  exit_fade() +
+  ggtitle('Distribution of differences')
+
+anim_save(filename = "output/full_urry.gif", animation = hist_full)
+```
+
+```{r, eval=FALSE}
+tp1 <-  ggplot(full_sim_urry, aes(x = diff)) +
+  geom_histogram(binwidth = 0.2, boundary = 0.5) + 
+  geom_vline(xintercept = coef(res1$lm)[2] * 2)
+
+tp2 <- full_sim_urry %>% 
+  mutate(side = 
+           factor(ifelse(diff > coef(res1$lm)[2] * 2, 
+                         "larger", "smaller"))) %>% 
+  ggplot(aes(x = diff, fill = side)) +
+  geom_histogram(binwidth = 0.2, boundary = 0.5) + 
+  geom_vline(xintercept = coef(res1$lm)[2] * 2) +
+  ggthemes::scale_fill_tableau(palette = "Color Blind") +
+  theme(legend.position = "none")
+cowplot::plot_grid(tp1, tp2)
+
+mean(df_full_ani$diff > coef(res1$lm)[2] * 2) * 2
+```
+
+
+## What does NHST caclulate?
