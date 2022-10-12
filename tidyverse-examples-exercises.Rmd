@@ -23,7 +23,7 @@ Note that as in the previous chapter, if you have problems downloading these two
 
 ```{r, eval=FALSE}
 ws1a <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv")
-ws1b <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv")
+ws1b <- read_csv("https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv")
 ```
 
 We now have two data sets that have the same structure (i.e., with the same columns and data types) as we can see by just printing them both:
