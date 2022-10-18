@@ -266,7 +266,15 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code></pre></div>
 <p>Then, you can load all <code>tidyverse</code> packages at once using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. Loading the <code>tidyverse</code> package this way is something we will do at the top of pretty much all scripts we will be creating.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; -- <span style="font-weight: bold;">Attaching packages</span> ------------------- tidyverse 1.3.2 --</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">ggplot2</span> 3.3.6      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">purrr  </span> 0.3.4 </span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tibble </span> 3.1.8      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">dplyr  </span> 1.0.10</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tidyr  </span> 1.2.1      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">stringr</span> 1.4.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">readr  </span> 2.1.2      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">forcats</span> 0.5.2 </span></span>
+<span><span class="co">#&gt; -- <span style="font-weight: bold;">Conflicts</span> ---------------------- tidyverse_conflicts() --</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span></code></pre></div>
 <p>When loading packages it is common that this produces some status or other messages in the console (some packages do, some don’t). For example, <code>tidyverse</code> lists the package versions of the loaded (or “attached”) packages and lists function conflicts; that is, cases in which a <code>tidyverse</code> function masks a previous loaded function with the same name. We include these messages here to show that this is normal and nothing to worry about, but will generally not later in the book, as this would get repetitive. However, note that the exact version numbers of the packages that are shown here may differ from the version numbers you see, simply because some packages might be updated after this book was written.</p>
 <p>The core <code>tidyverse</code> packages are (with descriptions taken or adapted from the official websites):</p>
 <ul>
@@ -887,7 +895,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2022-10-12.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2022-10-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
