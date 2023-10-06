@@ -1,5 +1,5 @@
 suppressPackageStartupMessages({
-  library(webex)
+  library(webexercises)
 })
 
 hide_code <- function() {

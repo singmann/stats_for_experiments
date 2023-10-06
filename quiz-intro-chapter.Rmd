@@ -11,7 +11,7 @@ The start point for a statistical analysis should be?
 2. A clearly specified research question 
 3. The believe that my hypothesis is probably true 
 
-Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -23,7 +23,7 @@ Which of the following is NOT one of the steps in the research process?
 4. Responding to emails 
 5. Communication of the results 
 
-Answer: `r webex::mcq(c("1", "2", "3", answer = "4", "5"))`
+Answer: `r webexercises::mcq(c("1", "2", "3", answer = "4", "5"))`
 :::
 
 ::: {.exercise}
@@ -34,7 +34,7 @@ What is NOT part of the operationalisation?
 3. Transformation of a research question into empirical and statistical hypothesis 
 4. Deciding for which variables data will be collected
 
-Answer: `r webex::mcq(c(answer = "1", "2", "3", "4"))`
+Answer: `r webexercises::mcq(c(answer = "1", "2", "3", "4"))`
 :::
 
 ::: {.exercise}
@@ -44,7 +44,7 @@ What is the main reason why we need statistics?
 2. To test whether the data we collected provide evidence for the empirical hypothesis 
 3. To publish papers in high-impact journals 
 
-Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -54,7 +54,7 @@ What is an epistemic gap?
 2. A specific outcome predicted by a theory 
 3. A mathematically formalized cognitive theory 
 
-Answer: `r webex::mcq(c(answer ="1", "2", "3"))`
+Answer: `r webexercises::mcq(c(answer ="1", "2", "3"))`
 :::
 
 
@@ -65,7 +65,7 @@ Underdetermination of theory by data suggests that:
 2. We need hypotheses to answer research questions 
 3. No single data sets unambiguously supports a specific hypothesis or theory 
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
@@ -76,7 +76,7 @@ When can a researcher assume that the data support the empirical prediction?
 3. When the estimated signal is large given the estimated level of noise
 4. When the estimated level of noise is smaller than a pre-specified threshold
 
-Answer: `r webex::mcq(c("1", "2", answer = "3", "4"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3", "4"))`
 :::
 
 ::: {.exercise}
@@ -87,7 +87,7 @@ What can we conclude if a statistical analysis provides strong support for our e
 3. It is unlikely that an alternative explanation could explain the results
 4. None of the above
 
-Answer: `r webex::mcq(c("1", "2", "3", answer = "4"))`
+Answer: `r webexercises::mcq(c("1", "2", "3", answer = "4"))`
 :::
 
 

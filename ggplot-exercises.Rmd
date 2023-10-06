@@ -179,7 +179,7 @@ What data format does ggplot2 accept?
 2. `data.frame` / `tibble`
 3. numerical vectors
 
-Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -189,7 +189,7 @@ What is the role of `aes()` function?
 2. It allows adding individual data points and lines to the plot
 3. It is used to map variables in the data onto aesthetics
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
@@ -199,7 +199,7 @@ Which variable is typically plotted on the y-axis?
 2.  The dependent variable
 3.  The control variable
 
-Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -209,7 +209,7 @@ What does "over-plotting" refer to?
 2. It means we created too many plots and need to restart R through the menu (Session - restart R)
 3. It occurs when incorrect aesthetics have been used and `ggplot2` cannot create a plot
 
-Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -219,7 +219,7 @@ What is "alpha blending"?
 2. A technique that creates the visual impression of semi-transparency
 3. An argument to `ggplot()` indicating that we want to plot all points of the data
 
-Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -229,7 +229,7 @@ What does `geom_jitter()` do?
 2. It allows a change of colour for some data points (i.e., colour is jittered)
 3. It allows the combination of several plots into one bigger plot in a jittered manner
 
-Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -239,7 +239,7 @@ What is a "theme" in ggplot2?
 2. It is the title of a plot
 3. The theme determines the overall look of a plot: e.g., font, font size, and background
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
@@ -249,7 +249,7 @@ What is a "faceted plot"?
 2. A plot in which data was originally over-plotted, but is not any more
 3. A plot consisting of several sub-plots/panels
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
@@ -259,7 +259,7 @@ Which of the following does NOT show all the individual data points?
 2. `geom_beeswarm()`
 3. `geom_quasirandom()`
 
-Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -269,7 +269,7 @@ What does 25% quantile mean?
 2. It's the data point for which 25% of the data points are smaller
 3. It's the data point for which 25% of the data points can be larger or smaller
 
-Answer: `r webex::mcq(c("1", answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -279,7 +279,7 @@ Why are dynamite plots NOT useful?
 2. They do not show the distribution of the data or any data points
 3. They do not contain legends and plot labels
 
-Answer: `r webex::mcq(c("1",  answer = "2", "3"))`
+Answer: `r webexercises::mcq(c("1",  answer = "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -289,7 +289,7 @@ What is the name of the function that adds the mean of the data to the plot?
 2. `geom_point()`
 3. `stat_summary()`
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
@@ -299,7 +299,7 @@ Which of these plots do NOT involve two or more variables?
 2. box plot
 3. bar graph
 
-Answer: `r webex::mcq(c(answer = "1", "2", "3"))`
+Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 :::
 
 ::: {.exercise}
@@ -309,7 +309,7 @@ What does a *uniform* distribution look like?
 2. It has at least two modes that have the same height
 3. It does not have a clear mode
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ::: {.exercise}
@@ -320,7 +320,7 @@ Consider you have data from an experiment with a dependent variable `score` and 
 3.  `aes(x = condition, y = score)`
 4.  `aes(y = condition, x = score)`
 
-Answer: `r webex::mcq(c("1", "2", answer = "3", "4"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3", "4"))`
 :::
 
 ::: {.exercise}
@@ -330,7 +330,7 @@ What is the appropriate way to handle outliers that are identified by a box-plot
 2.  Any real data point that is collected needs to be included in the analysis. Removing an outlier can be seen as an instance of data fabrication.
 3.  We should repeat the analysis with and without outlier, to see if the results are robust to the presence or absence of the outlier.
 
-Answer: `r webex::mcq(c("1", "2", answer = "3"))`
+Answer: `r webexercises::mcq(c("1", "2", answer = "3"))`
 :::
 
 ## `ggplot2` Exercise: Earworms and Sleep

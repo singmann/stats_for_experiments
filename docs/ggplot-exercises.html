@@ -6,17 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>ggplot2: Example, Quiz, and Exercises | Introduction to Statistics for Experimental Psychology with R</title>
 <meta name="author" content="Henrik Singmann">
-<meta name="description" content="As before, let’s get into the habit of restarting the R session before starting a new analysis. As a reminder, do so through the RStudio menu with Session - Restart R. After this, we begin by...">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="description" content="As before, let's get into the habit of restarting the R session before starting a new analysis. As a reminder, do so through the RStudio menu with Session - Restart R. After this, we begin by...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="ggplot2: Example, Quiz, and Exercises | Introduction to Statistics for Experimental Psychology with R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="As before, let’s get into the habit of restarting the R session before starting a new analysis. As a reminder, do so through the RStudio menu with Session - Restart R. After this, we begin by...">
+<meta property="og:description" content="As before, let's get into the habit of restarting the R session before starting a new analysis. As a reminder, do so through the RStudio menu with Session - Restart R. After this, we begin by...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ggplot2: Example, Quiz, and Exercises | Introduction to Statistics for Experimental Psychology with R">
-<meta name="twitter:description" content="As before, let’s get into the habit of restarting the R session before starting a new analysis. As a reminder, do so through the RStudio menu with Session - Restart R. After this, we begin by...">
+<meta name="twitter:description" content="As before, let's get into the habit of restarting the R session before starting a new analysis. As a reminder, do so through the RStudio menu with Session - Restart R. After this, we begin by...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -90,7 +90,7 @@
 <h1>
 <code>ggplot2</code>: Example, Quiz, and Exercises<a class="anchor" aria-label="anchor" href="#ggplot-exercises"><i class="fas fa-link"></i></a>
 </h1>
-<p>As before, let’s get into the habit of restarting the <code>R</code> session before starting a new analysis. As a reminder, do so through the <code>RStudio</code> menu with <code>Session</code> - <code>Restart R</code>. After this, we begin by loading the <code>tidyverse</code>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Note that the &lt;code&gt;library()&lt;/code&gt; function supports both regular and non-standard evaluation. That means, &lt;code&gt;library(tidyverse)&lt;/code&gt; also works for loading &lt;code&gt;tidyverse&lt;/code&gt;. However, as &lt;code&gt;tidyverse&lt;/code&gt; is the name of a package and not an &lt;code&gt;R&lt;/code&gt; object, I like to make this explicit by using &lt;code&gt;library("tidyverse")&lt;/code&gt;. It is difficult enough to remember when a name should be quoted and when not.&lt;/p&gt;'><sup>43</sup></a> As we will create plots, we also set a global theme without the grey background and some other tweaks.</p>
+<p>As before, let's get into the habit of restarting the <code>R</code> session before starting a new analysis. As a reminder, do so through the <code>RStudio</code> menu with <code>Session</code> - <code>Restart R</code>. After this, we begin by loading the <code>tidyverse</code>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Note that the &lt;code&gt;library()&lt;/code&gt; function supports both regular and non-standard evaluation. That means, &lt;code&gt;library(tidyverse)&lt;/code&gt; also works for loading &lt;code&gt;tidyverse&lt;/code&gt;. However, as &lt;code&gt;tidyverse&lt;/code&gt; is the name of a package and not an &lt;code&gt;R&lt;/code&gt; object, I like to make this explicit by using &lt;code&gt;library("tidyverse")&lt;/code&gt;. It is difficult enough to remember when a name should be quoted and when not.&lt;/p&gt;'><sup>43</sup></a> As we will create plots, we also set a global theme without the grey background and some other tweaks.</p>
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -104,7 +104,7 @@
 <h3>
 <span class="header-section-number">4.8.1</span> Reading and Combining Both Data Sets<a class="anchor" aria-label="anchor" href="#reading-and-combining-both-data-sets"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let’s for the last time get back to the data of <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. Here, we load the data sets in the same way as in the previous <code>tidyverse</code> extended example (Section <a href="tidyverse-exercises.html#extended-walasek-example">3.7</a>) and then combine them into one data set, <code>ws1</code>. As before, this assumes the two data files, for <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>, are in the <code>data</code> sub-folder of your working directory. We then convert the categorical variables into factors.</p>
+<p>Let's for the last time get back to the data of <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015">2015</a>)</span>. Here, we load the data sets in the same way as in the previous <code>tidyverse</code> extended example (Section <a href="tidyverse-exercises.html#extended-walasek-example">3.7</a>) and then combine them into one data set, <code>ws1</code>. As before, this assumes the two data files, for <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>, are in the <code>data</code> sub-folder of your working directory. We then convert the categorical variables into factors.</p>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span></span>
 <span><span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1b.csv"</span><span class="op">)</span></span>
@@ -112,7 +112,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1a_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="va">ws1b</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1b_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">ws1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">ws1a</span>, <span class="va">ws1b</span><span class="op">)</span></span>
+<span><span class="va">ws1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">ws1a</span>, <span class="va">ws1b</span><span class="op">)</span></span>
 <span><span class="va">ws1</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">subno</span><span class="op">)</span>,</span>
@@ -132,13 +132,13 @@
 <span><span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> accept, accept, accept, accept, accept, ~</span></span>
 <span><span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> -$20/+$20, -$20/+$20, -$20/+$20, -$20/+$~</span></span>
 <span><span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1~</span></span></code></pre></div>
-<p>As we have discussed before, there are two ways to plot this data. One way is to aggregate on a by-lottery – that is, a by-item – level. The other is to aggregate on a by-participant level. Here, we will do both, beginning with the by-lottery level.</p>
+<p>As we have discussed before, there are two ways to plot this data. One way is to aggregate on a by-lottery -- that is, a by-item -- level. The other is to aggregate on a by-participant level. Here, we will do both, beginning with the by-lottery level.</p>
 </div>
 <div id="by-lottery-plot" class="section level3" number="4.8.2">
 <h3>
 <span class="header-section-number">4.8.2</span> By-Lottery Plot<a class="anchor" aria-label="anchor" href="#by-lottery-plot"><i class="fas fa-link"></i></a>
 </h3>
-<p>For the by-lottery plot, we use the exact same strategy as before. That is, we will plot the average acceptance rate per lottery and condition. We also split lotteries into three bins – negative expected value, expected value of 0, and positive expected value. The only difference to our earlier analysis are slightly different factor level names for the plot.</p>
+<p>For the by-lottery plot, we use the exact same strategy as before. That is, we will plot the average acceptance rate per lottery and condition. We also split lotteries into three bins -- negative expected value, expected value of 0, and positive expected value. The only difference to our earlier analysis are slightly different factor level names for the plot.</p>
 <div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lot_sum_all</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">condition</span>, <span class="va">loss</span>, <span class="va">gain</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -177,7 +177,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"mean acceptance"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-4-1.png" width="100%"></div>
-<p>This call contains a few detailed specifications (e.g., nicer axes labels and better organised legends) typically only needed in a polished plot for a publication or presentation at a conference. The way to set these elements is therefore something that one can easily forget. One way to remember is by taking a look at the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf"><code>ggplot2</code> cheat sheet</a>. Another way is by simply googling what you want to do. For example, I googled “ggplot2 legend two rows” to remember I needed to use <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code> and the exact syntax. So, don’t forget that google is your friend when it comes to <code>R</code> programming, especially for the <code>tidyverse</code>.</p>
+<p>This call contains a few detailed specifications (e.g., nicer axes labels and better organised legends) typically only needed in a polished plot for a publication or presentation at a conference. The way to set these elements is therefore something that one can easily forget. One way to remember is by taking a look at the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization.pdf"><code>ggplot2</code> cheat sheet</a>. Another way is by simply googling what you want to do. For example, I googled "ggplot2 legend two rows" to remember I needed to use <code><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides()</a></code> and the exact syntax. So, don't forget that google is your friend when it comes to <code>R</code> programming, especially for the <code>tidyverse</code>.</p>
 <p>The plot shows the pattern across lotteries that we have seen before, and one that highly questions the original idea of loss aversion. It is clear that the relative attractiveness of symmetric lotteries differs considerably across conditions, so people do not evaluate the same magnitudes of losses and wins similarly across them.</p>
 </div>
 <div id="by-participant-plot" class="section level3" number="4.8.3">
@@ -214,7 +214,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">part_sum</span><span class="op">$</span><span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.0000000 0.3333333 0.6666667 1.0000000</span></span></code></pre></div>
 <p>In the code above, we used the <code>:</code> operator to create a sequence of integers (i.e., whole numbers) from 0 to 3. The same result would have been obtained by explicitly creating this vector, for example, using <code>c(0, 1, 2, 3)</code>.</p>
-<p>Plotting data like this with few unique values is a bit tricky. Our usual approaches – alpha blending, jitter, bee swarm plots, or the like – do not produce satisfactory results. The following code will produce all these plots and show the problem.</p>
+<p>Plotting data like this with few unique values is a bit tricky. Our usual approaches -- alpha blending, jitter, bee swarm plots, or the like -- do not produce satisfactory results. The following code will produce all these plots and show the problem.</p>
 <p>In this code, we also introduce another <code>ggplot2</code> functionality. A plot created by <code>ggplot2</code> is an <code>R</code> object itself. So far, we have printed the object which produces the plot in the plot pane. However, if we save the plot in an <code>R</code> object using <code>&lt;-</code>, the plot is <em>not</em> shown in the plot pane. Instead, we can then use another function, such as <code><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid()</a></code> from the <a href="https://cran.r-project.org/package=cowplot"><code>cowplot</code></a> package, to create one plot that consists of multiple individual plots. Note that you will have to install <code>cowplot</code> before running the code below (e.g., via <code>install.packages("cowplot")</code>).</p>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## load packages required here:</span></span>
@@ -268,10 +268,10 @@
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-9-1.png" width="100%"></div>
 <p>This plot shows that the distribution of individual mean acceptability scores is mostly bimodal. In all but the -$20/+$40 condition, the vast majority of participants either accepts all symmetric lotteries or rejects all of them. In the -$20/+$40 condition we only see one mode, which is when participants reject all symmetric lotteries. Taken together, this indicates that, overall, participants are quite consistent in their behaviour across different symmetric lotteries. If I reject or accept one symmetric lottery I am likely to make the same choice for another symmetric lottery. In other words, the amount of noise <em>within</em> participants is comparatively low whereas there is considerable noise <em>across</em> participants.</p>
 <p>In addition, the plot clearly shows the main pattern of results. The original notion of loss aversion is that what matters for the acceptance rates of symmetric lotteries is the magnitude of the potential losses and gains. The present results clearly contradict this notion. In the -$20/+$40 condition, in which symmetric lotteries are unattractive, most participants reject them. In contrast, in the -$40/+$20 condition, in which symmetric lotteries are attractive, most participants accept them. In the two conditions in which the symmetric lotteries are neither particularly attractive nor unattractive, around half of the participants accept the symmetric lotteries and around half reject them.</p>
-<p>Let’s discuss a bit what I meant by”clearly shows” in the start of the paragraph above. The plot shows both the main results pattern as well as the variability in the data in such a way that this plot, in some sense, makes further statistical analysis not really necessary. Given the relatively large number of participants per condition (around 200), the fact that in one condition the vast majority never accepts a symmetric lottery, but in another condition the vast majority always accepts a symmetric lottery, means that there is a clear difference between conditions. Any reasonable statistical test must come to the same conclusion, otherwise we would begin to question the validity of the statistical test or look for some other problems with the data.</p>
-<p>This means that a visual representation of the results can provide empirical evidence in addition to the statistical results. In fact, these two types of evidence – <em>figures</em> derived from the results and <em>statistical analyses</em> derived from the results – are complementary and should always be part of any communication of what you have found in an experiment. Without a figure, we cannot properly judge how much evidence the statistical result actually provides.</p>
+<p>Let's discuss a bit what I meant by"clearly shows" in the start of the paragraph above. The plot shows both the main results pattern as well as the variability in the data in such a way that this plot, in some sense, makes further statistical analysis not really necessary. Given the relatively large number of participants per condition (around 200), the fact that in one condition the vast majority never accepts a symmetric lottery, but in another condition the vast majority always accepts a symmetric lottery, means that there is a clear difference between conditions. Any reasonable statistical test must come to the same conclusion, otherwise we would begin to question the validity of the statistical test or look for some other problems with the data.</p>
+<p>This means that a visual representation of the results can provide empirical evidence in addition to the statistical results. In fact, these two types of evidence -- <em>figures</em> derived from the results and <em>statistical analyses</em> derived from the results -- are complementary and should always be part of any communication of what you have found in an experiment. Without a figure, we cannot properly judge how much evidence the statistical result actually provides.</p>
 <p>In the present case, in which the visual impression suggests a clear effect, some statisticians say the data pass the <em>inter-ocular trauma test</em>: The results hit you right between the eyes. If this is the case, our confidence that the data support an empirical hypothesis grows compared to a situation that only shows the outcome of a statistical analysis. If the statistical tests suggest an effect but the figures not so much, this is also an important outcome as it suggests the epistemic status of the empirical hypothesis is less clear. In any case, statistical analyses should always be accompanied by figures.</p>
-<p>With this, we leave loss aversion and the study by <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> behind us. This example has shown rather extensively that finding evidence that appears to support our theoretical idea does not mean our theory is actually supported. Put more bluntly, it does not really look as if the original notion of loss aversion is tenable. Does this mean the rank-based account preferred by <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span> is true? Not necessarily. What the data shows is that participants change their behaviour in a context-dependent manner. This is consistent with a rank-based account, but I am sure other accounts are possible as well. The larger point is that making strong inferences about great theoretical ideas is generally difficult.</p>
+<p>With this, we leave loss aversion and the study by <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015">2015</a>)</span> behind us. This example has shown rather extensively that finding evidence that appears to support our theoretical idea does not mean our theory is actually supported. Put more bluntly, it does not really look as if the original notion of loss aversion is tenable. Does this mean the rank-based account preferred by <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015">2015</a>)</span> is true? Not necessarily. What the data shows is that participants change their behaviour in a context-dependent manner. This is consistent with a rank-based account, but I am sure other accounts are possible as well. The larger point is that making strong inferences about great theoretical ideas is generally difficult.</p>
 </div>
 </div>
 <div id="quiz-1" class="section level2" number="4.9">
@@ -288,10 +288,10 @@
 </li>
 <li>numerical vectors</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-40" class="exercise"><strong>Exercise 4.2  </strong></span>What is the role of <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> function?</p>
@@ -300,10 +300,10 @@
 <li>It allows adding individual data points and lines to the plot</li>
 <li>It is used to map variables in the data onto aesthetics</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-41" class="exercise"><strong>Exercise 4.3  </strong></span>Which variable is typically plotted on the y-axis?</p>
@@ -312,34 +312,34 @@
 <li>The dependent variable</li>
 <li>The control variable</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-42" class="exercise"><strong>Exercise 4.4  </strong></span>What does “over-plotting” refer to?</p>
+<p><span id="exr:unlabeled-div-42" class="exercise"><strong>Exercise 4.4  </strong></span>What does "over-plotting" refer to?</p>
 <ol style="list-style-type: decimal">
 <li>When at least two data points are at exactly the same position and cannot be visually differentiated</li>
 <li>It means we created too many plots and need to restart R through the menu (Session - restart R)</li>
 <li>It occurs when incorrect aesthetics have been used and <code>ggplot2</code> cannot create a plot</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-43" class="exercise"><strong>Exercise 4.5  </strong></span>What is “alpha blending”?</p>
+<p><span id="exr:unlabeled-div-43" class="exercise"><strong>Exercise 4.5  </strong></span>What is "alpha blending"?</p>
 <ol style="list-style-type: decimal">
-<li>It is a synonym for “aesthetics” in ggplot2</li>
+<li>It is a synonym for "aesthetics" in ggplot2</li>
 <li>A technique that creates the visual impression of semi-transparency</li>
 <li>An argument to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> indicating that we want to plot all points of the data</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-44" class="exercise"><strong>Exercise 4.6  </strong></span>What does <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code> do?</p>
@@ -348,34 +348,34 @@
 <li>It allows a change of colour for some data points (i.e., colour is jittered)</li>
 <li>It allows the combination of several plots into one bigger plot in a jittered manner</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-45" class="exercise"><strong>Exercise 4.7  </strong></span>What is a “theme” in ggplot2?</p>
+<p><span id="exr:unlabeled-div-45" class="exercise"><strong>Exercise 4.7  </strong></span>What is a "theme" in ggplot2?</p>
 <ol style="list-style-type: decimal">
 <li>It refers to a colour palette used for the plot</li>
 <li>It is the title of a plot</li>
 <li>The theme determines the overall look of a plot: e.g., font, font size, and background</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-46" class="exercise"><strong>Exercise 4.8  </strong></span>What is a “faceted plot”?</p>
+<p><span id="exr:unlabeled-div-46" class="exercise"><strong>Exercise 4.8  </strong></span>What is a "faceted plot"?</p>
 <ol style="list-style-type: decimal">
 <li>A plot in which more than two variables are displayed</li>
 <li>A plot in which data was originally over-plotted, but is not any more</li>
 <li>A plot consisting of several sub-plots/panels</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-47" class="exercise"><strong>Exercise 4.9  </strong></span>Which of the following does NOT show all the individual data points?</p>
@@ -384,22 +384,22 @@
 <li><code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code></li>
 <li><code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code></li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-48" class="exercise"><strong>Exercise 4.10  </strong></span>What does 25% quantile mean?</p>
 <ol style="list-style-type: decimal">
-<li>It’s the data point for which 25% of the data points are larger</li>
-<li>It’s the data point for which 25% of the data points are smaller</li>
-<li>It’s the data point for which 25% of the data points can be larger or smaller</li>
+<li>It's the data point for which 25% of the data points are larger</li>
+<li>It's the data point for which 25% of the data points are smaller</li>
+<li>It's the data point for which 25% of the data points can be larger or smaller</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-49" class="exercise"><strong>Exercise 4.11  </strong></span>Why are dynamite plots NOT useful?</p>
@@ -408,10 +408,10 @@
 <li>They do not show the distribution of the data or any data points</li>
 <li>They do not contain legends and plot labels</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-50" class="exercise"><strong>Exercise 4.12  </strong></span>What is the name of the function that adds the mean of the data to the plot?</p>
@@ -420,10 +420,10 @@
 <li><code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code></li>
 <li><code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary()</a></code></li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-51" class="exercise"><strong>Exercise 4.13  </strong></span>Which of these plots do NOT involve two or more variables?</p>
@@ -432,10 +432,10 @@
 <li>box plot</li>
 <li>bar graph</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-52" class="exercise"><strong>Exercise 4.14  </strong></span>What does a <em>uniform</em> distribution look like?</p>
@@ -444,10 +444,10 @@
 <li>It has at least two modes that have the same height</li>
 <li>It does not have a clear mode</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-53" class="exercise"><strong>Exercise 4.15  </strong></span>Consider you have data from an experiment with a dependent variable <code>score</code> and independent variable <code>condition</code>. What would be the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> call to plot this data in the conventional way?</p>
@@ -457,11 +457,11 @@
 <li><code>aes(x = condition, y = score)</code></li>
 <li><code>aes(y = condition, x = score)</code></li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option>
+<option value="">4</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-54" class="exercise"><strong>Exercise 4.16  </strong></span>What is the appropriate way to handle outliers that are identified by a box-plot?</p>
@@ -470,17 +470,17 @@
 <li>Any real data point that is collected needs to be included in the analysis. Removing an outlier can be seen as an instance of data fabrication.</li>
 <li>We should repeat the analysis with and without outlier, to see if the results are robust to the presence or absence of the outlier.</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 </div>
 <div id="ggplot2-exercise-earworms-and-sleep" class="section level2" number="4.10">
 <h2>
 <span class="header-section-number">4.10</span> <code>ggplot2</code> Exercise: Earworms and Sleep<a class="anchor" aria-label="anchor" href="#ggplot2-exercise-earworms-and-sleep"><i class="fas fa-link"></i></a>
 </h2>
-<p>For this exercise, let’s return to the study by <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> investigating the relationship between earworms and sleep quality. Let’s quickly recap the study design and research question here. For more details see Section <a href="tidyverse-exercises.html#earworms-task1">3.10</a>.</p>
+<p>For this exercise, let's return to the study by <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span> investigating the relationship between earworms and sleep quality. Let's quickly recap the study design and research question here. For more details see Section <a href="tidyverse-exercises.html#earworms-task1">3.10</a>.</p>
 <p>The study was a sleep lab experiment in which participants heard some music before going to sleep. In the <em>lyrics</em> condition, the songs were the original versions of pop songs with lyrics. In the <em>instrumental</em> condition, these were instrumental versions of the pop songs.</p>
 <p>The researchers were interested in two research questions:</p>
 <ol style="list-style-type: decimal">
@@ -491,7 +491,7 @@
 <li>Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?</li>
 </ol>
 <p>To investigate this question, the researchers used <a href="https://en.wikipedia.org/wiki/Polysomnography">polysomnography</a> and measured various objective sleep parameters. Here, we are specifically looking at sleep efficiency and sleep time.</p>
-<p>A version of the original data file made available by <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> can be downloaded from <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv">here</a>. As before, I recommend you download it to the <code>data</code> folder in your working directory and then you can read in the data with the following code. It makes sense to restart <code>R</code> before doing that, so we also reload the <code>tidyverse</code>. Let’s prepare the data set as discussed in the previous exercise and then take a look at it.</p>
+<p>A version of the original data file made available by <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span> can be downloaded from <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv">here</a>. As before, I recommend you download it to the <code>data</code> folder in your working directory and then you can read in the data with the following code. It makes sense to restart <code>R</code> before doing that, so we also reload the <code>tidyverse</code>. Let's prepare the data set as discussed in the previous exercise and then take a look at it.</p>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://wilkelab.org/cowplot/">"cowplot"</a></span><span class="op">)</span>  <span class="co">## for plot_grid()</span></span>
@@ -540,7 +540,7 @@
 <li>
 <code>id</code>: Participant identifier</li>
 <li>
-<code>group</code>: experimental condition with two values: “Lyrics” versus “Instrumental”</li>
+<code>group</code>: experimental condition with two values: "Lyrics" versus "Instrumental"</li>
 <li>
 <code>relaxed</code>: question asking participants how relaxed they felt on a scale from 0 (= not relaxed) to 100 (= very relaxed) after listening to the music.</li>
 <li>
@@ -559,9 +559,9 @@ The next 5 variables concerned whether or not the participants reported having a
 <li>
 <code>sleep_time</code>: total sleep time in minutes</li>
 </ul>
-<p>The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for <code>classrank</code>. This uses US nomenclature for what year of four the student participant is in (Freshman = year 1, Sophomore = year 2, Junior = year 3, and Senior = year 4) plus some additional values for staff, post-graduate students and (presumably) one missing value (‘-’).</p>
+<p>The remaining variables are demographic ones whose meaning should be evident, except, perhaps, for <code>classrank</code>. This uses US nomenclature for what year of four the student participant is in (Freshman = year 1, Sophomore = year 2, Junior = year 3, and Senior = year 4) plus some additional values for staff, post-graduate students and (presumably) one missing value ('-').</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-55" class="exercise"><strong>Exercise 4.17  </strong></span>Let’s begin by taking a look at the distribution of sleep quality and sleep time, the two dependent variables for the second research question, using histograms. Ideally, combine the two histograms into one plot as shown previously using <code><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid()</a></code>. Remember that one important part of making histograms is picking the appropriate bin width. What do the distributions look like?</p>
+<p><span id="exr:unlabeled-div-55" class="exercise"><strong>Exercise 4.17  </strong></span>Let's begin by taking a look at the distribution of sleep quality and sleep time, the two dependent variables for the second research question, using histograms. Ideally, combine the two histograms into one plot as shown previously using <code><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid()</a></code>. Remember that one important part of making histograms is picking the appropriate bin width. What do the distributions look like?</p>
 <div class="webex-solution">
 <button>
 Hint
@@ -572,7 +572,7 @@ Hint
 <button>
 Solution
 </button>
-<p>Let’s start with a basic histogram without changing any setting to <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>. For this, we pass the <code>earworm</code> data to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, set <code>x</code> aesthetic to the variable we want to plot and then just combine both plots into one.</p>
+<p>Let's start with a basic histogram without changing any setting to <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>. For this, we pass the <code>earworm</code> data to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, set <code>x</code> aesthetic to the variable we want to plot and then just combine both plots into one.</p>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -585,7 +585,7 @@ Solution
 <span><span class="co">#&gt; `binwidth`.</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-11-1.png" width="100%"></div>
 <p>Both plots are a bit difficult to interpret as they are rather noisy, giving no clear visual impression. One possibility is that there are too many bins. Remember that we only have a total of 48 data points, so 30 bins means that there are few observations per bin.</p>
-<p>Therefore, let’s try to get a more informative visual impression by reducing the number of bins. Given the scale of the data we see here, let’s start with a bin width of 2 for sleep efficiency and 10 for sleep time. Let’s also set the boundary at 0 so the bins always begin at whole numbers.</p>
+<p>Therefore, let's try to get a more informative visual impression by reducing the number of bins. Given the scale of the data we see here, let's start with a bin width of 2 for sleep efficiency and 10 for sleep time. Let's also set the boundary at 0 so the bins always begin at whole numbers.</p>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">2</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
@@ -594,7 +594,7 @@ Solution
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-12-1.png" width="100%"></div>
 <p>The resulting plots are much easier to interpret. The distribution of sleep efficiency scores is unimodal and asymmetric with a long tail on the left side (so-called <em>left-skewed</em>). The distribution of sleep times looks bi-modal but symmetric around the midpoint between the two modes.</p>
-<p>To make sure this impression is not a fluke, let’s make two more variants of each plot. In one, we halve the bin width, and in the other, we increase it by 50%.</p>
+<p>To make sure this impression is not a fluke, let's make two more variants of each plot. In one, we halve the bin width, and in the other, we increase it by 50%.</p>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## half bin width</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -613,7 +613,7 @@ Solution
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-14-1.png" width="100%"></div>
 <p>For sleep efficiency, the pattern is relatively stable. If we halve the bin width, the mode is less well defined. However, with 1.5 times the bin width, the pattern is very similar.</p>
 <p>For sleep time, the pattern is essentially unchanged.</p>
-<p>Let’s make a final plot using the initial bin width, only a bit nicer. In particular, we harmonise the y-axis limits and use better x-axis labels.</p>
+<p>Let's make a final plot using the initial bin width, only a bit nicer. In particular, we harmonise the y-axis limits and use better x-axis labels.</p>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">2</span>, boundary <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
@@ -668,7 +668,7 @@ Hint
 <button>
 Solution
 </button>
-<p>Let’s begin by creating the combined control variable, <code>control_combined</code> using mutate.</p>
+<p>Let's begin by creating the combined control variable, <code>control_combined</code> using mutate.</p>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>control_combined <span class="op">=</span> <span class="op">(</span><span class="va">relaxed</span> <span class="op">+</span> <span class="va">sleepy</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">)</span></span></code></pre></div>
@@ -689,9 +689,9 @@ Solution
 </div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-58" class="exercise"><strong>Exercise 4.20  </strong></span>Let’s now take a look at research question (1): Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms?</p>
-<p>To do so, let’s look at two different dependent variables we have created in the <code>tidyverse</code> exercise: any earworm at all (which should be 0 if the participant did not report any earworm and 1 otherwise) and proportion of earworms (which should be the sum of the three earworm dependent variables divided by 3). Then calculate whether <code>group</code> affects these two new dependent variables.</p>
-<p>Note that we follow <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> and calculate these variables with only three of the earworm variables (i.e., all the <code>earworm_...</code> variables with the exception of <code>earworm_control</code>).</p>
+<p><span id="exr:unlabeled-div-58" class="exercise"><strong>Exercise 4.20  </strong></span>Let's now take a look at research question (1): Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms?</p>
+<p>To do so, let's look at two different dependent variables we have created in the <code>tidyverse</code> exercise: any earworm at all (which should be 0 if the participant did not report any earworm and 1 otherwise) and proportion of earworms (which should be the sum of the three earworm dependent variables divided by 3). Then calculate whether <code>group</code> affects these two new dependent variables.</p>
+<p>Note that we follow <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span> and calculate these variables with only three of the earworm variables (i.e., all the <code>earworm_...</code> variables with the exception of <code>earworm_control</code>).</p>
 <p>Make one plot for each of the two dependent variables in which the distribution of the variable across participants as well as the mean is shown, separately for each of the two experimental conditions.</p>
 <p>Does the plot support the prediction that instrumental music leads to more earworms than lyrical music?</p>
 <div class="webex-solution">
@@ -726,8 +726,8 @@ Solution
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"prop. earworms"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-22-1.png" width="100%"></div>
-<p>This plot provides some evidence for the hypothesis that instrumental songs induce earworms. In the ‘lyrics’ condition, the vast majority of participants report no earworms and only few report some. In contrast, in the ‘instrumental’ condition, participants are more likely to report earworms. Some even report having had earworms at each of the measured time points. Consequently, we also see a mean difference in the proportion of earworms here.</p>
-<p>Let’s now take a look at the second dependent variable, <code>any_earworm</code>. This variable can take on only two values, 0 or 1, per participant. Hence, we can use a very similar piece of code.</p>
+<p>This plot provides some evidence for the hypothesis that instrumental songs induce earworms. In the 'lyrics' condition, the vast majority of participants report no earworms and only few report some. In contrast, in the 'instrumental' condition, participants are more likely to report earworms. Some even report having had earworms at each of the measured time points. Consequently, we also see a mean difference in the proportion of earworms here.</p>
+<p>Let's now take a look at the second dependent variable, <code>any_earworm</code>. This variable can take on only two values, 0 or 1, per participant. Hence, we can use a very similar piece of code.</p>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">any_earworm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_count.html">geom_count</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -737,12 +737,12 @@ Solution
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"any earworm"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-23-1.png" width="100%"></div>
-<p>This provides a very similar picture as the ‘any earworm’ variable. For the ‘lyrics’ condition, the vast majority reports no earworms, whereas in the ‘instrumental condition’ the split is roughly 50-50. Of course, this similarity should not be too surprising. Both variables use the exact same information, only in slightly different ways.</p>
+<p>This provides a very similar picture as the 'any earworm' variable. For the 'lyrics' condition, the vast majority reports no earworms, whereas in the 'instrumental condition' the split is roughly 50-50. Of course, this similarity should not be too surprising. Both variables use the exact same information, only in slightly different ways.</p>
 <p>In sum, the data supports the prediction that listening to instrumental music leads to more earworms than listening to lyrical music.</p>
 </div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-59" class="exercise"><strong>Exercise 4.21  </strong></span>Now that we have learned something about the relationship between different versions of pop songs and earworms, let’s link this to the main point of interest of the study, sleep quality. More specifically, research question (2) is: Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition, in which participants are expected to have more earworms?</p>
+<p><span id="exr:unlabeled-div-59" class="exercise"><strong>Exercise 4.21  </strong></span>Now that we have learned something about the relationship between different versions of pop songs and earworms, let's link this to the main point of interest of the study, sleep quality. More specifically, research question (2) is: Does sleep quality differ between participants in the lyrical music condition and the instrumental music condition, in which participants are expected to have more earworms?</p>
 <p>Make one plot for each of the two dependent variables relevant to this research question, one for sleep efficiency and one for sleep time. As before, in each plot make sure that you show both the distribution of the variable across participants as well as the mean, separately for each of the two experimental conditions.</p>
 <p>Does the plot support the hypothesis that the type of music heard before sleeping affects sleep quality?</p>
 <div class="webex-solution">
@@ -755,7 +755,7 @@ Hint
 <button>
 Solution
 </button>
-<p>For this exercise, we do not need to further manipulate the data as each participant has only one observation for both dependent variables. The most important question here is how to display the data in the background. Let’s begin by using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code>,and make two plots, one for each dependent variable, and combine them into one figure.</p>
+<p>For this exercise, we do not need to further manipulate the data as each participant has only one observation for both dependent variables. The most important question here is how to display the data in the background. Let's begin by using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm()</a></code>,and make two plots, one for each dependent variable, and combine them into one figure.</p>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pr2_1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">geom_beeswarm</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -767,7 +767,7 @@ Solution
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-24-1.png" width="100%"></div>
-<p>This figure shows that for each of the two dependent variables, sleep quality is on average lower in the instrumental music group compared to the lyrical music group. When looking at the individual data points in the background, it looks like not many have the same value of the dependent variable, so the distribution of points is not very clear. Therefore, let’s also try out using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>:</p>
+<p>This figure shows that for each of the two dependent variables, sleep quality is on average lower in the instrumental music group compared to the lyrical music group. When looking at the individual data points in the background, it looks like not many have the same value of the dependent variable, so the distribution of points is not very clear. Therefore, let's also try out using <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code>:</p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pr2_1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">earworm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">sleep_efficiency</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -780,7 +780,7 @@ Solution
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-25-1.png" width="100%"></div>
 <p>This plot shows more clearly that for sleep efficiency, there is a difference in the means that is also reflected in the distribution of individual points. For the instrumental condition, the distribution of points seems to have a bigger range, as well as being shifted downwards compared to the lyrical condition. This suggests that there might be an actual effect of the type of music listened to before sleep on sleep efficiency.</p>
-<p>The pattern of results is not so clear for sleep time. Whereas there is also a difference in the means, the distributions look fairly similar. Furthermore, for each of the two groups there is one data point far away from the rest of the distribution (a potential “outlier”) in opposite direction to the mean difference (i.e., a particularly low value for the lyrics group for which the mean is larger). Hence, whether the observed difference reflects a genuine difference is a lot less clear.</p>
+<p>The pattern of results is not so clear for sleep time. Whereas there is also a difference in the means, the distributions look fairly similar. Furthermore, for each of the two groups there is one data point far away from the rest of the distribution (a potential "outlier") in opposite direction to the mean difference (i.e., a particularly low value for the lyrics group for which the mean is larger). Hence, whether the observed difference reflects a genuine difference is a lot less clear.</p>
 <p>Speaking more generally, <code>geom_quasirandom</code> seems to provide the more interesting and easy to interpret data visualisation for this data set. It shows that there seems to be an effect of experimental condition on sleep efficiency, but the effect is less clear for sleep time.</p>
 </div>
 </div>
@@ -825,7 +825,7 @@ Solution
 <div class="inline-figure"><img src="ggplot-exercises_files/figure-html/unnamed-chunk-27-1.png" width="100%"></div>
 <p>This plot suggests that sleep efficiency is lower if one reports at least one earworm during the night compared to when not. Interestingly, participants that report no earworms show a unimodal distribution with a mode that is larger than all but one sleep efficiency score for participants that do report earworms. However, as both distributions have a relatively long tail towards lower scores, the difference in means is not huge.</p>
 <p>For sleep time, the difference is in the opposite direction and noticeably smaller.</p>
-<p>The plot also shows that there are fewer participants that report an earworm than those that do not. Let’s take a look again how large both groups are:</p>
+<p>The plot also shows that there are fewer participants that report an earworm than those that do not. Let's take a look again how large both groups are:</p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">has_earworm</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -847,15 +847,24 @@ Solution
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
-  if (t = document.getElementById("webex-total_correct")) {
-    t.innerHTML =
-      document.getElementsByClassName("webex-correct").length + " of " +
-      document.getElementsByClassName("webex-solveme").length + " correct";
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
   }
 }
 
 /* webex-solution button toggling function */
 b_func = function() {
+  console.log("webex: toggle hide");
+
   var cl = this.parentElement.classList;
   if (cl.contains('open')) {
     cl.remove("open");
@@ -864,8 +873,24 @@ b_func = function() {
   }
 }
 
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
 /* function for checking solveme answers */
 solveme_func = function(e) {
+  console.log("webex: check solveme");
+
   var real_answers = JSON.parse(this.dataset.answer);
   var my_answer = this.value;
   var cl = this.classList;
@@ -875,22 +900,27 @@ solveme_func = function(e) {
   if (cl.contains("nospaces")) {
     my_answer = my_answer.replace(/ /g, "")
   }
-  
-  if (my_answer !== "" & real_answers.includes(my_answer)) {
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
     cl.add("webex-correct");
+    cl.remove("webex-incorrect");
   } else {
+    cl.add("webex-incorrect");
     cl.remove("webex-correct");
   }
 
   // match numeric answers within a specified tolerance
   if(this.dataset.tol > 0){
-    var tol = JSON.parse(this.dataset.tol);  
+    var tol = JSON.parse(this.dataset.tol);
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
     if (matches.reduce((a, b) => a + b, 0) > 0) {
       cl.add("webex-correct");
     } else {
       cl.remove("webex-correct");
-    }  
+    }
   }
 
   // added regex bit
@@ -898,13 +928,56 @@ solveme_func = function(e) {
     answer_regex = RegExp(real_answers.join("|"))
     if (answer_regex.test(my_answer)) {
       cl.add("webex-correct");
-    }  
+    }
   }
-  
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
   update_total_correct();
 }
 
 window.onload = function() {
+  console.log("webex onload");
   /* set up solution buttons */
   var buttons = document.getElementsByTagName("button");
 
@@ -913,7 +986,23 @@ window.onload = function() {
       buttons[i].onclick = b_func;
     }
   }
-  
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
   /* set up webex-solveme inputs */
   var solveme = document.getElementsByClassName("webex-solveme");
 
@@ -921,10 +1010,10 @@ window.onload = function() {
     /* make sure input boxes don't auto-anything */
     solveme[i].setAttribute("autocomplete","off");
     solveme[i].setAttribute("autocorrect", "off");
-    solveme[i].setAttribute("autocapitalize", "off"); 
+    solveme[i].setAttribute("autocapitalize", "off");
     solveme[i].setAttribute("spellcheck", "false");
     solveme[i].value = "";
-    
+
     /* adjust answer for ignorecase or nospaces */
     var cl = solveme[i].classList;
     var real_answer = solveme[i].dataset.answer;
@@ -935,12 +1024,27 @@ window.onload = function() {
       real_answer = real_answer.replace(/ /g, "");
     }
     solveme[i].dataset.answer = real_answer;
-    
+
     /* attach checking function */
     solveme[i].onkeyup = solveme_func;
     solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
   }
-  
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
   update_total_correct();
 }
 
@@ -977,7 +1081,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2022-10-23.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

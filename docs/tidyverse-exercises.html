@@ -7,7 +7,7 @@
 <title>tidyverse: Example, Quiz, and Exercises | Introduction to Statistics for Experimental Psychology with R</title>
 <meta name="author" content="Henrik Singmann">
 <meta name="description" content="To get into the habit of doing it regularly when starting a new task or analysis, now is probably a good time to restart your R session. As a reminder, do so through the RStudio menu with Session...">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="tidyverse: Example, Quiz, and Exercises | Introduction to Statistics for Experimental Psychology with R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="To get into the habit of doing it regularly when starting a new task or analysis, now is probably a good time to restart your R session. As a reminder, do so through the RStudio menu with Session...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="To get into the habit of doing it regularly when starting a new task or analysis, now is probably a good time to restart your R session. As a reminder, do so through the RStudio menu with Session...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -101,7 +101,7 @@
 <h3>
 <span class="header-section-number">3.7.1</span> Reading Both Data Sets<a class="anchor" aria-label="anchor" href="#reading-both-data-sets"><i class="fas fa-link"></i></a>
 </h3>
-<p>As an extended <code>tidyverse</code> example, let us look once again at the data of <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>. As described in Section <a href="tidyverse-intro.html#files">3.4.1</a>, there are two similar data sets, Experiments 1a and 1b, that we can consider together (and have done so in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>). To follow the extended examples, download them both into folder <code>data</code> that is in your current working directory: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>. Then, we can load them both as separate objects using <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>.</p>
+<p>As an extended <code>tidyverse</code> example, let us look once again at the data of <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015">2015</a>)</span>. As described in Section <a href="tidyverse-intro.html#files">3.4.1</a>, there are two similar data sets, Experiments 1a and 1b, that we can consider together (and have done so in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>). To follow the extended examples, download them both into folder <code>data</code> that is in your current working directory: <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv">Experiment 1a</a> and <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1b.csv">Experiment 1b</a>. Then, we can load them both as separate objects using <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">22912</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span></span>
@@ -121,7 +121,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
-<p>We use new names for the resulting data objects (<code>ws1a</code> and <code>ws1b</code>) to help us remember that this is the data from <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015" role="doc-biblioref">2015</a>)</span>, Experiments 1a and 1b. It’s generally a good idea to use descriptive object names as this makes code easier to read later on. Especially when the code is long, one could even use more descriptive names such as <code>walasek_stewart_2015_1a</code> and <code>walasek_stewart_2015_1b</code>. However, as this example stays relatively short, the first letter of the last names and no year will suffice.</p>
+<p>We use new names for the resulting data objects (<code>ws1a</code> and <code>ws1b</code>) to help us remember that this is the data from <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015">2015</a>)</span>, Experiments 1a and 1b. It's generally a good idea to use descriptive object names as this makes code easier to read later on. Especially when the code is long, one could even use more descriptive names such as <code>walasek_stewart_2015_1a</code> and <code>walasek_stewart_2015_1b</code>. However, as this example stays relatively short, the first letter of the last names and no year will suffice.</p>
 <p>Note that as in the previous chapter, if you have problems downloading these two files or setting up the correct working directory, you can load them directly from the internet as well. However, this is not recommended and only shown here to make sure you can follow all steps in this example.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://github.com/singmann/stats_for_experiments/raw/master/data/ws2015_exp1a.csv"</span><span class="op">)</span></span>
@@ -150,7 +150,7 @@
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     1     6    28 accept        40.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     1     6    32 accept        40.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># ... with 27,066 more rows</span></span></span></code></pre></div>
-<p>What this output shows is that not only do the two data sets have the same columns in the same order, but they also appear to have the same condition names. To check, let’s print the sorted unique values for each <code>condition</code> column:</p>
+<p>What this output shows is that not only do the two data sets have the same columns in the same order, but they also appear to have the same condition names. To check, let's print the sorted unique values for each <code>condition</code> column:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span><span class="op">$</span><span class="va">condition</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -166,8 +166,8 @@
 <h3>
 <span class="header-section-number">3.7.2</span> Combining Both Data Sets<a class="anchor" aria-label="anchor" href="#combining-both-data-sets"><i class="fas fa-link"></i></a>
 </h3>
-<p>To analyse these two data sets together, as we have done in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>, we now have to combine these two <code>tibble</code>s into one. Specifically, we need to add the <em>rows</em> of one of the data sets to the other data sets (in contrast to adding additional <em>columns</em> to one of the data sets). The <code>tidyverse</code> function to combine multiple <code>tibble</code>s by rows is <code><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows()</a></code>. So the code for combining the two data sets is simply <code>bind_rows(ws1a, ws1b)</code>. This will only work in a case like this in which not only do we have the same columns, but they are also in the same order .</p>
-<p>However, before combining the data, we have to consider one further complication. We can see that in both data sets the participant identifier column, <code>subno</code>, appears to consist of whole numbers. This means that the same number may be used for different participants in the two experiments. If we do not account for this possibility before combining the data, we may end up with a data set in which data from different participants are treated as coming from the same participant – a clear error. For example, the output above shows that there is a participant with <code>subno</code> 8 in Experiment 1a. If there is also a participant with <code>subno</code> 8 in Experiment 1b, the data from these two different participants (no participant participated in both studies) would be treated as being from the same participant – a clear error. To see whether this is indeed a potential problem, we print all individual <code>subno</code> values for both experiments.</p>
+<p>To analyse these two data sets together, as we have done in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>, we now have to combine these two <code>tibble</code>s into one. Specifically, we need to add the <em>rows</em> of one of the data sets to the other data sets (in contrast to adding additional <em>columns</em> to one of the data sets). The <code>tidyverse</code> function to combine multiple <code>tibble</code>s by rows is <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>. So the code for combining the two data sets is simply <code>bind_rows(ws1a, ws1b)</code>. This will only work in a case like this in which not only do we have the same columns, but they are also in the same order .</p>
+<p>However, before combining the data, we have to consider one further complication. We can see that in both data sets the participant identifier column, <code>subno</code>, appears to consist of whole numbers. This means that the same number may be used for different participants in the two experiments. If we do not account for this possibility before combining the data, we may end up with a data set in which data from different participants are treated as coming from the same participant -- a clear error. For example, the output above shows that there is a participant with <code>subno</code> 8 in Experiment 1a. If there is also a participant with <code>subno</code> 8 in Experiment 1b, the data from these two different participants (no participant participated in both studies) would be treated as being from the same participant -- a clear error. To see whether this is indeed a potential problem, we print all individual <code>subno</code> values for both experiments.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span><span class="op">$</span><span class="va">subno</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -237,13 +237,13 @@
 <span><span class="co">#&gt; [404] 469 471 472 473 474 475 476 478 480 481 484 485 486</span></span>
 <span><span class="co">#&gt; [417] 488 489 490 491 492 493 494</span></span></code></pre></div>
 <p>The output confirms our suspicion. <code>subno</code> values are not unique across experiments, so we need to make them so before combining the data. One straightforward way to do this is by adding a string to the start of each <code>subno</code>, either <code>e1a_</code> or <code>e1b_</code>, that indicates which data set each participant belongs to. For this we use the <code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> function which pastes strings together into one (<code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> does so without adding any extra separation character to the combined strings).</p>
-<p>In the same call, we will also convert the <code>subno</code> variable to a factor (as it is a categorical variable). We can then combine both data sets into one called <code>ws1</code> using the <code><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows()</a></code> call discussed above. We then get an overview of the combined data using the <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> function which is the <code>tidyverse</code> equivalent of <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> (<code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> often produces less verbose output for tibbles than <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>– try it out yourself to see).</p>
+<p>In the same call, we will also convert the <code>subno</code> variable to a factor (as it is a categorical variable). We can then combine both data sets into one called <code>ws1</code> using the <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> call discussed above. We then get an overview of the combined data using the <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> function which is the <code>tidyverse</code> equivalent of <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> (<code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> often produces less verbose output for tibbles than <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>-- try it out yourself to see).</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="va">ws1a</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1a_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="va">ws1b</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>subno <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"e1b_"</span>, <span class="va">subno</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">ws1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">ws1a</span>, <span class="va">ws1b</span><span class="op">)</span></span>
+<span><span class="va">ws1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">ws1a</span>, <span class="va">ws1b</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ws1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 49,984</span></span>
 <span><span class="co">#&gt; Columns: 6</span></span>
@@ -253,16 +253,16 @@
 <span><span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "accept", "accept", "accept", "accept", ~</span></span>
 <span><span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 20.2, 20.2, 20.2, 20.2, 20.2, 20.2, 20.2~</span></span>
 <span><span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1~</span></span></code></pre></div>
-<p>The output shows that the <code>subno</code> for the first participant in Experiment 1 is now <code>e1a_8</code>, not <code>8</code>. In other words, <code>subno</code>’s are now unique within each experiment and so we can combine the data without making the larger data set misleading.</p>
+<p>The output shows that the <code>subno</code> for the first participant in Experiment 1 is now <code>e1a_8</code>, not <code>8</code>. In other words, <code>subno</code>'s are now unique within each experiment and so we can combine the data without making the larger data set misleading.</p>
 <p>To verify this logic, we can count the number of unique values of <code>subno</code> for each data set using the <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> function on the <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> elements of the <code>subno</code> vectors. <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> is a function that returns the number of elements in a vector, so can be directly used in calculations. The calculation here shows that, indeed, the combined data has the same number of participants, 781, as Experiments 1a and 1b together.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ws1a</span><span class="op">$</span><span class="va">subno</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ws1b</span><span class="op">$</span><span class="va">subno</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 781</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ws1</span><span class="op">$</span><span class="va">subno</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 781</span></span></code></pre></div>
-<p>Before continuing with the analysis of the combined data, it makes sense to take a step back and consider briefly why we discussed the question of how to combine these two data sets rather extensively. One the one hand, the code above uses a few new functions that we have not yet introduced such as <code><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows()</a></code> and <code><a href="https://rdrr.io/r/base/length.html">length()</a></code>. As before, we want to introduce new functions by explicitly discussing their functionality.</p>
-<p>On the other hand, the discussion above shows us one way of handling and checking the assumptions in our code. The issue here is that when combining two data sets using <code><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows()</a></code>, the code assumes that the participant identifiers are unique. This is not necessarily an obvious assumption we have when writing the code, but it is a consequence of the fact that we simply concatenate both data sets. Because this is not an assumption that is obvious, we may overlook it, possibly leading to problems later on in our code. Specifically, treating data from different participants as coming from the same participant, just because they coincidentally share the same <code>subno</code>, is probably <em>not</em> appropriate in our statistical analysis. By checking whether the number of participants in the combined data set is equal to the sum of the number of participants in the separate data sets, we ensure that combining the two data sets was done appropriately.</p>
-<p>Another reason why we are discussing this issue in detail is that in a paper on which I am a co-author, <span class="citation">Skovgaard-Olsen, Singmann, and Klauer (<a href="references.html#ref-skovgaard-olsenRelevanceEffectConditionals2016" role="doc-biblioref">2016</a>)</span>, I overlooked this exact problem. The experiment reported in the paper consisted of three conditions that needed to be combined for the analysis. The problem was that the participant identifiers were only unique within conditions and not across conditions and I combined the data sets without considering this fact. Consequently, the statistical analysis incorrectly treated observations from different participants as belonging to the same participant. In fact, all statistical results reported in <span class="citation">Skovgaard-Olsen, Singmann, and Klauer (<a href="references.html#ref-skovgaard-olsenRelevanceEffectConditionals2016" role="doc-biblioref">2016</a>)</span> are affected as I only recognised the error after publication of the article. Luckily for my co-authors and me, once I realised what had happened and re-analysed the data after correctly combining it, that initial error had had no substantive effects on the results. Some details changed (the exact value of some numbers), but not the qualitative pattern of results. Consequently, we could fix this error by publishing a straightforward correction <span class="citation">(<a href="references.html#ref-skovgaard-olsenCorrigendumRelevanceEffect2018" role="doc-biblioref">Skovgaard-Olsen, Singmann, and Klauer 2018</a>)</span>. The larger point here is that such errors can and will happen. The best way to avoid them is by regularly checking explicitly whether the assumptions we make about our data and our code hold.</p>
+<p>Before continuing with the analysis of the combined data, it makes sense to take a step back and consider briefly why we discussed the question of how to combine these two data sets rather extensively. One the one hand, the code above uses a few new functions that we have not yet introduced such as <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> and <code><a href="https://rdrr.io/r/base/length.html">length()</a></code>. As before, we want to introduce new functions by explicitly discussing their functionality.</p>
+<p>On the other hand, the discussion above shows us one way of handling and checking the assumptions in our code. The issue here is that when combining two data sets using <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>, the code assumes that the participant identifiers are unique. This is not necessarily an obvious assumption we have when writing the code, but it is a consequence of the fact that we simply concatenate both data sets. Because this is not an assumption that is obvious, we may overlook it, possibly leading to problems later on in our code. Specifically, treating data from different participants as coming from the same participant, just because they coincidentally share the same <code>subno</code>, is probably <em>not</em> appropriate in our statistical analysis. By checking whether the number of participants in the combined data set is equal to the sum of the number of participants in the separate data sets, we ensure that combining the two data sets was done appropriately.</p>
+<p>Another reason why we are discussing this issue in detail is that in a paper on which I am a co-author, <span class="citation">Skovgaard-Olsen, Singmann, and Klauer (<a href="references.html#ref-skovgaard-olsenRelevanceEffectConditionals2016">2016</a>)</span>, I overlooked this exact problem. The experiment reported in the paper consisted of three conditions that needed to be combined for the analysis. The problem was that the participant identifiers were only unique within conditions and not across conditions and I combined the data sets without considering this fact. Consequently, the statistical analysis incorrectly treated observations from different participants as belonging to the same participant. In fact, all statistical results reported in <span class="citation">Skovgaard-Olsen, Singmann, and Klauer (<a href="references.html#ref-skovgaard-olsenRelevanceEffectConditionals2016">2016</a>)</span> are affected as I only recognised the error after publication of the article. Luckily for my co-authors and me, once I realised what had happened and re-analysed the data after correctly combining it, that initial error had had no substantive effects on the results. Some details changed (the exact value of some numbers), but not the qualitative pattern of results. Consequently, we could fix this error by publishing a straightforward correction <span class="citation">(<a href="references.html#ref-skovgaard-olsenCorrigendumRelevanceEffect2018">Skovgaard-Olsen, Singmann, and Klauer 2018</a>)</span>. The larger point here is that such errors can and will happen. The best way to avoid them is by regularly checking explicitly whether the assumptions we make about our data and our code hold.</p>
 </div>
 <div id="preparing-the-data-set-and-descriptive-analysis" class="section level3" number="3.7.3">
 <h3>
@@ -334,14 +334,14 @@
 <div class="exercise">
 <p><span id="exr:unlabeled-div-19" class="exercise"><strong>Exercise 3.1  </strong></span>What does <code>NA</code> stand for in <code>R</code>?</p>
 <ol style="list-style-type: decimal">
-<li>“not available”, i.e., missing data</li>
-<li>“no answer”, i.e, <code>R</code> couldn’t find an answer to your command</li>
-<li>“nothing applicable”, i.e., there are no values/variables that match your request</li>
+<li>"not available", i.e., missing data</li>
+<li>"no answer", i.e, <code>R</code> couldn't find an answer to your command</li>
+<li>"nothing applicable", i.e., there are no values/variables that match your request</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-20" class="exercise"><strong>Exercise 3.2  </strong></span>Which of the following is NOT true for an <code>R</code> package?</p>
@@ -350,22 +350,22 @@
 <li>Needs to be installed from CRAN every time you use it .</li>
 <li>Needs to be loaded every time you use it.</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-21" class="exercise"><strong>Exercise 3.3  </strong></span>What are “bugs” in programming languages?</p>
+<p><span id="exr:unlabeled-div-21" class="exercise"><strong>Exercise 3.3  </strong></span>What are "bugs" in programming languages?</p>
 <ol style="list-style-type: decimal">
 <li>variables that are not of interest for a specific analysis</li>
 <li>the same code is used multiple times for different datasets</li>
 <li>error in the code that leads to unexpected/wrong results</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-22" class="exercise"><strong>Exercise 3.4  </strong></span>What is a <code>tibble</code>?</p>
@@ -375,22 +375,22 @@
 <li>the <code>tiydverse</code> version of a vector</li>
 <li>the result you get from data wrangling</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-23" class="exercise"><strong>Exercise 3.5  </strong></span>This operator <code>%&gt;%</code> means we are using…</p>
+<p><span id="exr:unlabeled-div-23" class="exercise"><strong>Exercise 3.5  </strong></span>This operator <code>%&gt;%</code> means we are using...</p>
 <ol style="list-style-type: decimal">
 <li>base R</li>
 <li>a pipe</li>
 <li>a data.frame</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["2"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="answer">2</option>
+<option value="">3</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-24" class="exercise"><strong>Exercise 3.6  </strong></span>The <code>dplyr</code> package is NOT useful for:</p>
@@ -401,12 +401,12 @@
 <li>changing the ordering of the rows</li>
 <li>reading file in as csv</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["5"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="">3</option>
+<option value="">4</option>
+<option value="answer">5</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-25" class="exercise"><strong>Exercise 3.7  </strong></span>Using the <code>dplyr</code> package, which function is used for adding/changing variables in the current data?</p>
@@ -416,11 +416,11 @@
 <li><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code></li>
 <li><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code></li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["1"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="answer">1</option>
+<option value="">2</option>
+<option value="">3</option>
+<option value="">4</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-26" class="exercise"><strong>Exercise 3.8  </strong></span>Using the <code>dplyr</code> package, which function is used for selecting subsets of rows?</p>
@@ -430,11 +430,11 @@
 <li><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code></li>
 <li><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code></li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option>
+<option value="">4</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-27" class="exercise"><strong>Exercise 3.9  </strong></span>Using the <code>dplyr</code> package, which function is used for selecting subsets of columns?</p>
@@ -445,11 +445,11 @@
 </li>
 <li><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code></li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["4"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="">3</option>
+<option value="answer">4</option></select></p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-28" class="exercise"><strong>Exercise 3.10  </strong></span>When using the pipe operator <code>%&gt;%</code>, <code>R</code> executes operations in which order?</p>
@@ -458,17 +458,17 @@
 <li>That depends on which other packages are loaded.</li>
 <li>From left to right.</li>
 </ol>
-<p>Answer: <select class="webex-solveme" data-answer='["3"]'><option></option>
-<option>1</option>
-<option>2</option>
-<option>3</option></select></p>
+<p>Answer: <select class="webex-select"><option value="blank"></option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="answer">3</option></select></p>
 </div>
 </div>
 <div id="practical-helpers-cheatsheets" class="section level2" number="3.9">
 <h2>
 <span class="header-section-number">3.9</span> Practical Helpers: Cheatsheets<a class="anchor" aria-label="anchor" href="#practical-helpers-cheatsheets"><i class="fas fa-link"></i></a>
 </h2>
-<p>Trying to remember and applying all the <code>tidyverse</code> tools yourself can be a bit overwhelming at the beginning. There are quite a few functions and one has to remember for each what it does and what its syntax is. Furthermore, so far we have introduced the most important functions, but there are more in <code>dplyr</code> and other <code>tidyverse</code> packages that we do not have the space to introduce (for more see <a href="https://r4ds.had.co.nz/">“<code>R</code> for data science”</a>).</p>
+<p>Trying to remember and applying all the <code>tidyverse</code> tools yourself can be a bit overwhelming at the beginning. There are quite a few functions and one has to remember for each what it does and what its syntax is. Furthermore, so far we have introduced the most important functions, but there are more in <code>dplyr</code> and other <code>tidyverse</code> packages that we do not have the space to introduce (for more see <a href="https://r4ds.had.co.nz/">"<code>R</code> for data science"</a>).</p>
 <p>One way for you to keep an overview of which functions do what is with the help of <strong>cheat sheets</strong> (<em>or</em> cheatsheets). Cheat sheets are short (usually 1 or 2 pages) documents that provide an overview of a package or tool and are a common resource for many programming languages. Their benefit compared to other learning resources such as books or the documentation is that they provide a concise overview and can point you quickly to the right tool.</p>
 <p>In the case of <code>R</code>, once you know which function to use (e.g., thanks to the cheat sheet) it might then make sense to follow up by looking at the documentation. The documentation can be obtained for each function by entering <code>?functionname</code> (e.g., <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">?summarise</a></code>) at the <code>R</code> prompt. This provides not only an explanation of what the function does plus all of its arguments, but will also usually have helpful examples.</p>
 <p>For the <code>tiydverse</code> packages, <code>RStudio</code> provides an almost complete list of <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheets</a>. The most relevant for us at the moment is the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"><code>dplyr</code> cheat sheet</a>. Furthermore, there are also cheat sheets for <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf">the <code>RStudio</code> IDE iteself</a>, <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">reading in data</a>, and even <a href="http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf">base <code>R</code></a>. Before diving into the examples below, it might make sense to download (or even print) the cheat sheets and have them by your side while trying to solve the problems.</p>
@@ -477,15 +477,15 @@
 <h2>
 <span class="header-section-number">3.10</span> <code>tiydverse</code> Exercise: Earworms and Sleep<a class="anchor" aria-label="anchor" href="#earworms-task1"><i class="fas fa-link"></i></a>
 </h2>
-<p>For this exercise we will work with a data set from <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> investigating a research question about the relationship between listening to music and sleep: “Many people listen to music for hours every day, often near bedtime. We investigated whether music listening affects sleep, focusing on a rarely explored mechanism: involuntary musical imagery (earworms).” I’m sure most of you will have had the experience of an earworm – hearing some particular piece of music in your head, and not being able to ‘stop it playing’. If this seems alien to you, <a href="https://en.wikipedia.org/wiki/Earworm">Wikipedia provides a longer introduction</a>.</p>
-<p>Here, we are looking at the data from <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span>’s Study 2, which was a sleep-lab experiment. Participants came to the sleep-lab and stayed for one night in a controlled environment in which a number of objective sleep parameters could be measured via <a href="https://en.wikipedia.org/wiki/Polysomnography">polysomnography</a>. Throughout the night several physiological parameters such as electroencephalography (EEG) and breathing were recorded continuously. Participants were assigned to one of two conditions determining the music they heard just before going to bed: either a condition in which original versions of three pop songs, which included the lyrics, or an instrumental version of the same three pop-songs (without the lyrics). The three songs (<a href="https://youtu.be/1k8craCGpgs">“Don’t Stop Believin’” by Journey</a>, <a href="https://youtu.be/fWNaR-rxAic">“Call Me Maybe” by Carly Rae Jepsen</a>, and <a href="https://youtu.be/nfWlot6h_JM">“Shake It Off” by Taylor Swift</a>) were chosen because previous research had shown that they induce earworms. After participants woke up in the morning, they were asked whether they experienced any earworms at different points in the night or in the morning.</p>
+<p>For this exercise we will work with a data set from <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span> investigating a research question about the relationship between listening to music and sleep: "Many people listen to music for hours every day, often near bedtime. We investigated whether music listening affects sleep, focusing on a rarely explored mechanism: involuntary musical imagery (earworms)." I'm sure most of you will have had the experience of an earworm -- hearing some particular piece of music in your head, and not being able to 'stop it playing'. If this seems alien to you, <a href="https://en.wikipedia.org/wiki/Earworm">Wikipedia provides a longer introduction</a>.</p>
+<p>Here, we are looking at the data from <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span>'s Study 2, which was a sleep-lab experiment. Participants came to the sleep-lab and stayed for one night in a controlled environment in which a number of objective sleep parameters could be measured via <a href="https://en.wikipedia.org/wiki/Polysomnography">polysomnography</a>. Throughout the night several physiological parameters such as electroencephalography (EEG) and breathing were recorded continuously. Participants were assigned to one of two conditions determining the music they heard just before going to bed: either a condition in which original versions of three pop songs, which included the lyrics, or an instrumental version of the same three pop-songs (without the lyrics). The three songs (<a href="https://youtu.be/1k8craCGpgs">"Don't Stop Believin'" by Journey</a>, <a href="https://youtu.be/fWNaR-rxAic">"Call Me Maybe" by Carly Rae Jepsen</a>, and <a href="https://youtu.be/nfWlot6h_JM">"Shake It Off" by Taylor Swift</a>) were chosen because previous research had shown that they induce earworms. After participants woke up in the morning, they were asked whether they experienced any earworms at different points in the night or in the morning.</p>
 <p>The researchers were interested in two research questions:</p>
 <ol style="list-style-type: decimal">
 <li><p>Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms? This research question was based on previous results and the authors expected the instrumental version to induce more earworms than the lyrical versions.</p></li>
 <li><p>Does the sleep quality differ between participants in the lyrical music condition and the instrumental music condition (in which participants are expected to have more earworms)?</p></li>
 </ol>
 <p>Before looking at the data, take a guess yourself. Do you believe you sleep better after listening to music that makes it likely that you develop an earworm?</p>
-<p>A version of the original data file made available by <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> can be downloaded from <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv">here</a>. I recommend you download it to the <code>data</code> folder in the working directory and then you can read in the data via the following code. It makes sense to restart <code>R</code> before doing that, so we also reload the <code>tidyverse</code>.</p>
+<p>A version of the original data file made available by <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span> can be downloaded from <a href="https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv">here</a>. I recommend you download it to the <code>data</code> folder in the working directory and then you can read in the data via the following code. It makes sense to restart <code>R</code> before doing that, so we also reload the <code>tidyverse</code>.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
 <span><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/earworm_study.csv"</span><span class="op">)</span></span>
@@ -500,7 +500,7 @@
 <p>Alternatively, you can also download directly from the internet for this exercise, but I really recommend getting comfortable with files, folders, and the <code>R</code> working directory. The code for downloading from the internet is:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv"</span><span class="op">)</span></span></code></pre></div>
-<p>Let’s take a first look at the data:</p>
+<p>Let's take a first look at the data:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">earworm</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 48</span></span>
@@ -529,7 +529,7 @@
 <li>
 <code>id</code>: Participant identifier</li>
 <li>
-<code>group</code>: experimental condition with two values: “Lyrics” versus “Instrumental”</li>
+<code>group</code>: experimental condition with two values: "Lyrics" versus "Instrumental"</li>
 <li>
 <code>relaxed</code>: question asking participants how relaxed they felt on a scale from 0 (= not relaxed) to 100 (= very relaxed) after listening to the music.</li>
 <li>
@@ -653,7 +653,7 @@ Solution
 </div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-33" class="exercise"><strong>Exercise 3.15  </strong></span>Before looking at the results, it’s a good idea to get an overview of the demographics of the data. In the first step, let us provide a basic overview of participants ignoring the condition they are put in:</p>
+<p><span id="exr:unlabeled-div-33" class="exercise"><strong>Exercise 3.15  </strong></span>Before looking at the results, it's a good idea to get an overview of the demographics of the data. In the first step, let us provide a basic overview of participants ignoring the condition they are put in:</p>
 <ul>
 <li>Provide some summaries of the age of participants (min, max, mean, sd).</li>
 <li>What is the gender distribution?</li>
@@ -779,7 +779,7 @@ Solution
 <span><span class="co">#&gt; <span style="color: #555555;">3</span> Instrumental Female    13 0.565</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> Instrumental Male      10 0.435</span></span></code></pre></div>
 <p>The output shows that the gender ratio is not balanced between groups. Whereas we see a roughly 50-50 gender ratio in the instrumental condition, in the lyrical condition it is closer to 80-20.</p>
-<p>Finally, let’s use the same logic for the ethnicity question. Note that the resulting table is again too long to be shown fully, so we pipe it to <code>print(n = Inf)</code> as done before.</p>
+<p>Finally, let's use the same logic for the ethnicity question. Note that the resulting table is again too long to be shown fully, so we pipe it to <code>print(n = Inf)</code> as done before.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">group</span>, <span class="va">raceethnicity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -803,11 +803,11 @@ Solution
 <span><span class="co">#&gt; <span style="color: #555555;">8</span> Instrumental Hispanic             5 0.217</span></span></code></pre></div>
 <p>This does not show any major differences between the two conditions. Only the proportion of Asian participants is somewhat imbalanced.</p>
 <p>Overall, the results show that the two groups are not perfectly balanced, even though the groups were randomly created. This can happen in experiments, and in fact would be expected, especially if the group sizes are small as here (i.e., a maximum of 25 participants per condition). The larger the groups, the more likely it will be that they are balanced.</p>
-<p>If the groups are unbalanced, is this a problem? Not necessarily. If you remember, the problem randomisation attempts to address are confounders – third variables that can affect the dependent variable. Imbalance in experiments thus is problematic if we have imbalance in variables that are known to also affect the dependent variable. The question is if age and gender are such variables. I am not much of a sleep researcher, but would assume that the effect of gender on sleep efficiency is not extremely large. However, age surely has an effect on sleep, but I doubt whether that would be true in the age range of the participants here. If the age range were larger (e.g., one group had participants in their 40s or older and the other did not), I would be more concerned. The differences here seem rather unimportant overall. Nevertheless, in their main analysis <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021" role="doc-biblioref">2021</a>)</span> do adjust for the difference in gender, a statistical technique we will get back to later.</p>
+<p>If the groups are unbalanced, is this a problem? Not necessarily. If you remember, the problem randomisation attempts to address are confounders -- third variables that can affect the dependent variable. Imbalance in experiments thus is problematic if we have imbalance in variables that are known to also affect the dependent variable. The question is if age and gender are such variables. I am not much of a sleep researcher, but would assume that the effect of gender on sleep efficiency is not extremely large. However, age surely has an effect on sleep, but I doubt whether that would be true in the age range of the participants here. If the age range were larger (e.g., one group had participants in their 40s or older and the other did not), I would be more concerned. The differences here seem rather unimportant overall. Nevertheless, in their main analysis <span class="citation">Scullin, Gao, and Fillmore (<a href="references.html#ref-scullinBedtimeMusicInvoluntary2021">2021</a>)</span> do adjust for the difference in gender, a statistical technique we will get back to later.</p>
 </div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-35" class="exercise"><strong>Exercise 3.17  </strong></span>In addition to the demographic variables, we should also get an overview of the two control variables measuring participants’ responses about their own state after listening to the music, variables <code>relaxed</code> and <code>sleepy</code>. Check whether they look similar across condition by calculating their mean and SD.</p>
+<p><span id="exr:unlabeled-div-35" class="exercise"><strong>Exercise 3.17  </strong></span>In addition to the demographic variables, we should also get an overview of the two control variables measuring participants' responses about their own state after listening to the music, variables <code>relaxed</code> and <code>sleepy</code>. Check whether they look similar across condition by calculating their mean and SD.</p>
 <div class="webex-solution">
 <button>
 Hint
@@ -834,7 +834,7 @@ Solution
 </div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-36" class="exercise"><strong>Exercise 3.18  </strong></span>Having now carefully checked and explored the data, it’s time to take a look at research question 1: Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms?</p>
+<p><span id="exr:unlabeled-div-36" class="exercise"><strong>Exercise 3.18  </strong></span>Having now carefully checked and explored the data, it's time to take a look at research question 1: Does listening to the original version of a pop song (with lyrics) or an instrumental version of it affect whether or not participants develop earworms?</p>
 <p>Let us look at this research question in multiple steps:</p>
 <ol style="list-style-type: decimal">
 <li>Calculate whether experimental condition (<code>group</code>) affects any of the three <code>earworm</code> dependent variables as well as the <code>earworm</code> control variable. For doing so, calculate the conditional means as well as the standard deviations.</li>
@@ -964,8 +964,8 @@ Solution
 </div>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-37" class="exercise"><strong>Exercise 3.19  </strong></span>Let’s now take a look at research question 2: Does sleep quality differ between participants in the lyrical and the instrumental music condition (in which participants are expected to have more earworms)?</p>
-<p>Check the effect of the independent variable on the main measure of sleep quality, <code>sleep_efficiency</code>, and also on the length of sleep, <code>sleep_time</code>. Don’t forget to calculate both means and SD to judge the size of the difference given the level of noise.</p>
+<p><span id="exr:unlabeled-div-37" class="exercise"><strong>Exercise 3.19  </strong></span>Let's now take a look at research question 2: Does sleep quality differ between participants in the lyrical and the instrumental music condition (in which participants are expected to have more earworms)?</p>
+<p>Check the effect of the independent variable on the main measure of sleep quality, <code>sleep_efficiency</code>, and also on the length of sleep, <code>sleep_time</code>. Don't forget to calculate both means and SD to judge the size of the difference given the level of noise.</p>
 <p>In addition to just calculating the conditional means, also calculate the exact difference in sleep efficiency and sleeping time between both conditions.</p>
 <p>Does the data overall support the prediction?</p>
 <div class="webex-solution">
@@ -1020,7 +1020,7 @@ Solution
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-38" class="exercise"><strong>Exercise 3.20  </strong></span>The analysis so far supports the prediction for both research questions: Participants that listen to instrumental compared to lyrical songs report more earworms and sleep worse. However, this analysis does not address the question of whether participants that report earworms sleep worse than participants that do not report earworms.</p>
-<p>As the last bit of the analysis, let’s take a look at this question: Do participants that report having an earworm sleep better than participants that do not do so, ignoring the experimental condition. For this:</p>
+<p>As the last bit of the analysis, let's take a look at this question: Do participants that report having an earworm sleep better than participants that do not do so, ignoring the experimental condition. For this:</p>
 <ol style="list-style-type: decimal">
 <li>Create a new <code>factor</code>, <code>has_earworm</code>, that is <code>yes</code>, whenever participants report at least once that they had an earworm for one of the three <code>earworm</code> dependent variables (i.e., within the experimental time frame, ignoring the control time).</li>
 <li>Calculate the conditional N (number of participants) as well as conditional means and SD of the two sleep variables, <code>sleep_efficiency</code> and <code>sleep_time</code>, as a function of <code>has_earworm</code>.</li>
@@ -1089,15 +1089,24 @@ Solution
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
-  if (t = document.getElementById("webex-total_correct")) {
-    t.innerHTML =
-      document.getElementsByClassName("webex-correct").length + " of " +
-      document.getElementsByClassName("webex-solveme").length + " correct";
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
   }
 }
 
 /* webex-solution button toggling function */
 b_func = function() {
+  console.log("webex: toggle hide");
+
   var cl = this.parentElement.classList;
   if (cl.contains('open')) {
     cl.remove("open");
@@ -1106,8 +1115,24 @@ b_func = function() {
   }
 }
 
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
 /* function for checking solveme answers */
 solveme_func = function(e) {
+  console.log("webex: check solveme");
+
   var real_answers = JSON.parse(this.dataset.answer);
   var my_answer = this.value;
   var cl = this.classList;
@@ -1117,22 +1142,27 @@ solveme_func = function(e) {
   if (cl.contains("nospaces")) {
     my_answer = my_answer.replace(/ /g, "")
   }
-  
-  if (my_answer !== "" & real_answers.includes(my_answer)) {
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
     cl.add("webex-correct");
+    cl.remove("webex-incorrect");
   } else {
+    cl.add("webex-incorrect");
     cl.remove("webex-correct");
   }
 
   // match numeric answers within a specified tolerance
   if(this.dataset.tol > 0){
-    var tol = JSON.parse(this.dataset.tol);  
+    var tol = JSON.parse(this.dataset.tol);
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
     if (matches.reduce((a, b) => a + b, 0) > 0) {
       cl.add("webex-correct");
     } else {
       cl.remove("webex-correct");
-    }  
+    }
   }
 
   // added regex bit
@@ -1140,13 +1170,56 @@ solveme_func = function(e) {
     answer_regex = RegExp(real_answers.join("|"))
     if (answer_regex.test(my_answer)) {
       cl.add("webex-correct");
-    }  
+    }
   }
-  
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
   update_total_correct();
 }
 
 window.onload = function() {
+  console.log("webex onload");
   /* set up solution buttons */
   var buttons = document.getElementsByTagName("button");
 
@@ -1155,7 +1228,23 @@ window.onload = function() {
       buttons[i].onclick = b_func;
     }
   }
-  
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
   /* set up webex-solveme inputs */
   var solveme = document.getElementsByClassName("webex-solveme");
 
@@ -1163,10 +1252,10 @@ window.onload = function() {
     /* make sure input boxes don't auto-anything */
     solveme[i].setAttribute("autocomplete","off");
     solveme[i].setAttribute("autocorrect", "off");
-    solveme[i].setAttribute("autocapitalize", "off"); 
+    solveme[i].setAttribute("autocapitalize", "off");
     solveme[i].setAttribute("spellcheck", "false");
     solveme[i].value = "";
-    
+
     /* adjust answer for ignorecase or nospaces */
     var cl = solveme[i].classList;
     var real_answer = solveme[i].dataset.answer;
@@ -1177,12 +1266,27 @@ window.onload = function() {
       real_answer = real_answer.replace(/ /g, "");
     }
     solveme[i].dataset.answer = real_answer;
-    
+
     /* attach checking function */
     solveme[i].onkeyup = solveme_func;
     solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
   }
-  
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
   update_total_correct();
 }
 
@@ -1220,7 +1324,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2022-10-23.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
