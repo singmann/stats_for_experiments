@@ -193,7 +193,8 @@ Show Code
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234566</span><span class="op">)</span>  <span class="co">## needed to ensure jittered points are at same position</span></span>
 <span><span class="va">p1_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot_build.html">ggplot_build</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
+<span><span class="co">#&gt; No summary function supplied, defaulting to</span></span>
+<span><span class="co">#&gt; `mean_se()`</span></span>
 <span></span>
 <span><span class="va">lap2</span> <span class="op">&lt;-</span> <span class="va">laptop_urry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>xpoint <span class="op">=</span> <span class="va">p1_de</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
@@ -769,7 +770,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-06.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

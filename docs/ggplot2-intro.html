@@ -120,19 +120,19 @@
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ws1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 49,984</span></span>
 <span><span class="co">#&gt; Columns: 6</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">subno    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> e1a_8, e1a_8, e1a_8, e1a_8, e1a_8, e1a_8~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">loss     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">gain     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 8, 10, 12, 14, 16, 18, 20, 6, 8, 10, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> accept, accept, accept, accept, accept, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> -$20/+$20, -$20/+$20, -$20/+$20, -$20/+$~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1~</span></span></code></pre></div>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">subno    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> e1a_8, e1a_8, e1a_8, e1a_8, e1a_8, e1a_8…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">loss     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">gain     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 8, 10, 12, 14, 16, 18, 20, 6, 8, 10, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> accept, accept, accept, accept, accept, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> -$20/+$20, -$20/+$20, -$20/+$20, -$20/+$…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1…</span></span></code></pre></div>
 <p>One intuition we could have is that the probability that a lottery is accepted is related to the size of the potential gain, if we average over all other independent variables (i.e., potential loss and condition). To investigate this, we first need to calculate the average acceptance probability for each possible gain. Then, we can create a plot with the average accept probability on the y-axis against each possible gain on the x-axis. As we want to plot average acceptance probabilities and not the <em>raw</em> data (i.e., the individual observations), we need to summarise the raw data first. For this, we use the now well-known combination of <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lot_sum</span> <span class="op">&lt;-</span> <span class="va">ws1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">gain</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acceptance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">lot_sum</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 13 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 13 × 2</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>     6          0.093<span style="text-decoration: underline;">8</span></span></span>
@@ -141,7 +141,7 @@
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>    12          0.239 </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>    14          0.358 </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>    16          0.345 </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 7 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 7 more rows</span></span></span></code></pre></div>
 <p>Looking at the first few rows of the returned <code>tibble</code> suggests that our intuition is probably not too far off as the mean acceptance rates appear to increase with gain. To understand the pattern better, let us plot this data. For this, we pass the newly created <code>tibble</code> to the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function as shown next. We will first interpret what we see in the plot before describing the call that created it in detail.</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">lot_sum</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -177,7 +177,7 @@
 <span><span class="co">#&gt; `summarise()` has grouped output by 'loss'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
 <span><span class="va">lot_sum2</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 119 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 119 × 3</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   loss [13]</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -187,7 +187,7 @@
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>     6    12           0.881</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     6    14           0.876</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     6    16           0.916</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 113 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 113 more rows</span></span></span></code></pre></div>
 <p>For our first plot, we begin with the same call as above and only change the data set that is passed to the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function.</p>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -232,7 +232,7 @@
 <span>    ev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">ev</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EV negative"</span>, <span class="st">"EV = 0"</span>, <span class="st">"EV positive"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">lot_sum2</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 119 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 119 × 4</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   loss [13]</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span> <span style="font-weight: bold;">ev</span>         </span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      </span></span>
@@ -242,7 +242,7 @@
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>     6    12           0.881 EV positive</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     6    14           0.876 EV positive</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     6    16           0.916 EV positive</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 113 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 113 more rows</span></span></span></code></pre></div>
 <p>We can then use the new <code>ev</code> variable to print points in a different colour depending on the value of <code>ev</code>. For this we just need to map the <code>ev</code> variable to the <code>colour</code> aesthetic in the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> call, to get this very interesting plot.</p>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">lot_sum2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, colour <span class="op">=</span> <span class="va">ev</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -328,7 +328,7 @@ Another aesthetic to distinguish different points
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition', 'loss'.</span></span>
 <span><span class="co">#&gt; You can override using the `.groups` argument.</span></span>
 <span><span class="va">lot_sum_all</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 256 x 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 256 × 5</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   condition, loss [32]</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acceptance</span> <span style="font-weight: bold;">ev</span>         </span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      </span></span>
@@ -338,7 +338,7 @@ Another aesthetic to distinguish different points
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40     6    24           0.890 EV positive</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40     6    28           0.916 EV positive</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40     6    32           0.942 EV positive</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 250 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 250 more rows</span></span></span></code></pre></div>
 <p>To create a faceted plot, we need to use yet another <code>ggplot2</code> function, <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>, to which we pass the variable the plot should be faceted on. We specify the variables to facet on in the call to <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> using the <code><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars()</a></code> function. To create the faceted plot, we need to use the correct data set, in the tibble <code>lot_sum_all</code>, and then simply add <code>facet_wrap(vars(condition))</code> to the previous call (to simplify the plot, we remove the mapping of <code>loss</code> to <code>size</code>).</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">lot_sum_all</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gain</span>, y <span class="op">=</span> <span class="va">mean_acceptance</span>, </span>
@@ -387,7 +387,7 @@ Another aesthetic to distinguish different points
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
 <span><span class="va">part_sum</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 781 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 781 × 3</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   condition [4]</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">subno</span>   <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -397,7 +397,7 @@ Another aesthetic to distinguish different points
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40 e1a_129    0.844</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40 e1a_13     0.5  </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40 e1a_133    0.5  </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 775 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 775 more rows</span></span></span></code></pre></div>
 <p>It is already clear from the output that the individual mean acceptance rates even for the first few participants in one condition are quite variable. It also shows that the returned <code>tibble</code> is still grouped (See message and <code>Groups ...</code>):. If we were to perform other operations with it, instead of just plotting, it might be necessary to add an <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> call to the pipe to remove the grouping. However, as we are just passing it to the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function, this is not necessary here.</p>
 <div id="displaying-all-data-points" class="section level3" number="4.5.1">
 <h3>
@@ -507,7 +507,8 @@ Error bars?
 <p>The best illustration of how means and other summary statistics hide the distribution of the data is shown in the "datasaurus plot" below <span class="citation">(<a href="references.html#ref-matejkaSameStatsDifferent2017">Matejka and Fitzmaurice 2017</a>)</span>. Note that this plot shows two continuous variables plotted against one another (a <em>scatter</em> plot) and not one continuous and one categorical variable, but it nicely illustrates the point. Here you can see that the data can dramatically change its shape -- cycling through 13 qualitatively different patterns, one of which is a dinosaur -- while maintaining its means plus other summary statistics (up to two decimal points) on both x-axis and y-axis.</p>
 <div class="figure">
 <span style="display:block;" id="fig:datasaurus"></span>
-<img src="figures/DinoSequentialSmaller.gif" alt='The "datasaurus dozen". Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: https://www.autodesk.com/research/publications/same-stats-different-graphs' width="100%"><p class="caption">
+&lt;img src="figures/DinoSequentialSmaller.gif" alt="The "datasaurus dozen". Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" class="uri">https://www.autodesk.com/research/publications/same-stats-different-graphs</a>" width="100%" /&gt;
+<p class="caption">
 Figure 4.3: The "datasaurus dozen". Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs" class="uri">https://www.autodesk.com/research/publications/same-stats-different-graphs</a>
 </p>
 </div>
@@ -518,14 +519,16 @@ Figure 4.3: The "datasaurus dozen". Two variables that maintain their summary st
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
+<span><span class="co">#&gt; No summary function supplied, defaulting to</span></span>
+<span><span class="co">#&gt; `mean_se()`</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-28-1.png" width="100%"></div>
 <p>However, it's pretty difficult to see anything much different in these plots, except perhaps the larger black circle in the middle of the left-most distribution. The most noticeable difference is the status message telling us that the default summary function, <code><a href="https://ggplot2.tidyverse.org/reference/mean_se.html">mean_se()</a></code>, was used. As we want to add the mean and are fine with the error bars (which show the <em>standard error</em>, hence <code>se</code>), we can generally ignore this message. The problem with this plot is that we added black summary points on top of the black data points. One way to improve this plot is by plotting the data points in the background in a semi-transparent manner using <code>alpha = 0.2</code>.</p>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">part_sum</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">mean_acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
+<span><span class="co">#&gt; No summary function supplied, defaulting to</span></span>
+<span><span class="co">#&gt; `mean_se()`</span></span></code></pre></div>
 <div class="inline-figure"><img src="ggplot-intro_files/figure-html/unnamed-chunk-29-1.png" width="100%"></div>
 <p>This plot now makes it easy to see both the full distribution of the data as well as the mean. In principle, we should also see error bars, but they might be too small to be actually visible (meaning the error bars are smaller than the diameter of the point for the mean). As mentioned above, we'll leave the technical definition of the error bars until later and for now accept that they represent the uncertainty we have in the means.</p>
 <p>An alternative would be to not change the <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> plot, but the <code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary()</a></code> plot (e.g., by passing <code>colour = "red"</code>). This is left as an exercise for the reader. Likewise, you might want to see what happens if you change the order of the two calls (i.e., <code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary()</a></code> first and <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom()</a></code> second). As said before, an important part of learning <code>R</code> is trying out different things and seeing what happens. If your code is in an <code>R</code> script, there is literally nothing that can go wrong by trying out things. You cannot break <code>R</code> by goofing around with it! You can always restart <code>R</code> and start again from the beginning of your script to get where you are now. So, please do play around with the code provided here.</p>
@@ -894,7 +897,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-06.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -105,22 +105,22 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">22912</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">------------------------------------</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): response</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (5): subno, loss, gain, condition, resp</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
 <span><span class="va">ws1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1b.csv"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">27072</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">------------------------------------</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): response</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (5): subno, loss, gain, condition, resp</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
 <p>We use new names for the resulting data objects (<code>ws1a</code> and <code>ws1b</code>) to help us remember that this is the data from <span class="citation">Walasek and Stewart (<a href="references.html#ref-walasekHowMakeLoss2015">2015</a>)</span>, Experiments 1a and 1b. It's generally a good idea to use descriptive object names as this makes code easier to read later on. Especially when the code is long, one could even use more descriptive names such as <code>walasek_stewart_2015_1a</code> and <code>walasek_stewart_2015_1b</code>. However, as this example stays relatively short, the first letter of the last names and no year will suffice.</p>
 <p>Note that as in the previous chapter, if you have problems downloading these two files or setting up the correct working directory, you can load them directly from the internet as well. However, this is not recommended and only shown here to make sure you can follow all steps in this example.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
@@ -129,7 +129,7 @@
 <p>We now have two data sets that have the same structure (i.e., with the same columns and data types) as we can see by just printing them both:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>     8     6     6 accept        20.2     1</span></span>
@@ -138,9 +138,9 @@
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>     8     6    12 accept        20.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     8     6    14 accept        20.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     8     6    16 accept        20.2     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 22,906 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 22,906 more rows</span></span></span>
 <span><span class="va">ws1b</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 27,072 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 27,072 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>     1     6    12 accept        40.2     1</span></span>
@@ -149,7 +149,7 @@
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>     1     6    24 accept        40.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     1     6    28 accept        40.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     1     6    32 accept        40.2     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 27,066 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 27,066 more rows</span></span></span></code></pre></div>
 <p>What this output shows is that not only do the two data sets have the same columns in the same order, but they also appear to have the same condition names. To check, let's print the sorted unique values for each <code>condition</code> column:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1a</span><span class="op">$</span><span class="va">condition</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -247,12 +247,12 @@
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ws1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 49,984</span></span>
 <span><span class="co">#&gt; Columns: 6</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">subno    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> e1a_8, e1a_8, e1a_8, e1a_8, e1a_8, e1a_8~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">loss     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">gain     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 8, 10, 12, 14, 16, 18, 20, 6, 8, 10, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "accept", "accept", "accept", "accept", ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 20.2, 20.2, 20.2, 20.2, 20.2, 20.2, 20.2~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1~</span></span></code></pre></div>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">subno    </span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> e1a_8, e1a_8, e1a_8, e1a_8, e1a_8, e1a_8…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">loss     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">gain     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 6, 8, 10, 12, 14, 16, 18, 20, 6, 8, 10, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">response </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "accept", "accept", "accept", "accept", …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">condition</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 20.2, 20.2, 20.2, 20.2, 20.2, 20.2, 20.2…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">resp     </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1…</span></span></code></pre></div>
 <p>The output shows that the <code>subno</code> for the first participant in Experiment 1 is now <code>e1a_8</code>, not <code>8</code>. In other words, <code>subno</code>'s are now unique within each experiment and so we can combine the data without making the larger data set misleading.</p>
 <p>To verify this logic, we can count the number of unique values of <code>subno</code> for each data set using the <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> function on the <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> elements of the <code>subno</code> vectors. <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> is a function that returns the number of elements in a vector, so can be directly used in calculations. The calculation here shows that, indeed, the combined data has the same number of participants, 781, as Experiments 1a and 1b together.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
@@ -281,7 +281,7 @@
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">ws1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 49,984 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 49,984 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> e1a_8     6     6 accept   -$20/+$20     1</span></span>
@@ -290,7 +290,7 @@
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> e1a_8     6    12 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> e1a_8     6    14 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> e1a_8     6    16 accept   -$20/+$20     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 49,978 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 49,978 more rows</span></span></span></code></pre></div>
 <p>Next, we calculate the number of participants per condition and check if every participant has 64 trials. This is one way to check our assumptions about the data and ensure data integrity (we use the same code as described in Section <a href="tidyverse-intro.html#counting">3.5.3.5</a>).</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ws1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -303,7 +303,7 @@
 <span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">n_participants</span> <span style="font-weight: bold;">all_64</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;lgl&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40            191 TRUE  </span></span>
@@ -317,7 +317,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40    0.213</span></span>
@@ -490,13 +490,13 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
 <span><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/earworm_study.csv"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">48</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">19</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">------------------------------------</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">chr</span>  (7): group, gender, raceethnicity, nativeenglishspe...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (12): id, relaxed, sleepy, earworm_falling_asleep, e...</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
 <p>Alternatively, you can also download directly from the internet for this exercise, but I really recommend getting comfortable with files, folders, and the <code>R</code> working directory. The code for downloading from the internet is:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://github.com/singmann/stats_for_experiments/raw/master/data/earworm_study.csv"</span><span class="op">)</span></span></code></pre></div>
@@ -505,25 +505,25 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">earworm</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 48</span></span>
 <span><span class="co">#&gt; Columns: 19</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">id                    </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 102, 103, 104, 105, 106, 10~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">group                 </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Lyrics", "Lyrics", "Instru~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">relaxed               </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 37, 96, 62, 83, 68, 78, 60,~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">sleepy                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 49, 10, 44, 97, 42, 52, 41,~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_falling_asleep</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_night         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_morning       </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, 0, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_control       </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 0, 0, 0, 0, 1, 0, 0, ~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">sleep_efficiency      </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 90.0, 95.7, 89.8, 94.1, 98.~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">sleep_time            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 487.6, 519.4, 472.1, 494.8,~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">age                   </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 19, 21, 19, 20, 27, 18, 22,~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">gender                </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Female", "Female", "Female~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">raceethnicity         </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Caucasian", "Caucasian", "~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">nativeenglishspeaker  </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">bilingual             </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "No", "No", "No", "No", "No~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">height_inches         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 66, 68, 64, 69, 53, 62, 76,~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">weight_lbs            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 145, 183, 135, 155, 89, 120~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">handedness            </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "R", "L", "R", "R", "R", "R~</span></span>
-<span><span class="co">#&gt; $ <span style="font-weight: bold;">classrank             </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Sophomore", "Junior", "Fre~</span></span></code></pre></div>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">id                    </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 102, 103, 104, 105, 106, 10…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">group                 </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Lyrics", "Lyrics", "Instru…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">relaxed               </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 37, 96, 62, 83, 68, 78, 60,…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">sleepy                </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 49, 10, 44, 97, 42, 52, 41,…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_falling_asleep</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_night         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_morning       </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">earworm_control       </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 0, 0, 0, 0, 1, 0, 0, …</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">sleep_efficiency      </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 90.0, 95.7, 89.8, 94.1, 98.…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">sleep_time            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 487.6, 519.4, 472.1, 494.8,…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">age                   </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 19, 21, 19, 20, 27, 18, 22,…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">gender                </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Female", "Female", "Female…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">raceethnicity         </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Caucasian", "Caucasian", "…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">nativeenglishspeaker  </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Yes", "Yes", "Yes", "Yes",…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">bilingual             </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "No", "No", "No", "No", "No…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">height_inches         </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 66, 68, 64, 69, 53, 62, 76,…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">weight_lbs            </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 145, 183, 135, 155, 89, 120…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">handedness            </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "R", "L", "R", "R", "R", "R…</span></span>
+<span><span class="co">#&gt; $ <span style="font-weight: bold;">classrank             </span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> "Sophomore", "Junior", "Fre…</span></span></code></pre></div>
 <p>In addition to the variables relevant to our research questions, the data contains a number of control variables (the original data file included even more). We can see a total of 19 variables:</p>
 <ul>
 <li>
@@ -618,7 +618,7 @@ Solution
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 48 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 48 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">id</span>        <span style="font-weight: bold;">n</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> 102       1</span></span>
@@ -627,14 +627,14 @@ Solution
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> 105       1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> 106       1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> 107       1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 42 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 42 more rows</span></span></span></code></pre></div>
 <p>Looks like every <code>id</code> has one row. However, let us make sure this is indeed the case.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>all_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 1</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">all_1</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;lgl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> TRUE</span></span></code></pre></div>
@@ -644,7 +644,7 @@ Solution
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>            <span style="font-weight: bold;">n</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyrics          25</span></span>
@@ -678,7 +678,7 @@ Solution
 <span>            min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>,</span>
 <span>            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>,</span>
 <span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">mean</span>   <span style="font-weight: bold;">min</span>   <span style="font-weight: bold;">max</span>    <span style="font-weight: bold;">sd</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>  21.0    18    28  2.20</span></span></code></pre></div>
@@ -688,7 +688,7 @@ Solution
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">gender</span>     <span style="font-weight: bold;">n</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Female    34</span></span>
@@ -699,7 +699,7 @@ Solution
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 3</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">gender</span>     <span style="font-weight: bold;">n</span>  <span style="font-weight: bold;">prop</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Female    34 0.708</span></span>
@@ -711,7 +711,7 @@ Solution
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">raceethnicity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">raceethnicity</span>        <span style="font-weight: bold;">n</span>   <span style="font-weight: bold;">prop</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> African American     4 0.083<span style="text-decoration: underline;">3</span></span></span>
@@ -741,7 +741,7 @@ Solution
 <span>            min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>,</span>
 <span>            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>,</span>
 <span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 5</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>         <span style="font-weight: bold;">mean</span>   <span style="font-weight: bold;">min</span>   <span style="font-weight: bold;">max</span>    <span style="font-weight: bold;">sd</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyrics        20.4    18    24  1.63</span></span>
@@ -770,7 +770,7 @@ Solution
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'group'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   group [2]</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>        <span style="font-weight: bold;">gender</span>     <span style="font-weight: bold;">n</span>  <span style="font-weight: bold;">prop</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -789,7 +789,7 @@ Solution
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'group'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 8 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 8 × 4</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   group [2]</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>        <span style="font-weight: bold;">raceethnicity</span>        <span style="font-weight: bold;">n</span>   <span style="font-weight: bold;">prop</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -825,7 +825,7 @@ Solution
 <span>            sd_relaxed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">relaxed</span><span class="op">)</span>,</span>
 <span>            m_sleepy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sleepy</span><span class="op">)</span>,</span>
 <span>            sd_sleep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">sleepy</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 5</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>        <span style="font-weight: bold;">m_relaxed</span> <span style="font-weight: bold;">sd_relaxed</span> <span style="font-weight: bold;">m_sleepy</span> <span style="font-weight: bold;">sd_sleep</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyrics            72.4       19.6     68.7     23.2</span></span>
@@ -864,14 +864,12 @@ Solution
 <span>            m_cont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">earworm_control</span><span class="op">)</span>,</span>
 <span>            sd_cont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">earworm_control</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 9</span></span></span>
-<span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>       <span style="font-weight: bold;">m_fall</span> <span style="font-weight: bold;">sd_fall</span> <span style="font-weight: bold;">m_night</span> <span style="font-weight: bold;">sd_ni~1</span> <span style="font-weight: bold;">m_mor~2</span> <span style="font-weight: bold;">sd_mo~3</span></span></span>
-<span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyrics       0.12    0.332  0.08     0.277   0.12    0.332</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">2</span> Instrument~  0.261   0.449  0.043<span style="text-decoration: underline;">5</span>   0.209   0.391   0.499</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 2 more variables: </span><span style="color: #555555; font-weight: bold;">m_cont</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">sd_cont</span><span style="color: #555555;"> &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">#   and abbreviated variable names 1: sd_night,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">#   2: m_morning, 3: sd_morning</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 9</span></span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">group</span> <span style="font-weight: bold;">m_fall</span> <span style="font-weight: bold;">sd_fall</span> <span style="font-weight: bold;">m_night</span> <span style="font-weight: bold;">sd_night</span> <span style="font-weight: bold;">m_morning</span> <span style="font-weight: bold;">sd_morning</span></span></span>
+<span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyri…  0.12    0.332  0.08      0.277     0.12       0.332</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">2</span> Inst…  0.261   0.449  0.043<span style="text-decoration: underline;">5</span>    0.209     0.391      0.499</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 2 more variables: </span><span style="color: #555555; font-weight: bold;">m_cont</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">sd_cont</span><span style="color: #555555;"> &lt;dbl&gt;</span></span></span></code></pre></div>
 <p>Whereas this is the correct code, it does not show all variables of the returned data. One easy way to ensure all variables are shown is to convert the <code>tibble</code> back to a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">earworm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -954,7 +952,7 @@ Solution
 <span>            m_prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">prop_earworm</span><span class="op">)</span>,</span>
 <span>            sd_prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">prop_earworm</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 5</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>        <span style="font-weight: bold;">m_any</span> <span style="font-weight: bold;">sd_any</span> <span style="font-weight: bold;">m_prop</span> <span style="font-weight: bold;">sd_prop</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyrics       0.28   0.458  0.107   0.186</span></span>
@@ -988,7 +986,7 @@ Solution
 <span>            sd_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">sleep_time</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">summary_sleep</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 5</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">group</span>        <span style="font-weight: bold;">m_efficiency</span> <span style="font-weight: bold;">sd_efficiency</span> <span style="font-weight: bold;">m_time</span> <span style="font-weight: bold;">sd_time</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>               <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> Lyrics               94.3          2.97   507.    24.5</span></span>
@@ -999,7 +997,7 @@ Solution
 <code class="sourceCode R"><span><span class="va">summary_sleep</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>diff_efficiency <span class="op">=</span> <span class="va">m_efficiency</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">m_efficiency</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>            diff_time <span class="op">=</span> <span class="va">m_time</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">m_time</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">diff_efficiency</span> <span style="font-weight: bold;">diff_time</span></span></span>
 <span><span class="co">#&gt;             <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>            2.43      9.68</span></span></code></pre></div>
@@ -1050,13 +1048,12 @@ Solution
 <span>  <span class="op">)</span></span>
 <span><span class="va">summary_earworms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 x 7</span></span></span>
-<span><span class="co">#&gt;   <span style="font-weight: bold;">has_earworm</span>     <span style="font-weight: bold;">n</span> <span style="font-weight: bold;">m_efficie~1</span> <span style="font-weight: bold;">sd_ef~2</span> <span style="font-weight: bold;">m_time</span> <span style="font-weight: bold;">sd_time</span>  <span style="font-weight: bold;">prop</span></span></span>
-<span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">1</span> yes            19        91.4    4.17   508.    26.4 0.396</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">2</span> no             29        94.3    3.64   500.    24.7 0.604</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with abbreviated variable names 1: m_efficiency,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">#   2: sd_efficiency</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 2 × 7</span></span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">has_earworm</span>     <span style="font-weight: bold;">n</span> <span style="font-weight: bold;">m_efficiency</span> <span style="font-weight: bold;">sd_efficiency</span> <span style="font-weight: bold;">m_time</span></span></span>
+<span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">1</span> yes            19         91.4          4.17   508.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">2</span> no             29         94.3          3.64   500.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 2 more variables: </span><span style="color: #555555; font-weight: bold;">sd_time</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">prop</span><span style="color: #555555;"> &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="co">## want to see all variables:</span></span>
 <span><span class="va">summary_earworms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1074,7 +1071,7 @@ Solution
 <code class="sourceCode R"><span><span class="va">summary_earworms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>diff_efficiency <span class="op">=</span> <span class="va">m_efficiency</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">m_efficiency</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>            diff_time <span class="op">=</span> <span class="va">m_time</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">m_time</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">diff_efficiency</span> <span style="font-weight: bold;">diff_time</span></span></span>
 <span><span class="co">#&gt;             <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>            2.86     -<span style="color: #BB0000;">7.88</span></span></span></code></pre></div>
@@ -1324,7 +1321,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-06.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

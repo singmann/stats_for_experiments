@@ -267,14 +267,16 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <p>Then, you can load all <code>tidyverse</code> packages at once using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. Loading the <code>tidyverse</code> package this way is something we will do at the top of pretty much all scripts we will be creating.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; -- <span style="font-weight: bold;">Attaching packages</span> ------------------- tidyverse 1.3.2 --</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">ggplot2</span> 3.3.6      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">purrr  </span> 0.3.4 </span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tibble </span> 3.1.8      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">dplyr  </span> 1.0.10</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">tidyr  </span> 1.2.1      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">stringr</span> 1.4.1 </span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">readr  </span> 2.1.2      <span style="color: #00BB00;">v</span> <span style="color: #0000BB;">forcats</span> 0.5.2 </span></span>
-<span><span class="co">#&gt; -- <span style="font-weight: bold;">Conflicts</span> ---------------------- tidyverse_conflicts() --</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span></code></pre></div>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──── tidyverse 2.0.0 ──</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.4</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.0</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.4.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.0</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.2     </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────── tidyverse_conflicts() ──</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use the conflicted package (<span style="color: #0000BB; font-style: italic;">&lt;http://conflicted.r-lib.org/&gt;</span>) to force all conflicts to become errors</span></span></code></pre></div>
 <p>When loading packages it is common that this produces some status or other messages in the console (some packages do, some don't). For example, <code>tidyverse</code> lists the package versions of the loaded (or "attached") packages and lists function conflicts; that is, cases in which a <code>tidyverse</code> function masks a previous loaded function with the same name. We include these messages here to show that this is normal and nothing to worry about, but will generally not later in the book, as this would get repetitive. However, note that the exact version numbers of the packages that are shown here may differ from the version numbers you see, simply because some packages might be updated after this book was written.</p>
 <p>The core <code>tidyverse</code> packages are (with descriptions taken or adapted from the official websites):</p>
 <ul>
@@ -294,7 +296,7 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">df1a</span><span class="op">)</span></span>
 <span><span class="va">tbl1a</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> 8         6     6 accept   -$20/+$20     1</span></span>
@@ -303,21 +305,21 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> 8         6    12 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> 8         6    14 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> 8         6    16 accept   -$20/+$20     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 22,906 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 22,906 more rows</span></span></span></code></pre></div>
 <p>In the output of the <code>tibble</code>, we can see two things. First, the output only shows the first 6 rows. Compare this to what happens when typing <code>df1a</code> in the console which will print many more rows (so you cannot see the column names anymore). Second, the data type of each column is shown below the column names. This is another feature that makes <code>tibble</code>s more convenient in everyday use. We directly see that for example <code>subno</code> is a <code>factor</code> (<code>&lt;fct&gt;</code>) as it should be.</p>
 <p>An alternative way to create a <code>tibble</code> instead of a standard <code>data.frame</code> is by loading the data using the <code>tidyverse</code> specific read functions which are in the <a href="https://readr.tidyverse.org/"><code>readr</code></a> package. Remember that above we used the base <code>R</code> read function <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>, which is one of a handful of base <code>R</code> data read functions such as <code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code> (for reading data separated by spaces) and <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim()</a></code> (for reading tab separated data). <code>readr</code> offers a similar set of functions where the main differences are that instead of using a <code>.</code> in the function name they use an <code>_</code> and instead of a <code>data.frame</code> they return a <code>tibble</code>. So in case you have a <code>csv</code> file, you could use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> instead of <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>. Note that in this and in the following code chunks, we are going to overwrite the existing <code>tbl1a</code> object to not clutter the work space.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">22912</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">--</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">------------------------------------</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">chr</span> (1): response</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (5): subno, loss, gain, condition, resp</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">i</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
 <span><span class="va">tbl1a</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>     8     6     6 accept        20.2     1</span></span>
@@ -326,13 +328,13 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>     8     6    12 accept        20.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     8     6    14 accept        20.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     8     6    16 accept        20.2     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 22,906 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 22,906 more rows</span></span></span></code></pre></div>
 <p>What we can see from the output is that <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> not only returns the <code>tibble</code>, but also a message showing the column specification (i.e., data type for each column). We could use this to change the column type when reading in the data, but I usually do not find this necessary. In most cases it is sufficient to change the data type once the data is read in, as shown below.</p>
 <p>As the status message also shows, you can stop this message from appearing by specifying an additional argument to the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> call, <code>show_col_types = FALSE</code>. I don't think this is necessary. However, the following shows that it works as expected.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl1a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/ws2015_exp1a.csv"</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">tbl1a</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>     8     6     6 accept        20.2     1</span></span>
@@ -341,7 +343,7 @@ Figure 3.2: Screenshot of <code>RStudio</code> window with empty <code>R</code> 
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>     8     6    12 accept        20.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>     8     6    14 accept        20.2     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>     8     6    16 accept        20.2     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 22,906 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 22,906 more rows</span></span></span></code></pre></div>
 <p>Another feature of <code>readr</code> compared to the corresponding base <code>R</code> functions is that it is a bit more restrictive in some cases. That is, in case the data is not as expected by a particular read function, <code>readr</code> fails more often than base <code>R</code>. Whereas this can appear annoying while programming, it has the benefit that one learns of problems in the data early compared to late. In other words, <code>readr</code> functions are more likely than base <code>R</code> functions to ensure the data looks like you expect it to. And if your data is more likely to look like you expect it to, your code will be less likely to produce incorrect results.</p>
 <p>Therefore, in addition to using <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> instead of <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>, it is often better to use <code><a href="https://readr.tidyverse.org/reference/read_table.html">read_table()</a></code> instead of <code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code> for space separated data (or <code><a href="https://readr.tidyverse.org/reference/read_table2.html">read_table2()</a></code> if the data format is a bit sloppy), <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> instead of <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim()</a></code> for tab separated data, or <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> if you want to specify the data delimiter.</p>
 </div>
@@ -427,7 +429,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">tbl1a</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22,912 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> 8         6     6 accept   -$20/+$20     1</span></span>
@@ -436,7 +438,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> 8         6    12 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> 8         6    14 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> 8         6    16 accept   -$20/+$20     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 22,906 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 22,906 more rows</span></span></span></code></pre></div>
 <p>You can see a number of changes here as compared to the base <code>R</code> code:</p>
 <ul>
 <li>The block of code in which variables are converted to factors is wrapped into the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> call to which we have piped the data, <code>tbl1a</code>.</li>
@@ -453,7 +455,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl1a</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 1</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>    0.381</span></span></code></pre></div>
@@ -466,7 +468,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>    mean_pot_loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>,</span>
 <span>    mean_pot_gain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gain</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">mean_acc</span> <span style="font-weight: bold;">sd_acc</span> <span style="font-weight: bold;">mean_pot_loss</span> <span style="font-weight: bold;">mean_pot_gain</span></span></span>
 <span><span class="co">#&gt;      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>    0.381  0.486          19.5          19.2</span></span></code></pre></div>
@@ -485,7 +487,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>    mean_pot_loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>,</span>
 <span>    mean_pot_gain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gain</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">mean_acc</span> <span style="font-weight: bold;">sd_acc</span> <span style="font-weight: bold;">mean_pot_loss</span> <span style="font-weight: bold;">mean_pot_gain</span></span></span>
 <span><span class="co">#&gt;      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>    0.514  0.500            13            26</span></span></code></pre></div>
@@ -496,7 +498,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <code class="sourceCode R"><span><span class="va">symm1</span> <span class="op">&lt;-</span> <span class="va">tbl1a</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">loss</span> <span class="op">==</span> <span class="va">gain</span><span class="op">)</span></span>
 <span><span class="va">symm1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1,989 x 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1,989 × 6</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">subno</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">response</span> <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">resp</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> 8         6     6 accept   -$20/+$20     1</span></span>
@@ -505,7 +507,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> 8        12    12 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> 8        14    14 accept   -$20/+$20     1</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> 8        16    16 accept   -$20/+$20     1</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 1,983 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 1,983 more rows</span></span></span></code></pre></div>
 <p>Or equivalently:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">symm2</span> <span class="op">&lt;-</span> <span class="va">tbl1a</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -521,7 +523,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 22 × 3</span></span></span>
 <span><span class="co">#&gt;     <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">condition</span></span></span>
 <span><span class="co">#&gt;    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> 1</span>    12    12 -$20/+$40</span></span>
@@ -556,7 +558,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">loss</span>, <span class="va">gain</span>, <span class="va">condition</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 12 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 12 × 3</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">condition</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>    12    12 -$20/+$40</span></span>
@@ -565,7 +567,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span><span class="co">#&gt; <span style="color: #555555;">4</span>    12    12 -$20/+$20</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span>    16    16 -$20/+$20</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span>    20    20 -$20/+$20</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 6 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 6 more rows</span></span></span></code></pre></div>
 </div>
 <div id="group-by" class="section level4" number="3.5.3.4">
 <h4>
@@ -579,7 +581,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">loss</span> <span class="op">==</span> <span class="va">gain</span>, <span class="va">loss</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">condition</span> <span class="op">==</span> <span class="st">"-$20/+$40"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 1</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>    0.167</span></span>
@@ -589,7 +591,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">loss</span> <span class="op">==</span> <span class="va">gain</span>, <span class="va">loss</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">condition</span> <span class="op">==</span> <span class="st">"-$40/+$20"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 x 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 1 × 1</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span>    0.670</span></span></code></pre></div>
@@ -600,7 +602,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">loss</span> <span class="op">==</span> <span class="va">gain</span>, <span class="va">loss</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 x 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 2</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40    0.167</span></span>
@@ -619,7 +621,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition', 'loss'.</span></span>
 <span><span class="co">#&gt; You can override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 12 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 12 × 4</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   condition, loss [12]</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -646,7 +648,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition', 'loss'.</span></span>
 <span><span class="co">#&gt; You can override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 12 x 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 12 × 4</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span>  <span style="font-weight: bold;">loss</span>  <span style="font-weight: bold;">gain</span> <span style="font-weight: bold;">mean_acc</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40    12    12    0.190</span></span>
@@ -655,7 +657,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$20    12    12    0.469</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$20    16    16    0.458</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$20    20    20    0.458</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 6 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 6 more rows</span></span></span></code></pre></div>
 </div>
 <div id="counting" class="section level4" number="3.5.3.5">
 <h4>
@@ -669,7 +671,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 358 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 358 × 3</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># Groups:   condition [4]</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">subno</span>     <span style="font-weight: bold;">n</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -679,11 +681,11 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40 61       64</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40 73       64</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40 85       64</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 352 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 352 more rows</span></span></span>
 <span></span>
 <span><span class="va">tbl1a</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">condition</span>, <span class="va">subno</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 358 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 358 × 3</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">subno</span>     <span style="font-weight: bold;">n</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40 5        64</span></span>
@@ -692,7 +694,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span><span class="co">#&gt; <span style="color: #555555;">4</span> -$20/+$40 61       64</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">5</span> -$20/+$40 73       64</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">6</span> -$20/+$40 85       64</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># ... with 352 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;"># ℹ 352 more rows</span></span></span></code></pre></div>
 <p>We can see that the results are pretty much the same, the only difference being that <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> retains the grouped <code>tibble</code> whereas <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> does not.</p>
 <p>We can also see that the number of trials for each of the participants shown in the output is 64. This is exactly the number of trials we would expect from the description of the study in Section <a href="role-of-statistics-in-the-research-process.html#alternative-explanation-loss-aversion-or-loss-seeking">1.2.2</a>. However, so far we cannot be sure that this really holds for all participants. We expect this to be the case and it looks like it for a handful of participants shown, but does it really hold for everyone?</p>
 <p>When analysing data, questions such as these regularly come to one's mind. One has assumptions about what the data should look like, but one cannot be sure that these assumptions really hold. What if, for example, data collection did not finish for some participants and we only have partial data for those? The reality of analysing actual data is that often some assumptions one has about the data set do not hold. Many things can and will go wrong during data collection, so an important step in any analysis is to verify one's assumptions.</p>
@@ -708,7 +710,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 x 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   <span style="font-weight: bold;">condition</span> <span style="font-weight: bold;">n_participants</span> <span style="font-weight: bold;">all_64</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;lgl&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> -$20/+$40             84 TRUE  </span></span>
@@ -999,7 +1001,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-06.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2023-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
