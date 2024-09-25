@@ -7,7 +7,7 @@
 <title>Chapter 3 Short Introduction to R and the tidyverse | Introduction to Statistics for Experimental Psychology with R</title>
 <meta name="author" content="Henrik Singmann">
 <meta name="description" content="The previous two chapters have provided the theoretical and conceptual background we need for performing a statistical analysis. In this chapter we switch focus to the practical side and introduce...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Short Introduction to R and the tidyverse | Introduction to Statistics for Experimental Psychology with R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="The previous two chapters have provided the theoretical and conceptual background we need for performing a statistical analysis. In this chapter we switch focus to the practical side and introduce...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="The previous two chapters have provided the theoretical and conceptual background we need for performing a statistical analysis. In this chapter we switch focus to the practical side and introduce...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -120,7 +121,7 @@
 </h3>
 <p>The basic <code>R</code> software that performs the calculations can be installed from <a href="https://cran.r-project.org/index.html">CRAN</a>, the Comprehensive R Archive Network. However, the basic <code>R</code> installation is quite bare bones, especially for people used to modern operating systems like Windows or macOS. Therefore, in addition to <code>R</code>, I also recommend you install <a href="https://www.rstudio.com/products/rstudio/"><code>RStudio</code></a>. <code>RStudio</code> is the most popular IDE -- integrated development environment -- for <code>R</code>, and makes using it quite a bit more comfortable.</p>
 <p>Note that both <code>R</code> and <code>RStudio</code> need to be updated independently of each other. Especially <code>R</code> should be updated at least once per year from <a href="https://cran.r-project.org/index.html">CRAN</a>. So, if you already have <code>R</code> installed on your computer and do not remember the last time you have updated, now is probably a good time to do so. I personally update <code>R</code> usually within a few weeks of a new version appearing.</p>
-<p>If you need additional help installing <code>R</code> and <code>RStudio</code>, Danielle Navarro has created a set of video tutorials on <a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd">installing <code>R</code></a>. The link brings you to a Youtube playlist with specific videos for each major operating system.</p>
+<p>If you need additional help installing <code>R</code> and <code>RStudio</code>, a good resource is the <a href="https://psyteachr.github.io/RSetGo/">RSetGo book</a> (Ch. 1 and 2; from the University of Glasgow). Alternatively, Danielle Navarro has created a set of video tutorials on <a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd">installing <code>R</code></a>. The link brings you to a Youtube playlist with specific videos for each major operating system.</p>
 </div>
 <div id="step-2-getting-comfortable-with-r" class="section level3" number="3.2.2">
 <h3>
@@ -142,7 +143,7 @@
 </h3>
 <p>The sections above list the minimum requirements that you should go through before continuing with this chapter. If these resources are not enough for you, this section provides an overview of additional free resources you can take a look now or later to get deeper into R (i.e., feel free to skip the following bullet points and continue below).</p>
 <ul>
-<li><p><a href="https://psyteachr.github.io/msc-conv/">MSc Conversion: R Research Methods book</a> by Emily Nordmann is a book with accompanying <a href="https://www.youtube.com/playlist?list=PLMGjq7JynlJmBbomo-_lIqJ4qWcuHcy_z">video lectures</a>. This book is aimed at a similar audience to the present book. However, it focuses on a few concepts that we do not use here (e.g., <code>RMarkdown</code>, accessing <code>R</code> that runs on a server). The book is part of the <a href="https://psyteachr.github.io/">psychTeachR</a> book plus video series developed by the University of Glasgow that contains a few more interesting books such as <a href="https://psyteachr.github.io/data-skills-v1/">Data Skills: psyTeachR Books</a> which is very introductory.</p></li>
+<li><p><a href="https://psyteachr.github.io/quant-fun-v3/">Fundamentals of Quantitative Analysis</a> by is a book by James Bartlett and Wil Toivo. This book is aimed at a similar audience to the present book. However, it focuses on a few concepts that we do not use here (e.g., <code>RMarkdown</code>, accessing <code>R</code> that runs on a server). The book is part of the <a href="https://psyteachr.github.io/">psychTeachR</a> book plus video series developed by the University of Glasgow that contains a few more interesting books such as <a href="https://psyteachr.github.io/data-skills-v3/">Data Skills: psyTeachR Books</a> which is very introductory.</p></li>
 <li><p><a href="https://learningstatisticswithr.com/">Learning Statistics with <code>R</code></a>, also by Danielle Navarro (as you can see, I am a big fan of Danielle's work). This is a completely free introductory book to statistics using <code>R</code>, which can be downloaded from its website (the <a href="https://learningstatisticswithr.com/lsr-0.6.pdf">currently available version is 0.6</a>). Part II (Chapters 3 and 4) provides a gentle and comprehensive introduction to <code>R</code> for newcomers. From installing <code>R</code> and <code>RStudio</code>, navigating the console and <code>RStudio</code> windows, basic data types, reading in data and the file system, to the most important data types, <code>data.frames</code>, these roughly 70 pages (i.e., pp. 35 - 109) have you covered. Once you have had a look at these two chapters, Chapter 8 is a great next step as it introduces <code>R</code> scripts. If you are completely new to statistics, Chapter 5 also provides a great introduction to other important concepts. One downside of this resource is that it comes in the form of a PDF and not a website, so cannot be read comfortably on all devices (but is great for printing). Also note that <a href="https://psyr.djnavarro.net/index.html"><code>R</code> for Psychological Science</a> is an updated version of this book, so I would probably start with that first. Finally, note that the present book has a somewhat different conceptual focus for introducing statistical tests and methods (i.e., especially compared to Part IV).</p></li>
 <li><p>If you prefer an introduction that has a stronger programming focus, I recommend the free book <a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with <code>R</code></a> by Garrett Grolemund. Chapters 1 to 5 (pp. 1 - 99) also provide an introduction that starts with installing <code>R</code> in a gentle manner and then introduces the necessary basic concepts including the different data types and <code>data.frame</code>s.</p></li>
 </ul>
@@ -451,7 +452,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <h4>
 <span class="header-section-number">3.5.3.2</span> <code>summarise()</code><a class="anchor" aria-label="anchor" href="#summarise"><i class="fas fa-link"></i></a>
 </h4>
-<p>The second most important function from <code>dplyr</code> is <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> which as the name suggests, creates summaries. This usually means that we are reducing the number of rows in a data set, often to just one row. For example, we could use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to get the average probability with which lotteries were accepted across all conditions and lotteries. For this, we just need to take the overall mean of the <code>resp</code> variable.</p>
+<p>The second most important function from <code>dplyr</code> is <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> which as the name suggests, creates summaries. This means that we are reducing the number of rows in a data set to one row (or one row per grouping variable, as explained below). For example, we could use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to get the average probability with which lotteries were accepted across all conditions and lotteries. For this, we just need to take the overall mean of the <code>resp</code> variable.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl1a</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_acc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span><span class="op">)</span></span>
@@ -707,7 +708,7 @@ Figure 3.3: Comparison of execution order without pipe (upper part) or with pipe
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    n_participants <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    all_64 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">64</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'condition'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 4 × 3</span></span></span>
@@ -1001,7 +1002,7 @@ window.onload = function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2024-01-22.</p>
+    <p>"<strong>Introduction to Statistics for Experimental Psychology with <code>R</code></strong>" was written by Henrik Singmann. It was last built on 2024-09-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

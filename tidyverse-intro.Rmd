@@ -30,7 +30,7 @@ The basic `R` software that performs the calculations can be installed from [CRA
 
 Note that both `R` and `RStudio` need to be updated independently of each other. Especially `R` should be updated at least once per year from [CRAN](https://cran.r-project.org/index.html). So, if you already have `R` installed on your computer and do not remember the last time you have updated, now is probably a good time to do so. I personally update `R` usually within a few weeks of a new version appearing.
 
-If you need additional help installing `R` and `RStudio`, Danielle Navarro has created a set of video tutorials on [installing `R`](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd). The link brings you to a Youtube playlist with specific videos for each major operating system.
+If you need additional help installing `R` and `RStudio`, a good resource is the [RSetGo book](https://psyteachr.github.io/RSetGo/) (Ch. 1 and 2; from the University of Glasgow). Alternatively, Danielle Navarro has created a set of video tutorials on [installing `R`](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd). The link brings you to a Youtube playlist with specific videos for each major operating system.
 
 ### Step 2: Getting Comfortable with `R`
 
@@ -48,7 +48,7 @@ When working with `R` (or really any programming language) we generally work wit
 
 The sections above list the minimum requirements that you should go through before continuing with this chapter. If these resources are not enough for you, this section provides an overview of additional free resources you can take a look now or later to get deeper into R (i.e., feel free to skip the following bullet points and continue below).
 
--   [MSc Conversion: R Research Methods book](https://psyteachr.github.io/msc-conv/) by Emily Nordmann is a book with accompanying [video lectures](https://www.youtube.com/playlist?list=PLMGjq7JynlJmBbomo-_lIqJ4qWcuHcy_z). This book is aimed at a similar audience to the present book. However, it focuses on a few concepts that we do not use here (e.g., `RMarkdown`, accessing `R` that runs on a server). The book is part of the [psychTeachR](https://psyteachr.github.io/) book plus video series developed by the University of Glasgow that contains a few more interesting books such as [Data Skills: psyTeachR Books](https://psyteachr.github.io/data-skills-v1/) which is very introductory.
+-   [Fundamentals of Quantitative Analysis](https://psyteachr.github.io/quant-fun-v3/) by is a book by James Bartlett and Wil Toivo. This book is aimed at a similar audience to the present book. However, it focuses on a few concepts that we do not use here (e.g., `RMarkdown`, accessing `R` that runs on a server). The book is part of the [psychTeachR](https://psyteachr.github.io/) book plus video series developed by the University of Glasgow that contains a few more interesting books such as [Data Skills: psyTeachR Books](https://psyteachr.github.io/data-skills-v3/) which is very introductory.
 
 -   [Learning Statistics with `R`](https://learningstatisticswithr.com/), also by Danielle Navarro (as you can see, I am a big fan of Danielle's work). This is a completely free introductory book to statistics using `R`, which can be downloaded from its website (the [currently available version is 0.6](https://learningstatisticswithr.com/lsr-0.6.pdf)). Part II (Chapters 3 and 4) provides a gentle and comprehensive introduction to `R` for newcomers. From installing `R` and `RStudio`, navigating the console and `RStudio` windows, basic data types, reading in data and the file system, to the most important data types, `data.frames`, these roughly 70 pages (i.e., pp. 35 - 109) have you covered. Once you have had a look at these two chapters, Chapter 8 is a great next step as it introduces `R` scripts. If you are completely new to statistics, Chapter 5 also provides a great introduction to other important concepts. One downside of this resource is that it comes in the form of a PDF and not a website, so cannot be read comfortably on all devices (but is great for printing). Also note that [`R` for Psychological Science](https://psyr.djnavarro.net/index.html) is an updated version of this book, so I would probably start with that first. Finally, note that the present book has a somewhat different conceptual focus for introducing statistical tests and methods (i.e., especially compared to Part IV).
 
@@ -330,7 +330,7 @@ You can see a number of changes here as compared to the base `R` code:
 
 #### `summarise()`
 
-The second most important function from `dplyr` is `summarise()` which as the name suggests, creates summaries. This usually means that we are reducing the number of rows in a data set, often to just one row. For example, we could use `summarise()` to get the average probability with which lotteries were accepted across all conditions and lotteries. For this, we just need to take the overall mean of the `resp` variable.
+The second most important function from `dplyr` is `summarise()` which as the name suggests, creates summaries. This means that we are reducing the number of rows in a data set to one row (or one row per grouping variable, as explained below). For example, we could use `summarise()` to get the average probability with which lotteries were accepted across all conditions and lotteries. For this, we just need to take the overall mean of the `resp` variable.
 
 ```{r}
 tbl1a %>% 
@@ -505,7 +505,7 @@ tbl1a %>%
   summarise(
     n_participants = n(),
     all_64 = all(n == 64)
-    )
+  )
 ```
 
 So what exactly is happening here? After the first three lines (including the first `summarise()`), we create the once summarised `tibble` already shown in the previous code. This `tibble` has one row per participant with the `n` column giving the number of trials for that participant. We then group this `tibble` again by `condition` to ensure the following results are shown separately for each condition (which is not really necessary, as it is still grouped by `condition`, but makes the code clearer). We then perform another `summarise()` which summarises the once summarised `tibble` for each `condition`. In this `summarise()`, we perform two operations:
