@@ -1,4 +1,3 @@
-
 library("trackdown")
 
 rel_file <- "role_of_stats.Rmd"
@@ -17,8 +16,10 @@ upload_file(rel_file)
 ## THEN ACCEPT ALL CHANGES
 ## then:
 download_file(rel_file)
-writeLines(iconv(readLines(rel_file), from = "", to = "UTF8"), 
-           file(rel_file, encoding="UTF-8"))
+writeLines(
+  iconv(readLines(rel_file), from = "", to = "UTF8"),
+  file(rel_file, encoding = "UTF-8")
+)
 
 ## then update again on Google docs:
 update_file(file = rel_file)
@@ -28,7 +29,7 @@ update_file(file = rel_file)
 # Chapter 1: Role of Stats
 # https://docs.google.com/document/d/1HXOxOW8HZC3dWSCSKa0Rxylpotq7GJF3uthXUIRhHV8/edit?usp=sharing
 
-# Chapter 2: Research Designs 
+# Chapter 2: Research Designs
 # https://docs.google.com/document/d/1HXOxOW8HZC3dWSCSKa0Rxylpotq7GJF3uthXUIRhHV8/edit?usp=sharing
 
 # Chapter 3: Tidyverse Intro
