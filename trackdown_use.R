@@ -30,7 +30,7 @@ update_file(file = rel_file)
 # https://docs.google.com/document/d/1HXOxOW8HZC3dWSCSKa0Rxylpotq7GJF3uthXUIRhHV8/edit?usp=sharing
 
 # Chapter 2: Research Designs
-# https://docs.google.com/document/d/1HXOxOW8HZC3dWSCSKa0Rxylpotq7GJF3uthXUIRhHV8/edit?usp=sharing
+# https://docs.google.com/document/d/11V9ix_HmXwC85ku1oQoV4giaLqcRi80LGLp-CPccPp0/edit?usp=sharing
 
 # Chapter 3: Tidyverse Intro
 # https://docs.google.com/document/d/1Eajb4HL9gtecbBJSKjMAk3k-LzLOaNUBQoonoRWNBhQ/edit?usp=sharing
