@@ -69,6 +69,7 @@ Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 
 ::: {.exercise}
 What is true about numbers? 
+
 1. Numbers can represent categorical information
 2. Numbers can only represent numerical information
 3. If we apply a mathematical operation to numbers, we can interpret the results independent of the meaning of the numbers
@@ -78,6 +79,7 @@ Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 
 ::: {.exercise}
 Which one of these is NOT a  type of a variable in a research design? 
+
 1. Dependent variable
 2. Epistemic variable
 3. Control variable
@@ -87,6 +89,7 @@ Answer: `r webexercises::mcq(c("1", answer = "2", "3"))`
 
 ::: {.exercise}
 What does it mean if the data is presented in a wide format?
+
 1. The data of one participant only spans a single row
 2. The data of one participant spans multiple rows
 3. There is one row per observation
@@ -96,6 +99,7 @@ Answer: `r webexercises::mcq(c(answer = "1", "2", "3"))`
 
 ::: {.exercise}
 What does it mean if a variable represents ‘continuous numerical information’?
+
 1. A variable can in principle take on any real-valued (i.e., decimal) number
 2. A certain difference or interval has the same meaning anywhere on the scale
 3. Both answers are correct
