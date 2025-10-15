@@ -444,7 +444,9 @@ The problem with the dynamite plot is not that it shows the mean, but that it *o
 
 The best illustration of how means and other summary statistics hide the distribution of the data is shown in the "datasaurus plot" below [@matejkaSameStatsDifferent2017]. Note that this plot shows two continuous variables plotted against one another (a *scatter* plot) and not one continuous and one categorical variable, but it nicely illustrates the point. Here you can see that the  data can dramatically change its shape -- cycling through 13 qualitatively different patterns, one of which is a dinosaur -- while maintaining its means plus other summary statistics (up to two decimal points) on both x-axis and y-axis.
 
-```{r datasaurus, fig.cap= 'The "datasaurus dozen". Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs">source</a>',echo=FALSE}
+```{r datasaurus}
+#| fig.cap= 'The *datasaurus dozen*. Two variables that maintain their summary statistics while dramatically changing the shape of the data points. From Justin Matejka and George Fitzmaurice: https://www.autodesk.com/research/publications/same-stats-different-graphs',
+#| echo=FALSE
 knitr::include_graphics("figures/DinoSequentialSmaller.gif")
 ```
 
