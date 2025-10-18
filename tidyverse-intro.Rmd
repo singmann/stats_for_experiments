@@ -26,7 +26,7 @@ With this somewhat scary introduction out of the way, the next important questio
 
 ### Step 1: Installing `R` and `RStudio`
 
-The basic `R` software that performs the calculations can be installed from [CRAN](https://cran.r-project.org/index.html), the Comprehensive R Archive Network. However, the basic `R` installation is quite bare bones, especially for people used to modern operating systems like Windows or macOS. Therefore, in addition to `R`, I also recommend you install [`RStudio`](https://www.rstudio.com/products/rstudio/). `RStudio` is the most popular IDE -- integrated development environment -- for `R`, and makes using it quite a bit more comfortable.
+The basic `R` software that performs the calculations can be installed from [CRAN](https://cran.r-project.org/index.html), the Comprehensive R Archive Network. However, the basic `R` installation is quite bare bones, especially for people used to modern operating systems like Windows or macOS. Therefore, in addition to `R`, I also recommend you install [`RStudio`](https://www.rstudio.com/products/rstudio/). `RStudio` is the most popular IDE – integrated development environment – for `R`, and makes using it quite a bit more comfortable.
 
 Note that both `R` and `RStudio` need to be updated independently of each other. Especially `R` should be updated at least once per year from [CRAN](https://cran.r-project.org/index.html). So, if you already have `R` installed on your computer and do not remember the last time you have updated, now is probably a good time to do so. I personally update `R` usually within a few weeks of a new version appearing.
 
@@ -116,7 +116,7 @@ The first thing we usually want to do with a `data.frame` is to inspect its stru
 str(df1a)
 ```
 
-In the present case we have over 20 thousand observations on six variables. Most of the variables are `int` which means *integer*; that is, a numeric variable consisting solely of whole numbers (i.e., discrete values). We also have one `num` -- that is, numeric -- variable (i.e., numeric variable with decimal values), `condition`. In general, `int` and `num` variables are treated in the same way, as numeric variables, so there is hardly ever a reason to transform one into the other. Finally, `condition` is a `chr` or character variable.
+In the present case we have over 20 thousand observations on six variables. Most of the variables are `int` which means *integer*; that is, a numeric variable consisting solely of whole numbers (i.e., discrete values). We also have one `num` – that is, numeric – variable (i.e., numeric variable with decimal values), `condition`. In general, `int` and `num` variables are treated in the same way, as numeric variables, so there is hardly ever a reason to transform one into the other. Finally, `condition` is a `chr` or character variable.
 
 ### Transforming Categorical Variables into Factors
 
@@ -386,7 +386,7 @@ all.equal(symm1, symm2)
 
 Here, we use the `all.equal()` function to show that the two objects are the same. This function can compare arbitrary `R` objects and only returns `TRUE` if two objects are identical.
 
-One problem with the `filter()` command used above is that it selects all symmetric lotteries and not only the symmetric lotteries that appear in all conditions. In other words, it also selects some symmetric lotteries that only appear in a subset of the conditions. As our goal is to compare performance across conditions -- for this to be a fair comparison it needs to be done on only the lotteries that are shared across all conditions -- this `filter()` call is therefore not the correct one.  The following code, which shows all symmetric lotteries for each condition, demonstrates this.
+One problem with the `filter()` command used above is that it selects all symmetric lotteries and not only the symmetric lotteries that appear in all conditions. In other words, it also selects some symmetric lotteries that only appear in a subset of the conditions. As our goal is to compare performance across conditions – for this to be a fair comparison it needs to be done on only the lotteries that are shared across all conditions – this `filter()` call is therefore not the correct one.  The following code, which shows all symmetric lotteries for each condition, demonstrates this.
 
 ```{r}
 tbl1a %>%
@@ -446,7 +446,7 @@ tbl1a %>%
 
 We can see that the output now contains the average proportion of accepting the symmetric lotteries for each of the four conditions separately. So instead of first splitting the data and then calculating the summary statistics (here, the mean of the `resp` column) for each split separately, `group_by()` does exactly this internally.
 
-In other words, whenever we have a categorical variable in our data, we can use `group_by()` to perform operations separately across the levels of the categorical variable. Given the ubiquity of categorical variables -- for example, every experiment has at least one experimental factor -- this is a huge time and effort saver.
+In other words, whenever we have a categorical variable in our data, we can use `group_by()` to perform operations separately across the levels of the categorical variable. Given the ubiquity of categorical variables – for example, every experiment has at least one experimental factor – this is a huge time and effort saver.
 
 And whereas here we have shown the use of `group_by()` for `summarise()` (which is probably the most common use), `group_by()` also works for the other `dplyr` verbs for which the results can depend on other rows, `mutate()` and `arrange()`.
 

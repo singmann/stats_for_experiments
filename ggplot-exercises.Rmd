@@ -38,11 +38,11 @@ ws1 <- ws1 %>%
 glimpse(ws1)
 ```
 
-As we have discussed before, there are two ways to plot this data. One way is to aggregate on a by-lottery -- that is, a by-item -- level. The other is to aggregate on a by-participant level. Here, we will do both, beginning with the by-lottery level.
+As we have discussed before, there are two ways to plot this data. One way is to aggregate on a by-lottery – that is, a by-item – level. The other is to aggregate on a by-participant level. Here, we will do both, beginning with the by-lottery level.
 
 ### By-Lottery Plot
 
-For the by-lottery plot, we use the exact same strategy as before. That is, we will plot the average acceptance rate per lottery and condition. We also split lotteries into three bins -- negative expected value, expected value of 0, and positive expected value. The only difference to our earlier analysis are slightly different factor level names for the plot.
+For the by-lottery plot, we use the exact same strategy as before. That is, we will plot the average acceptance rate per lottery and condition. We also split lotteries into three bins – negative expected value, expected value of 0, and positive expected value. The only difference to our earlier analysis are slightly different factor level names for the plot.
 
 ```{r}
 lot_sum_all <- ws1 %>% 
@@ -104,7 +104,7 @@ sort(unique(part_sum$mean_acc))
 
 In the code above, we used the `:` operator to create a sequence of integers (i.e., whole numbers) from 0 to 3. The same result would have been obtained by explicitly creating this vector, for example, using `c(0, 1, 2, 3)`.
 
-Plotting data like this with few unique values is a bit tricky. Our usual approaches -- alpha blending, jitter, bee swarm plots, or the like -- do not produce satisfactory results. The following code will produce all these plots and show the problem. 
+Plotting data like this with few unique values is a bit tricky. Our usual approaches – alpha blending, jitter, bee swarm plots, or the like – do not produce satisfactory results. The following code will produce all these plots and show the problem. 
 
 In this code, we also introduce another `ggplot2` functionality. A plot created by `ggplot2` is an `R` object itself. So far, we have printed the object  which produces the plot in the plot pane. However, if we save the plot in an `R` object using `<-`, the plot is *not* shown in the plot pane. Instead, we can then use another function, such as `plot_grid()` from the [`cowplot`](https://cran.r-project.org/package=cowplot) package, to create one plot that consists of multiple individual plots. Note that you will have to install `cowplot` before running the code below (e.g., via `install.packages("cowplot")`). 
 
@@ -162,7 +162,7 @@ In addition, the plot clearly shows the main pattern of results. The original no
 
 Let's discuss a bit what I meant by"clearly shows" in the start of the paragraph above. The plot shows both the main results pattern as well as the variability in the data in such a way that this plot, in some sense, makes further statistical analysis not really necessary. Given the relatively large number of participants per condition (around 200), the fact that in one condition the vast majority never accepts a symmetric lottery, but in another condition the vast majority always accepts a symmetric lottery, means that there is a clear difference between conditions. Any reasonable statistical test must come to the same conclusion, otherwise we would begin to question the validity of the statistical test or look for some other problems with the data.
 
-This means that a visual representation of the results can provide empirical evidence in addition to the statistical results. In fact, these two types of evidence -- *figures* derived from the results and *statistical analyses* derived from the results -- are complementary and should always be part of any communication of what you have found in an experiment. Without a figure, we cannot properly judge how much evidence the statistical result actually provides.
+This means that a visual representation of the results can provide empirical evidence in addition to the statistical results. In fact, these two types of evidence – *figures* derived from the results and *statistical analyses* derived from the results – are complementary and should always be part of any communication of what you have found in an experiment. Without a figure, we cannot properly judge how much evidence the statistical result actually provides.
 
 In the present case, in which the visual impression suggests a clear effect, some statisticians say the data pass the *inter-ocular trauma test*: The results hit you right between the eyes. If this is the case, our confidence that the data support an empirical hypothesis grows compared to a situation that only shows the outcome of a statistical analysis. If the statistical tests suggest an effect but the figures  not so much, this is also an important outcome as it suggests the epistemic status of the empirical hypothesis is less clear. In any case, statistical analyses should always be accompanied by figures.
 
