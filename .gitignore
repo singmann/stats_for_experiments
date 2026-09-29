@@ -14,3 +14,4 @@ tmp-pdfcrop-*
 local
 lukasz_notes.Rmd
 not used.Rmd
+.DS_Store

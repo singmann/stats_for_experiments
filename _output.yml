@@ -9,7 +9,7 @@ bookdown::bs4_book:
     primary: '#096B72'
   repo:
     base: https://github.com/singmann/stats_for_experiments
-    branch: main
+    branch: master
   md_extensions: -smart
 bookdown::pdf_book:
   includes:
