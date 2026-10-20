@@ -120,7 +120,7 @@ The first thing we usually want to do with a `data.frame` is to inspect its stru
 str(df1a)
 ```
 
-In the present case we have over 20 thousand observations on six variables. Most of the variables are `int` which means *integer*; that is, a numeric variable consisting solely of whole numbers (i.e., discrete values). We also have one `num` – that is, numeric – variable (i.e., numeric variable with decimal values), `condition`. In general, `int` and `num` variables are treated in the same way, as numeric variables, so there is hardly ever a reason to transform one into the other. Finally, `condition` is a `chr` or character variable.
+In the present case we have over 20 thousand observations on six variables. Most of the variables are `int` which means *integer*; that is, a numeric variable consisting solely of whole numbers (i.e., discrete values). We also have one `num` – that is, numeric – variable (i.e., numeric variable with decimal values), `condition`. In general, `int` and `num` variables are treated in the same way, as numeric variables, so there is hardly ever a reason to transform one into the other. Finally, `response`` is a `chr` or character variable.
 
 ### Transforming Categorical Variables into Factors
 
@@ -454,7 +454,7 @@ In other words, whenever we have a categorical variable in our data, we can use 
 
 And whereas here we have shown the use of `group_by()` for `summarise()` (which is probably the most common use), `group_by()` also works for the other `dplyr` verbs for which the results can depend on other rows, `mutate()` and `arrange()`.
 
-In the example above, we have only passed one variable (`condition`) to `group_by()`. But we can also pass multiple variables. This will perform the operations conditional on the combination of both variables. For example, here we have selected the three symmetric lotteries that are the same across conditions. With `group_by()`, it is easy to get the average proportion of acceptances separately for each lottery and condition. As this returns a `tiible` with more rows as shown by default, we again use `print(n = Inf)` as the last command in the pipe chain to show all rows.
+In the example above, we have only passed one variable (`condition`) to `group_by()`. But we can also pass multiple variables. This will perform the operations conditional on the combination of both variables. For example, here we have selected the three symmetric lotteries that are the same across conditions. With `group_by()`, it is easy to get the average proportion of acceptances separately for each lottery and condition. As this returns a `tibble` with more rows as shown by default, we again use `print(n = Inf)` as the last command in the pipe chain to show all rows.
 
 ```{r}
 tbl1a %>%

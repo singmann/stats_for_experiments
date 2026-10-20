@@ -291,7 +291,6 @@ In addition to the variables relevant to our research questions, the data contai
 The next 5 variables concerned whether or not the participants reported having an earworm at different times:
 - `earworm_falling_asleep`: Had earworm when trying to fall asleep last night? 0 = No; 1 = Yes
 - `earworm_night`: Had earworm when woke up during the night? 0 = No; 1 = Yes
-- `earworm_falling_asleep`: Had earworm when woke up during the night? 0 = No; 1 = Yes
 - `earworm_morning`: Had earworm when woke up this morning? 0 = No; 1 = Yes
 - `earworm_control`: Had earworm at the control time point (i.e., after getting ready to leave the lab)? 0 = No; 1 = Yes
 - `sleep_efficiency`: sleep efficiency percentage score obtained from the polysomnography (0 = very low sleep efficiency and 100 = very high sleep efficiency)

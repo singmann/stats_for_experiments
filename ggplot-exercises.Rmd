@@ -79,7 +79,7 @@ The plot shows the pattern across lotteries that we have seen before, and one th
 
 ### By-Participant Plot
 
-One important piece of information that the by-lottery plots do not show, is the variability in accepting the symmetric lotteries across participants. To visualise this, we need to plot the distribution of mean acceptability scores across participants for each condition separately. In particular, we are interested in these values for the three symmetric lotteries that are shared across all three conditions, the -\$12/+\$12, -\$14/+\$14, and -\$16/+\$16 lotteries. 
+One important piece of information that the by-lottery plots do not show, is the variability in accepting the symmetric lotteries across participants. To visualise this, we need to plot the distribution of mean acceptability scores across participants for each condition separately. In particular, we are interested in these values for the three symmetric lotteries that are shared across all three conditions, the -\$12/+\$12, -\$16/+\$16, and -\$20/+\$20 lotteries. 
 
 To plot these values across participants, we first need to calculate the by-participant mean acceptability scores for the three symmetric lotteries. For this, we can use the filter introduced earlier and then group by both `condition` and `subno`.
 
