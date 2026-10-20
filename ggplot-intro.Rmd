@@ -6,7 +6,7 @@ One way to create data visualisation in `R` is through the base `R` graphics eng
 
 Instead of introducing base `R` plotting, we introduce the `tidyverse` approach for data visualisation, [`ggplot2`](https://ggplot2.tidyverse.org/). [`ggplot2`](https://ggplot2.tidyverse.org/) is a system for declaratively creating graphics, based on the book "The Grammar of Graphics" [@wilkinsonGrammarGraphics1999].[^ggplot-intro-x1] [`ggplot2`](https://ggplot2.tidyverse.org/) is also the perhaps the most prominent member of the `tidyverse`. As its creation pre-dates the term `tidyverse` by several years, it can also be seen as one of the founding packages.
 
-[^ggplot-intro-x1]: The name of the book is also the reason for the name of the package. `ggplot2` is the the second version of "**G**rammar of **G**raphics", where the first version is the book itself. That is why there also is no `ggplot` or `ggplot1` package.
+[^ggplot-intro-x1]: The name of the book is also the reason for the name of the package. The "gg" in `ggplot2` stands for "**G**rammar of **G**raphics". The numeral 2 is in the name is because it is the second incarnation of the idea for the package, see: https://github.com/hadley/ggplot1
 
 In contrast to the base `R` plot functionality that works with vectors, `ggplot2` requires that the data is passed either as a `data.frame` or `tibble`. With this in hand, "you provide the data, tell `ggplot2` how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details." ([quote from the official documentation](https://ggplot2.tidyverse.org/)).
 
