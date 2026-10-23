@@ -10,7 +10,7 @@ bookdown::bs4_book:
   repo:
     base: https://github.com/singmann/stats_for_experiments
     branch: master
-  md_extensions: -smart
+  md_extensions: +smart
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
