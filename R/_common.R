@@ -21,3 +21,4 @@ options(
   pillar.bold = TRUE,
   stringr.html = FALSE
 )
+
